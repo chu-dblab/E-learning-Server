@@ -37,21 +37,19 @@ function sql_connect(){
 }
 
 // ------------------------------------------------------------------------
-
-
-// ------------------------------------------------------------------------
 /**
- * sql_selectDB()
+ * getFullFormName
  *
- * 選擇資料庫
+ * 取得完整資料表名稱
  *
  * @access	public
- * @param	string	帳號
- * @param	string	密碼
- * @return	bool	是否有選擇成功
+ * @param	string	資料表名稱
+ * @return	string	完整的資料表名稱
  */
-/*function sql_selectDB(){
+ function getFullFormName($inputName){
+	global $DB_INFO_URL;
+	require_once($DB_INFO_URL); //取得連結資料庫連結變數
 	
-	mysql_select_db($DB_NAME,$db); //指定這個資料庫
-}
-*/
+	return $FORM_PREFIX + $inputName;
+ }
+
