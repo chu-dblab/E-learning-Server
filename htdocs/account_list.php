@@ -11,68 +11,21 @@
 	/**
 	 * 前置設定
 	*/
-	$ROOT_FILE = "";	//根目錄的位置
+	require_once("lib/include.php");
+	require_once(DOCUMENT_ROOT."lib/sql.php");
+
+	//$FORM_USER = "users";	//使用者帳號資料表
 	
-	$FORM_USER = "users";	//使用者帳號資料表
-	
-	// ------------------------------------------------------------------------
-	
-	/**
-	 * 要include進來的函式庫
-	*/
-	require_once($ROOT_FILE."lib/sql.php"); //取得連結資料庫連結變數
 	// ------------------------------------------------------------------------
 	// TODO 顯示帳號資料表的function
-	function displayAllUsersTable(){
-		global $FORM_USER;
-		
-		echo sql_getFormName($FORM_USER);
-		
-		
-		//建立表格
-		print "<table>";
-		
-		//建立標題列
-		print "<thead>";
-		print "<tr>";
-		print "<th scpoe='col'>";
-		print $db_tablecol->name; //顯示Field
-		print "</th>";
-		print "</tr>";
-		print "</thead>";
-		
-		//建立內容
-		print "<tbody>";
-		while($db_tablerow = mysql_fetch_array($db_table))
-		{
-			//寫法1: 
-			print "<tr>";
-			print "<th scrope='row'>".$db_tablerow[$DB_FROM_1COL]."</th>"; //陣列變數的[]處，也可以填入"資料表的欄位名稱"
-			print "<td>".$db_tablerow[1]."</td>";
-			print "<td>".$db_tablerow[2]."</td>";
-			print "<td>".$db_tablerow[3]."</td>";
-			print "<td>".$db_tablerow[4]."</td>";
-			print "<td>".$db_tablerow[5]."</td>";
-			print "<td>".$db_tablerow[6]."</td>";
-			print "<td>".$db_tablerow[7]."</td>";
-			print "<td>".$db_tablerow[8]."</td>";
-			print "<td>".$db_tablerow[9]."</td>";
-			print "<td>".$db_tablerow[10]."</td>";
-			print "<td>".$db_tablerow[11]."</td>";
-			print "</tr>";
 
-		}
-		print "<tbody>";
-		print "</table>";
-		
-	}
 	
 	// ------------------------------------------------------------------------
 	
 	$db = sql_connect();	//連接資料庫
 	// TODO 顯示所有帳號
 	
-	//sql_close($db);
+	
 	
 ?>
 <!DOCTYPE html>
@@ -93,7 +46,6 @@
 			<div id="main" role="main">
 				
 				<section>
-					<?php displayAllUsersTable(); ?>
 				</section>
 				
 			</div>
@@ -103,3 +55,4 @@
 		</footer>
 	</body>
 </html>
+<?php sql_close($db); ?>

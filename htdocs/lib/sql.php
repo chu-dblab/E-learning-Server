@@ -19,7 +19,6 @@
  * 
  * @since	Version 1
 */
-$SQL_ROOT_FILE = "./";	//根目錄的位置
 
 // ------------------------------------------------------------------------
 
@@ -35,6 +34,8 @@ $SQL_ROOT_FILE = "./";	//根目錄的位置
  * @author	元兒～ <yuan817@moztw.org>
  */
 function sql_connect(){
+	global $DB_SERV,$DB_USER,$DB_PASS,$DB_NAME;
+	
 	$db = mysql_connect($DB_SERV,$DB_USER,$DB_PASS) or die( "<h1>無法連結資料庫主機</h1>".sql_getErrMsg() );	//連結資料庫
 	mysql_select_db($DB_NAME,$db) or die( "<h1>無法連結資料庫</h1>".sql_getErrMsg() ); //指定這個資料庫
 	
@@ -55,11 +56,7 @@ function sql_connect(){
  * @author	元兒～ <yuan817@moztw.org>
  */
 function sql_getFormName($inputName){
-	global $DB_INFO_URL;
-	
-	
-	echo "000".$FORM_PREFIX;
-	
+	global $FORM_PREFIX;
 	return $FORM_PREFIX.$inputName;
  }
 // ------------------------------------------------------------------------
@@ -100,9 +97,7 @@ function sql_close($db){
  */
 
 function sql_getErrMsg(){
-	//取得連結資料庫連結變數
-	require_once($ROOT_FILE."config/dev_config.php");
-	
+
 	//輸出錯誤資訊
 	if($DEV_DEGUG == true){
 		return "<p>SQL Debug: <br />".mysql_error()."</p>";
