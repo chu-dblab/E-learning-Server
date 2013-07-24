@@ -15,6 +15,7 @@
 require_once(DOCUMENT_ROOT."lib/sql.php");
 require_once(DOCUMENT_ROOT."lib/password.php"); //取得連結資料庫連結變數
 $FORM_USER = "users";	//使用者帳號資料表
+
 // ------------------------------------------------------------------------
 
 /**

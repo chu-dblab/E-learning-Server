@@ -1,4 +1,7 @@
 <?php
+require_once(DOCUMENT_ROOT."config.php");
+// ------------------------------------------------------------------------
+
 /**
  The MIT License
 
@@ -46,7 +49,7 @@ function generatorText($password_len)
 // ------------------------------------------------------------------------
 
 /**
- * encrypt
+ * encryptText
  *
  * 將文字加密
  *
@@ -57,21 +60,11 @@ function generatorText($password_len)
  * @since	Version 1
  * @author	元兒～ <yuan817@moztw.org>
  */
-function encrypt($text, $mode){
-	switch($mode){
-		case "MD5":
-			
-			break;
-		default:
-		
-	}
-}
-// ------------------------------------------------------------------------
-
-/**
- * encrypt
+ /**
+ * encryptText
  *
- * 將文字加密（用預設加密方式加密）
+ * 將文字加密（不帶第二個參數）
+ * 不帶第二個參數，就自動從預設的帶起
  *
  * @param	string	原文內容
  * @return	string	加密後內容
@@ -79,6 +72,27 @@ function encrypt($text, $mode){
  * @since	Version 1
  * @author	元兒～ <yuan817@moztw.org>
  */
-function encrypt($text){
-	
+function encryptText(){
+	if(func_num_args() == 2){
+		$args = func_get_args();
+		$text = $args[0];
+		$mode = $args[1];
+		
+		switch($mode){
+			case "MD5":
+				return md5($text);
+				break;
+			default:
+				return $text;
+				break;
+		}
+	}
+	else if(func_num_args() == 1){
+		global $ENCRYPT_MODE;
+		$args = func_get_args();
+		$text = $args[0];
+		
+		return encryptText($text, $ENCRYPT_MODE);
+	}
 }
+// ------------------------------------------------------------------------
