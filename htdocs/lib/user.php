@@ -50,7 +50,56 @@ function user_create(){
  */
 
 function user_login($userid, $userpasswd){
+	global $FORM_USER;
+	$userpasswd = encryptText($userpasswd);
 	
+	//查詢使用者登入資訊
+	$db = sql_connect();	//開啟資料庫
+	
+	$db_user_query = mysql_query("SELECT `username`,`password`,`isActive` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$userid'") or die(mysql_error());
+	//若有找到使用者
+	if(mysql_num_rows($db_user_query) >= 1){
+		//檢查這個帳戶是否已啟用
+		if( mysql_result($db_user_query, 0, isActive) ){
+			//核對密碼正確
+			if( $userpasswd == mysql_result($db_user_query, 0, password) ){
+				
+				//符合登入條件
+				
+				//亂數產生登入驗證碼
+				$login_verify = generatorText(32);
+				
+				//取得現在時間，用字串的形式
+				$nowDate = date("Y-m-d H:i:s");
+				
+				//登記新的登入碼和登入時間進資料庫
+				mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
+					SET `verify_login` = '".$login_verify."', `last_login`  = '$nowDate' 
+					WHERE `username` = '$userid'") or die(mysql_error());
+				
+				
+				//回傳使用者登入碼
+				return $login_verify;
+				
+			}
+			//密碼錯誤
+			else{
+				sql_close($db);	//關閉資料庫
+				return "PasswdErr";
+			}
+		}
+		else{
+			return "NoActiveErr";
+		}
+		
+	}
+	//若沒有這個使用者
+	else{
+		sql_close($db);	//關閉資料庫
+		return "UsernameErr";
+	}
+	
+	sql_close($db);	//關閉資料庫
 }
 
 /**
