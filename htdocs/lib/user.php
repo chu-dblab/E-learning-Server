@@ -12,6 +12,7 @@
  * @filesource
  */
 
+$FORM_USER = "users";	//使用者帳號資料表
 // ------------------------------------------------------------------------
 
 /**
@@ -47,4 +48,21 @@ function user_create(){
 
 function user_login(){
 	
+}
+
+/**
+ * user_queryAll
+ *
+ * 查詢使用者帳號
+ *
+ * @access	public
+ * @param	object	資料庫
+ * @return	object	mysql_query的查詢結果
+ * 
+ * @since	Version 0
+ */
+function user_queryAll($db){
+	global $DEV_DEGUG, $FORM_USER;
+	$db_table = mysql_query("SELECT `ID`, `username`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
+	return $db_table;
 }

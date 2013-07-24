@@ -13,19 +13,59 @@
 	*/
 	require_once("lib/include.php");
 	require_once(DOCUMENT_ROOT."lib/sql.php");
-
-	//$FORM_USER = "users";	//使用者帳號資料表
+	require_once(DOCUMENT_ROOT."lib/user.php");
 	
 	// ------------------------------------------------------------------------
 	// TODO 顯示帳號資料表的function
-
+	function usersTotal(){
+		global $user_DBTable;
+		return mysql_num_rows($user_DBTable);
+	}
+	
+	function showUsersTable(){
+		global $user_DBTable;
+		if( usersTotal() > 0 ){	//若已有1個以上的使用者
+			//建立表格
+			echo "<table class='allUsers_table'>";
+			echo "<thead>";
+			echo "<tr>";
+				//第1行: 欄位名稱
+				echo "<th scpoe='col'>ID</th>";
+				echo "<th scpoe='col'>帳號名稱</th>";
+				echo "<th scpoe='col'>登入碼</th>";
+				echo "<th scpoe='col'>最後登入時間</th>";
+				echo "<th scpoe='col'>啟用</th>";
+				echo "<th scpoe='col'>真實姓名</th>";
+				echo "<th scpoe='col'>暱稱</th>";
+				echo "<th scpoe='col'>Email</th>";
+			echo "</tr>";
+			echo "</thead>";
+			echo "<tbody>";
+				while( $user_DBTableRow = mysql_fetch_array($user_DBTable) ){
+					echo "<tr>";
+						echo "<th scrope='row'>".$user_DBTableRow['ID']."</th>";
+						echo "<td>".$user_DBTableRow['username']."</td>";
+						echo "<td>".$user_DBTableRow['verify_login']."</td>";
+						echo "<td>".$user_DBTableRow['last_login']."</td>";
+						echo "<td>".$user_DBTableRow['isActive']."</td>";
+						echo "<td>".$user_DBTableRow['name']."</td>";
+						echo "<td>".$user_DBTableRow['nickname']."</td>";
+						echo "<td>".$user_DBTableRow['email']."</td>";
+					echo "</tr>";
+				}
+			echo "<tbody>";
+			echo "</table>";
+			
+		}
+		else{	//若無使用者
+			echo "尚未建立使用者";
+		}
+	}
 	
 	// ------------------------------------------------------------------------
 	
-	$db = sql_connect();	//連接資料庫
-	// TODO 顯示所有帳號
-	
-	
+	$db = sql_connect();	//連接資料庫0
+	$user_DBTable = user_queryAll($db);	//查詢所有使用者
 	
 ?>
 <!DOCTYPE html>
@@ -46,6 +86,9 @@
 			<div id="main" role="main">
 				
 				<section>
+					<p>總共有<?php echo usersTotal(); ?>個使用者</p>
+					<?php showUsersTable(); ?>
+					
 				</section>
 				
 			</div>
