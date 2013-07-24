@@ -13,8 +13,8 @@
  */
 
 // ------------------------------------------------------------------------
-$ROOT_FILE = "./";
-$DB_INFO_URL = $ROOT_FILE+"config/db_config.php"; 
+$ROOT_FILE = "./";	//根目錄的位置
+$DB_INFO_URL = $ROOT_FILE+"config/db_config.php"; 	//設定檔的位置
 // ------------------------------------------------------------------------
 
 /**
@@ -38,7 +38,7 @@ function sql_connect(){
 
 // ------------------------------------------------------------------------
 /**
- * getFullFormName
+ * getFormName
  *
  * 取得完整資料表名稱
  *
@@ -46,7 +46,7 @@ function sql_connect(){
  * @param	string	資料表名稱
  * @return	string	完整的資料表名稱
  */
- function getFullFormName($inputName){
+ function getFormName($inputName){
 	global $DB_INFO_URL;
 	require_once($DB_INFO_URL); //取得連結資料庫連結變數
 	
