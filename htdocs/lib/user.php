@@ -15,7 +15,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * createUser
+ * user_create
  *
  * 建立使用者帳號
  *
@@ -23,15 +23,17 @@
  * @param	string	帳號
  * @param	string	密碼
  * @return	bool	是否有成功建立
+ * 
+ * @since	Version 0
  */
-function createUser(){
+function user_create(){
 	
 }
 
 // ------------------------------------------------------------------------
 
 /**
- * userLogin
+ * user_login
  *
  * 登入使用者帳號
  *
@@ -39,8 +41,10 @@ function createUser(){
  * @param	string	帳號
  * @param	string	密碼
  * @return	string	使用者登入碼
+ * 
+ * @since	Version 0
  */
 
-function userLogin(){
+function user_login(){
 	
 }
