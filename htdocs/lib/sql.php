@@ -6,7 +6,7 @@
  * @package	CHU-E-learning
  * @author		CHU-TDAP
  * @copyright	
- * @license		
+ * @license		type filter text
  * @link		https://github.com/CHU-TDAP/
  * @since		Version 1.0
  * @filesource
@@ -19,8 +19,8 @@
  * 
  * @since	Version 1
 */
-$ROOT_FILE = "./";	//根目錄的位置
-$DB_INFO_URL = $ROOT_FILE."config/db_config.php"; 	//設定檔的位置
+$SQL_ROOT_FILE = "./";	//根目錄的位置
+
 // ------------------------------------------------------------------------
 
 /**
@@ -35,9 +35,6 @@ $DB_INFO_URL = $ROOT_FILE."config/db_config.php"; 	//設定檔的位置
  * @author	元兒～ <yuan817@moztw.org>
  */
 function sql_connect(){
-	global $DB_INFO_URL;
-	require_once($DB_INFO_URL); //取得連結資料庫連結變數
-	
 	$db = mysql_connect($DB_SERV,$DB_USER,$DB_PASS) or die( "<h1>無法連結資料庫主機</h1>".sql_getErrMsg() );	//連結資料庫
 	mysql_select_db($DB_NAME,$db) or die( "<h1>無法連結資料庫</h1>".sql_getErrMsg() ); //指定這個資料庫
 	
@@ -59,7 +56,7 @@ function sql_connect(){
  */
 function sql_getFormName($inputName){
 	global $DB_INFO_URL;
-	require_once($DB_INFO_URL); //取得連結資料庫連結變數
+	
 	
 	echo "000".$FORM_PREFIX;
 	
