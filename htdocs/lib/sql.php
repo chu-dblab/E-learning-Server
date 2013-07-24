@@ -19,7 +19,8 @@
  * 
  * @since	Version 1
 */
-
+require_once(DOCUMENT_ROOT."config/dev_config.php"); //取得除錯參數
+require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連結變數
 // ------------------------------------------------------------------------
 
 /**

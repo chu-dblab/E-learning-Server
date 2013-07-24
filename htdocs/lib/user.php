@@ -12,6 +12,8 @@
  * @filesource
  */
 
+require_once(DOCUMENT_ROOT."lib/sql.php");
+require_once(DOCUMENT_ROOT."lib/password.php"); //取得連結資料庫連結變數
 $FORM_USER = "users";	//使用者帳號資料表
 // ------------------------------------------------------------------------
 
@@ -46,7 +48,23 @@ function user_create(){
  * @since	Version 0
  */
 
-function user_login(){
+function user_login($userid, $userpasswd){
+	
+}
+
+/**
+ * user_logout
+ *
+ * 登出使用者帳號
+ *
+ * @access	public
+ * @param	string	登入碼
+ * @return	bool	是否登出成功
+ * 
+ * @since	Version 0
+ */
+
+function user_logout(){
 	
 }
 
