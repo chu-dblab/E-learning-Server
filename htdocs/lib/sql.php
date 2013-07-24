@@ -38,8 +38,8 @@ function sql_connect(){
 	global $DB_INFO_URL;
 	require_once($DB_INFO_URL); //取得連結資料庫連結變數
 	
-	$db = mysql_connect($DB_SERV,$DB_USER,$DB_PASS) or die( "<h1>無法連結資料庫</h1>".sql_getErrMsg() );	//連結資料庫
-	mysql_select_db($DB_NAME,$db); //指定這個資料庫
+	$db = mysql_connect($DB_SERV,$DB_USER,$DB_PASS) or die( "<h1>無法連結資料庫主機</h1>".sql_getErrMsg() );	//連結資料庫
+	mysql_select_db($DB_NAME,$db) or die( "<h1>無法連結資料庫</h1>".sql_getErrMsg() ); //指定這個資料庫
 	
 	return $db;
 }
@@ -61,7 +61,9 @@ function sql_getFormName($inputName){
 	global $DB_INFO_URL;
 	require_once($DB_INFO_URL); //取得連結資料庫連結變數
 	
-	return $FORM_PREFIX + $inputName;
+	echo "000".$FORM_PREFIX;
+	
+	return $FORM_PREFIX.$inputName;
  }
 // ------------------------------------------------------------------------
 
