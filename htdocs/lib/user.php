@@ -56,7 +56,7 @@ function user_login($userid, $userpasswd){
 	//查詢使用者登入資訊
 	$db = sql_connect();	//開啟資料庫
 	
-	$db_user_query = mysql_query("SELECT `username`,`password`,`isActive` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$userid'") or die(mysql_error());
+	$db_user_query = mysql_query("SELECT `username`,`password`,`isActive` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$userid'") or die(sql_getErrMsg());
 	//若有找到使用者
 	if(mysql_num_rows($db_user_query) >= 1){
 		//檢查這個帳戶是否已啟用
@@ -75,7 +75,7 @@ function user_login($userid, $userpasswd){
 				//登記新的登入碼和登入時間進資料庫
 				mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
 					SET `verify_login` = '".$login_verify."', `last_login`  = '$nowDate' 
-					WHERE `username` = '$userid'") or die(mysql_error());
+					WHERE `username` = '$userid'") or die(sql_getErrMsg());
 				
 				
 				//回傳使用者登入碼
@@ -114,8 +114,28 @@ function user_login($userid, $userpasswd){
  * @since	Version 0
  */
 
-function user_logout(){
+function user_logout($loginCode){
+	global $FORM_USER;
 	
+	//連結資料庫
+	$db = sql_connect();	
+
+	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `verify_login` = '$loginCode'") or die(sql_getErrMsg());
+	//若有找到
+	if(mysql_num_rows($db_user_query) >= 1){
+		//清除登入碼和登入時間進資料庫
+		mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
+			SET `verify_login` = '' 
+			WHERE `verify_login` = '$loginCode'") or die(sql_getErrMsg()
+		);
+			
+		sql_close($db);	//關閉資料庫
+		
+		return true;	//傳回登出成功
+	}
+	else{
+		return false;	//傳回登出失敗
+	}
 }
 
 /**
