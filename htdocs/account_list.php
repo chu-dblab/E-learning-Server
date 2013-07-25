@@ -12,7 +12,7 @@
 	 * 前置設定
 	*/
 	require_once("lib/include.php");
-	require_once(DOCUMENT_ROOT."lib/sql.php");
+	//require_once(DOCUMENT_ROOT."lib/sql.php");
 	require_once(DOCUMENT_ROOT."lib/user.php");
 	
 	// ------------------------------------------------------------------------

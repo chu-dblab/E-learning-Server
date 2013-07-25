@@ -10,7 +10,7 @@
  * @link		https://github.com/CHU-TDAP/
  * @since		Version 1.0
  * @filesource
- */
+*/
 
 require_once(DOCUMENT_ROOT."lib/sql.php");
 require_once(DOCUMENT_ROOT."lib/password.php"); //取得連結資料庫連結變數
@@ -28,9 +28,7 @@ $FORM_USER = "users";	//使用者帳號資料表
  * @return	bool	是否已有這個使用者
  * 
  * @since	Version 0
- 
- `ID`, `username`, `logged_code`, `last_login_time`, `isActive`, `name`, `nickname`, `email`
- */
+*/
 function user_ishave($username){
 	global $FORM_USER;
 	
@@ -58,9 +56,7 @@ function user_ishave($username){
  * @return	string	是否有成功建立
  * 
  * @since	Version 0
- 
- `ID`, `username`, `logged_code`, `last_login_time`, `isActive`, `name`, `nickname`, `email`
- */
+*/
 function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nickname, $email){
 	global $FORM_USER;
 	
@@ -95,7 +91,6 @@ function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nicknam
 	
 	
 }
-
 // ------------------------------------------------------------------------
 
 /**
@@ -109,7 +104,7 @@ function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nicknam
  * @return	string	使用者登入碼
  * 
  * @since	Version 0
- */
+*/
 
 function user_login($userid, $userpasswd){
 	global $FORM_USER;
@@ -160,6 +155,7 @@ function user_login($userid, $userpasswd){
 	
 	sql_close($db);	//關閉資料庫
 }
+// ------------------------------------------------------------------------
 
 /**
  * user_logout
@@ -171,14 +167,15 @@ function user_login($userid, $userpasswd){
  * @return	bool	是否登出成功
  * 
  * @since	Version 0
- */
+*/
 
 function user_logout($loginCode){
 	global $FORM_USER;
 	
 	//連結資料庫
-	$db = sql_connect();	
+	$db = sql_connect();
 
+	//尋找登入碼
 	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg());
 	//若有找到
 	if(mysql_num_rows($db_user_query) >= 1){
@@ -196,6 +193,72 @@ function user_logout($loginCode){
 		return false;	//傳回登出失敗
 	}
 }
+// ------------------------------------------------------------------------
+
+/**
+ * user_getUserId
+ *
+ * 查詢使用者帳號
+ *
+ * @access	public
+ * @param	string	登入碼
+ * @return	int	使用者ID(回傳0為找不到使用者)
+ * 
+ * @since	Version 0
+ */
+function user_getUserId($loggedCode){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = sql_connect();
+	
+	//尋找登入碼
+	$db_user_query = mysql_query("SELECT `ID` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loggedCode'") or die(sql_getErrMsg());
+	
+	//若有找到
+	if(mysql_num_rows($db_user_query) >= 1){
+		$iserID = mysql_result($db_user_query, 0, ID);
+		sql_close($db);	//關閉資料庫
+		return $iserID;
+	}
+	else{
+		sql_close($db);	//關閉資料庫
+		return 0;
+	}
+}
+// ------------------------------------------------------------------------ 
+
+/**
+ * user_getUserQuery
+ *
+ * 查詢使用者
+ *
+ * @access	public
+ * @param	string	登入碼
+ * @return	object	此使用者的資料表內容(回傳NULL為找不到使用者)
+ * 
+ * @since	Version 0
+*/
+function user_getUserQuery($loggedCode){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = sql_connect();
+	
+	//尋找登入碼
+	$db_user_query = mysql_query("SELECT `ID` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loggedCode'") or die(sql_getErrMsg());
+	
+	//若有找到
+	if(mysql_num_rows($db_user_query) >= 1){
+		return $db_user_query;
+	}
+	else{
+		return NULL;
+	}
+}
+
+
+// ------------------------------------------------------------------------ 
 
 /**
  * user_queryAll
@@ -207,7 +270,7 @@ function user_logout($loginCode){
  * @return	object	mysql_query的查詢結果
  * 
  * @since	Version 0
- */
+*/
 function user_queryAll($db){
 	global $DEV_DEGUG, $FORM_USER;
 	$db_table = mysql_query("SELECT `ID`, `username`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
