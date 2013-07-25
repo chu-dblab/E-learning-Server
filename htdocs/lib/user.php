@@ -19,6 +19,35 @@ $FORM_USER = "users";	//使用者帳號資料表
 // ------------------------------------------------------------------------
 
 /**
+ * user_ishave
+ *
+ * 是否已有這個使用者
+ *
+ * @access	public
+ * @param	string	帳號
+ * @return	bool	是否已有這個使用者
+ * 
+ * @since	Version 0
+ 
+ `ID`, `username`, `logged_code`, `last_login_time`, `isActive`, `name`, `nickname`, `email`
+ */
+function user_ishave($username){
+	global $FORM_USER;
+	
+	//查詢使用者登入資訊
+	$db = sql_connect();	//開啟資料庫
+	
+	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$username'") or die(sql_getErrMsg());
+	
+	if(mysql_num_rows($db_user_query) >= 1){
+		return true;
+	}
+	else false;
+}
+
+// ------------------------------------------------------------------------
+
+/**
  * user_create
  *
  * 建立使用者帳號
@@ -26,11 +55,44 @@ $FORM_USER = "users";	//使用者帳號資料表
  * @access	public
  * @param	string	帳號
  * @param	string	密碼
- * @return	bool	是否有成功建立
+ * @return	string	是否有成功建立
  * 
  * @since	Version 0
+ 
+ `ID`, `username`, `logged_code`, `last_login_time`, `isActive`, `name`, `nickname`, `email`
  */
-function user_create(){
+function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nickname, $email){
+	global $FORM_USER;
+	
+	//是否已有這個使用者
+	if(user_ishave($username)){
+		return "UsernameCreatedErr";
+	}
+	//確認密碼錯誤
+	else if($passwd != $passwd_rep) {
+		return "RepPasswdErr";
+	}
+	//都沒有問題，新增帳號
+	else{
+		//開啟資料庫
+		$db = sql_connect();
+		
+		//將密碼加密
+		$passwd = encryptText($passwd);
+		
+		//紀錄使用者帳號進資料庫
+		mysql_query("INSERT INTO ".sql_getFormName($FORM_USER)." 
+			(`username` ,`password` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
+			VALUES ('$username', '$passwd', NOW() , '$isActive', '$name', '$nickname', '$email')") 
+			or die(sql_getErrMsg());
+		
+		//關閉資料庫
+		sql_close($db);
+		
+		//回傳成功訊息
+		return "finish";
+	}	
+	
 	
 }
 
@@ -68,13 +130,10 @@ function user_login($userid, $userpasswd){
 				
 				//亂數產生登入驗證碼
 				$login_verify = generatorText(32);
-				
-				//取得現在時間，用字串的形式
-				$nowDate = date("Y-m-d H:i:s");
-				
+
 				//登記新的登入碼和登入時間進資料庫
 				mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-					SET `logged_code` = '".$login_verify."', `last_login`  = '$nowDate' 
+					SET `logged_code` = '".$login_verify."', `last_login_time`  = NOW() 
 					WHERE `username` = '$userid'") or die(sql_getErrMsg());
 				
 				
@@ -125,7 +184,7 @@ function user_logout($loginCode){
 	if(mysql_num_rows($db_user_query) >= 1){
 		//清除登入碼和登入時間進資料庫
 		mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-			SET `logged_code` = '' 
+			SET `logged_code` = NULL 
 			WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg()
 		);
 			
@@ -151,6 +210,6 @@ function user_logout($loginCode){
  */
 function user_queryAll($db){
 	global $DEV_DEGUG, $FORM_USER;
-	$db_table = mysql_query("SELECT `ID`, `username`, `logged_code`, `last_login`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
+	$db_table = mysql_query("SELECT `ID`, `username`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
 	return $db_table;
 }
