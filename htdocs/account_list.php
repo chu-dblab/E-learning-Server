@@ -45,7 +45,7 @@
 					echo "<tr>";
 						echo "<th scrope='row'>".$user_DBTableRow['ID']."</th>";
 						echo "<td>".$user_DBTableRow['username']."</td>";
-						echo "<td>".$user_DBTableRow['verify_login']."</td>";
+						echo "<td>".$user_DBTableRow['logged_code']."</td>";
 						echo "<td>".$user_DBTableRow['last_login']."</td>";
 						echo "<td>".$user_DBTableRow['isActive']."</td>";
 						echo "<td>".$user_DBTableRow['name']."</td>";

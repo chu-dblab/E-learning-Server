@@ -74,7 +74,7 @@ function user_login($userid, $userpasswd){
 				
 				//登記新的登入碼和登入時間進資料庫
 				mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-					SET `verify_login` = '".$login_verify."', `last_login`  = '$nowDate' 
+					SET `logged_code` = '".$login_verify."', `last_login`  = '$nowDate' 
 					WHERE `username` = '$userid'") or die(sql_getErrMsg());
 				
 				
@@ -120,13 +120,13 @@ function user_logout($loginCode){
 	//連結資料庫
 	$db = sql_connect();	
 
-	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `verify_login` = '$loginCode'") or die(sql_getErrMsg());
+	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg());
 	//若有找到
 	if(mysql_num_rows($db_user_query) >= 1){
 		//清除登入碼和登入時間進資料庫
 		mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-			SET `verify_login` = '' 
-			WHERE `verify_login` = '$loginCode'") or die(sql_getErrMsg()
+			SET `logged_code` = '' 
+			WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg()
 		);
 			
 		sql_close($db);	//關閉資料庫
@@ -151,6 +151,6 @@ function user_logout($loginCode){
  */
 function user_queryAll($db){
 	global $DEV_DEGUG, $FORM_USER;
-	$db_table = mysql_query("SELECT `ID`, `username`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
+	$db_table = mysql_query("SELECT `ID`, `username`, `logged_code`, `last_login`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
 	return $db_table;
 }
