@@ -9,12 +9,15 @@ define('DOCUMENT_ROOT',dirname(__FILE__)."/");
 */
 //網站標題
 define('SITE_NAME',"無所不在學習導引系統");
-
 //網站副標題
 define('SITE_SUBNAME',"");
+//網站標題簡稱
+define('SITE_NAME_REFERRED',"無所不在學習導引系統");
 
 //網站網址
+//Warning: 網址後面務必加上"/"
 define('SITE_URL',"http://chu-elearning/");
+define('SITE_URL_ROOT',"http://chu-elearning/");
 
 
 /**

@@ -13,6 +13,7 @@
 	*/
 	require_once("../lib/include.php");
 	//require_once(DOCUMENT_ROOT."lib/sql.php");
+	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/user.php");
 	
 	// ------------------------------------------------------------------------
@@ -75,33 +76,53 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>建立使用者帳號</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
-		<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+		.sidebar-nav {
+			padding: 9px 0;
+		}
+
+		@media (max-width: 980px) {
+			/* Enable use of floated navbar text */
+			.navbar-text.pull-right {
+				float: none;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+		}
+		</style>
+		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<div id="wrapper" class="container">
+		<?php template_admin_top_nav() ?>
+		
+		
 			<header>
 				<h1>使用者帳號清單</h1>
 				<h2></h2>
 			</header>
+
+			<section>
+				<p>總共有<?php echo usersTotal(); ?>個使用者</p>
+				<?php showUsersTable(); ?>
+				
+			</section>
 		
-			<div id="main" role="main">
-				
-				<section>
-					<p>總共有<?php echo usersTotal(); ?>個使用者</p>
-					<?php showUsersTable(); ?>
-					
-				</section>
-				
-			</div>
-		</div>
+		<hr />
 		<footer>
-			<p>Create in 2013/7/24 &nbsp;&nbsp;By 元兒～</p>
+			<?php template_admin_footer() ?>
 		</footer>
 		
-		<script src="../assets/js/jquery-1.10.2.min.js"></script>
-		<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="<?php echo SITE_URL_ROOT ?>assets/js/jquery-1.10.2.min.js"></script>
+		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
 <?php sql_close($db); ?>
