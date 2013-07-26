@@ -25,6 +25,11 @@
 4. <strike>執行install.php檔案，將以上述設定檔資料自動安裝資料庫</strike>
     (目前尚未完成此功能，需手動建立資料庫、資料表)
 
+## 本站採用的Framework
+### 網頁前端（含後台管理介面）
+* Bootstrap Version 2.3.2
+* JQuery v1.10.2
+
 
 
 ## 修改紀錄
@@ -50,7 +55,13 @@
 
 * /htdocs/lib/password.php 的`generatorText($password_len)`函式
     * 原作者: [Tsung-Hao Lee](http://about.me/tsung)
-    * 來源: <http://blog.longwin.com.tw/2007/08/php_function_gen_password_2007/>
+    * 來源: <http://blog.longwin.com.tw/2007/08/php_function_gen_password_2007/>  
+* 網站介面套版 Bootstrap
+    * 網站: <http://twitter.github.io/bootstrap/index.html>
+    * Github: <http://github.com/twitter/bootstrap>
+* JQuery
+    * 網站: <http://jquery.com/>
+    * Github: <http://github.com/jquery/jquery>
 
 ## 關於
 * 主要連結 <https://github.com/organizations/CHU-TDAP> 
