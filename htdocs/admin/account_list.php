@@ -27,14 +27,14 @@
 		global $user_DBTable;
 		if( usersTotal() > 0 ){	//若已有1個以上的使用者
 			//建立表格
-			echo "<table class='allUsers_table'>";
+			echo "<table class='allUsers_table table table-striped'>";
 			echo "<thead>";
 			echo "<tr>";
 				//第1行: 欄位名稱
 				echo "<th scpoe='col'>ID</th>";
-				echo "<th scpoe='col'>帳號名稱</th>";
+				echo "<th scpoe='col'>帳號</th>";
 				echo "<th scpoe='col'>登入碼</th>";
-				echo "<th scpoe='col'>最後登入時間</th>";
+				echo "<th scpoe='col'>登入時間</th>";
 				echo "<th scpoe='col'>建立時間</th>";
 				echo "<th scpoe='col'>啟用</th>";
 				echo "<th scpoe='col'>真實姓名</th>";
