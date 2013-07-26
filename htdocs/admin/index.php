@@ -73,4 +73,3 @@
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
-<?php sql_close($db); ?>

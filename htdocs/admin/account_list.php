@@ -107,7 +107,7 @@
 					</section>
 					
 				</div><!--/span-->
-			</div>
+			</div><!--/row-->
 			<hr />
 			<footer>
 				<?php template_admin_footer() ?>
