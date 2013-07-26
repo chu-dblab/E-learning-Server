@@ -1,5 +1,5 @@
 <li class="nav-header">後台管理</li>
-		<li class="<?php getCurrentActiveClass('index.html') ?>"><a href="<?php echo SITE_URL_ROOT ?>admin/index.html">總覽</a></li>
+		<li class="<?php getCurrentActiveClass('index.php') ?>"><a href="<?php echo SITE_URL_ROOT ?>admin/index.php">總覽</a></li>
 		
 		<li class="nav-header">使用者</li>
 		<li class="<?php getCurrentActiveClass('account_list.php') ?>"><a href="<?php echo SITE_URL_ROOT ?>admin/account_list.php">帳號管理</a></li>

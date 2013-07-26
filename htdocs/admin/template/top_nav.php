@@ -27,7 +27,7 @@ require_once("../lib/include.php");
 				
 				<!-- 導覽列導覽連結 -->
 				<ul class="nav">
-					<li class="active"><a href="<?php echo SITE_URL_ROOT ?>admin/index.html">後台管理</a></li>
+					<li class="active"><a href="<?php echo SITE_URL_ROOT ?>admin/index.php">後台管理</a></li>
 					<li><a href="#about">關於</a></li>
 				</ul>
 				
