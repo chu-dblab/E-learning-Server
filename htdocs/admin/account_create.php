@@ -74,7 +74,7 @@
 						<?php show_status_notify() ?>
 					</section>
 					<section id="create-form">
-						<form action="account_process.php" method="post">
+						<form action="action/account_process.php" method="post">
 							<fieldset>
 								<legend>請在此填入新使用者資料</legend>
 								<label>帳號: <input autofocus type="text" name="user_id" required="required" />*</label>
