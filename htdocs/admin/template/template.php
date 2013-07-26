@@ -3,13 +3,13 @@
  
  
 function template_admin_top_nav(){
-	include_once(DOCUMENT_ROOT."admin/template/top_nav.php");
+	include(DOCUMENT_ROOT."admin/template/top_nav.php");
 }
  
 function template_admin_sidebar(){
-	include_once(DOCUMENT_ROOT."admin/template/sidebar.php");
+	include(DOCUMENT_ROOT."admin/template/sidebar.php");
 }
  
 function template_admin_footer(){
-	include_once(DOCUMENT_ROOT."admin/template/footer.html");
+	include(DOCUMENT_ROOT."admin/template/footer.html");
 }
