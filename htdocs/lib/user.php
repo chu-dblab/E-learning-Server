@@ -86,7 +86,7 @@ function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nicknam
 		sql_close($db);
 		
 		//回傳成功訊息
-		return "finish";
+		return "Finish";
 	}	
 	
 	
