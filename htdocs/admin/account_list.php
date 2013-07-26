@@ -107,7 +107,7 @@
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span3">
-				
+					<?php template_admin_sidebar(); ?>
 				</div><!--/span-->
 				
 				<div class="span9">
@@ -125,12 +125,11 @@
 					
 				</div><!--/span-->
 			</div>
+			<hr />
+			<footer>
+				<?php template_admin_footer() ?>
+			</footer>
 		</div>
-		
-		<hr />
-		<footer>
-			<?php template_admin_footer() ?>
-		</footer>
 		
 		<script src="<?php echo SITE_URL_ROOT ?>assets/js/jquery-1.10.2.min.js"></script>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>

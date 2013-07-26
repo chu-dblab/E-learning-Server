@@ -1,13 +1,5 @@
 <?php
 require_once("../lib/include.php");
-
-$current_page = basename(getenv('SCRIPT_NAME'));	//取得目前網頁
-
-/*function getCurrentActiveClass(){
-	
-}*/
-
-
 ?>
 
 <!-- 最上方導覽列 -->
