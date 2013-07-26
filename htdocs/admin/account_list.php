@@ -104,17 +104,28 @@
 	<body>
 		<?php template_admin_top_nav() ?>
 		
-		
-			<header>
-				<h1>使用者帳號清單</h1>
-				<h2></h2>
-			</header>
-
-			<section>
-				<p>總共有<?php echo usersTotal(); ?>個使用者</p>
-				<?php showUsersTable(); ?>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span3">
 				
-			</section>
+				</div><!--/span-->
+				
+				<div class="span9">
+				
+					<header>
+						<h1>使用者帳號清單</h1>
+						<h2></h2>
+					</header>
+
+					<section>
+						<p>總共有<?php echo usersTotal(); ?>個使用者</p>
+						<?php showUsersTable(); ?>
+						
+					</section>
+					
+				</div><!--/span-->
+			</div>
+		</div>
 		
 		<hr />
 		<footer>
