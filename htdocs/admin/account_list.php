@@ -16,8 +16,33 @@
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/user.php");
 	
+	//讀取session資料
+	session_start();
+	$status_create =  $_SESSION["user_create_status"];
+	$status_create_message =  $_SESSION["user_create_status_message"];
+	unset($_SESSION["user_create_status"]);
+	unset($_SESSION["user_create_status_message"]);
 	// ------------------------------------------------------------------------
-	// TODO 顯示帳號資料表的function
+	
+	function show_status_notify(){
+		global $status_create, $status_create_message;
+		
+		if($status_create){
+			echo "<div class='alert";
+			switch($status_create){
+				case "Finish":
+					echo " alert-success";
+					break;
+			}
+			echo "'>";
+			
+			echo "<button type='button' class='close' data-dismiss='alert'>&times;</button>";
+			echo $status_create_message;
+			
+			echo "</div>";
+		}
+	}
+	
 	function usersTotal(){
 		global $user_DBTable;
 		return mysql_num_rows($user_DBTable);
@@ -99,7 +124,11 @@
 						<h1>使用者帳號清單</h1>
 						<h2></h2>
 					</header>
-
+					
+					<section id="status-notify">
+						<?php show_status_notify() ?>
+					</section>
+					
 					<section>
 						<p>總共有<?php echo usersTotal(); ?>個使用者</p>
 						<?php showUsersTable(); ?>
