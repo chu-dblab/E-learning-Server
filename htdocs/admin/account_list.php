@@ -75,7 +75,7 @@
 <html lang="zh-tw">
 	<head>
 		<meta charset="utf-8" />
-		<title>建立使用者帳號</title>
+		<title>建立使用者帳號 -<?php echo SITE_NAME_REFERRED ?></title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">

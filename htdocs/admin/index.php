@@ -19,7 +19,7 @@
 <html lang="zh-tw">
 	<head>
 		<meta charset="utf-8" />
-		<title>後台管理總覽</title>
+		<title>後台管理總覽 -<?php echo SITE_NAME_REFERRED ?></title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
