@@ -15,7 +15,8 @@
 	require_once(DOCUMENT_ROOT."lib/sql.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	
-	$sql_query_input = "SELECT * FROM ce_users";
+	//$sql_query_input = "SELECT * FROM ce_users";
+	$sql_query_input = $_POST["sql-query-input"];
 	// ------------------------------------------------------------------------
 	
 	function show_status_notify(){
@@ -132,7 +133,14 @@
 					
 					<section id="sql-query-input">
 						<form action="sql_tool_query.php" method="post">
-						
+							<div class="control-group">
+								<label class="control-label" for="sql-query-input">SQL查詢語法: </label>
+								<div class="controls">
+									<textarea name="sql-query-input" id="sql-query-input" ></textarea>
+								</div>
+								<button type="submit" class="btn" id="sendbutton" name="sendbutton">SQL!!!</button>
+								<button type="reset" class="btn" id="resetbutton" name="resetbutton">重填</button>
+							</div>
 						</form>
 					</section>
 					
