@@ -1,7 +1,7 @@
 ﻿<!--
-   register_account.html
+  account_list.php
    
-   註冊使用者帳號
+   查詢有哪些使用者
    
    Copyright 2013 元兒～ <yuan@Yuan-NB>
    
@@ -11,7 +11,7 @@
 	/**
 	 * 前置設定
 	*/
-	require_once("lib/include.php");
+	require_once("../lib/include.php");
 	//require_once(DOCUMENT_ROOT."lib/sql.php");
 	require_once(DOCUMENT_ROOT."lib/user.php");
 	
@@ -76,7 +76,8 @@
 		<meta charset="utf-8" />
 		<title>建立使用者帳號</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="mySeverDefault.css" />
+		<!-- Bootstrap -->
+		<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	</head>
 	<body>
 		<div id="wrapper" class="container">
@@ -98,6 +99,9 @@
 		<footer>
 			<p>Create in 2013/7/24 &nbsp;&nbsp;By 元兒～</p>
 		</footer>
+		
+		<script src="../assets/js/jquery-1.10.2.min.js"></script>
+		<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
 <?php sql_close($db); ?>
