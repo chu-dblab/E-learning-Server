@@ -44,5 +44,11 @@
 * 更久以前...
     * 建立初步架構
 
+## 部份資源來源
+
+* /htdocs/lib/password.php 的`generatorText($password_len)`函式
+    * 原作者: [Tsung-Hao Lee](http://about.me/tsung)
+    * 來源: <http://blog.longwin.com.tw/2007/08/php_function_gen_password_2007/>
+
 ## 關於
 * 主要連結 <https://github.com/organizations/CHU-TDAP> 
