@@ -14,9 +14,8 @@
 	require_once("config.php");
 	require_once("template/template.php");
 	
-	$SITE_URL = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-	$SITE_URL = dirname( dirname($SITE_URL) )."/";
-	//echo $SITE_URL;
+	$SERVER_URL = $_SERVER["SERVER_NAME"];
+	//echo $SERVER_URL;
 	
 ?>
 <!DOCTYPE html>
@@ -37,30 +36,30 @@
 		
 		<div class="container">
 			<div class="page-header">
-				<h1>第一步 <small>基本的網站設定</small></h1>
+				<h1>第二步 <small>資料庫連結設定</small></h1>
 			</div>
 			
 			<section>
-				<form class="form-horizontal" action="input_sql_config.php" method="post">
+				<form class="form-horizontal">
 					<div class="row-fluid">
 						<div class="span6">
 						
 							<div class="control-group">
-								<label class="control-label" for="inputSiteName">網站名稱: </label>
+								<label class="control-label" for="inputSQLHost">資料庫伺服器位址: </label>
 								<div class="controls">
-									<input type="text" name="inputSiteName" required="required" value="" id="inputSiteName" placeholder="完整的網站名稱">
+									<input type="text" name="inputSQLHost" value="<?php echo $SERVER_URL ?>" id="inputSQLHost" placeholder="localhost" required="required">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputSiteSubName">網站副標題: </label>
+								<label class="control-label" for="inputSQLUser">資料庫伺服器帳號: </label>
 								<div class="controls">
-									<input type="text" name="inputSiteSubName" id="inputSiteSubName" placeholder="副標題">
+									<input type="text" name="inputSQLUser" id="inputSQLUser" placeholder="帳號名稱" required="required">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputSiteReferred">網站簡稱: </label>
+								<label class="control-label" for="inputSQLPass">資料庫伺服器密碼: </label>
 								<div class="controls">
-									<input type="text" name="inputSiteReferred" id="inputSiteReferred" placeholder="簡稱">
+									<input type="password" name="inputSQLPass" id="inputSQLPass" placeholder="密碼" required="required">
 								</div>
 							</div>
 							
@@ -69,24 +68,16 @@
 						<div class="span6">
 						
 							<div class="control-group">
-								<label class="control-label" for="inputEncryptMode">密碼加密方式: </label>
+								<label class="control-label" for="inputSQLDBName">要使用的資料庫名稱: </label>
 								<div class="controls">
-									<select name="inputEncryptMode" id="inputEncryptMode">
-										<option>MD5</option>
-									</select>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputSiteIndexUrl">網站首頁網址: </label>
-								<div class="controls">
-									<input type="url" name="inputSiteIndexUrl" id="inputSiteIndexUrl" required="required" value="<?php echo $SITE_URL ?>" placeholder="http://">
+									<input type="text" name="inputSQLDBName" id="inputSQLDBName" required="required">
 									</input>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputSiteRootUrl">網站系統根網址: </label>
+								<label class="control-label" for="inputSQLDBFormPrefix">資料表前綴字元: </label>
 								<div class="controls">
-									<input type="url" name="inputSiteIndexUrl" id="inputSiteRootUrl" required="required" value="<?php echo $SITE_URL ?>" placeholder="http://">
+									<input type="text" name="inputSQLDBFormPrefix" id="inputSQLDBFormPrefix" placeholder="選填">
 								</div>
 							</div>
 						
@@ -95,6 +86,8 @@
 					
 					<button type="submit" class="btn btn-success pull-right" id="sendbutton" name="sendbutton">下一步 &raquo;</button>
 					<button type="reset" class="btn pull-right" id="resetbutton" name="resetbutton">重填</button>
+					<a href="javascript:(history.back(1))" class="btn pull-right">上一步</a>
+					
 					
 				</form>
 			</section>
