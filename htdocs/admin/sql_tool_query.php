@@ -115,6 +115,11 @@
 		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="<?php echo SITE_URL_ROOT ?>assets/css/bootstrap-top-navbar.css" rel="stylesheet">
 		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<style>
+		#sql-query-input{
+			width: 100%;
+		}
+		</style>
 	</head>
 	<body>
 		<?php template_admin_top_nav() ?>
@@ -132,16 +137,18 @@
 					</header>
 					
 					<section id="sql-query-input">
-						<form action="sql_tool_query.php" method="post">
-							<div class="control-group">
-								<label class="control-label" for="sql-query-input">SQL查詢語法: </label>
-								<div class="controls">
-									<textarea name="sql-query-input" id="sql-query-input" ></textarea>
+						<div class="well">
+							<form action="sql_tool_query.php" method="post">
+								<div class="control-group">
+									<label class="control-label" for="sql-query-input">SQL查詢語法: </label>
+									<div class="controls">
+										<textarea name="sql-query-input" id="sql-query-input" ><?php echo $sql_query_input ?></textarea>
+									</div>
+									<button type="submit" class="btn" id="sendbutton" name="sendbutton">SQL!!!</button>
+									<button type="reset" class="btn" id="resetbutton" name="resetbutton">重填</button>
 								</div>
-								<button type="submit" class="btn" id="sendbutton" name="sendbutton">SQL!!!</button>
-								<button type="reset" class="btn" id="resetbutton" name="resetbutton">重填</button>
-							</div>
-						</form>
+							</form>
+						</div>
 					</section>
 					
 					<section id="status-notify">
