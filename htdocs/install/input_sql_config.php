@@ -41,6 +41,10 @@
 			
 			<section>
 				<form class="form-horizontal">
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>提示!</strong> 請使用 MariaDB 或是 MySQL 資料庫系統。
+					</div>
 					<div class="row-fluid">
 						<div class="span6">
 						
@@ -86,7 +90,7 @@
 					
 					<button type="submit" class="btn btn-success pull-right" id="sendbutton" name="sendbutton">下一步 &raquo;</button>
 					<button type="reset" class="btn pull-right" id="resetbutton" name="resetbutton">重填</button>
-					<a href="javascript:(history.back(1))" class="btn pull-right">上一步</a>
+					<a href="javascript:(history.back(1))" class="btn pull-right">&laquo; 上一步</a>
 					
 					
 				</form>
