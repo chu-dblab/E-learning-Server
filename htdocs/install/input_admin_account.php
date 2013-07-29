@@ -36,52 +36,68 @@
 		
 		<div class="container">
 			<div class="page-header">
-				<h1>第二步 <small>資料庫連結設定</small></h1>
+				<h1>第三步 <small>建立管理者帳號</small></h1>
 			</div>
 			
 			<section>
-				<form class="form-horizontal" action="input_admin_account.php" method="post">
-					<div class="alert alert-info">
+				<form class="form-horizontal">
+					<div class="alert">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>提示!</strong> 請使用 MariaDB 或是 MySQL 資料庫系統。
+						<strong>注意!</strong> 請記好你的管理者帳密，並不要洩漏給第三者。
 					</div>
 					<div class="row-fluid">
 						<div class="span6">
 						
 							<div class="control-group">
-								<label class="control-label" for="inputSQLHost">資料庫伺服器位址: </label>
+								<label class="control-label" for="inputSiteAdminUser">管理者帳號: </label>
 								<div class="controls">
-									<input type="text" name="inputSQLHost" value="<?php echo $SERVER_URL ?>" id="inputSQLHost" placeholder="localhost" required="required">
+									<input type="text" name="inputSiteAdminUser" id="inputSiteAdminUser" placeholder="帳號名稱" value="root" required="required">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputSQLUser">資料庫伺服器帳號: </label>
+								<label class="control-label" for="inputSiteAdminPass">管理者密碼: </label>
 								<div class="controls">
-									<input type="text" name="inputSQLUser" id="inputSQLUser" placeholder="帳號名稱" required="required">
+									<input type="password" name="inputSiteAdminPass" id="inputSiteAdminPass" placeholder="請輸入密碼" required="required" oninput="checkPasswords()">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputSQLPass">資料庫伺服器密碼: </label>
+								<label class="control-label" for="inputSiteAdminRepPass">管理者確認密碼: </label>
 								<div class="controls">
-									<input type="password" name="inputSQLPass" id="inputSQLPass" placeholder="密碼" required="required">
+									<input type="password" name="inputSiteAdminRepPass" id="inputSiteAdminRepPass" placeholder="確認密碼" required="required" oninput="checkPasswords()">
 								</div>
 							</div>
-							
+							<script>
+								function checkPasswords() {
+									var user_password = document.getElementById('inputSiteAdminPass');
+									var user_confirm_password = document.getElementById('inputSiteAdminRepPass');
+									if (user_password.value != user_confirm_password.value) {
+										user_confirm_password.setCustomValidity('您這兩次輸入的密碼不同，請再次確認！');
+									}
+									else {
+										user_confirm_password.setCustomValidity('');
+									}
+								}
+							</script>
 						</div><!-- /span -->
 						
 						<div class="span6">
 						
 							<div class="control-group">
-								<label class="control-label" for="inputSQLDBName">要使用的資料庫名稱: </label>
+								<label class="control-label" for="inputSiteAdminUserRealName">姓名: </label>
 								<div class="controls">
-									<input type="text" name="inputSQLDBName" id="inputSQLDBName" required="required">
-									</input>
+									<input type="text" name="inputSiteAdminUserRealName" id="inputSiteAdminUserRealName" placeholder="">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputSQLDBFormPrefix">資料表前綴字元: </label>
+								<label class="control-label" for="inputSiteAdminUserNickName">暱稱: </label>
 								<div class="controls">
-									<input type="text" name="inputSQLDBFormPrefix" id="inputSQLDBFormPrefix" placeholder="選填">
+									<input type="text" name="inputSiteAdminUserNickName" id="inputSiteAdminUserNickName" placeholder="">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputSiteAdminUserEmail">E-mail: </label>
+								<div class="controls">
+									<input type="text" name="inputSiteAdminUserEmail" id="inputSiteAdminUserEmail" placeholder="">
 								</div>
 							</div>
 						
