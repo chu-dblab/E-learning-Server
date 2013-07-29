@@ -40,7 +40,7 @@
 			</div>
 			
 			<section>
-				<form class="form-horizontal">
+				<form class="form-horizontal" action="pre_install_detail.php" method="post">
 					<div class="alert">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<strong>注意!</strong> 請記好你的管理者帳密，並不要洩漏給第三者。
