@@ -97,11 +97,49 @@ function input_sql_config(){
 		backPage("input_sql_config.php","要使用的資料庫名稱是必填的喔");
 	}
 	
+	/**
+	 * 紀錄使用者輸入的資料
+	*/
+	session_start();
+	$_SESSION["install_inputSQLHost"]  = $inputSQLHost;
+	$_SESSION["install_inputSQLUser"]  = $inputSQLUser;
+	$_SESSION["install_inputSQLPass"]  = $inputSQLPass;
+	$_SESSION["install_inputSQLDBName"]  = $inputSQLDBName;
+	$_SESSION["install_inputSQLDBFormPrefix"]  = $inputSQLDBFormPrefix;
+	
 	//DEBUG
 	/*echo $inputSQLHost."<br>";
 	echo $inputSQLUser."<br>";
 	echo $inputSQLPass."<br>";
 	echo $inputSQLDBName."<br>";
 	echo $inputSQLDBFormPrefix."<br>";*/
+	
+}
+
+function input_admin_account(){
+	/**
+	 * 帶入使用者輸入的資料
+	*/
+	$inputSiteAdminUser = $_POST["inputSiteAdminUser"];
+	$inputSQLUser = $_POST["inputSQLUser"];
+	$inputSiteAdminRepPass = $_POST["inputSiteAdminRepPass"];
+	$inputSiteAdminUserRealName = $_POST["inputSiteAdminUserRealName"];
+	$inputSiteAdminUserNickName = $_POST["inputSiteAdminUserNickName"];
+	$inputSiteAdminUserEmail = $_POST["inputSiteAdminUserEmail"];
+	
+	/**
+	 * 驗證資料有無填錯
+	*/
+	if($inputSiteAdminUser == ""){
+		backPage("input_admin_account.php","請填入管理者帳號");
+	}
+	else if($inputSiteAdminPass == ""){
+		backPage("input_admin_account.php","請填入確認密碼");
+	}
+	else if($inputSiteAdminRepPass == $inputSiteAdminPass){
+		backPage("input_admin_account.php","確認密錯誤");
+	}
+	
+	
 	
 }
