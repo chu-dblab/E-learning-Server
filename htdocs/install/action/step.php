@@ -44,7 +44,9 @@ function input_site_config(){
 		backPage("input_site_config.php","網站首頁網址是必填的喔");
 	}
 	
-	//紀錄使用者輸入的資料
+	/**
+	 * 紀錄使用者輸入的資料
+	*/
 	session_start();
 	$_SESSION["install_inputSiteName"]  = $inputSiteName;
 	$_SESSION["install_inputSiteSubName"] = $inputSiteSubName;
