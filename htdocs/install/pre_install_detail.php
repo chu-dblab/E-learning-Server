@@ -14,8 +14,14 @@
 	require_once("config.php");
 	require_once("template/template.php");
 	
-	$SITE_URL = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-	$SITE_URL = dirname( dirname($SITE_URL) )."/";
+	require_once("action/step.php");
+	if($_POST["inputSiteAdminUser"]){
+		input_admin_account();
+	}
+	
+	
+	/*$SITE_URL = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	$SITE_URL = dirname( dirname($SITE_URL) )."/";*/
 	//echo $SITE_URL;
 	
 ?>

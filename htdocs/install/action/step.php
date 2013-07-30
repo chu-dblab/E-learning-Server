@@ -121,7 +121,7 @@ function input_admin_account(){
 	 * 帶入使用者輸入的資料
 	*/
 	$inputSiteAdminUser = $_POST["inputSiteAdminUser"];
-	$inputSQLUser = $_POST["inputSQLUser"];
+	$inputSiteAdminPass = $_POST["inputSiteAdminPass"];
 	$inputSiteAdminRepPass = $_POST["inputSiteAdminRepPass"];
 	$inputSiteAdminUserRealName = $_POST["inputSiteAdminUserRealName"];
 	$inputSiteAdminUserNickName = $_POST["inputSiteAdminUserNickName"];
@@ -136,10 +136,19 @@ function input_admin_account(){
 	else if($inputSiteAdminPass == ""){
 		backPage("input_admin_account.php","請填入確認密碼");
 	}
-	else if($inputSiteAdminRepPass == $inputSiteAdminPass){
-		backPage("input_admin_account.php","確認密錯誤");
+	else if($inputSiteAdminRepPass != $inputSiteAdminPass){
+		backPage("input_admin_account.php","確認密碼錯誤");
 	}
 	
-	
+	/**
+	 * 紀錄使用者輸入的資料
+	*/
+	session_start();
+	$_SESSION["install_inputSiteAdminUser"]  = $inputSQLHost;
+	$_SESSION["install_inputSiteAdminPass"]  = $inputSiteAdminPass;
+	$_SESSION["install_inputSiteAdminRepPass"]  = $inputSiteAdminRepPass;
+	$_SESSION["install_inputSiteAdminUserRealName"]  = $inputSiteAdminUserRealName;
+	$_SESSION["install_inputSiteAdminUserNickName"]  = $inputSiteAdminUserNickName;
+	$_SESSION["install_inputSiteAdminUserEmail"]  = $inputSiteAdminUserEmail;
 	
 }
