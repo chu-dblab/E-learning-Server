@@ -144,7 +144,7 @@ function input_admin_account(){
 	 * 紀錄使用者輸入的資料
 	*/
 	session_start();
-	$_SESSION["install_inputSiteAdminUser"]  = $inputSQLHost;
+	$_SESSION["install_inputSiteAdminUser"]  = $inputSiteAdminUser;
 	$_SESSION["install_inputSiteAdminPass"]  = $inputSiteAdminPass;
 	$_SESSION["install_inputSiteAdminRepPass"]  = $inputSiteAdminRepPass;
 	$_SESSION["install_inputSiteAdminUserRealName"]  = $inputSiteAdminUserRealName;

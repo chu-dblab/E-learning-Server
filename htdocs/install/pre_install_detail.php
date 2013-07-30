@@ -19,6 +19,29 @@
 		input_admin_account();
 	}
 	
+	/**
+	 * 取得使用者輸入過的資料
+	*/
+	session_start();
+	$inputSiteName = $_SESSION["install_inputSiteName"];
+	$inputSiteSubName = $_SESSION["install_inputSiteSubName"];
+	$inputSiteReferred = $_SESSION["install_inputSiteReferred"];
+	$inputEncryptMode = $_SESSION["install_inputEncryptMode"];
+	$inputSiteRootUrl = $_SESSION["install_inputSiteRootUrl"];
+	$inputSiteIndexUrl = $_SESSION["install_inputSiteIndexUrl"];
+	
+	$inputSQLHost = $_SESSION["install_inputSQLHost"];
+	$inputSQLUser = $_SESSION["install_inputSQLUser"];
+	//$inputSQLPass = $_SESSION["install_inputSQLPass"];
+	$inputSQLDBName = $_SESSION["install_inputSQLDBName"];
+	$inputSQLDBFormPrefix = $_SESSION["install_inputSQLDBFormPrefix"];
+	
+	$inputSiteAdminUser = $_SESSION["install_inputSiteAdminUser"];
+	//$inputSiteAdminPass = $_SESSION["install_inputSiteAdminPass"];
+	//$inputSiteAdminRepPass = $_SESSION["install_inputSiteAdminRepPass"];
+	$inputSiteAdminUserRealName = $_SESSION["install_inputSiteAdminUserRealName"];
+	$inputSiteAdminUserNickName = $_SESSION["install_inputSiteAdminUserNickName"];
+	$inputSiteAdminUserEmail = $_SESSION["install_inputSiteAdminUserEmail"];
 	
 	/*$SITE_URL = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 	$SITE_URL = dirname( dirname($SITE_URL) )."/";*/
@@ -53,19 +76,19 @@
 							<div class="control-group">
 								<label class="control-label">網站名稱: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteName ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">網站副標題: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteSubName ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">網站簡稱: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteReferred ?>
 								</div>
 							</div>
 						</div><!-- /span -->
@@ -74,19 +97,19 @@
 							<div class="control-group">
 								<label class="control-label">網站首頁網址: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteIndexUrl ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">網站系統根網址: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteRootUrl ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">密碼加密方式: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputEncryptMode ?>
 								</div>
 							</div>
 						</div><!-- /span -->
@@ -97,13 +120,13 @@
 							<div class="control-group">
 								<label class="control-label">資料庫伺服器位址: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSQLHost ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">資料庫伺服器帳號: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSQLUser ?>
 								</div>
 							</div>
 						</div><!-- /span -->
@@ -112,13 +135,13 @@
 							<div class="control-group">
 								<label class="control-label">要使用的資料庫名稱: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSQLDBName ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">資料表前綴字元: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSQLDBFormPrefix ?>
 								</div>
 							</div>
 						</div><!-- /span -->
@@ -129,25 +152,27 @@
 							<div class="control-group">
 								<label class="control-label">管理者帳號: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteAdminUser ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">姓名: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteAdminUserRealName ?>
 								</div>
 							</div>
+						</div>
+						<div class="span6">
 							<div class="control-group">
 								<label class="control-label">暱稱: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteAdminUserNickName ?>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">E-mail: </label>
 								<div class="controls">
-									fdsg
+									<?php echo $inputSiteAdminUserEmail ?>
 								</div>
 							</div>
 							
