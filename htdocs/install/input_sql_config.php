@@ -13,11 +13,14 @@
 	*/
 	require_once("config.php");
 	require_once("template/template.php");
+	require_once("action/notify.php");
 	
 	$SERVER_URL = $_SERVER["SERVER_NAME"];
 	
 	require_once("action/step.php");
-	input_site_config();
+	if($_POST["inputSiteName"]){
+		input_site_config();
+	}
 	//echo $SERVER_URL;
 	
 ?>
@@ -44,6 +47,7 @@
 			
 			<section>
 				<form class="form-horizontal" action="input_admin_account.php" method="post">
+					<?php show_status_notify() ?>
 					<div class="alert alert-info">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<strong>提示!</strong> 請使用 MariaDB 或是 MySQL 資料庫系統。

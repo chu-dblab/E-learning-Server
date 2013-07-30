@@ -63,3 +63,45 @@ function input_site_config(){
 	echo $inputSiteRootUrl."<br>";
 	echo $inputSiteIndexUrl."<br>";*/
 }
+
+
+function input_sql_config(){
+	/**
+	 * 帶入使用者輸入的資料
+	*/
+	$inputSQLHost = $_POST["inputSQLHost"];
+	$inputSQLUser = $_POST["inputSQLUser"];
+	$inputSQLPass = $_POST["inputSQLPass"];
+	$inputSQLDBName = $_POST["inputSQLDBName"];
+	$inputSQLDBFormPrefix = $_POST["inputSQLDBFormPrefix"];
+	
+	/**
+	 * 驗證資料有無填錯
+	*/
+	//是否有填必填資料
+	if($inputSQLHost == ""){
+		backPage("input_sql_config.php","資料庫伺服器位址是必填的喔");
+	}
+	else if($inputSQLUser == ""){
+		backPage("input_sql_config.php","資料庫伺服器帳號是必填的喔");
+	}
+	else if($inputSQLPass == ""){
+		backPage("input_sql_config.php","資料庫伺服器是必填的喔");
+	}
+	//測試資料庫連線
+	else if( !mysql_connect($inputSQLHost,$inputSQLUser,$inputSQLPass) ){
+		backPage("input_sql_config.php","資料庫無法連結，請檢查你填入的資訊有無錯誤，或是資料庫系統是否有啟動");
+	}
+	//是否有填必填資料
+	else if($inputSQLDBName == ""){
+		backPage("input_sql_config.php","要使用的資料庫名稱是必填的喔");
+	}
+	
+	//DEBUG
+	/*echo $inputSQLHost."<br>";
+	echo $inputSQLUser."<br>";
+	echo $inputSQLPass."<br>";
+	echo $inputSQLDBName."<br>";
+	echo $inputSQLDBFormPrefix."<br>";*/
+	
+}

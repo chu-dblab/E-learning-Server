@@ -14,8 +14,8 @@
 	require_once("config.php");
 	require_once("template/template.php");
 	
-	$SERVER_URL = $_SERVER["SERVER_NAME"];
-	//echo $SERVER_URL;
+	require_once("action/step.php");
+	input_sql_config();
 	
 ?>
 <!DOCTYPE html>
