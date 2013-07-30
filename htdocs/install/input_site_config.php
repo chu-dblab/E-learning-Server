@@ -13,6 +13,7 @@
 	*/
 	require_once("config.php");
 	require_once("template/template.php");
+	require_once("action/notify.php");
 	
 	$SITE_URL = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 	$SITE_URL = dirname( dirname($SITE_URL) )."/";
@@ -42,13 +43,14 @@
 			
 			<section>
 				<form class="form-horizontal" action="input_sql_config.php" method="post">
+					<?php show_status_notify() ?>
 					<div class="row-fluid">
 						<div class="span6">
 						
 							<div class="control-group">
 								<label class="control-label" for="inputSiteName">網站名稱: </label>
 								<div class="controls">
-									<input type="text" name="inputSiteName" required="required" value="" id="inputSiteName" placeholder="完整的網站名稱">
+									<input type="text" name="inputSiteName" required="required" id="inputSiteName" placeholder="完整的網站名稱">
 								</div>
 							</div>
 							<div class="control-group">
@@ -72,7 +74,8 @@
 								<label class="control-label" for="inputEncryptMode">密碼加密方式: </label>
 								<div class="controls">
 									<select name="inputEncryptMode" id="inputEncryptMode">
-										<option>MD5</option>
+										<option value="MD5">MD5</option>
+										<option value="">無</option>
 									</select>
 								</div>
 							</div>
@@ -86,7 +89,7 @@
 							<div class="control-group">
 								<label class="control-label" for="inputSiteRootUrl">網站系統根網址: </label>
 								<div class="controls">
-									<input type="url" name="inputSiteIndexUrl" id="inputSiteRootUrl" required="required" value="<?php echo $SITE_URL ?>" placeholder="http://">
+									<input type="url" name="inputSiteRootUrl" id="inputSiteRootUrl" required="required" value="<?php echo $SITE_URL ?>" placeholder="http://">
 								</div>
 							</div>
 						

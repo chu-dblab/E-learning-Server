@@ -15,6 +15,9 @@
 	require_once("template/template.php");
 	
 	$SERVER_URL = $_SERVER["SERVER_NAME"];
+	
+	require_once("action/step.php");
+	input_site_config();
 	//echo $SERVER_URL;
 	
 ?>
