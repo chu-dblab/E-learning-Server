@@ -12,8 +12,9 @@
 ## 如何安裝
 
 1. /htdocs/ 為網站根目錄
-2. 修改 /htdocs/config.php 檔案，依你的需求設定
-3. 建立 /htdocs/config/db_config.php 檔案，裡面填入
+2. 將內附的chu-elearn.sql匯入進你的資料庫
+3. 修改 /htdocs/config.php 檔案，依你的需求設定
+4. 建立 /htdocs/config/db_config.php 檔案，裡面填入
 
         <?php
         $DB_SERV = "localhost";    //資料庫伺服器名稱
@@ -22,7 +23,8 @@
         $DB_NAME = "chu-elearn";    //指定要使用哪個資料庫
         $FORM_PREFIX = "ce_";	//資料表的前綴字元
 
-4. <strike>執行install.php檔案，將以上述設定檔資料自動安裝資料庫</strike>
+
+請無視: <strike>執行install.php檔案，將以上述設定檔資料自動安裝資料庫</strike>
     (目前尚未完成此功能，需手動建立資料庫、資料表)
 
 ## 本站採用的Framework
