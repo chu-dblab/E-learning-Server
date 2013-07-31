@@ -1,5 +1,5 @@
 <?php
-require_once("../config.php");
+require_once("config.php");
 ?>
 
 <!-- 最上方導覽列 -->

@@ -3,14 +3,24 @@ session_start();
 
 	$inputSiteAdminUser = $_SESSION["install_inputSiteAdminUser"];
 	$inputSiteAdminPass = $_SESSION["install_inputSiteAdminPass"];
-	//$inputSiteAdminRepPass = $_SESSION["install_inputSiteAdminRepPass"];
 	$inputSiteAdminUserRealName = $_SESSION["install_inputSiteAdminUserRealName"];
 	$inputSiteAdminUserNickName = $_SESSION["install_inputSiteAdminUserNickName"];
 	$inputSiteAdminUserEmail = $_SESSION["install_inputSiteAdminUserEmail"];
 	
+	
+function encryptText($text){
+	global $inputEncryptMode;
+	switch($inputEncryptMode){
+		case "MD5":
+			return md5($text);
+			break;
+		default:
+			return $text;
+			break;
+	}
+}
 
-require_once("../../config.php");
-require_once(DOCUMENT_ROOT."lib/user.php"); //取得連結資料庫連結變數
-require_once(DOCUMENT_ROOT."lib/password.php");
 
-user_create("$inputSiteAdminUser", "$inputSiteAdminPass", "$inputSiteAdminPass", "1", true, "$inputSiteAdminUserRealName", "$inputSiteAdminUserNickName", "$inputSiteAdminUserEmail");
+mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."users` (`username` ,`password` ,`group` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
+	VALUES ('$inputSiteAdminUser', '".encryptText($inputSiteAdminPass)."', '1', NOW() , '1', '$inputSiteAdminUserRealName', '$inputSiteAdminUserNickName', '$inputSiteAdminUserEmail')") 
+	or die(mysql_error());
