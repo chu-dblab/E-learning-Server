@@ -233,7 +233,39 @@ function user_getUserId($loggedCode){
 	}
 }
 // ------------------------------------------------------------------------ 
+/**
+ * user_getGroupList
+ *
+ * 取得使用者群組清單
+ *
+ * @access	public
+ * @return	array	陣列索引為ID，值為群組名稱
+ * 
+ * @since	Version 0
+*/
+function user_getGroupList(){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = sql_connect();
+	
+	//查詢群組
+	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName("user_groups")) or die(sql_getErrMsg());
+	
+	//若有找到
+	if(mysql_num_rows($db_usergroup_query) >= 1){
+		while( $db_usergroup_queryRow = mysql_fetch_array($db_usergroup_query) ){
+			$groupArray[ $db_usergroup_queryRow['ID'] ] = $db_usergroup_queryRow['name'];
+		}
+		return $groupArray;
+	}
+	else{
+		return NULL;
+	}
+}
 
+
+// ------------------------------------------------------------------------ 
 /**
  * user_getUserQuery
  *
