@@ -13,3 +13,4 @@
 */
 
 $DEV_DEGUG = true;
+error_reporting(E_ALL);

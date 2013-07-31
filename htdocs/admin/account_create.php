@@ -12,6 +12,7 @@
 	 * 前置設定
 	*/
 	require_once("../lib/include.php");
+	require_once("../lib/user.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	
 	//讀取session資料
@@ -28,6 +29,7 @@
 			echo "<div class='alert";
 			switch($status_create){
 				case "UsernameCreatedErr":
+				case "NoGroupErr":
 				case "RepPasswdErr":
 					echo " alert-error";
 					break;
@@ -40,7 +42,9 @@
 			echo "</div>";
 		}
 	}
-	
+	function showUserGroupSelect(){
+		
+	}
 ?>
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -92,6 +96,18 @@
 										}
 									}
 								</script>
+								<label>使用者群組: 
+									<select name="user_group" id="user_group">
+										<?php 
+											$userGroup = user_getGroupList();
+											for($i=1; $i<=count($userGroup); $i++){
+												echo "<option value='$i'>$userGroup[$i]</option>";
+											}
+										?>
+										<!--<option value="MD5">MD5</option>
+										<otion value="">無</option>-->
+									</select>
+								</label>
 								 <label class="checkbox">
 									<input type="checkbox" name="user_active" value="active" checked> 啟用這個帳號
 								</label>

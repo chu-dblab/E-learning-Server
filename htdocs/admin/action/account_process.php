@@ -13,6 +13,7 @@ require_once(DOCUMENT_ROOT."lib/user.php");
 $register_user_id = $_POST["user_id"];
 $register_user_password = $_POST["user_password"];
 $register_user_confirm_password = $_POST["user_confirm_password"];
+$register_user_group = $_POST["user_group"];
 $register_user_active = $_POST["user_active"];
 $register_user_realName = $_POST["user_realName"];
 $register_user_nickName = $_POST["user_nickName"];
@@ -32,7 +33,7 @@ if($register_user_active) {
 }
 
 
-$account_create_status = user_create($register_user_id, $register_user_password, $register_user_confirm_password, $register_user_active, $register_user_realName, $register_user_nickName, $register_user_email);
+$account_create_status = user_create($register_user_id, $register_user_password, $register_user_confirm_password, $register_user_group, $register_user_active, $register_user_realName, $register_user_nickName, $register_user_email);
 
 if($account_create_status == "Finish"){
 	$status_message = "<strong>建立成功！</strong>";
@@ -50,6 +51,9 @@ else{
 	switch($account_create_status){
 		case "UsernameCreatedErr":
 			$status_message .= " '$register_user_id'名稱已經有人使用了喔～";
+			break;
+		case "NoGroupErr":
+			$status_message .= " 沒有你選擇的群組喔";
 			break;
 		case "RepPasswdErr":
 			$status_message .= " 確認密碼錯誤，請重新再試";
