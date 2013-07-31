@@ -53,11 +53,17 @@ function user_ishave($username){
  * @access	public
  * @param	string	帳號
  * @param	string	密碼
+ * @param	string	確認密碼
+ * @param	string	群組
+ * @param	string	是否啟用
+ * @param	string	姓名
+ * @param	string	暱稱
+ * @param	string	e-mail
  * @return	string	是否有成功建立
  * 
  * @since	Version 0
 */
-function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nickname, $email){
+function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, $nickname, $email){
 	global $FORM_USER;
 	
 	//是否已有這個使用者
@@ -78,8 +84,8 @@ function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nicknam
 		
 		//紀錄使用者帳號進資料庫
 		mysql_query("INSERT INTO ".sql_getFormName($FORM_USER)." 
-			(`username` ,`password` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
-			VALUES ('$username', '$passwd', NOW() , '$isActive', '$name', '$nickname', '$email')") 
+			(`username` ,`password` ,`group` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
+			VALUES ('$username', '$passwd', '$group', NOW() , '$isActive', '$name', '$nickname', '$email')") 
 			or die(sql_getErrMsg());
 		
 		//關閉資料庫
@@ -87,7 +93,7 @@ function user_create($username, $passwd, $passwd_rep, $isActive, $name, $nicknam
 		
 		//回傳成功訊息
 		return "Finish";
-	}	
+	}
 	
 	
 }
