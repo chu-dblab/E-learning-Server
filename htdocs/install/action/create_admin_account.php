@@ -13,4 +13,4 @@ require_once("../../config.php");
 require_once(DOCUMENT_ROOT."lib/user.php"); //取得連結資料庫連結變數
 require_once(DOCUMENT_ROOT."lib/password.php");
 
-user_create("$inputSiteAdminUser", "$inputSiteAdminPass", "$inputSiteAdminPass", true, "$inputSiteAdminUserRealName", "$inputSiteAdminUserNickName", "$inputSiteAdminUserEmail");
+user_create("$inputSiteAdminUser", "$inputSiteAdminPass", "$inputSiteAdminPass", "1", true, "$inputSiteAdminUserRealName", "$inputSiteAdminUserNickName", "$inputSiteAdminUserEmail");
