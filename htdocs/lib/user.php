@@ -338,6 +338,38 @@ function user_getGroupID($groupName){
 
 // ------------------------------------------------------------------------ 
 /**
+ * user_getGroupName
+ *
+ * 取得此使用者群組的名稱
+ *
+ * @access	public
+ * @param	int	ID
+ * @return	string	群組名稱
+ * 
+ * @since	Version 0
+*/
+function user_getGroupName($groupID){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = sql_connect();
+	
+	//查詢群組
+	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName("user_groups")." WHERE `ID` = '$groupID'") or die(sql_getErrMsg());
+	
+	//若有找到
+	if(mysql_num_rows($db_usergroup_query) >= 1){
+		$result = mysql_result($db_usergroup_query, 0, name);
+		sql_close($db);	//關閉資料庫
+		return $result;
+	}
+	else{
+		return NULL;
+	}
+}
+
+// ------------------------------------------------------------------------ 
+/**
  * user_getUserQuery
  *
  * 查詢使用者

@@ -58,6 +58,7 @@
 				//第1行: 欄位名稱
 				echo "<th scpoe='col'>ID</th>";
 				echo "<th scpoe='col'>帳號</th>";
+				echo "<th scpoe='col'>群組</th>";
 				echo "<th scpoe='col'>登入碼</th>";
 				echo "<th scpoe='col'>登入時間</th>";
 				echo "<th scpoe='col'>建立時間</th>";
@@ -72,6 +73,7 @@
 					echo "<tr>";
 						echo "<th scrope='row'>".$user_DBTableRow['ID']."</th>";
 						echo "<td>".$user_DBTableRow['username']."</td>";
+						echo "<td>".user_getGroupName( $user_DBTableRow['group'] )."</td>";
 						echo "<td>".$user_DBTableRow['logged_code']."</td>";
 						echo "<td>".$user_DBTableRow['last_login_time']."</td>";
 						echo "<td>".$user_DBTableRow['create_time']."</td>";
