@@ -1,33 +1,53 @@
 <?php
-/**
- * 網站根目錄
-*/
-	define('DOCUMENT_ROOT',dirname(__FILE__)."/");
+session_start();
 
-/**
- * 網站資訊
-*/
-	//網站標題
-	define('SITE_NAME',"無所不在學習導引系統");
-	//網站副標題
-	define('SITE_SUBNAME',"");
-	//網站標題簡稱
-	define('SITE_NAME_REFERRED',"無所不在學習導引系統");
-
-	//網站網址
-	//Warning: 網址後面務必加上"/"
-	define('SITE_URL',"http://chu-elearning/");
-	define('SITE_URL_ROOT',"http://chu-elearning/");
+$inputSiteName = $_SESSION["install_inputSiteName"];
+$inputSiteSubName = $_SESSION["install_inputSiteSubName"];
+$inputSiteReferred = $_SESSION["install_inputSiteReferred"];
+$inputEncryptMode = $_SESSION["install_inputEncryptMode"];
+$inputSiteRootUrl = $_SESSION["install_inputSiteRootUrl"];
+$inputSiteIndexUrl = $_SESSION["install_inputSiteIndexUrl"];
 
 
-/**
- * 要用哪種加密方式
- * 
- * 目前提供選項: MD5
-*/
-	$ENCRYPT_MODE = "MD5";
+$create_txt_content = "<?php\n/**\n * 網站根目錄\n*/\n";
+$create_txt_content .= "\tdefine('DOCUMENT_ROOT',dirname(__FILE__).'/');\n";
+$create_txt_content .= "\n";
 
-/**
- * 你的地區
-*/
-	date_default_timezone_set("Asia/Taipei");	//設定時區
+$create_txt_content .= "/**\n * 網站資訊\n*/\n";
+$create_txt_content .= "\t//網站標題\n";
+$create_txt_content .= "\tdefine('SITE_NAME','$inputSiteName');\n";
+$create_txt_content .= "\t//網站副標題\n";
+$create_txt_content .= "\tdefine('SITE_SUBNAME','$inputSiteSubName');\n";
+$create_txt_content .= "\t//網站標題簡稱\n";
+$create_txt_content .= "\tdefine('SITE_NAME_REFERRED','$inputSiteReferred');\n";
+$create_txt_content .= "\n";
+
+$create_txt_content .= "\t//網站網址\n";
+$create_txt_content .= "\t//Warning: 網址後面務必加上\"/\"\n";
+$create_txt_content .= "\tdefine('SITE_URL','$inputSiteIndexUrl');\n";
+$create_txt_content .= "\tdefine('SITE_URL_ROOT','$inputSiteRootUrl');\n";
+$create_txt_content .= "\n";
+
+$create_txt_content .= "/**\n * 要用哪種加密方式\n * \n * 目前提供選項: MD5\n*/\n";
+$create_txt_content .= "\t\$ENCRYPT_MODE = '$inputEncryptMode';\n";
+$create_txt_content .= "\n";
+
+$create_txt_content .= "/**\n * 你的地區\n*/\n";
+$create_txt_content .= "\tdate_default_timezone_set('Asia/Taipei');\t//設定時區\n";
+
+echo "content:<br>";
+echo "<pre>".htmlentities($create_txt_content, ENT_QUOTES, 'UTF-8')."</pre>";
+
+
+if($fp=fopen("../../config.php","w+")){
+	fputs($fp,$create_txt_content);
+	
+	//echo "OK";
+}
+else{
+	//echo "Fail";
+}
+fclose($fp);
+
+
+//echo "Finish";

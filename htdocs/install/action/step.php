@@ -146,7 +146,6 @@ function input_admin_account(){
 	session_start();
 	$_SESSION["install_inputSiteAdminUser"]  = $inputSiteAdminUser;
 	$_SESSION["install_inputSiteAdminPass"]  = $inputSiteAdminPass;
-	$_SESSION["install_inputSiteAdminRepPass"]  = $inputSiteAdminRepPass;
 	$_SESSION["install_inputSiteAdminUserRealName"]  = $inputSiteAdminUserRealName;
 	$_SESSION["install_inputSiteAdminUserNickName"]  = $inputSiteAdminUserNickName;
 	$_SESSION["install_inputSiteAdminUserEmail"]  = $inputSiteAdminUserEmail;

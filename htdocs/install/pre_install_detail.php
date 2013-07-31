@@ -179,7 +179,7 @@
 						</div><!-- /span -->
 					</div>
 					
-					<button type="submit" class="btn btn-success pull-right" id="sendbutton" name="sendbutton">確認無誤，開始安裝!!</button>
+					<a href="action/install.php" class="btn btn-success pull-right">確認無誤，開始安裝!!</a>
 					<a href="javascript:(history.back(1))" class="btn pull-right">&laquo; 上一步</a>
 					
 				</form>
