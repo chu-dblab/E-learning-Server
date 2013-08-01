@@ -74,14 +74,14 @@ function userGroup_create($name, $display_name, $adminPermissions){
  * @since	Version 0
 */
 function userGroup_remove($name){
-	global $FORM_USER_GROUP;
+	global $FORM_USER, $FORM_USER_GROUP;
 	//開啟資料庫
 	$db = sql_connect();
 	
 	// TODO 尚未完成移除動作
-	//$db_existUser = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `group` = '".userGroup_getID($name)."'") or die(sql_getErrMsg());
+	$db_existUser = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `user_group` = '$name'") or die(sql_getErrMsg());
 	
-	/*//檢查是否有此群組
+	//檢查是否有此群組
 	if( !userGroup_ishave($name) ){
 		return "NoFound";
 	}
@@ -93,17 +93,19 @@ function userGroup_remove($name){
 	else{
 		//刪除群組
 		//DELETE FROM `yuan_chu-elearn`.`ce_user_groups` WHERE `ce_user_groups`.`ID` = 5
+		$db = sql_connect();
 		mysql_query("DELETE FROM `".sql_getFormName($FORM_USER_GROUP)."` 
 			WHERE `name` = '$name'
 			") 
 			or die(sql_getErrMsg());
+		
 			
 		//關閉資料庫
 		sql_close($db);
 		
 		//回傳成功訊息
 		return "Finish";
-	}*/
+	}
 }
 // ========================================================================
 
