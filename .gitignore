@@ -7,3 +7,6 @@ test.php
 # KDE Dolphin自己產生的垃圾
 *.directory
 .*.kate-swp
+
+# GitEye產生的
+.project
