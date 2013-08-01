@@ -13,10 +13,11 @@
 */
 
 require_once(DOCUMENT_ROOT."lib/sql.php");
-require_once(DOCUMENT_ROOT."lib/password.php"); //取得連結資料庫連結變數
+require_once(DOCUMENT_ROOT."lib/user.php");
 $FORM_USER_GROUP = "user_groups";	//使用者帳號資料表
 
 // ========================================================================
+
 /**
  * userGroup_create
  *
@@ -31,7 +32,7 @@ $FORM_USER_GROUP = "user_groups";	//使用者帳號資料表
  * 
  * @since	Version 0
 */
-function userGroup_create($name, $adminPermissions){
+function userGroup_create($name, $display_name, $adminPermissions){
 	global $FORM_USER_GROUP;
 	//檢查有無重複的名稱
 	if( userGroup_ishave($name) ){
@@ -44,8 +45,8 @@ function userGroup_create($name, $adminPermissions){
 		
 		//紀錄使用者帳號進資料庫
 		mysql_query("INSERT INTO `".sql_getFormName($FORM_USER_GROUP)."` 
-			(`name` ,`admin`)
-			VALUES ('user', '$adminPermissions');
+			(`name`, `display_name`, `admin`)
+			VALUES ('$name', '$display_name', '$adminPermissions');
 			") 
 			or die(sql_getErrMsg());
 			
@@ -55,6 +56,54 @@ function userGroup_create($name, $adminPermissions){
 		//回傳成功訊息
 		return "Finish";
 	}
+}
+// ------------------------------------------------------------------------
+
+/**
+ * userGroup_remove
+ *
+ * 刪除使用者群組
+ *
+ * @access	public
+ * @param	string	名稱
+ * @return	string	是否有成功刪除
+ *			"Finish": 成功建立
+ *			"UserExist": 尚有存在的使用者
+			"NoFound": 找不到存在的群組
+ * 
+ * @since	Version 0
+*/
+function userGroup_remove($name){
+	global $FORM_USER_GROUP;
+	//開啟資料庫
+	$db = sql_connect();
+	
+	// TODO 尚未完成移除動作
+	//$db_existUser = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `group` = '".userGroup_getID($name)."'") or die(sql_getErrMsg());
+	
+	/*//檢查是否有此群組
+	if( !userGroup_ishave($name) ){
+		return "NoFound";
+	}
+	//檢查是否有使用者還存在這個群組
+	else if( mysql_num_rows($db_existUser) >= 1 ){
+		return "UserExist";
+	}
+	//都沒有問題
+	else{
+		//刪除群組
+		//DELETE FROM `yuan_chu-elearn`.`ce_user_groups` WHERE `ce_user_groups`.`ID` = 5
+		mysql_query("DELETE FROM `".sql_getFormName($FORM_USER_GROUP)."` 
+			WHERE `name` = '$name'
+			") 
+			or die(sql_getErrMsg());
+			
+		//關閉資料庫
+		sql_close($db);
+		
+		//回傳成功訊息
+		return "Finish";
+	}*/
 }
 // ========================================================================
 
@@ -75,12 +124,13 @@ function userGroup_getList(){
 	$db = sql_connect();
 	
 	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
+	//SELECT DISTINCT(`name`) `name`, `ID`, `display_name` FROM `ce_user_groups` WHERE 1
+	$db_usergroup_query = mysql_query("SELECT distinct(`name`) `name`, `ID`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
 	
 	//若有找到
 	if(mysql_num_rows($db_usergroup_query) >= 1){
 		while( $db_usergroup_queryRow = mysql_fetch_array($db_usergroup_query) ){
-			$groupArray[ $db_usergroup_queryRow['ID'] ] = $db_usergroup_queryRow['name'];
+			$groupArray[ $db_usergroup_queryRow['name'] ] = $db_usergroup_queryRow['display_name'];
 		}
 		sql_close($db);	//關閉資料庫
 		return $groupArray;
@@ -89,7 +139,8 @@ function userGroup_getList(){
 		return NULL;
 	}
 }
-// ------------------------------------------------------------------------ 
+// ------------------------------------------------------------------------
+
 /**
  * userGroup_ishave
  *
@@ -120,8 +171,8 @@ function userGroup_ishave($name){
 		return false;
 	}
 }
+// ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------ 
 /**
  * userGroup_getID
  *
@@ -152,8 +203,8 @@ function userGroup_getID($groupName){
 		return NULL;
 	}
 }
-
 // ------------------------------------------------------------------------ 
+
 /**
  * userGroup_getName
  *
@@ -185,7 +236,7 @@ function userGroup_getName($groupID){
 	}
 }
 
-// ------------------------------------------------------------------------ 
+// ========================================================================
 
 /**
  * userGroup_queryAll

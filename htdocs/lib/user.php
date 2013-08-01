@@ -13,6 +13,7 @@
 */
 
 require_once(DOCUMENT_ROOT."lib/sql.php");
+require_once(DOCUMENT_ROOT."lib/password.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
 $FORM_USER = "users";	//使用者帳號資料表
 
@@ -75,7 +76,7 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 		return "UsernameCreatedErr";
 	}
 	//檢查有無此群組
-	else if( !userGroup_getName($group) ){
+	else if( !userGroup_ishave($group) ){
 		return "NoGroupErr";
 	}
 	//確認密碼錯誤
@@ -92,7 +93,7 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 		
 		//紀錄使用者帳號進資料庫
 		mysql_query("INSERT INTO ".sql_getFormName($FORM_USER)." 
-			(`username` ,`password` ,`group` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
+			(`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
 			VALUES ('$username', '$passwd', '$group', NOW() , '$isActive', '$name', '$nickname', '$email')") 
 			or die(sql_getErrMsg());
 		
@@ -285,6 +286,6 @@ function user_getUserQuery($loggedCode){
 */
 function user_queryAll($db){
 	global $DEV_DEGUG, $FORM_USER;
-	$db_table = mysql_query("SELECT `ID`, `username`, `group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
+	$db_table = mysql_query("SELECT `ID`, `username`, `user_group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
 	return $db_table;
 }

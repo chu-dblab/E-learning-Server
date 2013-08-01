@@ -97,8 +97,9 @@
 									<select name="user_group" id="user_group">
 										<?php 
 											$userGroup = userGroup_getList();
-											for($i=1; $i<=count($userGroup); $i++){
-												echo "<option value='$i'>$userGroup[$i]</option>";
+											foreach($userGroup as $key=>$value){
+												//echo $key.".".$value."<br>";
+												echo "<option value='$key'>$key: $value</option>";
 											}
 										?>
 										<!--<option value="MD5">MD5</option>

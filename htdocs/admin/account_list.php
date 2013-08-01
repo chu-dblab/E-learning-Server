@@ -73,7 +73,7 @@
 					echo "<tr>";
 						echo "<th scrope='row'>".$user_DBTableRow['ID']."</th>";
 						echo "<td>".$user_DBTableRow['username']."</td>";
-						echo "<td>".userGroup_getName( $user_DBTableRow['group'] )."</td>";
+						echo "<td>".$user_DBTableRow['user_group']."</td>";
 						echo "<td>".$user_DBTableRow['logged_code']."</td>";
 						echo "<td>".$user_DBTableRow['last_login_time']."</td>";
 						echo "<td>".$user_DBTableRow['create_time']."</td>";
