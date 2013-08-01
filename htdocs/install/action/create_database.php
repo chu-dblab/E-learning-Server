@@ -71,7 +71,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."user_groups` (
 
 mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."user_groups` (`ID`, `name`, `display_name`, `admin`) VALUES
 (1, 'admin', '管理者', 1),
-(2, 'user', '', 0);") or die(mysql_error());
+(2, 'user', '使用者', 0);") or die(mysql_error());
 
 mysql_query("ALTER TABLE `".$inputSQLDBFormPrefix."users`
   ADD CONSTRAINT `ce_users_ibfk_1` FOREIGN KEY (`user_group`) REFERENCES `ce_user_groups` (`name`)") or die(mysql_error());
