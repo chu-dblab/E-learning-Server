@@ -88,14 +88,16 @@
 						echo "</div>";
 					}
 				?>
-				
-			</section>
-			<section>
 				<?php
 					if($install_config_code || $install_db_config_code){
 						echo "<p class='text-warning'>請先建立好上述檔案後，再進入本網站！！</p>";
+						echo "<hr>";
 					}
 				?>
+			</section>
+			<section>
+				<p><strong>恭喜你！</strong>你已經可以開始使用了！！</p>
+				<p>為了增加本站安全性，建議現在可以把<code>網站根目錄/install/</code>整個資料夾刪除吧！！</p>
 				<p><a href="../" class="btn btn-success btn-large">進入本站首頁吧 &raquo;</a></p>
 			</section>
 			<hr>
