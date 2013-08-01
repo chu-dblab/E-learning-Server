@@ -17,7 +17,46 @@ require_once(DOCUMENT_ROOT."lib/password.php"); //取得連結資料庫連結變
 $FORM_USER_GROUP = "user_groups";	//使用者帳號資料表
 
 // ========================================================================
-
+/**
+ * userGroup_create
+ *
+ * 建立使用者群組
+ *
+ * @access	public
+ * @param	string	名稱
+ * @param	string	管理員權限
+ * @return	string	是否有成功建立
+ *			"Finish": 成功建立
+ *			"NameCreatedErr": 有重複名稱
+ * 
+ * @since	Version 0
+*/
+function userGroup_create($name, $adminPermissions){
+	global $FORM_USER_GROUP;
+	//檢查有無重複的名稱
+	if( userGroup_ishave($name) ){
+		return "NameCreatedErr";
+	}
+	//都沒有問題，新增帳號
+	else{
+		//開啟資料庫Finish
+		$db = sql_connect();
+		
+		//紀錄使用者帳號進資料庫
+		mysql_query("INSERT INTO `".sql_getFormName($FORM_USER_GROUP)."` 
+			(`name` ,`admin`)
+			VALUES ('user', '$adminPermissions');
+			") 
+			or die(sql_getErrMsg());
+			
+		//關閉資料庫
+		sql_close($db);
+		
+		//回傳成功訊息
+		return "Finish";
+	}
+}
+// ========================================================================
 
 /**
  * userGroup_getList
@@ -57,19 +96,19 @@ function userGroup_getList(){
  * 是否擁有此群組
  *
  * @access	public
- * @param	int	群組ID
+ * @param	string	群組名稱
  * @return	bool	是否已有
  * 
  * @since	Version 0
 */
-function userGroup_ishave($groupID){
+function userGroup_ishave($name){
 	global $FORM_USER_GROUP;
 	
 	//連結資料庫
 	$db = sql_connect();
 	
 	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `ID` = '$groupID'") or die(sql_getErrMsg());
+	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$name'") or die(sql_getErrMsg());
 	
 	//若有找到
 	if(mysql_num_rows($db_usergroup_query) >= 1){
@@ -146,3 +185,21 @@ function userGroup_getName($groupID){
 	}
 }
 
+// ------------------------------------------------------------------------ 
+
+/**
+ * userGroup_queryAll
+ *
+ * 查詢所有使用者群組
+ *
+ * @access	public
+ * @param	object	資料庫
+ * @return	object	mysql_query的查詢結果
+ * 
+ * @since	Version 1
+*/
+function userGroup_queryAll($db){
+	global $DEV_DEGUG, $FORM_USER_GROUP;
+	$db_table = mysql_query("SELECT `ID`, `name`, `admin` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
+	return $db_table;
+}

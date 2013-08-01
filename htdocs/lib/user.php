@@ -75,7 +75,7 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 		return "UsernameCreatedErr";
 	}
 	//檢查有無此群組
-	else if( !userGroup_ishave($group) ){
+	else if( !userGroup_getName($group) ){
 		return "NoGroupErr";
 	}
 	//確認密碼錯誤
