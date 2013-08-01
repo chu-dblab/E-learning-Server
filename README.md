@@ -36,6 +36,7 @@
 
 ## 修改紀錄
 * 2013.8.1
+    * 改名為`assets/js/jquery.min.js`，並將所有網頁有用到jquery的更改對應路徑
     * **資料庫調整: 更改users欄位名稱group->user_uroup** (因為會和MySQL的保留字衝到)
     * userGroup: 新增 建立群組 函式功能
     * **架構調整: 將lib/user.php的使用者群組相關移出成lib/userGroup.php，並修改相對應的函式名稱**

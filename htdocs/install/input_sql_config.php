@@ -107,7 +107,7 @@
 			<?php template_install_footer() ?>
 		</div>
 		
-		<script src="<?php echo SITE_URL_ROOT_TMP_INSTALL ?>assets/js/jquery-1.10.2.min.js"></script>
+		<script src="<?php echo SITE_URL_ROOT_TMP_INSTALL ?>assets/js/jquery.min.js"></script>
 		<script src="<?php echo SITE_URL_ROOT_TMP_INSTALL ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
