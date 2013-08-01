@@ -14,7 +14,10 @@ $register_user_id = $_POST["user_id"];
 $register_user_password = $_POST["user_password"];
 $register_user_confirm_password = $_POST["user_confirm_password"];
 $register_user_group = $_POST["user_group"];
-$register_user_active = $_POST["user_active"];
+$register_user_active = false;
+if($_POST["user_active"]){
+	$register_user_active = true;
+}
 $register_user_realName = $_POST["user_realName"];
 $register_user_nickName = $_POST["user_nickName"];
 $register_user_email = $_POST["user_email"];
