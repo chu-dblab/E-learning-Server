@@ -16,7 +16,7 @@ require_once(DOCUMENT_ROOT."lib/sql.php");
 require_once(DOCUMENT_ROOT."lib/password.php"); //取得連結資料庫連結變數
 $FORM_USER = "users";	//使用者帳號資料表
 
-// ------------------------------------------------------------------------
+// ========================================================================
 
 /**
  * user_ishave
@@ -39,7 +39,7 @@ function user_ishave($username){
 	
 	if(mysql_num_rows($db_user_query) >= 1){
 		return true;
-	}
+	}// ========================================================================
 	else false;
 }
 
@@ -240,7 +240,57 @@ function user_getUserId($loggedCode){
 		return 0;
 	}
 }
+// ------------------------------------------------------------------------
+
+/**
+ * user_getUserQuery
+ *
+ * 查詢使用者
+ *
+ * @access	public
+ * @param	string	登入碼
+ * @return	object	此使用者的資料表內容(回傳NULL為找不到使用者)
+ * 
+ * @since	Version 0
+*/
+function user_getUserQuery($loggedCode){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = sql_connect();
+	
+	//尋找登入碼
+	$db_user_query = mysql_query("SELECT `ID` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loggedCode'") or die(sql_getErrMsg());
+	
+	//若有找到
+	if(mysql_num_rows($db_user_query) >= 1){
+		return $db_user_query;
+	}
+	else{
+		return NULL;
+	}
+}
 // ------------------------------------------------------------------------ 
+
+/**
+ * user_queryAll
+ *
+ * 查詢使用者帳號
+ *
+ * @access	public
+ * @param	object	資料庫
+ * @return	object	mysql_query的查詢結果
+ * 
+ * @since	Version 1
+*/
+function user_queryAll($db){
+	global $DEV_DEGUG, $FORM_USER;
+	$db_table = mysql_query("SELECT `ID`, `username`, `group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
+	return $db_table;
+}
+
+// ========================================================================
+
 /**
  * user_getGroupList
  *
@@ -274,9 +324,9 @@ function user_getGroupList(){
 }
 // ------------------------------------------------------------------------ 
 /**
- * user_getGroupID
+ * user_ishaveGroup
  *
- * 取得此使用者群組的ID
+ * 是否擁有此群組
  *
  * @access	public
  * @param	int	群組ID
@@ -368,52 +418,3 @@ function user_getGroupName($groupID){
 	}
 }
 
-// ------------------------------------------------------------------------ 
-/**
- * user_getUserQuery
- *
- * 查詢使用者
- *
- * @access	public
- * @param	string	登入碼
- * @return	object	此使用者的資料表內容(回傳NULL為找不到使用者)
- * 
- * @since	Version 0
-*/
-function user_getUserQuery($loggedCode){
-	global $FORM_USER;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//尋找登入碼
-	$db_user_query = mysql_query("SELECT `ID` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loggedCode'") or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_user_query) >= 1){
-		return $db_user_query;
-	}
-	else{
-		return NULL;
-	}
-}
-
-
-// ------------------------------------------------------------------------ 
-
-/**
- * user_queryAll
- *
- * 查詢使用者帳號
- *
- * @access	public
- * @param	object	資料庫
- * @return	object	mysql_query的查詢結果
- * 
- * @since	Version 1
-*/
-function user_queryAll($db){
-	global $DEV_DEGUG, $FORM_USER;
-	$db_table = mysql_query("SELECT `ID`, `username`, `group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
-	return $db_table;
-}
