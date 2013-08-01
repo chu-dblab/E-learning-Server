@@ -96,7 +96,7 @@
 						echo "<p class='text-warning'>請先建立好上述檔案後，再進入本網站！！</p>";
 					}
 				?>
-				<p><a href=".php" class="btn btn-success btn-large">進入本站首頁吧 &raquo;</a></p>
+				<p><a href="../" class="btn btn-success btn-large">進入本站首頁吧 &raquo;</a></p>
 			</section>
 			<hr>
 			<?php template_install_footer() ?>
