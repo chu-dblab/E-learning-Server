@@ -10,8 +10,15 @@
 * MariaDB 5.5.31 (可用MySQL)
 
 ## 如何安裝
+### 引導式安裝
+安裝前請先把`/htdocs/config.php`、`/htdocs/config/db_config.php`砍掉，若之前有安裝過，請砍掉之前安裝的資料庫
+1. 請先把`/htdocs/` 整個複製到你的網頁空間
+2. 設定你的網頁伺服器、資料夾權限，允許由網頁伺服器建立檔案（此步可略過，但安裝完後請手動建立安裝完成畫面提到的檔案）
+3. 打開你的瀏覽器，網址輸入 http://你的網站/install/ 進行安裝，接下來就按照畫面的提示去做
+4. 安裝完後，為了增加安全性，請刪除`/htdocs/install/`整個資料夾。
 
-1. /htdocs/ 為網站根目錄
+### 手動安裝
+1. 請先把`/htdocs/` 整個複製到你的網頁空間
 2. 將內附的chu-elearn.sql匯入進你的資料庫
 3. 修改 /htdocs/config.php 檔案，依你的需求設定
 4. 建立 /htdocs/config/db_config.php 檔案，裡面填入
