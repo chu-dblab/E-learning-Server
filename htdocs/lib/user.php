@@ -13,7 +13,7 @@
 */
 
 require_once(DOCUMENT_ROOT."lib/sql.php");
-require_once(DOCUMENT_ROOT."lib/password.php"); //取得連結資料庫連結變數
+require_once(DOCUMENT_ROOT."lib/userGroup.php");
 $FORM_USER = "users";	//使用者帳號資料表
 
 // ========================================================================
@@ -75,7 +75,7 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 		return "UsernameCreatedErr";
 	}
 	//檢查有無此群組
-	else if( !user_ishaveGroup($group) ){
+	else if( !userGroup_ishave($group) ){
 		return "NoGroupErr";
 	}
 	//確認密碼錯誤
@@ -288,133 +288,3 @@ function user_queryAll($db){
 	$db_table = mysql_query("SELECT `ID`, `username`, `group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
 	return $db_table;
 }
-
-// ========================================================================
-
-/**
- * user_getGroupList
- *
- * 取得使用者群組清單
- *
- * @access	public
- * @return	array	陣列索引為ID，值為群組名稱
- * 
- * @since	Version 0
-*/
-function user_getGroupList(){
-	global $FORM_USER;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName("user_groups")) or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		while( $db_usergroup_queryRow = mysql_fetch_array($db_usergroup_query) ){
-			$groupArray[ $db_usergroup_queryRow['ID'] ] = $db_usergroup_queryRow['name'];
-		}
-		sql_close($db);	//關閉資料庫
-		return $groupArray;
-	}
-	else{
-		return NULL;
-	}
-}
-// ------------------------------------------------------------------------ 
-/**
- * user_ishaveGroup
- *
- * 是否擁有此群組
- *
- * @access	public
- * @param	int	群組ID
- * @return	bool	是否已有
- * 
- * @since	Version 0
-*/
-function user_ishaveGroup($groupID){
-	global $FORM_USER;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName("user_groups")." WHERE `ID` = '$groupID'") or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		sql_close($db);	//關閉資料庫
-		return true;
-	}
-	else{
-		sql_close($db);	//關閉資料庫
-		return false;
-	}
-}
-
-// ------------------------------------------------------------------------ 
-/**
- * user_getGroupID
- *
- * 取得此使用者群組的ID
- *
- * @access	public
- * @param	string	群組名稱
- * @return	int	ID
- * 
- * @since	Version 0
-*/
-function user_getGroupID($groupName){
-	global $FORM_USER;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName("user_groups")." WHERE `name` = '$groupName'") or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		$result = mysql_result($db_usergroup_query, 0, ID);
-		sql_close($db);	//關閉資料庫
-		return $result;
-	}
-	else{
-		return NULL;
-	}
-}
-
-// ------------------------------------------------------------------------ 
-/**
- * user_getGroupName
- *
- * 取得此使用者群組的名稱
- *
- * @access	public
- * @param	int	ID
- * @return	string	群組名稱
- * 
- * @since	Version 0
-*/
-function user_getGroupName($groupID){
-	global $FORM_USER;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName("user_groups")." WHERE `ID` = '$groupID'") or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		$result = mysql_result($db_usergroup_query, 0, name);
-		sql_close($db);	//關閉資料庫
-		return $result;
-	}
-	else{
-		return NULL;
-	}
-}
-

@@ -36,14 +36,15 @@
 
 ## 修改紀錄
 * 2013.8.1
-    * **完成系統安裝流程**: 可進入`htdocs/install/install.php`進行安裝
+    * **架構調整: 將lib/user.php的使用者群組相關移出成lib/userGroup.php，並修改相對應的函式名稱**
+    * 完成系統安裝流程: 可進入`htdocs/install/install.php`進行安裝
 * 2013.7.31
     * **(有調整user api函式)新增使用者群組功能**
 * 2013.7.27
     * 使用者帳號建立功能
 * 2013.7.26
-    * README.md: 加入**如何安裝**
-    * **建立後台管理介面**！（使用Bootstrap套版）
+    * README.md: 加入"如何安裝"
+    * 建立後台管理介面！（使用Bootstrap套版）
     * 後台管理介面- 使用者列表
 * 2013.7.25
     * **更改users資料表的欄位登入碼為`login_code`**

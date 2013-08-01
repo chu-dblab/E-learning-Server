@@ -42,9 +42,6 @@
 			echo "</div>";
 		}
 	}
-	function showUserGroupSelect(){
-		
-	}
 ?>
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -99,7 +96,7 @@
 								<label>使用者群組: 
 									<select name="user_group" id="user_group">
 										<?php 
-											$userGroup = user_getGroupList();
+											$userGroup = userGroup_getList();
 											for($i=1; $i<=count($userGroup); $i++){
 												echo "<option value='$i'>$userGroup[$i]</option>";
 											}
