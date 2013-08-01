@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: localhost
--- 產生日期: 2013 年 07 月 31 日 07:25
+-- 產生日期: 2013 年 08 月 01 日 11:12
 -- 伺服器版本: 5.5.32-MariaDB-log
 -- PHP 版本: 5.4.17
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `ce_users` (
   `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(60) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `group` int(20) unsigned NOT NULL DEFAULT '1',
+  `user_group` varchar(60) NOT NULL DEFAULT 'user',
   `logged_code` varchar(32) DEFAULT NULL,
   `last_login_time` timestamp NULL DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `ce_users` (
   `nickname` varchar(60) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `group` (`group`)
+  KEY `user_group` (`user_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -53,17 +53,19 @@ CREATE TABLE IF NOT EXISTS `ce_users` (
 CREATE TABLE IF NOT EXISTS `ce_user_groups` (
   `ID` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
+  `display_name` varchar(60) NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 轉存資料表中的資料 `ce_user_groups`
 --
 
-INSERT INTO `ce_user_groups` (`ID`, `name`, `admin`) VALUES
-(1, 'admin', 1),
-(2, 'user', 0);
+INSERT INTO `ce_user_groups` (`ID`, `name`, `display_name`, `admin`) VALUES
+(1, 'admin', '管理者', 1),
+(2, 'user', '', 0);
 
 --
 -- 匯出資料表的 Constraints
@@ -73,4 +75,4 @@ INSERT INTO `ce_user_groups` (`ID`, `name`, `admin`) VALUES
 -- 資料表的 Constraints `ce_users`
 --
 ALTER TABLE `ce_users`
-  ADD CONSTRAINT `ce_users_ibfk_1` FOREIGN KEY (`group`) REFERENCES `ce_user_groups` (`ID`);
+  ADD CONSTRAINT `ce_users_ibfk_1` FOREIGN KEY (`user_group`) REFERENCES `ce_user_groups` (`name`);

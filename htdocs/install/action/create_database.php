@@ -1,4 +1,5 @@
 <?php
+echo "s";
 /**
  * 取得使用者輸入過的資料
 */
@@ -27,6 +28,8 @@ else{
 }
 fclose($fp);
 
+echo "db_config text created";
+
 /**
  * 資料庫連結
 */
@@ -45,7 +48,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."users` (
   `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(60) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `group` int(20) unsigned NOT NULL DEFAULT '1',
+  `user_group` varchar(60) NOT NULL DEFAULT 'user',
   `logged_code` varchar(32) DEFAULT NULL,
   `last_login_time` timestamp NULL DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -54,18 +57,21 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."users` (
   `nickname` varchar(60) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `group` (`group`)
+  KEY `user_group` (`user_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."user_groups` (
   `ID` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
+  `display_name` varchar(60) NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2") or die(mysql_error());
+  PRIMARY KEY (`ID`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3") or die(mysql_error());
 
-mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."user_groups` (`ID`, `name`, `admin`) VALUES
-(1, 'admin', 1);") or die(mysql_error());
+mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."user_groups` (`ID`, `name`, `display_name`, `admin`) VALUES
+(1, 'admin', '管理者', 1),
+(2, 'user', '', 0);") or die(mysql_error());
 
 mysql_query("ALTER TABLE `".$inputSQLDBFormPrefix."users`
-  ADD CONSTRAINT `".$inputSQLDBFormPrefix."users_ibfk_1` FOREIGN KEY (`group`) REFERENCES `".$inputSQLDBFormPrefix."user_groups` (`ID`)") or die(mysql_error());
+  ADD CONSTRAINT `ce_users_ibfk_1` FOREIGN KEY (`user_group`) REFERENCES `ce_user_groups` (`name`)") or die(mysql_error());
