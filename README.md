@@ -47,7 +47,8 @@
 * 2013.8.2
     * **架構調整: 利用登入碼針對此帳號操作獨立成User類別**，原`lib/user.php`裡利用登入碼操作的函式將逐漸被User類別取代
     * **對此使用者（登入碼）的資料庫操作，移到`lib/sql.php`**
-    * User類別: 完成__construct, getLoggedCode, getID, getQuery, logout 函式
+    * **更改資料庫users資料表欄位: name->realname**
+    * User類別: 實作多個函式
 * 2013.8.1
     * 改名為`assets/js/jquery.min.js`，並將所有網頁有用到jquery的更改對應路徑
     * **資料庫調整: 更改users欄位名稱group->user_uroup** (因為會和MySQL的保留字衝到)

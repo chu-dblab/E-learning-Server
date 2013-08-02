@@ -21,6 +21,6 @@ function encryptText($text){
 }
 
 
-mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."users` (`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
+mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."users` (`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`realname` ,`nickname` ,`email`)
 	VALUES ('$inputSiteAdminUser', '".encryptText($inputSiteAdminPass)."', 'admin', NOW() , '1', '$inputSiteAdminUserRealName', '$inputSiteAdminUserNickName', '$inputSiteAdminUserEmail')") 
 	or die(mysql_error());

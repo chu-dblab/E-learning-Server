@@ -53,7 +53,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."users` (
   `last_login_time` timestamp NULL DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isActive` tinyint(1) NOT NULL DEFAULT '1',
-  `name` varchar(60) DEFAULT NULL,
+  `realname` varchar(60) DEFAULT NULL,
   `nickname` varchar(60) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -74,4 +74,4 @@ mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."user_groups` (`ID`, `name`, `
 (2, 'user', '使用者', 0);") or die(mysql_error());
 
 mysql_query("ALTER TABLE `".$inputSQLDBFormPrefix."users`
-  ADD CONSTRAINT `ce_users_ibfk_1` FOREIGN KEY (`user_group`) REFERENCES `ce_user_groups` (`name`)") or die(mysql_error());
+  ADD CONSTRAINT `".$inputSQLDBFormPrefix."users_ibfk_1` FOREIGN KEY (`user_group`) REFERENCES `".$inputSQLDBFormPrefix."user_groups` (`name`)") or die(mysql_error());

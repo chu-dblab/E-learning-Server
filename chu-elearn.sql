@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: localhost
--- 產生日期: 2013 年 08 月 01 日 11:12
+-- 產生日期: 2013 年 08 月 02 日 15:16
 -- 伺服器版本: 5.5.32-MariaDB-log
 -- PHP 版本: 5.4.17
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `ce_users` (
   `last_login_time` timestamp NULL DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isActive` tinyint(1) NOT NULL DEFAULT '1',
-  `name` varchar(60) DEFAULT NULL,
+  `realname` varchar(60) DEFAULT NULL,
   `nickname` varchar(60) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `ce_user_groups` (
 
 INSERT INTO `ce_user_groups` (`ID`, `name`, `display_name`, `admin`) VALUES
 (1, 'admin', '管理者', 1),
-(2, 'user', '', 0);
+(2, 'user', '使用者', 0);
 
 --
 -- 匯出資料表的 Constraints

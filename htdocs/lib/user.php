@@ -93,7 +93,7 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 		
 		//紀錄使用者帳號進資料庫
 		mysql_query("INSERT INTO ".sql_getFormName($FORM_USER)." 
-			(`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`name` ,`nickname` ,`email`)
+			(`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`reaLname` ,`nickname` ,`email`)
 			VALUES ('$username', '$passwd', '$group', NOW() , '$isActive', '$name', '$nickname', '$email')") 
 			or die(sql_getErrMsg());
 		
@@ -222,6 +222,6 @@ function user_logout($userid){
 */
 function user_queryAll($db){
 	global $DEV_DEGUG, $FORM_USER;
-	$db_table = mysql_query("SELECT `ID`, `username`, `user_group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `name`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
+	$db_table = mysql_query("SELECT `ID`, `username`, `user_group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `realname`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
 	return $db_table;
 }

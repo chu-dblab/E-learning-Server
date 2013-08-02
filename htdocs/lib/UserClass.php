@@ -47,7 +47,6 @@ class User {
 	 * @param	string	資料表欄位名稱
 	 * @param	(依輸入型態)	資料表欄位內容
 	 * @return	bool	是否更改成功
-	 * TODO
 	 * @since	Version 0
 	 */
 	private function setQueryInfo($colName, $rowContent){
@@ -132,7 +131,7 @@ class User {
 	 * @return	string	真實姓名
 	 */
 	function getRealName(){
-		return $this->getQueryInfo("name");
+		return $this->getQueryInfo("realname");
 	}
 	
 	/**
@@ -143,7 +142,7 @@ class User {
 	 * @return	bool	是否更改成功
 	 */
 	function setRealName($input){
-		return $this->setQueryInfo("name", $input);
+		return $this->setQueryInfo("realname", $input);
 	}
 	// ------------------------------------------------------------------------
 	

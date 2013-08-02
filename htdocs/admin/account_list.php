@@ -78,7 +78,7 @@
 						echo "<td>".$user_DBTableRow['last_login_time']."</td>";
 						echo "<td>".$user_DBTableRow['create_time']."</td>";
 						echo "<td>".$user_DBTableRow['isActive']."</td>";
-						echo "<td>".$user_DBTableRow['name']."</td>";
+						echo "<td>".$user_DBTableRow['realname']."</td>";
 						echo "<td>".$user_DBTableRow['nickname']."</td>";
 						echo "<td>".$user_DBTableRow['email']."</td>";
 					echo "</tr>";
