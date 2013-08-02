@@ -134,6 +134,17 @@ class User {
 	function getRealName(){
 		return $this->getQueryInfo("name");
 	}
+	
+	/**
+	 * 修改真實姓名
+	 *
+	 * @access	public
+	 * @param	string	新真實姓名
+	 * @return	bool	是否更改成功
+	 */
+	function setRealName($input){
+		return $this->setQueryInfo("name", $input);
+	}
 	// ------------------------------------------------------------------------
 	
 	/**
@@ -145,6 +156,17 @@ class User {
 	function getNickName(){
 		return $this->getQueryInfo("nickname");
 	}
+	
+	/**
+	 * 修改暱稱
+	 *
+	 * @access	public
+	 * @param	string	新暱稱
+	 * @return	bool	是否更改成功
+	 */
+	function setNickName($input){
+		return $this->setQueryInfo("nickname", $input);
+	}
 	// ------------------------------------------------------------------------
 	
 	/**
@@ -155,6 +177,17 @@ class User {
 	 */
 	function getEmail(){
 		return $this->getQueryInfo("email");
+	}
+	
+	/**
+	 * 修改帳號Email
+	 *
+	 * @access	public
+	 * @param	string	新Email
+	 * @return	bool	是否更改成功
+	 */
+	function setEmail($input){
+		return $this->setQueryInfo("email", $input);
 	}
 	// ------------------------------------------------------------------------
 	
