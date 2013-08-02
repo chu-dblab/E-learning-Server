@@ -183,7 +183,8 @@ function user_login($userid, $userpasswd){
  * 
  * @since	Version 0
 */
-
+// TODO 改變輸入參數為(帳號)
+//	PS. 利用登入碼登出功能將由User類別取代
 function user_logout($loginCode){
 	global $FORM_USER;
 	
@@ -194,7 +195,7 @@ function user_logout($loginCode){
 	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg());
 	//若有找到
 	if(mysql_num_rows($db_user_query) >= 1){
-		//清除登入碼和登入時間進資料庫
+		//清除登入碼進資料庫
 		mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
 			SET `logged_code` = NULL 
 			WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg()
@@ -206,69 +207,6 @@ function user_logout($loginCode){
 	}
 	else{
 		return false;	//傳回登出失敗
-	}
-}
-// ------------------------------------------------------------------------
-
-/**
- * user_getUserId
- *
- * 查詢使用者帳號
- *
- * @access	public
- * @param	string	登入碼
- * @return	int	使用者ID(回傳0為找不到使用者)
- * 
- * @since	Version 0
- */
-function user_getUserId($loggedCode){
-	global $FORM_USER;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//尋找登入碼
-	$db_user_query = mysql_query("SELECT `ID` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loggedCode'") or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_user_query) >= 1){
-		$iserID = mysql_result($db_user_query, 0, ID);
-		sql_close($db);	//關閉資料庫
-		return $iserID;
-	}
-	else{
-		sql_close($db);	//關閉資料庫
-		return 0;
-	}
-}
-// ------------------------------------------------------------------------
-
-/**
- * user_getUserQuery
- *
- * 查詢使用者
- *
- * @access	public
- * @param	string	登入碼
- * @return	object	此使用者的資料表內容(回傳NULL為找不到使用者)
- * 
- * @since	Version 0
-*/
-function user_getUserQuery($loggedCode){
-	global $FORM_USER;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//尋找登入碼
-	$db_user_query = mysql_query("SELECT `ID` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loggedCode'") or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_user_query) >= 1){
-		return $db_user_query;
-	}
-	else{
-		return NULL;
 	}
 }
 // ------------------------------------------------------------------------ 
