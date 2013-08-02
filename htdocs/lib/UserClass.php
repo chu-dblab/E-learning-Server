@@ -40,6 +40,19 @@ class User {
 			return NULL;
 		}
 	}
+	/**
+	 * 更新此使用者的資料表欄位內容
+	 *
+	 * @access	private
+	 * @param	string	資料表欄位名稱
+	 * @param	(依輸入型態)	資料表欄位內容
+	 * @return	bool	是否更改成功
+	 * TODO
+	 * @since	Version 0
+	 */
+	private function setQueryInfo($colName, $rowContent){
+		return sql_setTheUserQuery($this->loggedCode, $colName, $rowContent);
+	}
 	// ========================================================================
 	
 	/**
@@ -110,7 +123,7 @@ class User {
 	function getCreateTime(){
 		return $this->getQueryInfo("create_time");
 	}
-	// ------------------------------------------------------------------------
+	// ========================================================================
 	
 	/**
 	 * 取得真實姓名
@@ -240,13 +253,10 @@ class User {
 				$db = sql_connect();
 				
 				//將密碼加密
-				$passwd = encryptText($newPasswd);
+				$passwd = encryptText($newPasswd, $newPasswdMode);
 				
-				//UPDATE `yuan_chu-elearn`.`ce_users` SET `password` = \'0\' WHERE `ce_users`.`ID` = 3;
 				//登記新的密碼進資料庫
-				mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-					SET `password` = '".$passwd."' 
-					WHERE `logged_code` = '".$this->loggedCode."'") or die(sql_getErrMsg());
+				$this->setQueryInfo("password", $passwd);
 				
 				sql_close($db);	//關閉資料庫
 				

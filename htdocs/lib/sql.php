@@ -93,6 +93,37 @@ function sql_getTheUserQuery($loggedCode){
 	}
 }
 // ------------------------------------------------------------------------
+/**
+ * sql_setTheUserQuery
+ *
+ * 查詢此使用者
+ *
+ * @access	public
+ * @param	string	登入碼
+ * @return	object	資料庫物件
+ * 
+ * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ */
+function sql_setTheUserQuery($loggedCode, $colName, $content){
+	global $FORM_USER;
+	//連結資料庫
+	$db = sql_connect();
+	
+	//尋找登入碼
+	if($db_user_query = mysql_query("
+		UPDATE ".sql_getFormName($FORM_USER)." 
+		SET `$colName` = '$content' 
+		WHERE `logged_code` = '$loggedCode'") or die(sql_getErrMsg()))
+	{
+		return true;
+	}
+	else{
+		return false;
+	}
+	
+}
+// ------------------------------------------------------------------------
 
 /**
  * sql_close
