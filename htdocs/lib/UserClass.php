@@ -91,6 +91,61 @@ class User {
 	// ------------------------------------------------------------------------
 	
 	/**
+	 * 取得登入時間
+	 *
+	 * @access	public
+	 * @return	string	登入時間
+	 */
+	function getLoginTime(){
+		return $this->getQueryInfo("last_login_time");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號建立時間
+	 *
+	 * @access	public
+	 * @return	string	建立時間
+	 */
+	function getCreateTime(){
+		return $this->getQueryInfo("create_time");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得真實姓名
+	 *
+	 * @access	public
+	 * @return	string	真實姓名
+	 */
+	function getRealName(){
+		return $this->getQueryInfo("name");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得暱稱
+	 *
+	 * @access	public
+	 * @return	string	暱稱
+	 */
+	function getNickName(){
+		return $this->getQueryInfo("nickname");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號Email
+	 *
+	 * @access	public
+	 * @return	string	使用者資訊的Email
+	 */
+	function getEmail(){
+		return $this->getQueryInfo("email");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
 	 * 取得此帳號查詢
 	 *
 	 * @access	public
