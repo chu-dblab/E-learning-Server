@@ -175,30 +175,28 @@ function user_login($userid, $userpasswd){
 /**
  * user_logout
  *
- * 登出使用者帳號
+ * 登出某使用者帳號
  *
  * @access	public
- * @param	string	登入碼
+ * @param	string	帳號
  * @return	bool	是否登出成功
  * 
  * @since	Version 0
 */
-// TODO 改變輸入參數為(帳號)
-//	PS. 利用登入碼登出功能將由User類別取代
-function user_logout($loginCode){
+function user_logout($userid){
 	global $FORM_USER;
 	
 	//連結資料庫
 	$db = sql_connect();
 
 	//尋找登入碼
-	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg());
+	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$userid'") or die(sql_getErrMsg());
 	//若有找到
 	if(mysql_num_rows($db_user_query) >= 1){
 		//清除登入碼進資料庫
 		mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
 			SET `logged_code` = NULL 
-			WHERE `logged_code` = '$loginCode'") or die(sql_getErrMsg()
+			WHERE `username` = '$userid'") or die(sql_getErrMsg()
 		);
 			
 		sql_close($db);	//關閉資料庫
