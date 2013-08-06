@@ -119,6 +119,8 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
  * @return	string	使用者登入碼
  * 
  * @since	Version 0
+ *
+ * TODO 有無此使用者判斷
 */
 
 function user_login($userid, $userpasswd){
