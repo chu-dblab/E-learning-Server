@@ -92,7 +92,6 @@ function userGroup_remove($name){
 	//都沒有問題
 	else{
 		//刪除群組
-		//DELETE FROM `yuan_chu-elearn`.`ce_user_groups` WHERE `ce_user_groups`.`ID` = 5
 		$db = sql_connect();
 		mysql_query("DELETE FROM `".sql_getFormName($FORM_USER_GROUP)."` 
 			WHERE `name` = '$name'
@@ -115,7 +114,7 @@ function userGroup_remove($name){
  * 取得使用者群組清單
  *
  * @access	public
- * @return	array	陣列索引為ID，值為群組名稱
+ * @return	array	陣列索引為name，值為群組顯示名稱
  * 
  * @since	Version 0
 */
@@ -126,8 +125,7 @@ function userGroup_getList(){
 	$db = sql_connect();
 	
 	//查詢群組
-	//SELECT DISTINCT(`name`) `name`, `ID`, `display_name` FROM `ce_user_groups` WHERE 1
-	$db_usergroup_query = mysql_query("SELECT distinct(`name`) `name`, `ID`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
+	$db_usergroup_query = mysql_query("SELECT distinct(`name`) `name`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
 	
 	//若有找到
 	if(mysql_num_rows($db_usergroup_query) >= 1){
@@ -161,7 +159,7 @@ function userGroup_ishave($name){
 	$db = sql_connect();
 	
 	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$name'") or die(sql_getErrMsg());
+	$db_usergroup_query = mysql_query("SELECT `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$name'") or die(sql_getErrMsg());
 	
 	//若有找到
 	if(mysql_num_rows($db_usergroup_query) >= 1){
@@ -173,38 +171,6 @@ function userGroup_ishave($name){
 		return false;
 	}
 }
-// ------------------------------------------------------------------------
-
-/**
- * userGroup_getID
- *
- * 取得此使用者群組的ID
- *
- * @access	public
- * @param	string	群組名稱
- * @return	int	ID
- * 
- * @since	Version 0
-*/
-function userGroup_getID($groupName){
-	global $FORM_USER_GROUP;
-	
-	//連結資料庫
-	$db = sql_connect();
-	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$groupName'") or die(sql_getErrMsg());
-	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		$result = mysql_result($db_usergroup_query, 0, ID);
-		sql_close($db);	//關閉資料庫
-		return $result;
-	}
-	else{
-		return NULL;
-	}
-}
 // ------------------------------------------------------------------------ 
 
 /**
@@ -213,23 +179,23 @@ function userGroup_getID($groupName){
  * 取得此使用者群組的名稱
  *
  * @access	public
- * @param	int	ID
+ * @param	string	groupName
  * @return	string	群組名稱
  * 
  * @since	Version 0
 */
-function userGroup_getName($groupID){
+function userGroup_getDiaplayName($groupName){
 	global $FORM_USER_GROUP;
 	
 	//連結資料庫
 	$db = sql_connect();
 	
 	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `ID`, `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `ID` = '$groupID'") or die(sql_getErrMsg());
+	$db_usergroup_query = mysql_query("SELECT `name`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$groupName'") or die(sql_getErrMsg());
 	
 	//若有找到
 	if(mysql_num_rows($db_usergroup_query) >= 1){
-		$result = mysql_result($db_usergroup_query, 0, name);
+		$result = mysql_result($db_usergroup_query, 0, display_name);
 		sql_close($db);	//關閉資料庫
 		return $result;
 	}
@@ -253,6 +219,6 @@ function userGroup_getName($groupID){
 */
 function userGroup_queryAll($db){
 	global $DEV_DEGUG, $FORM_USER_GROUP;
-	$db_table = mysql_query("SELECT `ID`, `name`, `admin` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
+	$db_table = mysql_query("SELECT `name`, `display_name`, `admin` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
 	return $db_table;
 }
