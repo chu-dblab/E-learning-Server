@@ -11,7 +11,7 @@ try {
 	
 	echo "成功";
 } catch (PDOException $e){
-	echo "Fail: ".$e;
+	echo "Fail: ".$db_connect->Errorinfo();
 }
 
 
