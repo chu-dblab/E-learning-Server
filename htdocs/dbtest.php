@@ -1,18 +1,16 @@
-<?php
-/**
- * 前置設定
-*/
-require_once("lib/include.php");
-require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連結變數
-require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+<?php 
+//$db_connect = new PDO("mysql:dbname=yuan_chu_elearn;host:localhost;charset=utf8;", "yuan", "123456");
+$db_connect = new PDO("mysql:host:localhost;dbname=yuan_chu_elearn;charset=utf8;", "yuan", "123456");
 
-try {
-	$db_connect = new Database();
-	
-	echo "成功";
-} catch (PDOException $e){
-	echo "Fail: ".$db_connect->Errorinfo();
+$result = $db_connect->query("SELECT * FROM xe_users WHERE `username` = 'yuan817'"); 
+
+if ($result === false){
+    print_r($db_connect->errorInfo());
+    //log the error or take some other smart action
 }
 
-
-echo "<h1>Finish</h1>";
+while($row=$result->fetch(PDO::FETCH_OBJ)){   
+	//PDO::FETCH_OBJ 指定取出資料的型態
+	echo $row->username."\n"; 
+	echo $row->ID."\n";  
+}
