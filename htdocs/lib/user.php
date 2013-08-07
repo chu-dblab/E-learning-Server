@@ -15,7 +15,7 @@
 require_once(DOCUMENT_ROOT."lib/sql.php");
 require_once(DOCUMENT_ROOT."lib/password.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
-$FORM_USER = "users";	//使用者帳號資料表
+require_once(DOCUMENT_ROOT."config/db_table_config.php");
 
 // ========================================================================
 
