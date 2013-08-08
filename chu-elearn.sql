@@ -24,55 +24,234 @@ USE `chu-elearn`;
 
 -- --------------------------------------------------------
 
---
--- 表的結構 `ce_users`
---
+-- 
+-- 資料表格式： `belong`
+-- 
 
-CREATE TABLE IF NOT EXISTS `ce_users` (
-  `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(60) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  `user_group` varchar(60) NOT NULL DEFAULT 'user',
-  `logged_code` varchar(32) DEFAULT NULL,
-  `last_login_time` timestamp NULL DEFAULT NULL,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `isActive` tinyint(1) NOT NULL DEFAULT '1',
-  `realname` varchar(60) DEFAULT NULL,
-  `nickname` varchar(60) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `user_group` (`user_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `belong` (
+  `TID` int(10) unsigned NOT NULL,
+  `ThemeID` int(10) unsigned NOT NULL,
+  `Weights` float NOT NULL COMMENT '當次學習主題的某一個學習標的之權重',
+  UNIQUE KEY `TID` (`TID`),
+  UNIQUE KEY `ThemeID` (`ThemeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `belong`
+-- 
+
 
 -- --------------------------------------------------------
 
---
--- 表的結構 `ce_user_groups`
---
+-- 
+-- 資料表格式： `edge`
+-- 
 
-CREATE TABLE IF NOT EXISTS `ce_user_groups` (
-  `ID` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) NOT NULL,
-  `display_name` varchar(60) NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE `edge` (
+  `Ti` int(10) unsigned NOT NULL,
+  `Tj` int(10) unsigned NOT NULL,
+  `MoveTime` varchar(20) NOT NULL COMMENT '移動時間(分鐘)',
+  `Distance` varchar(20) NOT NULL COMMENT '距離(M)',
+  UNIQUE KEY `Ti` (`Ti`),
+  UNIQUE KEY `Tj` (`Tj`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和標的之間 資料表';
 
---
--- 轉存資料表中的資料 `ce_user_groups`
---
+-- 
+-- 列出以下資料庫的數據： `edge`
+-- 
 
-INSERT INTO `ce_user_groups` (`ID`, `name`, `display_name`, `admin`) VALUES
-(1, 'admin', '管理者', 1),
-(2, 'user', '使用者', 0);
 
---
--- 匯出資料表的 Constraints
---
+-- --------------------------------------------------------
 
---
--- 資料表的 Constraints `ce_users`
---
-ALTER TABLE `ce_users`
-  ADD CONSTRAINT `ce_users_ibfk_1` FOREIGN KEY (`user_group`) REFERENCES `ce_user_groups` (`name`);
+-- 
+-- 資料表格式： `group`
+-- 
+
+CREATE TABLE `group` (
+  `GID` int(10) unsigned NOT NULL,
+  `GName` varchar(15) NOT NULL,
+  `GCompetence` varchar(10) NOT NULL,
+  PRIMARY KEY  (`GID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `group`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- 資料表格式： `question`
+-- 
+
+CREATE TABLE `question` (
+  `QID` int(10) unsigned NOT NULL,
+  `QA` varchar(10) NOT NULL,
+  `Q_Url` varchar(50) NOT NULL,
+  `TID` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`QID`),
+  UNIQUE KEY `TID` (`TID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `question`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- 資料表格式： `recommend`
+-- 
+
+CREATE TABLE `recommend` (
+  `TID` int(10) unsigned NOT NULL,
+  `SID` int(10) unsigned NOT NULL,
+  `Order` int(10) unsigned NOT NULL COMMENT '系統推薦標地順序',
+  UNIQUE KEY `TID` (`TID`,`SID`),
+  KEY `SID` (`SID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `recommend`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- 資料表格式： `student`
+-- 
+
+CREATE TABLE `student` (
+  `SID` int(10) unsigned NOT NULL,
+  `SPassword` varchar(30) NOT NULL,
+  `SName` varchar(20) NOT NULL,
+  `SLogged_no` varchar(40) default NULL,
+  `In_Learn_Time` datetime NOT NULL,
+  `GID` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`SID`),
+  KEY `GID` (`GID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `student`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- 資料表格式： `study`
+-- 
+
+CREATE TABLE `study` (
+  `TID` int(10) unsigned NOT NULL,
+  `SID` int(10) unsigned NOT NULL,
+  `QID` int(10) unsigned default NULL,
+  `Answer` varchar(5) default NULL COMMENT '答題對錯 Y=對 N=錯',
+  `Answer_Time` varchar(10) default NULL COMMENT '作答時間',
+  `In_TargetTime` time NOT NULL,
+  `Out_TargetTime` time default NULL,
+  `TCheck` varchar(5) NOT NULL COMMENT '有無正確到推薦點',
+  UNIQUE KEY `TID` (`TID`),
+  UNIQUE KEY `SID` (`SID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `study`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- 資料表格式： `target`
+-- 
+
+CREATE TABLE `target` (
+  `TID` int(10) unsigned NOT NULL,
+  `TName` varchar(15) NOT NULL,
+  `TLearn_Time` int(10) unsigned NOT NULL,
+  `MapID` int(10) unsigned NOT NULL,
+  `Map_Url` varchar(50) NOT NULL,
+  `FloorName` varchar(50) NOT NULL,
+  `BlockName` varchar(50) NOT NULL,
+  `BlockMap` varchar(50) NOT NULL,
+  `CourseName` varchar(50) NOT NULL,
+  `MaterialID` int(10) unsigned NOT NULL,
+  `Material_Url` varchar(50) NOT NULL,
+  `PLj` int(11) unsigned NOT NULL,
+  `Mj` int(11) unsigned default NULL,
+  PRIMARY KEY  (`TID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `target`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- 資料表格式： `theme`
+-- 
+
+CREATE TABLE `theme` (
+  `ThemeID` int(10) unsigned NOT NULL,
+  `ThemeName` varchar(15) NOT NULL,
+  `theme_Learn_DateTime` datetime NOT NULL COMMENT '本次學習此主題發生的日期時間',
+  `Theme_LearnTotal` int(10) unsigned NOT NULL COMMENT '學習此主題要花的總時間(hr)',
+  `Theme_Introduction` varchar(70) NOT NULL,
+  PRIMARY KEY  (`ThemeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `theme`
+-- 
+
+
+-- 
+-- 備份資料表限制
+-- 
+
+-- 
+-- 資料表限制 `belong`
+-- 
+ALTER TABLE `belong`
+  ADD CONSTRAINT `belong_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `belong_ibfk_2` FOREIGN KEY (`ThemeID`) REFERENCES `theme` (`ThemeID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- 資料表限制 `edge`
+-- 
+ALTER TABLE `edge`
+  ADD CONSTRAINT `edge_ibfk_1` FOREIGN KEY (`Ti`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `edge_ibfk_2` FOREIGN KEY (`Tj`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- 資料表限制 `question`
+-- 
+ALTER TABLE `question`
+  ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- 資料表限制 `recommend`
+-- 
+ALTER TABLE `recommend`
+  ADD CONSTRAINT `recommend_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recommend_ibfk_2` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- 資料表限制 `student`
+-- 
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`GID`) REFERENCES `group` (`GID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- 資料表限制 `study`
+-- 
+ALTER TABLE `study`
+  ADD CONSTRAINT `study_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `study_ibfk_2` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
