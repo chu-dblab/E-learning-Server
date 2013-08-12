@@ -107,36 +107,14 @@ CREATE TABLE `question` (
 
 CREATE TABLE `recommend` (
   `TID` int(10) unsigned NOT NULL,
-  `SID` int(10) unsigned NOT NULL,
+  `UID` int(10) unsigned NOT NULL,
   `Order` int(10) unsigned NOT NULL COMMENT '系統推薦標地順序',
-  UNIQUE KEY `TID` (`TID`,`SID`),
-  KEY `SID` (`SID`)
+  UNIQUE KEY `TID` (`TID`,`UID`),
+  KEY `UID` (`UID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 
 -- 列出以下資料庫的數據： `recommend`
--- 
-
-
--- --------------------------------------------------------
-
--- 
--- 資料表格式： `student`
--- 
-
-CREATE TABLE `student` (
-  `SID` int(10) unsigned NOT NULL,
-  `SPassword` varchar(30) NOT NULL,
-  `SName` varchar(20) NOT NULL,
-  `SLogged_no` varchar(40) default NULL,
-  `In_Learn_Time` datetime NOT NULL,
-  `GID` int(10) unsigned NOT NULL,
-  PRIMARY KEY  (`SID`),
-  KEY `GID` (`GID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- 
--- 列出以下資料庫的數據： `student`
 -- 
 
 
@@ -148,7 +126,7 @@ CREATE TABLE `student` (
 
 CREATE TABLE `study` (
   `TID` int(10) unsigned NOT NULL,
-  `SID` int(10) unsigned NOT NULL,
+  `UID` int(10) unsigned NOT NULL,
   `QID` int(10) unsigned default NULL,
   `Answer` varchar(5) default NULL COMMENT '答題對錯 Y=對 N=錯',
   `Answer_Time` varchar(10) default NULL COMMENT '作答時間',
@@ -156,7 +134,7 @@ CREATE TABLE `study` (
   `Out_TargetTime` time default NULL,
   `TCheck` varchar(5) NOT NULL COMMENT '有無正確到推薦點',
   UNIQUE KEY `TID` (`TID`),
-  UNIQUE KEY `SID` (`SID`)
+  UNIQUE KEY `SID` (`UID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 
@@ -212,6 +190,28 @@ CREATE TABLE `theme` (
 -- 
 
 
+-- --------------------------------------------------------
+
+-- 
+-- 資料表格式： `user`
+-- 
+
+CREATE TABLE `user` (
+  `UID` int(10) unsigned NOT NULL,
+  `UPassword` varchar(30) NOT NULL,
+  `UName` varchar(20) NOT NULL,
+  `ULogged_no` varchar(40) default NULL,
+  `In_Learn_Time` datetime NOT NULL,
+  `GID` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`UID`),
+  KEY `GID` (`GID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 
+-- 列出以下資料庫的數據： `user`
+-- 
+
+
 -- 
 -- 備份資料表限制
 -- 
@@ -240,18 +240,18 @@ ALTER TABLE `question`
 -- 資料表限制 `recommend`
 -- 
 ALTER TABLE `recommend`
-  ADD CONSTRAINT `recommend_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recommend_ibfk_2` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- 
--- 資料表限制 `student`
--- 
-ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`GID`) REFERENCES `group` (`GID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `recommend_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recommend_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
 -- 資料表限制 `study`
 -- 
 ALTER TABLE `study`
-  ADD CONSTRAINT `study_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `study_ibfk_2` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `study_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `study_ibfk_1` FOREIGN KEY (`TID`) REFERENCES `target` (`TID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- 資料表限制 `user`
+-- 
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`GID`) REFERENCES `group` (`GID`) ON DELETE CASCADE ON UPDATE CASCADE;
