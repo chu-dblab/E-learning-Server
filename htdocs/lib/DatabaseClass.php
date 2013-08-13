@@ -62,28 +62,27 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	// ========================================================================
 
 	/**
-	* form
-	* TODO
-	* 取得完整資料表名稱
+	* getTheUserArray
+	* 
+	* 查詢此使用者
 	*
 	* @access	public
-	* @param	string	資料表名稱
-	* @return	string	完整的資料表名稱
+	* @param	string	登入碼
+	* @return	array	此使用者的所有查詢結果
 	* 
-	* @since	Version 2
+	* @since	Version 3
 	* @author	元兒～ <yuan817@moztw.org>
 	*/
-	function getTheUserQuery($loggedCode){
+	function getTheUserArray($loggedCode){
 		global $FORM_USER;
-		$result = $this->prepare("SELECT * FROM ".$this->table($FORM_USER)." WHERE `username` = ':loggedCode'");
-		$result->bindParam(':loggedCode',$loggedCode);
-		$result->execute();
+		$queryResult = $this->prepare("SELECT * FROM ".$this->table($FORM_USER)." WHERE `logged_code` = :loggedCode");
+		$queryResult->bindParam(':loggedCode',$loggedCode);
+		$queryResult->execute();
 		
-		echo "f";
-		echo $result->fetchColumn();
-		
+		$result = $queryResult->fetchAll();
 		return $result;
 	}
+	
 	// ========================================================================
 	/**
 	* ErrorMsg

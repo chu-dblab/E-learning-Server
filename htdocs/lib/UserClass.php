@@ -3,6 +3,7 @@
  * 前置作業
 */
 require_once(DOCUMENT_ROOT."lib/sql.php");
+require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 require_once(DOCUMENT_ROOT."lib/password.php");
 //require_once(DOCUMENT_ROOT."lib/user.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
@@ -19,6 +20,22 @@ $FORM_USER = "users";	//使用者帳號資料表
  */
 class User {
 	private $loggedCode;
+	private $infoArray;
+	
+	/**
+	 * 取得此使用者的所有資訊
+	 *
+	 * @access	private
+	 * @param	string	資料表欄位名稱
+	 * @return	(依資料庫型態)	資料表欄位內容
+	 * 
+	 * @since	Version 0
+	 */
+	private function getSQLTable(){
+		$db = new Database();
+		$this->infoArray = $db->getTheUserArray($this->loggedCode);
+		///echo '<pre>', print_r($this->infoArray, true), '</pre>';	//DEBUG
+	}
 	
 	/**
 	 * 取得此使用者的資料表欄位內容
@@ -27,18 +44,11 @@ class User {
 	 * @param	string	資料表欄位名稱
 	 * @return	(依資料庫型態)	資料表欄位內容
 	 * 
-	 * @since	Version 0
+	 * @since	Version 1
 	 */
 	private function getQueryInfo($colName){
-		$db_user_query = sql_getTheUserQuery($this->loggedCode);
 		
-		if($db_user_query){
-			$resultInfo = mysql_result($db_user_query, 0, $colName);
-			return $resultInfo;
-		}
-		else{
-			return NULL;
-		}
+		return $this->infoArray[0][$colName];
 	}
 	/**
 	 * 更新此使用者的資料表欄位內容
@@ -61,9 +71,8 @@ class User {
 	 * @param	string	登入碼
 	 */
 	function __construct($inputLoggedCode){
-		if( sql_getTheUserQuery($inputLoggedCode) ){
-			$this->loggedCode = $inputLoggedCode;
-		}
+		$this->loggedCode = $inputLoggedCode;
+		$this->getSQLTable();
 	}
 	
 	// ========================================================================
