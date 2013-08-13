@@ -130,8 +130,8 @@ CREATE TABLE `study` (
   `QID` int(10) unsigned default NULL,
   `Answer` varchar(5) default NULL COMMENT '答題對錯 Y=對 N=錯',
   `Answer_Time` varchar(10) default NULL COMMENT '作答時間',
-  `In_TargetTime` time NOT NULL,
-  `Out_TargetTime` time default NULL,
+  `In_TargetTime` datetime NOT NULL,
+  `Out_TargetTime` datetime default NULL,
   `TCheck` varchar(5) NOT NULL COMMENT '有無正確到推薦點',
   UNIQUE KEY `TID` (`TID`),
   UNIQUE KEY `SID` (`UID`)
