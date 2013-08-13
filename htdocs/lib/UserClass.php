@@ -2,23 +2,24 @@
 /**
  * 前置作業
 */
-require_once(DOCUMENT_ROOT."lib/sql.php");
+require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 require_once(DOCUMENT_ROOT."lib/password.php");
-//require_once(DOCUMENT_ROOT."lib/user.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
-$FORM_USER = "users";	//使用者帳號資料表
 
-/**
+ /**
  * User
+ * 一個物件即代表這一位使用者
  *
- * @package Package Name
- * @subpackage Subpackage
- * @category Category
- * @author Author Name
- * @link http://example.com
- */
+ * @package	CHU-E-learning
+ * @author	CHU-TDAP
+ * @copyright	
+ * @license	type filter text
+ * @link	https://github.com/CHU-TDAP/
+ * @since	Version 2.0
+*/
 class User {
 	private $loggedCode;
+	private $infoArray;
 	
 	/**
 	 * 取得此使用者的資料表欄位內容
@@ -27,18 +28,12 @@ class User {
 	 * @param	string	資料表欄位名稱
 	 * @return	(依資料庫型態)	資料表欄位內容
 	 * 
-	 * @since	Version 0
+	 * @author	元兒～ <yuan817@moztw.org>
+	 * @since	Version 1
 	 */
 	private function getQueryInfo($colName){
-		$db_user_query = sql_getTheUserQuery($this->loggedCode);
 		
-		if($db_user_query){
-			$resultInfo = mysql_result($db_user_query, 0, $colName);
-			return $resultInfo;
-		}
-		else{
-			return NULL;
-		}
+		return $this->infoArray[0][$colName];
 	}
 	/**
 	 * 更新此使用者的資料表欄位內容
@@ -46,11 +41,14 @@ class User {
 	 * @access	private
 	 * @param	string	資料表欄位名稱
 	 * @param	(依輸入型態)	資料表欄位內容
-	 * @return	bool	是否更改成功
-	 * @since	Version 0
+	 * @return	int	更動到幾筆
+	 * 
+	 * @author	元兒～ <yuan817@moztw.org>
+	 * @since	Version 3
 	 */
 	private function setQueryInfo($colName, $rowContent){
-		return sql_setTheUserQuery($this->loggedCode, $colName, $rowContent);
+		$db = new Database();
+		return $db->setTheUserArray($this->loggedCode, $colName, $rowContent);
 	}
 	// ========================================================================
 	
@@ -61,9 +59,8 @@ class User {
 	 * @param	string	登入碼
 	 */
 	function __construct($inputLoggedCode){
-		if( sql_getTheUserQuery($inputLoggedCode) ){
-			$this->loggedCode = $inputLoggedCode;
-		}
+		$this->loggedCode = $inputLoggedCode;
+		$this->getQuery();
 	}
 	
 	// ========================================================================
@@ -199,14 +196,15 @@ class User {
 	 * @since	Version 0
 	 */
 	function getQuery(){
-		return sql_getTheUserQuery($this->loggedCode);
+		$db = new Database();
+		$this->infoArray = $db->getTheUserArray($this->loggedCode);
+		return $this->infoArray;
 	}
 	// ========================================================================
 	
 	/**
 	 * 驗證密碼是否錯誤
 	 *
-	 * TODO 函式
 	 * @access	public
 	 * @param	string	密碼
 	 * @param	string	加密方式(可省略)
@@ -242,7 +240,6 @@ class User {
 	/**
 	 * 更改密碼
 	 *
-	 * TODO 函式
 	 * @access	public
 	 * @param	string	舊密碼
 	 * @param	string	舊密碼加密方式（可省略）
@@ -281,16 +278,11 @@ class User {
 			//都沒問題，更改密碼
 			else{
 				
-				//開啟資料庫Finish
-				$db = sql_connect();
-				
 				//將密碼加密
 				$passwd = encryptText($newPasswd, $newPasswdMode);
 				
 				//登記新的密碼進資料庫
 				$this->setQueryInfo("password", $passwd);
-				
-				sql_close($db);	//關閉資料庫
 				
 				return "Finish";
 			}
@@ -327,17 +319,11 @@ class User {
 	 function logout(){
 		global $FORM_USER;
 		if($this->loggedCode){
-			//連結資料庫
-			$db = sql_connect();
-			
+
 			//清除登入碼進資料庫
-			mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-				SET `logged_code` = NULL 
-				WHERE `logged_code` = '".$this->loggedCode."'") or die(sql_getErrMsg()
-			);
+			$this->setQueryInfo("logged_code", NULL);
 			
 			$this->loggedCode = NULL;
-			sql_close($db);	//關閉資料庫
 		}
 		return false;
 	 }

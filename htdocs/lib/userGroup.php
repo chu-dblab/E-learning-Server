@@ -8,13 +8,13 @@
  * @copyright	
  * @license		
  * @link		https://github.com/CHU-TDAP/
- * @since		Version 1.0
+ * @since		Version 2.0
  * @filesource
 */
 
-require_once(DOCUMENT_ROOT."lib/sql.php");
 require_once(DOCUMENT_ROOT."lib/user.php");
-$FORM_USER_GROUP = "user_groups";	//使用者帳號資料表
+require_once(DOCUMENT_ROOT."config/db_table_config.php");
+require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 
 // ========================================================================
 
@@ -29,8 +29,10 @@ $FORM_USER_GROUP = "user_groups";	//使用者帳號資料表
  * @return	string	是否有成功建立
  *			"Finish": 成功建立
  *			"NameCreatedErr": 有重複名稱
+ *			"DBErr": 資料庫錯誤
  * 
- * @since	Version 0
+* @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_create($name, $display_name, $adminPermissions){
 	global $FORM_USER_GROUP;
@@ -40,21 +42,24 @@ function userGroup_create($name, $display_name, $adminPermissions){
 	}
 	//都沒有問題，新增帳號
 	else{
-		//開啟資料庫Finish
-		$db = sql_connect();
+		//資料庫連結
+		$db = new Database();
 		
 		//紀錄使用者帳號進資料庫
-		mysql_query("INSERT INTO `".sql_getFormName($FORM_USER_GROUP)."` 
-			(`name`, `display_name`, `admin`)
-			VALUES ('$name', '$display_name', '$adminPermissions');
-			") 
-			or die(sql_getErrMsg());
-			
-		//關閉資料庫
-		sql_close($db);
+		$db_userGroup_query = $db->prepare("INSERT INTO `".$db->table($FORM_USER_GROUP)."` (`name`, `display_name`, `admin`) VALUES (:groupName, :display_name , :adminPermissions )");
+		$db_userGroup_query->bindParam(":groupName",$name);
+		$db_userGroup_query->bindParam(":display_name",$display_name);
+		$db_userGroup_query->bindParam(":adminPermissions",$adminPermissions);
+		$db_userGroup_query->execute();
 		
-		//回傳成功訊息
-		return "Finish";
+		//若有有加入
+		if( $db_userGroup_query->rowCount() ) {
+			return "Finish";	//回傳成功訊息
+		}
+		//若無加入
+		else {
+			return "DBErr";
+		}
 	}
 }
 // ------------------------------------------------------------------------
@@ -70,40 +75,42 @@ function userGroup_create($name, $display_name, $adminPermissions){
  *			"Finish": 成功建立
  *			"UserExist": 尚有存在的使用者
 			"NoFound": 找不到存在的群組
- * 
- * @since	Version 0
+			"DBErr": 資料庫錯誤
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_remove($name){
 	global $FORM_USER, $FORM_USER_GROUP;
-	//開啟資料庫
-	$db = sql_connect();
+	//資料庫連結
+	$db = new Database();
 	
-	// TODO 尚未完成移除動作
-	$db_existUser = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `user_group` = '$name'") or die(sql_getErrMsg());
+	//查詢此群組是否有使用者
+	$db_user_query = $db->prepare("SELECT `username` FROM ".$db->table($FORM_USER)." WHERE `user_group` = :groupName");
+	$db_user_query->bindParam(":groupName",$name);
+	$db_user_query->execute();
 	
 	//檢查是否有此群組
 	if( !userGroup_ishave($name) ){
 		return "NoFound";
 	}
 	//檢查是否有使用者還存在這個群組
-	else if( mysql_num_rows($db_existUser) >= 1 ){
+	else if( $db_user_query->fetch() ){
 		return "UserExist";
 	}
 	//都沒有問題
 	else{
 		//刪除群組
-		$db = sql_connect();
-		mysql_query("DELETE FROM `".sql_getFormName($FORM_USER_GROUP)."` 
-			WHERE `name` = '$name'
-			") 
-			or die(sql_getErrMsg());
+		$db_userGroup_query = $db->prepare("DELETE FROM `".$db->table($FORM_USER_GROUP)."` WHERE `name` = :groupName");
+		$db_userGroup_query->bindParam(":groupName",$name);
+		$db_userGroup_query->execute();
 		
-			
-		//關閉資料庫
-		sql_close($db);
-		
-		//回傳成功訊息
-		return "Finish";
+		//若有成功刪除
+		if( $db_userGroup_query->rowCount() ) {
+			return "Finish";	//回傳成功訊息
+		}
+		else {
+			return "DBErr";
+		}
 	}
 }
 // ========================================================================
@@ -116,28 +123,24 @@ function userGroup_remove($name){
  * @access	public
  * @return	array	陣列索引為name，值為群組顯示名稱
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_getList(){
 	global $FORM_USER_GROUP;
 	
-	//連結資料庫
-	$db = sql_connect();
+	//資料庫連結
+	$db = new Database();
 	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT distinct(`name`) `name`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
+	//資料庫查詢
+	$db_userGroup_query = $db->query("SELECT distinct(`name`) `name`, `display_name` FROM ".$db->table($FORM_USER_GROUP));
 	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		while( $db_usergroup_queryRow = mysql_fetch_array($db_usergroup_query) ){
-			$groupArray[ $db_usergroup_queryRow['name'] ] = $db_usergroup_queryRow['display_name'];
-		}
-		sql_close($db);	//關閉資料庫
-		return $groupArray;
+	//若有找到，將列表以陣列傳回
+	//$result[內部群組名稱] = 使用者看得到的群組名稱
+	while( $db_thisGroupArray = $db_userGroup_query->fetch() ) {
+		$result[ $db_thisGroupArray['name'] ] = $db_thisGroupArray['display_name'];
 	}
-	else{
-		return NULL;
-	}
+	return $result;
 }
 // ------------------------------------------------------------------------
 
@@ -150,24 +153,26 @@ function userGroup_getList(){
  * @param	string	群組名稱
  * @return	bool	是否已有
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_ishave($name){
 	global $FORM_USER_GROUP;
 	
-	//連結資料庫
-	$db = sql_connect();
+	//資料庫連結
+	$db = new Database();
 	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$name'") or die(sql_getErrMsg());
+	//資料庫查詢
+	$db_userGroup_query = $db->prepare("SELECT `name` FROM ".$db->table($FORM_USER_GROUP)." WHERE `name` = :groupName");
+	$db_userGroup_query->bindParam(":groupName",$name);
+	$db_userGroup_query->execute();
 	
 	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		sql_close($db);	//關閉資料庫
+	if( $db_userGroup_query->fetch() ) {
 		return true;
 	}
-	else{
-		sql_close($db);	//關閉資料庫
+	//若找不到
+	else {
 		return false;
 	}
 }
@@ -182,25 +187,26 @@ function userGroup_ishave($name){
  * @param	string	groupName
  * @return	string	群組名稱
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_getDiaplayName($groupName){
 	global $FORM_USER_GROUP;
 	
-	//連結資料庫
-	$db = sql_connect();
+	//資料庫連結
+	$db = new Database();
 	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `name`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$groupName'") or die(sql_getErrMsg());
+	//資料庫查詢
+	$db_userGroup_query = $db->prepare("SELECT `name`, `display_name` FROM ".$db->table($FORM_USER_GROUP)." WHERE `name` = :groupName");
+	$db_userGroup_query->bindParam(":groupName",$groupName);
+	$db_userGroup_query->execute();
 	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		$result = mysql_result($db_usergroup_query, 0, display_name);
-		sql_close($db);	//關閉資料庫
-		return $result;
+	//取得顯示名稱
+	if( $groupArray = $db_userGroup_query->fetch() ) {
+		return $groupArray['display_name'];
 	}
-	else{
-		return NULL;
+	else {
+		return null;
 	}
 }
 
@@ -212,13 +218,17 @@ function userGroup_getDiaplayName($groupName){
  * 查詢所有使用者群組
  *
  * @access	public
- * @param	object	資料庫
- * @return	object	mysql_query的查詢結果
+ * @return	array	mysql_query的查詢結果
  * 
- * @since	Version 1
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
-function userGroup_queryAll($db){
-	global $DEV_DEGUG, $FORM_USER_GROUP;
-	$db_table = mysql_query("SELECT `name`, `display_name`, `admin` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
-	return $db_table;
+function userGroup_queryAll(){
+	global $FORM_USER_GROUP;
+	//資料庫連結
+	$db = new Database();
+	
+	//資料庫查詢
+	$db_userGroup_query = $db->query("SELECT * FROM ".$db->table($FORM_USER_GROUP));
+	return $db_userGroup_query->fetchAll();
 }

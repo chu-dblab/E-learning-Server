@@ -1,7 +1,9 @@
 ﻿<!--
-  account_list.php
+  sql_tool_query.php
    
-   查詢有哪些使用者
+   SQL查詢工具
+   
+   version: 2.0
    
    Copyright 2013 元兒～ <yuan@Yuan-NB>
    
@@ -12,11 +14,14 @@
 	 * 前置設定
 	*/
 	require_once("../lib/include.php");
-	require_once(DOCUMENT_ROOT."lib/sql.php");
+	//require_once(DOCUMENT_ROOT."lib/sql.php");
+	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	
 	//$sql_query_input = "SELECT * FROM ce_users";
-	$sql_query_input = $_POST["sql-query-input"];
+	if(isset($_POST["sql-query-input"])){
+		$sql_query_input = $_POST["sql-query-input"];
+	}
 	// ------------------------------------------------------------------------
 	
 	function show_status_notify(){
@@ -43,34 +48,34 @@
 	
 	function sqlTotal(){
 		global $sql_Table;
-		return mysql_num_rows($sql_Table);
+		return count($sql_Table);
 	}
 	
 	function showSqlTable(){
-		global $sql_Table;
-		if( mysql_num_rows($sql_Table) > 0 ){	//若已有1個以上的使用者
+		global $sql_Table, $sql_result;
+		if( count($sql_Table) > 0 ){
 			//建立表格
 			echo "<table id='sql_result' class='table table-striped'>";
 			echo "<thead>";
 			echo "<tr>";
-				//第1行: 欄位名稱
-				while($sql_TableCol = mysql_fetch_field($sql_Table))
-				{
+				for ($i = 0; $i < $sql_result->columnCount(); $i++) {
 					echo "<th scpoe='col'>";
-					echo $sql_TableCol->name; //顯示Field
+					$col = $sql_result->getColumnMeta($i);
+					echo $col['name'];
+					//echo $sql_TableCol->name; //顯示Field
 					echo "</th>";
 				}
 			echo "</tr>";
 			echo "</thead>";
 			echo "<tbody>";
-				while( $sql_TableRow = mysql_fetch_array($sql_Table) ){
+				foreach ($sql_Table as $mainKey => $thisArray) {
 					echo "<tr>";
 						echo "<th scrope='row'>";
-						echo $sql_TableRow[0];
+						echo $thisArray[0];
 						echo "</th>";
-						for($i=1; $i<mysql_num_fields($sql_Table);$i++){
+						for($i=1; $i<count($thisArray);$i++){
 							echo "<td>";
-							echo $sql_TableRow[$i]."&nbsp;";
+							echo $thisArray[$i]."&nbsp;";
 							print "</td>";
 						}
 					echo "</tr>";
@@ -87,18 +92,22 @@
 	// ------------------------------------------------------------------------
 	
 	//若有輸入SQL查詢語法的話
-	if($sql_query_input){
+	if(isset($sql_query_input)){
 		//連接資料庫
-		$db = sql_connect();
+		$db = new Database();
+		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, 0);
 		
 		//對資料庫進行查詢
-		if( $sql_Table = mysql_query($sql_query_input) ){
+		try {
+			$sql_result = $db->query($sql_query_input);
+			$sql_Table = $sql_result->fetchAll(PDO::FETCH_NUM);
 			$sql_status = "Finish";
 			$sql_result_message = "成功查詢到".sqlTotal()."筆資料！";
 		}
-		else{
+		catch(PDOException $e)
+		{
 			$sql_status = "Error";
-			$sql_result_message =  mysql_error();
+			$sql_result_message = $e->getMessage();
 		}
 	}
 	
@@ -142,7 +151,7 @@
 								<div class="control-group">
 									<label class="control-label" for="sql-query-input">SQL查詢語法: </label>
 									<div class="controls">
-										<textarea name="sql-query-input" id="sql-query-input" ><?php echo $sql_query_input ?></textarea>
+										<textarea name="sql-query-input" id="sql-query-input" ><?php if(isset($sql_query_input)){ echo $sql_query_input; } ?></textarea>
 									</div>
 									<button type="submit" class="btn" id="sendbutton" name="sendbutton">SQL!!!</button>
 									<button type="reset" class="btn" id="resetbutton" name="resetbutton">重填</button>
@@ -171,4 +180,3 @@
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
-<?php sql_close($db); ?>

@@ -12,13 +12,18 @@
 	 * 前置設定
 	*/
 	require_once("../lib/include.php");
-	require_once("../lib/user.php");
+	require_once(DOCUMENT_ROOT."lib/user.php");
+	require_once(DOCUMENT_ROOT."lib/userGroup.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	
 	//讀取session資料
 	session_start();
-	$status_create =  $_SESSION["user_create_status"];
-	$status_create_message =  $_SESSION["user_create_status_message"];
+	if(isset($_SESSION["user_create_status"])) {
+		$status_create =  $_SESSION["user_create_status"];
+	}
+	if(isset($_SESSION["user_create_status_message"])) {
+		$status_create_message =  $_SESSION["user_create_status_message"];
+	}
 	unset($_SESSION["user_create_status"]);
 	unset($_SESSION["user_create_status_message"]);
 	
@@ -98,7 +103,6 @@
 										<?php 
 											$userGroup = userGroup_getList();
 											foreach($userGroup as $key=>$value){
-												//echo $key.".".$value."<br>";
 												echo "<option value='$key'>$key: $value</option>";
 											}
 										?>
@@ -133,4 +137,3 @@
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
-<?php sql_close($db); ?>
