@@ -29,8 +29,10 @@ require_once(DOCUMENT_ROOT."config/db_table_config.php");
  * @return	string	是否有成功建立
  *			"Finish": 成功建立
  *			"NameCreatedErr": 有重複名稱
+ *			"DBErr": 資料庫錯誤
  * 
- * @since	Version 0
+* @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_create($name, $display_name, $adminPermissions){
 	global $FORM_USER_GROUP;
@@ -40,21 +42,23 @@ function userGroup_create($name, $display_name, $adminPermissions){
 	}
 	//都沒有問題，新增帳號
 	else{
-		//開啟資料庫Finish
-		$db = sql_connect();
+		//資料庫連結
+		$db = new Database();
 		
 		//紀錄使用者帳號進資料庫
-		mysql_query("INSERT INTO `".sql_getFormName($FORM_USER_GROUP)."` 
-			(`name`, `display_name`, `admin`)
-			VALUES ('$name', '$display_name', '$adminPermissions');
-			") 
-			or die(sql_getErrMsg());
-			
-		//關閉資料庫
-		sql_close($db);
+		$db_userGroup_query = $db->prepare("INSERT INTO `".$db->table($FORM_USER_GROUP)."` (`name`, `display_name`, `admin`) VALUES (:groupName, :display_name , :adminPermissions )");
+		$db_userGroup_query->bindParam(":groupName",$name);
+		$db_userGroup_query->bindParam(":display_name",$display_name);
+		$db_userGroup_query->bindParam(":adminPermissions",$adminPermissions);
+		$db_userGroup_query->execute();
 		
-		//回傳成功訊息
-		return "Finish";
+		//是否有加入
+		if( $db_userGroup_query->rowCount() ) {
+			return "Finish";
+		}
+		else {
+			return "DBErr";
+		}
 	}
 }
 // ------------------------------------------------------------------------
@@ -71,6 +75,7 @@ function userGroup_create($name, $display_name, $adminPermissions){
  *			"UserExist": 尚有存在的使用者
 			"NoFound": 找不到存在的群組
  * 
+ * TODO PDO
  * @since	Version 0
 */
 function userGroup_remove($name){
@@ -116,28 +121,23 @@ function userGroup_remove($name){
  * @access	public
  * @return	array	陣列索引為name，值為群組顯示名稱
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_getList(){
 	global $FORM_USER_GROUP;
 	
-	//連結資料庫
-	$db = sql_connect();
+	//資料庫連結
+	$db = new Database();
 	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT distinct(`name`) `name`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)) or die(sql_getErrMsg());
+	//資料庫查詢
+	$db_userGroup_query = $db->query("SELECT distinct(`name`) `name`, `display_name` FROM ".$db->table($FORM_USER_GROUP));
 	
 	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		while( $db_usergroup_queryRow = mysql_fetch_array($db_usergroup_query) ){
-			$groupArray[ $db_usergroup_queryRow['name'] ] = $db_usergroup_queryRow['display_name'];
-		}
-		sql_close($db);	//關閉資料庫
-		return $groupArray;
+	while( $db_thisGroupArray = $db_userGroup_query->fetch() ) {
+		$result[ $db_thisGroupArray['name'] ] = $db_thisGroupArray['display_name'];
 	}
-	else{
-		return NULL;
-	}
+	return $result;
 }
 // ------------------------------------------------------------------------
 
@@ -217,6 +217,7 @@ function userGroup_getDiaplayName($groupName){
  * @param	object	資料庫
  * @return	object	mysql_query的查詢結果
  * 
+ * TODO PDO
  * @since	Version 1
 */
 function userGroup_queryAll($db){
