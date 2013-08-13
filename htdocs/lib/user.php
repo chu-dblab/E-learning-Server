@@ -28,20 +28,29 @@ require_once(DOCUMENT_ROOT."config/db_table_config.php");
  * @param	string	帳號
  * @return	bool	是否已有這個使用者
  * 
- * @since	Version 0
+ * @since	Version 3
 */
 function user_ishave($username){
 	global $FORM_USER;
 	
-	//查詢使用者登入資訊
-	$db = sql_connect();	//開啟資料庫
+	//資料庫連結
+	$db = new Database();
 	
-	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$username'") or die(sql_getErrMsg());
+	//資料庫查詢
+	$db_user_query = $db->prepare("SELECT * FROM ".$db->table($FORM_USER)." WHERE `username` = :username");
+	$db_user_query->bindParam(":username",$username);
+	$db_user_query->execute();
 	
-	if(mysql_num_rows($db_user_query) >= 1){
+	//取得是否有此使用者
+	//$result = ;
+	if( $db_user_query->fetch() ) {
+		//有找到使用者
 		return true;
-	}// ========================================================================
-	else false;
+	}
+	else {
+		//無此使用者
+		return false;
+	}
 }
 
 // ------------------------------------------------------------------------
@@ -65,8 +74,10 @@ function user_ishave($username){
  *			"UsernameCreatedErr": 已有這個帳號
  *			"RepPasswdErr": 確認密碼錯誤
  *			"NoGroupErr": 沒有指定的群組
+			"DBErr": 資料庫錯誤
  * 
- * @since	Version 1
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 3
 */
 function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, $nickname, $email){
 	global $FORM_USER;
@@ -85,23 +96,34 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 	}
 	//都沒有問題，新增帳號
 	else{
-		//開啟資料庫Finish
-		$db = sql_connect();
+		//開啟資料庫
+		$db = new Database();
 		
 		//將密碼加密
 		$passwd = encryptText($passwd);
 		
 		//紀錄使用者帳號進資料庫
-		mysql_query("INSERT INTO ".sql_getFormName($FORM_USER)." 
+		$db_sqlString = "INSERT INTO ".$db->table($FORM_USER)." 
 			(`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`reaLname` ,`nickname` ,`email`)
-			VALUES ('$username', '$passwd', '$group', NOW() , '$isActive', '$name', '$nickname', '$email')") 
-			or die(sql_getErrMsg());
+			VALUES (:username , :passwd , :group , NOW() , :isActive , :name , :nickname , :email)";
+		$db_user_query = $db->prepare($db_sqlString);
+		$db_user_query->bindParam(":username",$username);
+		$db_user_query->bindParam(":passwd",$passwd);
+		$db_user_query->bindParam(":group",$group);
+		$db_user_query->bindParam(":isActive",$isActive);
+		$db_user_query->bindParam(":name",$name);
+		$db_user_query->bindParam(":nickname",$nickname);
+		$db_user_query->bindParam(":email",$email);
+		$db_user_query->execute();
 		
-		//關閉資料庫
-		sql_close($db);
-		
-		//回傳成功訊息
-		return "Finish";
+		//判斷是否已加入狀況
+		if( $db_user_query->rowCount() ) {
+			//回傳成功訊息
+			return "Finish";
+		}
+		else {
+			return "DBErr";
+		}
 	}
 	
 	
@@ -117,60 +139,62 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
  * @param	string	帳號
  * @param	string	密碼
  * @return	string	使用者登入碼
+			"NoActiveErr": 帳號未啟用
+			"PasswdErr": 密碼錯誤
+			"DBErr": 資料庫寫入錯誤
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 3
  *
- * TODO 有無此使用者判斷
 */
 
 function user_login($userid, $userpasswd){
 	global $FORM_USER;
+	
+	//將密碼加密
 	$userpasswd = encryptText($userpasswd);
 	
-	//查詢使用者登入資訊
-	$db = sql_connect();	//開啟資料庫
+	//開啟資料庫
+	$db = new Database();
 	
-	$db_user_query = mysql_query("SELECT `username`,`password`,`isActive` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$userid'") or die(sql_getErrMsg());
+	//查詢使用者登入資訊
+	$db_user_query = $db->prepare("SELECT `username`,`password`,`isActive` FROM ".$db->table($FORM_USER)." WHERE `username` = :username");
+	$db_user_query->bindParam(":username",$userid);
+	$db_user_query->execute();
+	
 	//若有找到使用者
-	if(mysql_num_rows($db_user_query) >= 1){
-		//檢查這個帳戶是否已啟用
-		if( mysql_result($db_user_query, 0, isActive) ){
-			//核對密碼正確
-			if( $userpasswd == mysql_result($db_user_query, 0, password) ){
-				
-				//符合登入條件
-				
-				//亂數產生登入驗證碼
-				$login_verify = generatorText(32);
-
-				//登記新的登入碼和登入時間進資料庫
-				mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-					SET `logged_code` = '".$login_verify."', `last_login_time`  = NOW() 
-					WHERE `username` = '$userid'") or die(sql_getErrMsg());
-				
-				
-				//回傳使用者登入碼
-				return $login_verify;
-				
-			}
-			//密碼錯誤
-			else{
-				sql_close($db);	//關閉資料庫
-				return "PasswdErr";
-			}
-		}
-		else{
+	if( $db_user_array = $db_user_query->fetch() ) {
+		//echo '<pre>', print_r($db_user_array, true), '</pre>';
+		
+		//若這個帳戶未啟用
+		if( !$db_user_array['isActive'] ) {
 			return "NoActiveErr";
 		}
-		
-	}
-	//若沒有這個使用者
-	else{
-		sql_close($db);	//關閉資料庫
-		return "UsernameErr";
+		//若密碼錯誤
+		else if(  $userpasswd != $db_user_array['password'] ) {
+			return "PasswdErr";
+		}
+		//符合登入條件
+		else{
+			//亂數產生登入驗證碼
+			$login_verify = generatorText(32);
+			
+			//登記新的登入碼和登入時間進資料庫
+			$db_user_query = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `logged_code` = '".$login_verify."', `last_login_time`  = NOW() WHERE `username` = :username");
+			$db_user_query->bindParam(":username",$userid);
+			$db_user_query->execute();
+			
+			//判斷是否已加入狀況
+			if( $db_user_query->rowCount() ) {
+				//回傳使用者登入碼
+				return $login_verify;
+			} else {
+				return "DBErr";
+			}
+			
+		}
 	}
 	
-	sql_close($db);	//關閉資料庫
 }
 // ------------------------------------------------------------------------
 
@@ -183,30 +207,27 @@ function user_login($userid, $userpasswd){
  * @param	string	帳號
  * @return	bool	是否登出成功
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 3
 */
 function user_logout($userid){
 	global $FORM_USER;
 	
 	//連結資料庫
-	$db = sql_connect();
-
-	//尋找登入碼
-	$db_user_query = mysql_query("SELECT `username` FROM ".sql_getFormName($FORM_USER)." WHERE `username` = '$userid'") or die(sql_getErrMsg());
-	//若有找到
-	if(mysql_num_rows($db_user_query) >= 1){
-		//清除登入碼進資料庫
-		mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-			SET `logged_code` = NULL 
-			WHERE `username` = '$userid'") or die(sql_getErrMsg()
-		);
-			
-		sql_close($db);	//關閉資料庫
-		
-		return true;	//傳回登出成功
+	$db = new Database();
+	
+	//清除登入碼進資料庫
+	$db_user_query = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `logged_code` = NULL WHERE `username` = :username");
+	$db_user_query->bindParam(":username",$userid);
+	$db_user_query->execute();
+	
+	//判斷是否已登出
+	if( $db_user_query->rowCount() ) {
+		//回傳成功訊息
+		return true;
 	}
-	else{
-		return false;	//傳回登出失敗
+	else {
+		return false;
 	}
 }
 // ------------------------------------------------------------------------ 
@@ -217,8 +238,8 @@ function user_logout($userid){
  * 查詢使用者帳號
  *
  * @access	public
- * @param	object	資料庫
  * @return	object	mysql_query的查詢結果
+ * TODO Change to PDO
  * 
  * @since	Version 1
 */

@@ -7,15 +7,17 @@ require_once(DOCUMENT_ROOT."lib/password.php");
 //require_once(DOCUMENT_ROOT."lib/user.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
 
-/**
+ /**
  * User
+ * 一個物件即代表這一位使用者
  *
- * @package Package Name
- * @subpackage Subpackage
- * @category Category
- * @author Author Name
- * @link http://example.com
- */
+ * @package	CHU-E-learning
+ * @author	CHU-TDAP
+ * @copyright	
+ * @license	type filter text
+ * @link	https://github.com/CHU-TDAP/
+ * @since	Version 1.0
+*/
 class User {
 	private $loggedCode;
 	private $infoArray;
@@ -27,6 +29,7 @@ class User {
 	 * @param	string	資料表欄位名稱
 	 * @return	(依資料庫型態)	資料表欄位內容
 	 * 
+	 * @author	元兒～ <yuan817@moztw.org>
 	 * @since	Version 1
 	 */
 	private function getQueryInfo($colName){
@@ -40,6 +43,8 @@ class User {
 	 * @param	string	資料表欄位名稱
 	 * @param	(依輸入型態)	資料表欄位內容
 	 * @return	int	更動到幾筆
+	 * 
+	 * @author	元兒～ <yuan817@moztw.org>
 	 * @since	Version 3
 	 */
 	private function setQueryInfo($colName, $rowContent){
