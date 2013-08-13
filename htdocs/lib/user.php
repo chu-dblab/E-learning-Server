@@ -238,13 +238,19 @@ function user_logout($userid){
  * 查詢使用者帳號
  *
  * @access	public
- * @return	object	mysql_query的查詢結果
- * TODO Change to PDO
+ * @return	array	mysql_query的查詢結果
  * 
- * @since	Version 1
+ * @since	Version 3
 */
-function user_queryAll($db){
-	global $DEV_DEGUG, $FORM_USER;
-	$db_table = mysql_query("SELECT `ID`, `username`, `user_group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `realname`, `nickname`, `email` FROM ".sql_getFormName($FORM_USER)) or die(sql_getErrMsg());
-	return $db_table;
+function user_queryAll(){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = new Database();
+	
+	//取得所有使用者
+	$result_sql = $db->query( "SELECT `ID`, `username`, `user_group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `realname`, `nickname`, `email` 
+		FROM ".$db->table($FORM_USER) );
+	
+	return $result_sql->fetchAll();
 }
