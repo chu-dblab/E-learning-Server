@@ -2,12 +2,10 @@
 /**
  * 前置作業
 */
-require_once(DOCUMENT_ROOT."lib/sql.php");
 require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 require_once(DOCUMENT_ROOT."lib/password.php");
 //require_once(DOCUMENT_ROOT."lib/user.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
-$FORM_USER = "users";	//使用者帳號資料表
 
 /**
  * User
@@ -21,21 +19,6 @@ $FORM_USER = "users";	//使用者帳號資料表
 class User {
 	private $loggedCode;
 	private $infoArray;
-	
-	/**
-	 * 取得此使用者的所有資訊
-	 *
-	 * @access	private
-	 * @param	string	資料表欄位名稱
-	 * @return	(依資料庫型態)	資料表欄位內容
-	 * 
-	 * @since	Version 0
-	 */
-	private function getSQLTable(){
-		$db = new Database();
-		$this->infoArray = $db->getTheUserArray($this->loggedCode);
-		///echo '<pre>', print_r($this->infoArray, true), '</pre>';	//DEBUG
-	}
 	
 	/**
 	 * 取得此使用者的資料表欄位內容
@@ -56,11 +39,12 @@ class User {
 	 * @access	private
 	 * @param	string	資料表欄位名稱
 	 * @param	(依輸入型態)	資料表欄位內容
-	 * @return	bool	是否更改成功
-	 * @since	Version 0
+	 * @return	int	更動到幾筆
+	 * @since	Version 3
 	 */
 	private function setQueryInfo($colName, $rowContent){
-		return sql_setTheUserQuery($this->loggedCode, $colName, $rowContent);
+		$db = new Database();
+		return $db->setTheUserArray($this->loggedCode, $colName, $rowContent);
 	}
 	// ========================================================================
 	
@@ -72,7 +56,7 @@ class User {
 	 */
 	function __construct($inputLoggedCode){
 		$this->loggedCode = $inputLoggedCode;
-		$this->getSQLTable();
+		$this->getQuery();
 	}
 	
 	// ========================================================================
@@ -208,7 +192,9 @@ class User {
 	 * @since	Version 0
 	 */
 	function getQuery(){
-		return sql_getTheUserQuery($this->loggedCode);
+		$db = new Database();
+		$this->infoArray = $db->getTheUserArray($this->loggedCode);
+		return $this->infoArray;
 	}
 	// ========================================================================
 	
@@ -290,16 +276,11 @@ class User {
 			//都沒問題，更改密碼
 			else{
 				
-				//開啟資料庫Finish
-				$db = sql_connect();
-				
 				//將密碼加密
 				$passwd = encryptText($newPasswd, $newPasswdMode);
 				
 				//登記新的密碼進資料庫
 				$this->setQueryInfo("password", $passwd);
-				
-				sql_close($db);	//關閉資料庫
 				
 				return "Finish";
 			}
@@ -336,17 +317,11 @@ class User {
 	 function logout(){
 		global $FORM_USER;
 		if($this->loggedCode){
-			//連結資料庫
-			$db = sql_connect();
-			
+
 			//清除登入碼進資料庫
-			mysql_query("UPDATE ".sql_getFormName($FORM_USER)." 
-				SET `logged_code` = NULL 
-				WHERE `logged_code` = '".$this->loggedCode."'") or die(sql_getErrMsg()
-			);
+			$this->setQueryInfo("logged_code", NULL);
 			
 			$this->loggedCode = NULL;
-			sql_close($db);	//關閉資料庫
 		}
 		return false;
 	 }
