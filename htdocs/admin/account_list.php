@@ -15,11 +15,16 @@
 	//require_once(DOCUMENT_ROOT."lib/sql.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/user.php");
+	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	//讀取session資料
 	session_start();
-	$status_create =  $_SESSION["user_create_status"];
-	$status_create_message =  $_SESSION["user_create_status_message"];
+	if( isset($_SESSION["user_create_status"]) ) {
+		$status_create =  $_SESSION["user_create_status"];
+	}
+	if( isset($_SESSION["user_create_status_message"]) ) {
+		$status_create_message =  $_SESSION["user_create_status_message"];
+	}
 	unset($_SESSION["user_create_status"]);
 	unset($_SESSION["user_create_status_message"]);
 	// ------------------------------------------------------------------------
@@ -45,7 +50,7 @@
 	
 	function usersTotal(){
 		global $user_DBTable;
-		return mysql_num_rows($user_DBTable);
+		return count($user_DBTable);
 	}
 	
 	function showUsersTable(){
@@ -69,18 +74,18 @@
 			echo "</tr>";
 			echo "</thead>";
 			echo "<tbody>";
-				while( $user_DBTableRow = mysql_fetch_array($user_DBTable) ){
+				foreach ($user_DBTable as $userKey => $thisUserArray) {
 					echo "<tr>";
-						echo "<th scrope='row'>".$user_DBTableRow['ID']."</th>";
-						echo "<td>".$user_DBTableRow['username']."</td>";
-						echo "<td>".$user_DBTableRow['user_group']."</td>";
-						echo "<td>".$user_DBTableRow['logged_code']."</td>";
-						echo "<td>".$user_DBTableRow['last_login_time']."</td>";
-						echo "<td>".$user_DBTableRow['create_time']."</td>";
-						echo "<td>".$user_DBTableRow['isActive']."</td>";
-						echo "<td>".$user_DBTableRow['realname']."</td>";
-						echo "<td>".$user_DBTableRow['nickname']."</td>";
-						echo "<td>".$user_DBTableRow['email']."</td>";
+						echo "<th scrope='row'>".$thisUserArray['ID']."</th>";
+						echo "<td>".$thisUserArray['username']."</td>";
+						echo "<td>".$thisUserArray['user_group']."</td>";
+						echo "<td>".$thisUserArray['logged_code']."</td>";
+						echo "<td>".$thisUserArray['last_login_time']."</td>";
+						echo "<td>".$thisUserArray['create_time']."</td>";
+						echo "<td>".$thisUserArray['isActive']."</td>";
+						echo "<td>".$thisUserArray['realname']."</td>";
+						echo "<td>".$thisUserArray['nickname']."</td>";
+						echo "<td>".$thisUserArray['email']."</td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";
@@ -94,8 +99,8 @@
 	
 	// ------------------------------------------------------------------------
 	
-	$db = sql_connect();	//連接資料庫0
-	$user_DBTable = user_queryAll($db);	//查詢所有使用者
+	$db = new Database();
+	$user_DBTable = user_queryAll();	//查詢所有使用者
 	
 ?>
 <!DOCTYPE html>
@@ -149,4 +154,3 @@
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
-<?php sql_close($db); ?>
