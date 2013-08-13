@@ -16,7 +16,7 @@ require_once(DOCUMENT_ROOT."lib/userGroup.php");
  * @copyright	
  * @license	type filter text
  * @link	https://github.com/CHU-TDAP/
- * @since	Version 1.0
+ * @since	Version 2.0
 */
 class User {
 	private $loggedCode;

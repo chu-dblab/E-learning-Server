@@ -8,11 +8,10 @@
  * @copyright	
  * @license		
  * @link		https://github.com/CHU-TDAP/
- * @since		Version 1.0
+ * @since		Version 2.0
  * @filesource
 */
 
-require_once(DOCUMENT_ROOT."lib/sql.php");
 require_once(DOCUMENT_ROOT."lib/password.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
 require_once(DOCUMENT_ROOT."config/db_table_config.php");
