@@ -12,7 +12,6 @@
 	 * 前置設定
 	*/
 	require_once("../lib/include.php");
-	//require_once(DOCUMENT_ROOT."lib/sql.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/user.php");
 	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
@@ -29,6 +28,7 @@
 	unset($_SESSION["user_create_status_message"]);
 	// ------------------------------------------------------------------------
 	
+	//取得上個頁面傳來的訊息
 	function show_status_notify(){
 		global $status_create, $status_create_message;
 		
@@ -48,11 +48,13 @@
 		}
 	}
 	
+	//取得共有幾個使用者
 	function usersTotal(){
 		global $user_DBTable;
 		return count($user_DBTable);
 	}
 	
+	//顯示使用者列表
 	function showUsersTable(){
 		global $user_DBTable;
 		if( usersTotal() > 0 ){	//若已有1個以上的使用者

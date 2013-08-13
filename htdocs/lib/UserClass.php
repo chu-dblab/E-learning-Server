@@ -4,7 +4,6 @@
 */
 require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 require_once(DOCUMENT_ROOT."lib/password.php");
-//require_once(DOCUMENT_ROOT."lib/user.php");
 require_once(DOCUMENT_ROOT."lib/userGroup.php");
 
  /**
@@ -206,7 +205,6 @@ class User {
 	/**
 	 * 驗證密碼是否錯誤
 	 *
-	 * TODO 函式
 	 * @access	public
 	 * @param	string	密碼
 	 * @param	string	加密方式(可省略)
@@ -242,7 +240,6 @@ class User {
 	/**
 	 * 更改密碼
 	 *
-	 * TODO 函式
 	 * @access	public
 	 * @param	string	舊密碼
 	 * @param	string	舊密碼加密方式（可省略）

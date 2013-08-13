@@ -52,10 +52,11 @@ function userGroup_create($name, $display_name, $adminPermissions){
 		$db_userGroup_query->bindParam(":adminPermissions",$adminPermissions);
 		$db_userGroup_query->execute();
 		
-		//是否有加入
+		//若有有加入
 		if( $db_userGroup_query->rowCount() ) {
-			return "Finish";
+			return "Finish";	//回傳成功訊息
 		}
+		//若無加入
 		else {
 			return "DBErr";
 		}
@@ -83,7 +84,6 @@ function userGroup_remove($name){
 	//資料庫連結
 	$db = new Database();
 	
-	// TODO 尚未完成移除動作
 	//查詢此群組是否有使用者
 	$db_user_query = $db->prepare("SELECT `username` FROM ".$db->table($FORM_USER)." WHERE `user_group` = :groupName");
 	$db_user_query->bindParam(":groupName",$name);
@@ -104,9 +104,9 @@ function userGroup_remove($name){
 		$db_userGroup_query->bindParam(":groupName",$name);
 		$db_userGroup_query->execute();
 		
-		//是否有成功刪除
+		//若有成功刪除
 		if( $db_userGroup_query->rowCount() ) {
-			return "Finish";
+			return "Finish";	//回傳成功訊息
 		}
 		else {
 			return "DBErr";
@@ -135,7 +135,8 @@ function userGroup_getList(){
 	//資料庫查詢
 	$db_userGroup_query = $db->query("SELECT distinct(`name`) `name`, `display_name` FROM ".$db->table($FORM_USER_GROUP));
 	
-	//若有找到
+	//若有找到，將列表以陣列傳回
+	//$result[內部群組名稱] = 使用者看得到的群組名稱
 	while( $db_thisGroupArray = $db_userGroup_query->fetch() ) {
 		$result[ $db_thisGroupArray['name'] ] = $db_thisGroupArray['display_name'];
 	}
@@ -217,11 +218,10 @@ function userGroup_getDiaplayName($groupName){
  * 查詢所有使用者群組
  *
  * @access	public
- * @param	object	資料庫
- * @return	object	mysql_query的查詢結果
+ * @return	array	mysql_query的查詢結果
  * 
- * TODO PDO
- * @since	Version 1
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_queryAll(){
 	global $FORM_USER_GROUP;
