@@ -8,7 +8,7 @@
  * @copyright	
  * @license		
  * @link		https://github.com/CHU-TDAP/
- * @since		Version 1.0
+ * @since		Version 2.0
  * @filesource
 */
 
@@ -150,24 +150,26 @@ function userGroup_getList(){
  * @param	string	群組名稱
  * @return	bool	是否已有
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_ishave($name){
 	global $FORM_USER_GROUP;
 	
-	//連結資料庫
-	$db = sql_connect();
+	//資料庫連結
+	$db = new Database();
 	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$name'") or die(sql_getErrMsg());
+	//資料庫查詢
+	$db_userGroup_query = $db->prepare("SELECT `name` FROM ".$db->table($FORM_USER_GROUP)." WHERE `name` = :groupName");
+	$db_userGroup_query->bindParam(":groupName",$name);
+	$db_userGroup_query->execute();
 	
 	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		sql_close($db);	//關閉資料庫
+	if( $db_userGroup_query->fetch() ) {
 		return true;
 	}
-	else{
-		sql_close($db);	//關閉資料庫
+	//若找不到
+	else {
 		return false;
 	}
 }
@@ -182,25 +184,25 @@ function userGroup_ishave($name){
  * @param	string	groupName
  * @return	string	群組名稱
  * 
- * @since	Version 0
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 2
 */
 function userGroup_getDiaplayName($groupName){
 	global $FORM_USER_GROUP;
 	
-	//連結資料庫
-	$db = sql_connect();
+	//資料庫連結
+	$db = new Database();
 	
-	//查詢群組
-	$db_usergroup_query = mysql_query("SELECT `name`, `display_name` FROM ".sql_getFormName($FORM_USER_GROUP)." WHERE `name` = '$groupName'") or die(sql_getErrMsg());
+	//資料庫查詢
+	$db_userGroup_query = $db->prepare("SELECT `name`, `display_name` FROM ".$db->table($FORM_USER_GROUP)." WHERE `name` = :groupName");
+	$db_userGroup_query->bindParam(":groupName",$groupName);
+	$db_userGroup_query->execute();
 	
-	//若有找到
-	if(mysql_num_rows($db_usergroup_query) >= 1){
-		$result = mysql_result($db_usergroup_query, 0, display_name);
-		sql_close($db);	//關閉資料庫
-		return $result;
+	if( $groupArray = $db_userGroup_query->fetch() ) {
+		return $groupArray['display_name'];
 	}
-	else{
-		return NULL;
+	else {
+		return null;
 	}
 }
 
