@@ -2,8 +2,12 @@
    /*
     *  類別名稱：推薦學習點
     */
+	
+	include_once("sql.php");
 	class RecommandLearnNode
 	{
+		private $conDB;
+		private $qureyString;
 		public function __construct()
 		{
 		}
@@ -45,22 +49,28 @@
 			
 		}
 		
-		
+		/*
+		 * 方法名稱：getNodeOfLearnOfParameter
+		 * 說明：取得學習點的所有參數
+		 */
 		public function getNodeOfLearnOfParameter()
 		{
 			
 		}
 		
-		public function getPathOfLearning()
-		{
-			
-		}
-		
+		/*
+		 * 方法名稱：QuickSort
+		 * 說明：隊取得的資料作快速排序
+		 */
 		private function QuickSort()
 		{
 			
 		}
 		
+		/*
+		 * 方法名稱：DetechteIsAllLearnNode
+		 * 說明：偵測所有的學習點是不是已經達到限制人數
+		 */
 		public function DetechteIsAllLearnNode()
 		{
 			
