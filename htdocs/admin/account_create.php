@@ -1,7 +1,7 @@
 ﻿<!--
-  account_list.php
+  account_create.php
    
-   查詢有哪些使用者
+   新增一位使用者
    
    Copyright 2013 元兒～ <yuan@Yuan-NB>
    
@@ -80,12 +80,31 @@
 						<?php show_status_notify() ?>
 					</section>
 					<section id="create-form">
-						<form action="action/account_toCreate.php" method="post">
+						<form class="form-horizontal" action="action/account_toCreate.php" method="post">
 							<fieldset>
 								<legend>請在此填入新使用者資料</legend>
-								<label>帳號: <input autofocus type="text" name="user_id" required="required" />*</label>
-								<label>密碼: <input type="password" name="user_password" id="user_password" required="required" oninput="checkPasswords()" />*</label>
-								<label>確認密碼: <input type="password" name="user_confirm_password" id="user_confirm_password" required="required" oninput="checkPasswords()" />*</label>
+								
+								<div class="control-group">
+									<label class="control-label" for="user_id">帳號: </label>
+									<div class="controls">
+										<input autofocus type="text" name="user_id" id="user_id" required="required" placeholder="完整的網站名稱" />
+										<span class="help-inline">*</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="user_password">密碼: </label>
+									<div class="controls">
+										<input type="password" name="user_password" id="user_password" required="required" oninput="checkPasswords()" />
+										<span class="help-inline">*</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="user_confirm_password">確認密碼: </label>
+									<div class="controls">
+										<input type="password" name="user_confirm_password" id="user_confirm_password" required="required" oninput="checkPasswords()" />
+										<span class="help-inline">*</span>
+									</div>
+								</div>
 								<script>
 									function checkPasswords() {
 										var user_password = document.getElementById('user_password');
@@ -98,28 +117,60 @@
 										}
 									}
 								</script>
-								<label>使用者群組: 
-									<select name="user_group" id="user_group">
-										<?php 
-											$userGroup = userGroup_getList();
-											foreach($userGroup as $key=>$value){
-												echo "<option value='$key'>$key: $value</option>";
-											}
-										?>
-										<!--<option value="MD5">MD5</option>
-										<otion value="">無</option>-->
-									</select>
-								</label>
-								 <label class="checkbox">
-									<input type="checkbox" name="user_active" value="active" checked> 啟用這個帳號
-								</label>
+								
+								<div class="control-group">
+									<label class="control-label" for="user_group">使用者群組: </label>
+									<div class="controls">
+										<select name="user_group" id="user_group">
+											<?php 
+												$userGroup = userGroup_getList();
+												foreach($userGroup as $key=>$value){
+													echo "<option value='$key'>$key: $value</option>";
+												}
+											?>
+											<!--<option value="MD5">MD5</option>
+											<otion value="">無</option>-->
+										</select>
+										<span class="help-inline">*</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+										<label class="checkbox">
+											<input type="checkbox" name="user_active" value="active" checked> 啟用這個帳號
+										</label>
+									</div>
+								</div>
 								<hr />
-								<label>姓名: <input type="text" name="user_realName" /></label>
-								<label>暱稱: <input type="text" name="user_nickName" /></label>
-								<label>e-mail: <input type="email" name="user_email" placeholder="XXX@XXX.XXX" /></label>
+								<div class="control-group">
+									<label class="control-label" for="user_realName">姓名: </label>
+									<div class="controls">
+										<input type="text" name="user_realName" id="user_realName" />
+										<span class="help-inline"></span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="user_nickName">暱稱: </label>
+									<div class="controls">
+										<input type="text" name="user_nickName" id="user_nickName" />
+										<span class="help-inline"></span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="user_email">e-mail: </label>
+									<div class="controls">
+										<input type="email" name="user_email" id="user_email" placeholder="XXX@XXX.XXX" />
+										<span class="help-inline"></span>
+									</div>
+								</div>
+										
 								<hr />
-								<button type="submit" class="btn" id="sendbutton" name="sendbutton">註冊！！</button>
-								<button type="reset" class="btn" id="resetbutton" name="resetbutton">重填</button>
+								<div class="control-group">
+									<div class="controls">
+										<button type="submit" class="btn btn-success" id="sendbutton" name="sendbutton">註冊！！</button>
+										<button type="reset" class="btn" id="resetbutton" name="resetbutton">重填</button>
+									</div>
+								</div>
 							</fieldset>
 						</form>
 						
