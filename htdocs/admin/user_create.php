@@ -1,5 +1,5 @@
 ﻿<!--
-  account_create.php
+  user_create.php
    
    新增一位使用者
    
@@ -80,7 +80,7 @@
 						<?php show_status_notify() ?>
 					</section>
 					<section id="create-form">
-						<form class="form-horizontal" action="action/account_toCreate.php" method="post">
+						<form class="form-horizontal" action="action/user_toCreate.php" method="post">
 							<fieldset>
 								<legend>請在此填入新使用者資料</legend>
 								

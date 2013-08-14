@@ -46,7 +46,7 @@ if($account_create_status == "Finish"){
 	session_start();
 	$_SESSION["user_create_status"] = $account_create_status;
 	$_SESSION["user_create_status_message"] = $status_message;
- 	header("Location: ../account_list.php");
+ 	header("Location: ../user_list.php");
 }
 else{
 	$status_message = "<strong>無法建立！</strong>";
@@ -67,5 +67,5 @@ else{
 	session_start();
 	$_SESSION["user_create_status"] = $account_create_status;
 	$_SESSION["user_create_status_message"] = $status_message;
- 	header("Location: ../account_create.php");
+ 	header("Location: ../user_create.php");
 }
