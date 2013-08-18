@@ -130,6 +130,52 @@
 						
 					</section>
 					
+					<hr />
+					
+					<section>
+						<div class="well"><h2>新增使用者群組</h2>
+						
+<!--  -->
+							<form class="form-horizontal" action="action/userGroup_toCreate.php" method="post">
+								<fieldset>
+									<div class="control-group">
+										<label class="control-label" for="userGroup_id">內部群組名稱: </label>
+										<div class="controls">
+											<input autofocus type="text" name="userGroup_id" id="userGroup_id" required="required" placeholder="僅限英文字" />
+											<span class="help-inline">*</span>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label" for="userGroup_displayName">群組顯示名稱: </label>
+										<div class="controls">
+											<input type="text" name="userGroup_displayName" id="userGroup_displayName" />
+											<span class="help-inline"></span>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">授予權限: </label>
+										<div class="controls">
+											<label class="checkbox">
+												<input type="checkbox" name="userGroup_admin" value="active"> 管理者權限
+											</label>
+										</div>
+									</div>
+														
+									<hr />
+									<div class="control-group">
+										<div class="controls">
+											<button type="submit" class="btn btn-success" id="sendbutton" name="sendbutton">建立！！</button>
+											<button type="reset" class="btn" id="resetbutton" name="resetbutton">重填</button>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+<!-- -->
+						</div>
+					</section>
+					
 				</div><!--/span-->
 			</div><!--/row-->
 			<hr />
