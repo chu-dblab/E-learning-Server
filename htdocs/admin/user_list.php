@@ -14,7 +14,6 @@
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/user.php");
-	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	//讀取session資料
 	session_start();
@@ -101,7 +100,6 @@
 	
 	// ------------------------------------------------------------------------
 	
-	$db = new Database();
 	$user_DBTable = user_queryAll();	//查詢所有使用者
 	
 ?>
