@@ -224,11 +224,17 @@ function userGroup_getDiaplayName($groupName){
  * @since	Version 2
 */
 function userGroup_queryAll(){
-	global $FORM_USER_GROUP;
+	global $FORM_USER, $FORM_USER_GROUP;
 	//資料庫連結
 	$db = new Database();
 	
 	//資料庫查詢
-	$db_userGroup_query = $db->query("SELECT * FROM ".$db->table($FORM_USER_GROUP));
+	$db_userGroup_query = $db->query("
+		SELECT `groups`.`name`, `groups`.`display_name`, count(`users`.`user_group`) AS `in_user`, `groups`.`admin` 
+		FROM `".$db->table($FORM_USER)."` AS `users` 
+		JOIN `".$db->table($FORM_USER_GROUP)."` AS `groups` ON `users`.`user_group` = `groups`.`name` 
+		GROUP BY `users`.`user_group`"
+	);
+	
 	return $db_userGroup_query->fetchAll();
 }

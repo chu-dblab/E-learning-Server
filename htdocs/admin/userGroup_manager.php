@@ -1,7 +1,7 @@
 ﻿<!--
-  user_list.php
+  user_Group_manager.php
    
-   查詢有哪些使用者
+   查詢有哪些使用者群組
    
    Copyright 2013 元兒～ <yuan@Yuan-NB>
    
@@ -13,8 +13,7 @@
 	*/
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
-	require_once(DOCUMENT_ROOT."lib/user.php");
-	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+	require_once(DOCUMENT_ROOT."lib/userGroup.php");
 	
 	//讀取session資料
 	session_start();
@@ -49,45 +48,33 @@
 	}
 	
 	//取得共有幾個使用者
-	function usersTotal(){
-		global $user_DBTable;
-		return count($user_DBTable);
+	function userGroupsTotal(){
+		global $userGroup_DBTable;
+		return count($userGroup_DBTable);
 	}
 	
 	//顯示使用者列表
-	function showUsersTable(){
-		global $user_DBTable;
-		if( usersTotal() > 0 ){	//若已有1個以上的使用者
+	function showuserGroupsTable(){
+		global $userGroup_DBTable;
+		if( userGroupsTotal() > 0 ){	//若已有1個以上的使用者
 			//建立表格
 			echo "<table class='allUsers_table table table-striped'>";
 			echo "<thead>";
 			echo "<tr>";
 				//第1行: 欄位名稱
-				echo "<th scpoe='col'>ID</th>";
-				echo "<th scpoe='col'>帳號</th>";
-				echo "<th scpoe='col'>群組</th>";
-				echo "<th scpoe='col'>登入碼</th>";
-				echo "<th scpoe='col'>登入時間</th>";
-				echo "<th scpoe='col'>建立時間</th>";
-				echo "<th scpoe='col'>啟用</th>";
-				echo "<th scpoe='col'>真實姓名</th>";
-				echo "<th scpoe='col'>暱稱</th>";
-				echo "<th scpoe='col'>Email</th>";
+				echo "<th scpoe='col'>內部名稱</th>";
+				echo "<th scpoe='col'>顯示名稱</th>";
+				echo "<th scpoe='col'>群組內使用者、</th>";
+				echo "<th scpoe='col'>管理員權限</th>";
 			echo "</tr>";
 			echo "</thead>";
 			echo "<tbody>";
-				foreach ($user_DBTable as $userKey => $thisUserArray) {
+				foreach ($userGroup_DBTable as $groupKey => $thisGroupArray) {
 					echo "<tr>";
-						echo "<th scrope='row'>".$thisUserArray['ID']."</th>";
-						echo "<td>".$thisUserArray['username']."</td>";
-						echo "<td>".$thisUserArray['user_group']."</td>";
-						echo "<td>".$thisUserArray['logged_code']."</td>";
-						echo "<td>".$thisUserArray['last_login_time']."</td>";
-						echo "<td>".$thisUserArray['create_time']."</td>";
-						echo "<td>".$thisUserArray['isActive']."</td>";
-						echo "<td>".$thisUserArray['realname']."</td>";
-						echo "<td>".$thisUserArray['nickname']."</td>";
-						echo "<td>".$thisUserArray['email']."</td>";
+						echo "<th scrope='row'>".$thisGroupArray['name']."</th>";
+						echo "<td>".$thisGroupArray['display_name']."</td>";
+						echo "<td>".$thisGroupArray['in_user']."</td>";
+						echo "<td>".$thisGroupArray['admin']."</td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";
@@ -95,14 +82,13 @@
 			
 		}
 		else{	//若無使用者
-			echo "尚未建立使用者";
+			echo "尚未建立使用者群組";
 		}
 	}
 	
 	// ------------------------------------------------------------------------
 	
-	$db = new Database();
-	$user_DBTable = user_queryAll();	//查詢所有使用者
+	$userGroup_DBTable = userGroup_queryAll();	//查詢所有使用者群組
 	
 ?>
 <!DOCTYPE html>
@@ -130,7 +116,7 @@
 				<div class="span9">
 				
 					<header>
-						<h1>使用者帳號清單</h1>
+						<h1>使用者群組清單</h1>
 						<h2></h2>
 					</header>
 					
@@ -139,8 +125,8 @@
 					</section>
 					
 					<section>
-						<p>總共有<?php echo usersTotal(); ?>個使用者</p>
-						<?php showUsersTable(); ?>
+						<p>總共有<?php echo userGroupsTotal(); ?>個使用者群組</p>
+						<?php showuserGroupsTable(); ?>
 						
 					</section>
 					
