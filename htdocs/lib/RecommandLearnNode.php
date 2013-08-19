@@ -3,22 +3,25 @@
     *  類別名稱：推薦學習點
     */
 	
-	include_once("sql.php");
+	require_once("DatabaseClass.php");
 	class RecommandLearnNode
 	{
 		private $conDB;
-		private $qureyString;
 		public function __construct()
 		{
+		  $conDB = new DatabaseClass();
 		}
 		
 		/*
 		 * 方法名稱：加人數
 		 * 說明：當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
+		 * 參數: $number, 學習點的編號
+		 * 回傳值： NONE
 		 */
-		public function addPeople()
+		public function addPeople($number)
 		{
-			
+		    $query = "UPDATE target set Mj = Mj + 1 where number = ".number;
+		    $result = $conDB->execute($query);		    
 		}
 		
 		/*
