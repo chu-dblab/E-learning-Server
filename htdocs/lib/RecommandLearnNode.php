@@ -27,11 +27,13 @@
 		/*
 		 * 方法名稱：減人數
 		 * 說明：當使用者按下"離開"按鈕時, 則人數減一
-		 */
-		
-		public function SubPeople()
+		 * 參數: $number, 學習點的編號
+		 * 回傳值： NONE
+		 */		
+		public function SubPeople($number)
 		{
-			
+		     $query = "UPDATE target set Mj = Mj - 1 where number = ".number;
+		     $result = $conDB->execute($query);	
 		}
 		
 		/*
