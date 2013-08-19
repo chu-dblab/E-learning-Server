@@ -17,14 +17,14 @@
 	
 	//讀取session資料
 	session_start();
-	if( isset($_SESSION["user_create_status"]) ) {
-		$status_create =  $_SESSION["user_create_status"];
+	if( isset($_SESSION["userGroup_create_status"]) ) {
+		$status_create =  $_SESSION["userGroup_create_status"];
 	}
-	if( isset($_SESSION["user_create_status_message"]) ) {
-		$status_create_message =  $_SESSION["user_create_status_message"];
+	if( isset($_SESSION["userGroup_create_status_message"]) ) {
+		$status_create_message =  $_SESSION["userGroup_create_status_message"];
 	}
-	unset($_SESSION["user_create_status"]);
-	unset($_SESSION["user_create_status_message"]);
+	unset($_SESSION["userGroup_create_status"]);
+	unset($_SESSION["userGroup_create_status_message"]);
 	// ------------------------------------------------------------------------
 	
 	//取得上個頁面傳來的訊息
