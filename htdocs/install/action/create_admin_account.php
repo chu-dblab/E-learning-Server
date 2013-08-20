@@ -7,20 +7,8 @@ session_start();
 	$inputSiteAdminUserNickName = $_SESSION["install_inputSiteAdminUserNickName"];
 	$inputSiteAdminUserEmail = $_SESSION["install_inputSiteAdminUserEmail"];
 	
+
+require_once("../../lib/include.php");
+require_once(DOCUMENT_ROOT."lib/user.php");
 	
-function encryptText($text){
-	global $inputEncryptMode;
-	switch($inputEncryptMode){
-		case "MD5":
-			return md5($text);
-			break;
-		default:
-			return $text;
-			break;
-	}
-}
-
-
-mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."users` (`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`realname` ,`nickname` ,`email`)
-	VALUES ('$inputSiteAdminUser', '".encryptText($inputSiteAdminPass)."', 'admin', NOW() , '1', '$inputSiteAdminUserRealName', '$inputSiteAdminUserNickName', '$inputSiteAdminUserEmail')") 
-	or die(mysql_error());
+user_create($inputSiteAdminUser, $inputSiteAdminPass, $inputSiteAdminPass, "admin", true, $inputSiteAdminUserRealName, $inputSiteAdminUserNickName, $inputSiteAdminUserEmail);
