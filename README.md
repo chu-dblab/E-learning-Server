@@ -23,6 +23,41 @@
 1. 請先把`/htdocs/` 整個複製到你的網頁空間
 2. 將內附的chu-elearn.sql匯入進你的資料庫
 3. 修改 /htdocs/config.php 檔案，依你的需求設定
+
+        <?php
+        /**
+        * 網站根目錄
+        */
+                define('DOCUMENT_ROOT',dirname(__FILE__).'/');
+
+        /**
+        * 網站資訊
+        */
+                //網站標題
+                define('SITE_NAME','無所不在學習導引系統');
+                //網站副標題
+                define('SITE_SUBNAME','');
+                //網站標題簡稱
+                define('SITE_NAME_REFERRED','無所不在學習導引系統');
+
+                //網站網址
+                //Warning: 網址後面務必加上"/"
+                define('SITE_URL','http://chu-elearning/');             //網站首頁
+                define('SITE_URL_ROOT','http://chu-elearning/');        //本系統的根網址
+
+        /**
+        * 要用哪種加密方式
+        * 
+        * 目前提供選項: MD5
+        */
+                $ENCRYPT_MODE = 'MD5';
+
+        /**
+        * 你的地區
+        */
+                date_default_timezone_set('Asia/Taipei');       //設定時區
+
+            
 4. 建立 /htdocs/config/db_config.php 檔案，裡面填入
 
         <?php
