@@ -71,10 +71,10 @@
 			echo "<tbody>";
 				foreach ($userGroup_DBTable as $groupKey => $thisGroupArray) {
 					echo "<tr>";
-						echo "<th scrope='row'>".$thisGroupArray['name']."</th>";
-						echo "<td>".$thisGroupArray['display_name']."</td>";
+						echo "<th scrope='row'>".$thisGroupArray['GID']."</th>";
+						echo "<td>".$thisGroupArray['GName']."</td>";
 						echo "<td>".$thisGroupArray['in_user']."</td>";
-						echo "<td>".$thisGroupArray['admin']."</td>";
+						echo "<td>".$thisGroupArray['Gauth_admin']."</td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";

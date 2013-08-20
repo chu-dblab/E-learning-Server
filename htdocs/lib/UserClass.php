@@ -77,25 +77,13 @@ class User {
 	// ------------------------------------------------------------------------
 	
 	/**
-	 * 取得帳號ID
-	 *
-	 * @access	public
-	 * @return	string	ID-帳號編號
-	 */
-	function getID(){
-		return $this->getQueryInfo("ID");
-		
-	}
-	// ------------------------------------------------------------------------
-	
-	/**
 	 * 取得帳號名稱
 	 *
 	 * @access	public
 	 * @return	string	帳號名稱
 	 */
 	function getUsername(){
-		return $this->getQueryInfo("username");
+		return $this->getQueryInfo("UID");
 	}
 	// ------------------------------------------------------------------------
 	
@@ -106,7 +94,7 @@ class User {
 	 * @return	string	登入時間
 	 */
 	function getLoginTime(){
-		return $this->getQueryInfo("last_login_time");
+		return $this->getQueryInfo("ULast_In_Time");
 	}
 	// ------------------------------------------------------------------------
 	
@@ -117,7 +105,7 @@ class User {
 	 * @return	string	建立時間
 	 */
 	function getCreateTime(){
-		return $this->getQueryInfo("create_time");
+		return $this->getQueryInfo("UBuild_Time");
 	}
 	// ========================================================================
 	
@@ -128,7 +116,7 @@ class User {
 	 * @return	string	真實姓名
 	 */
 	function getRealName(){
-		return $this->getQueryInfo("realname");
+		return $this->getQueryInfo("UReal_Name");
 	}
 	
 	/**
@@ -139,7 +127,7 @@ class User {
 	 * @return	bool	是否更改成功
 	 */
 	function setRealName($input){
-		return $this->setQueryInfo("realname", $input);
+		return $this->setQueryInfo("UReal_Name", $input);
 	}
 	// ------------------------------------------------------------------------
 	
@@ -150,7 +138,7 @@ class User {
 	 * @return	string	暱稱
 	 */
 	function getNickName(){
-		return $this->getQueryInfo("nickname");
+		return $this->getQueryInfo("UNickname");
 	}
 	
 	/**
@@ -161,7 +149,7 @@ class User {
 	 * @return	bool	是否更改成功
 	 */
 	function setNickName($input){
-		return $this->setQueryInfo("nickname", $input);
+		return $this->setQueryInfo("UNickname", $input);
 	}
 	// ------------------------------------------------------------------------
 	
@@ -172,7 +160,7 @@ class User {
 	 * @return	string	使用者資訊的Email
 	 */
 	function getEmail(){
-		return $this->getQueryInfo("email");
+		return $this->getQueryInfo("UEmail");
 	}
 	
 	/**
@@ -183,7 +171,7 @@ class User {
 	 * @return	bool	是否更改成功
 	 */
 	function setEmail($input){
-		return $this->setQueryInfo("email", $input);
+		return $this->setQueryInfo("UEmail", $input);
 	}
 	// ------------------------------------------------------------------------
 	
@@ -221,7 +209,7 @@ class User {
 			$mode = $args[1];
 			
 			//動作
-			if( $this->getQueryInfo("password") == encryptText($inputPasswd, $mode) ){
+			if( $this->getQueryInfo("UPassword") == encryptText($inputPasswd, $mode) ){
 				return true;
 			}
 			else{
@@ -282,7 +270,7 @@ class User {
 				$passwd = encryptText($newPasswd, $newPasswdMode);
 				
 				//登記新的密碼進資料庫
-				$this->setQueryInfo("password", $passwd);
+				$this->setQueryInfo("UPassword", $passwd);
 				
 				return "Finish";
 			}
@@ -321,7 +309,7 @@ class User {
 		if($this->loggedCode){
 
 			//清除登入碼進資料庫
-			$this->setQueryInfo("logged_code", NULL);
+			$this->setQueryInfo("ULogged_code", NULL);
 			
 			$this->loggedCode = NULL;
 		}

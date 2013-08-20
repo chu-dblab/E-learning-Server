@@ -36,7 +36,7 @@ function user_ishave($username){
 	$db = new Database();
 	
 	//資料庫查詢
-	$db_user_query = $db->prepare("SELECT * FROM ".$db->table($FORM_USER)." WHERE `username` = :username");
+	$db_user_query = $db->prepare("SELECT * FROM ".$db->table($FORM_USER)." WHERE `UID` = :username");
 	$db_user_query->bindParam(":username",$username);
 	$db_user_query->execute();
 	
@@ -103,12 +103,12 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 		
 		//紀錄使用者帳號進資料庫
 		$db_sqlString = "INSERT INTO ".$db->table($FORM_USER)." 
-			(`username` ,`password` ,`user_group` ,`create_time` ,`isActive` ,`reaLname` ,`nickname` ,`email`)
-			VALUES (:username , :passwd , :group , NOW() , :isActive , :name , :nickname , :email)";
+			(`UID` ,`GID` ,`UPassword` ,`UBuild_Time` ,`UEnabled` ,`UReal_Name` ,`UNickname` ,`UEmail`)
+			VALUES (:username , :group , :passwd , NOW() , :isActive , :name , :nickname , :email)";
 		$db_user_query = $db->prepare($db_sqlString);
 		$db_user_query->bindParam(":username",$username);
-		$db_user_query->bindParam(":passwd",$passwd);
 		$db_user_query->bindParam(":group",$group);
+		$db_user_query->bindParam(":passwd",$passwd);
 		$db_user_query->bindParam(":isActive",$isActive);
 		$db_user_query->bindParam(":name",$name);
 		$db_user_query->bindParam(":nickname",$nickname);
@@ -157,7 +157,7 @@ function user_login($userid, $userpasswd){
 	$db = new Database();
 	
 	//查詢使用者登入資訊
-	$db_user_query = $db->prepare("SELECT `username`,`password`,`isActive` FROM ".$db->table($FORM_USER)." WHERE `username` = :username");
+	$db_user_query = $db->prepare("SELECT `UID`,`UPassword`,`UEnabled` FROM ".$db->table($FORM_USER)." WHERE `UID` = :username");
 	$db_user_query->bindParam(":username",$userid);
 	$db_user_query->execute();
 	
@@ -166,11 +166,11 @@ function user_login($userid, $userpasswd){
 		//echo '<pre>', print_r($db_user_array, true), '</pre>';
 		
 		//若這個帳戶未啟用
-		if( !$db_user_array['isActive'] ) {
+		if( !$db_user_array['UEnabled'] ) {
 			return "NoActiveErr";
 		}
 		//若密碼錯誤
-		else if(  $userpasswd != $db_user_array['password'] ) {
+		else if(  $userpasswd != $db_user_array['UPassword'] ) {
 			return "PasswdErr";
 		}
 		//符合登入條件
@@ -179,7 +179,7 @@ function user_login($userid, $userpasswd){
 			$login_verify = generatorText(32);
 			
 			//登記新的登入碼和登入時間進資料庫
-			$db_user_query = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `logged_code` = '".$login_verify."', `last_login_time`  = NOW() WHERE `username` = :username");
+			$db_user_query = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `ULogged_code` = '".$login_verify."', `ULast_In_Time`  = NOW() WHERE `UID` = :username");
 			$db_user_query->bindParam(":username",$userid);
 			$db_user_query->execute();
 			
@@ -216,7 +216,7 @@ function user_logout($userid){
 	$db = new Database();
 	
 	//清除登入碼進資料庫
-	$db_user_query = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `logged_code` = NULL WHERE `username` = :username");
+	$db_user_query = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `ULogged_code` = NULL WHERE `UID` = :username");
 	$db_user_query->bindParam(":username",$userid);
 	$db_user_query->execute();
 	
@@ -248,7 +248,7 @@ function user_queryAll(){
 	$db = new Database();
 	
 	//取得所有使用者
-	$result_sql = $db->query( "SELECT `ID`, `username`, `user_group`, `logged_code`, `last_login_time`, `create_time`, `isActive`, `realname`, `nickname`, `email` 
+	$result_sql = $db->query( "SELECT `UID`, `GID`, `ULogged_code`, `ULast_In_Time`, `UBuild_Time`, `UEnabled`, `In_Learn_Time`, `UReal_Name`, `UNickname`, `UEmail` 
 		FROM ".$db->table($FORM_USER) );
 	
 	return $result_sql->fetchAll();

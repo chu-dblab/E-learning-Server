@@ -75,7 +75,7 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	*/
 	function getTheUserArray($loggedCode){
 		global $FORM_USER;
-		$queryResult = $this->prepare("SELECT * FROM ".$this->table($FORM_USER)." WHERE `logged_code` = :loggedCode");
+		$queryResult = $this->prepare("SELECT * FROM ".$this->table($FORM_USER)." WHERE `ULogged_code` = :loggedCode");
 		$queryResult->bindParam(':loggedCode',$loggedCode);
 		$queryResult->execute();
 		
@@ -99,7 +99,7 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	*/
 	function setTheUserArray($loggedCode, $colName, $content){
 		global $FORM_USER;
-		$queryResult = $this->prepare("UPDATE ".$this->table($FORM_USER)." SET $colName = :content WHERE `logged_code` = :loggedCode");
+		$queryResult = $this->prepare("UPDATE ".$this->table($FORM_USER)." SET $colName = :content WHERE `ULogged_code` = :loggedCode");
 		$queryResult->bindParam(':content',$content);
 		$queryResult->bindParam(':loggedCode',$loggedCode);
 		$queryResult->execute();

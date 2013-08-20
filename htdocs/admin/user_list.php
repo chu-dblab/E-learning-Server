@@ -62,13 +62,13 @@
 			echo "<thead>";
 			echo "<tr>";
 				//第1行: 欄位名稱
-				echo "<th scpoe='col'>ID</th>";
 				echo "<th scpoe='col'>帳號</th>";
 				echo "<th scpoe='col'>群組</th>";
 				echo "<th scpoe='col'>登入碼</th>";
 				echo "<th scpoe='col'>登入時間</th>";
 				echo "<th scpoe='col'>建立時間</th>";
 				echo "<th scpoe='col'>啟用</th>";
+				echo "<th scpoe='col'>開始學習時間</th>";
 				echo "<th scpoe='col'>真實姓名</th>";
 				echo "<th scpoe='col'>暱稱</th>";
 				echo "<th scpoe='col'>Email</th>";
@@ -77,16 +77,16 @@
 			echo "<tbody>";
 				foreach ($user_DBTable as $userKey => $thisUserArray) {
 					echo "<tr>";
-						echo "<th scrope='row'>".$thisUserArray['ID']."</th>";
-						echo "<td>".$thisUserArray['username']."</td>";
-						echo "<td>".$thisUserArray['user_group']."</td>";
-						echo "<td>".$thisUserArray['logged_code']."</td>";
-						echo "<td>".$thisUserArray['last_login_time']."</td>";
-						echo "<td>".$thisUserArray['create_time']."</td>";
-						echo "<td>".$thisUserArray['isActive']."</td>";
-						echo "<td>".$thisUserArray['realname']."</td>";
-						echo "<td>".$thisUserArray['nickname']."</td>";
-						echo "<td>".$thisUserArray['email']."</td>";
+						echo "<th scrope='row'>".$thisUserArray['UID']."</th>";
+						echo "<td>".$thisUserArray['GID']."</td>";
+						echo "<td>".$thisUserArray['ULogged_code']."</td>";
+						echo "<td>".$thisUserArray['ULast_In_Time']."</td>";
+						echo "<td>".$thisUserArray['UBuild_Time']."</td>";
+						echo "<td>".$thisUserArray['UEnabled']."</td>";
+						echo "<td>".$thisUserArray['In_Learn_Time']."</td>";
+						echo "<td>".$thisUserArray['UReal_Name']."</td>";
+						echo "<td>".$thisUserArray['UNickname']."</td>";
+						echo "<td>".$thisUserArray['UEmail']."</td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";

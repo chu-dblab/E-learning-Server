@@ -46,7 +46,7 @@ function userGroup_create($name, $display_name, $adminPermissions){
 		$db = new Database();
 		
 		//紀錄使用者帳號進資料庫
-		$db_userGroup_query = $db->prepare("INSERT INTO `".$db->table($FORM_USER_GROUP)."` (`name`, `display_name`, `admin`) VALUES (:groupName, :display_name , :adminPermissions )");
+		$db_userGroup_query = $db->prepare("INSERT INTO `".$db->table($FORM_USER_GROUP)."` (`GID`, `GName`, `Gauth_admin`) VALUES (:groupName, :display_name , :adminPermissions )");
 		$db_userGroup_query->bindParam(":groupName",$name);
 		$db_userGroup_query->bindParam(":display_name",$display_name);
 		$db_userGroup_query->bindParam(":adminPermissions",$adminPermissions);
@@ -85,7 +85,7 @@ function userGroup_remove($name){
 	$db = new Database();
 	
 	//查詢此群組是否有使用者
-	$db_user_query = $db->prepare("SELECT `username` FROM ".$db->table($FORM_USER)." WHERE `user_group` = :groupName");
+	$db_user_query = $db->prepare("SELECT `UID` FROM ".$db->table($FORM_USER)." WHERE `GID` = :groupName");
 	$db_user_query->bindParam(":groupName",$name);
 	$db_user_query->execute();
 	
@@ -100,7 +100,7 @@ function userGroup_remove($name){
 	//都沒有問題
 	else{
 		//刪除群組
-		$db_userGroup_query = $db->prepare("DELETE FROM `".$db->table($FORM_USER_GROUP)."` WHERE `name` = :groupName");
+		$db_userGroup_query = $db->prepare("DELETE FROM `".$db->table($FORM_USER_GROUP)."` WHERE `GID` = :groupName");
 		$db_userGroup_query->bindParam(":groupName",$name);
 		$db_userGroup_query->execute();
 		
@@ -133,12 +133,12 @@ function userGroup_getList(){
 	$db = new Database();
 	
 	//資料庫查詢
-	$db_userGroup_query = $db->query("SELECT distinct(`name`) `name`, `display_name` FROM ".$db->table($FORM_USER_GROUP));
+	$db_userGroup_query = $db->query("SELECT distinct(`GID`) `GID`, `GName` FROM ".$db->table($FORM_USER_GROUP));
 	
 	//若有找到，將列表以陣列傳回
 	//$result[內部群組名稱] = 使用者看得到的群組名稱
 	while( $db_thisGroupArray = $db_userGroup_query->fetch() ) {
-		$result[ $db_thisGroupArray['name'] ] = $db_thisGroupArray['display_name'];
+		$result[ $db_thisGroupArray['GID'] ] = $db_thisGroupArray['GName'];
 	}
 	return $result;
 }
@@ -163,7 +163,7 @@ function userGroup_ishave($name){
 	$db = new Database();
 	
 	//資料庫查詢
-	$db_userGroup_query = $db->prepare("SELECT `name` FROM ".$db->table($FORM_USER_GROUP)." WHERE `name` = :groupName");
+	$db_userGroup_query = $db->prepare("SELECT `GID` FROM ".$db->table($FORM_USER_GROUP)." WHERE `GID` = :groupName");
 	$db_userGroup_query->bindParam(":groupName",$name);
 	$db_userGroup_query->execute();
 	
@@ -197,13 +197,13 @@ function userGroup_getDiaplayName($groupName){
 	$db = new Database();
 	
 	//資料庫查詢
-	$db_userGroup_query = $db->prepare("SELECT `name`, `display_name` FROM ".$db->table($FORM_USER_GROUP)." WHERE `name` = :groupName");
+	$db_userGroup_query = $db->prepare("SELECT `GID`, `GName` FROM ".$db->table($FORM_USER_GROUP)." WHERE `GID` = :groupName");
 	$db_userGroup_query->bindParam(":groupName",$groupName);
 	$db_userGroup_query->execute();
 	
 	//取得顯示名稱
 	if( $groupArray = $db_userGroup_query->fetch() ) {
-		return $groupArray['display_name'];
+		return $groupArray['GName'];
 	}
 	else {
 		return null;
@@ -230,10 +230,10 @@ function userGroup_queryAll(){
 	
 	//資料庫查詢
 	$db_userGroup_query = $db->query("
-		SELECT `groups`.`name`, `groups`.`display_name`, count(`users`.`user_group`) AS `in_user`, `groups`.`admin` 
+		SELECT `groups`.`GID`, `groups`.`GName`, count(`users`.`GID`) AS `in_user`, `groups`.`Gauth_admin` 
 		FROM `".$db->table($FORM_USER)."` AS `users` 
-		JOIN `".$db->table($FORM_USER_GROUP)."` AS `groups` ON `users`.`user_group` = `groups`.`name` 
-		GROUP BY `users`.`user_group`"
+		JOIN `".$db->table($FORM_USER_GROUP)."` AS `groups` ON `users`.`GID` = `groups`.`GID` 
+		GROUP BY `users`.`GID`"
 	);
 	
 	return $db_userGroup_query->fetchAll();
