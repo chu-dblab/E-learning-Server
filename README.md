@@ -33,9 +33,6 @@
         $FORM_PREFIX = "ce_";	//資料表的前綴字元
 
 
-請無視: <strike>執行install.php檔案，將以上述設定檔資料自動安裝資料庫</strike>
-    (目前尚未完成此功能，需手動建立資料庫、資料表)
-
 ## 本站採用的Framework
 ### 網頁前端（含後台管理介面）
 * Bootstrap Version 2.3.2
