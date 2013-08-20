@@ -66,10 +66,10 @@ CREATE TABLE `chu_edge` (
 -- 
 
 CREATE TABLE `chu_group` (
-  `GID` int(10) unsigned NOT NULL,
+  `GID` varchar(30) NOT NULL,
   `GName` varchar(15) NOT NULL,
   `GCompetence` varchar(10) NOT NULL,
-  PRIMARY KEY  (`GID`)
+  PRIMARY KEY (`GID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 
@@ -105,7 +105,7 @@ CREATE TABLE `chu_question` (
 
 CREATE TABLE `chu_recommend` (
   `TID` int(10) unsigned NOT NULL,
-  `UID` int(10) unsigned NOT NULL,
+  `UID` varchar(30) NOT NULL COMMENT 'S#',
   `Order` int(10) unsigned NOT NULL COMMENT '系統推薦標地順序',
   UNIQUE KEY `TID` (`TID`,`UID`),
   KEY `UID` (`UID`)
@@ -124,7 +124,7 @@ CREATE TABLE `chu_recommend` (
 
 CREATE TABLE `chu_study` (
   `TID` int(10) unsigned NOT NULL,
-  `UID` int(10) unsigned NOT NULL,
+  `UID` varchar(30) NOT NULL COMMENT 'S#',
   `QID` int(10) unsigned default NULL,
   `Answer` varchar(5) default NULL COMMENT '答題對錯 Y=對 N=錯',
   `Answer_Time` varchar(10) default NULL COMMENT '作答時間',
@@ -195,20 +195,18 @@ CREATE TABLE `chu_theme` (
 -- 
 
 CREATE TABLE `chu_user` (
-  `UID` int(10) unsigned NOT NULL COMMENT 'S#',
+  `UID` varchar(30) NOT NULL COMMENT 'S#',
+  `GID` varchar(30) NOT NULL COMMENT '使用者群組',
   `UPassword` varchar(30) NOT NULL COMMENT '密碼',
-  `UName` varchar(20) NOT NULL COMMENT '使用者名稱',
-  `UReal_Name` varchar(20) NOT NULL COMMENT '真實名稱',
-  `ULogged_no` varchar(40) default NULL,
-  `UAccount_no` varchar(20) NOT NULL COMMENT '帳號',
-  `ULast_In_Time` datetime default NULL,
-  `UNickname` varchar(20) default NULL COMMENT '使用者暱稱',
-  `UEmail` varchar(50) NOT NULL,
-  `UBuild_Time` datetime NOT NULL COMMENT '帳號建立時間',
-  `UEnabled` varchar(10) NOT NULL COMMENT '帳號啟用狀態',
-  `In_Learn_Time` datetime NOT NULL,
-  `GID` int(10) unsigned NOT NULL,
-  PRIMARY KEY  (`UID`),
+  `ULogged_code` varchar(32) DEFAULT NULL COMMENT '登入碼',
+  `ULast_In_Time` timestamp NULL DEFAULT NULL COMMENT '最後登入時間',
+  `UBuild_Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '帳號建立時間',
+  `UEnabled` tinyint(1) NOT NULL DEFAULT '1' COMMENT '帳號啟用狀態',
+  `In_Learn_Time` datetime NOT NULL COMMENT '開始學習時間',
+  `UReal_Name` varchar(20) DEFAULT NULL COMMENT '真實姓名',
+  `UNickname` varchar(20) DEFAULT NULL COMMENT '使用者暱稱',
+  `UEmail` varchar(50) DEFAULT NULL COMMENT '使用者email',
+  PRIMARY KEY (`UID`),
   KEY `GID` (`GID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
