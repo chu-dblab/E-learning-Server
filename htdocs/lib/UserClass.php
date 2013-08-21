@@ -312,6 +312,7 @@ class User {
 			$this->setQueryInfo("ULogged_code", NULL);
 			
 			$this->loggedCode = NULL;
+			return true;
 		}
 		return false;
 	 }

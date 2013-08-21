@@ -27,6 +27,14 @@
 	$ENCRYPT_MODE = 'MD5';
 
 /**
+ * 瀏覽器Cookies
+ * 
+*/	
+	//CookiesID的前綴字元
+	$COOKIES_PREFIX = "chu_";
+	//設定登入狀態的有效期限
+	$COOKIES_LOGIN_TIMEOUT = 3000;
+/**
  * 你的地區
 */
 	date_default_timezone_set('Asia/Taipei');	//設定時區

@@ -140,6 +140,7 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
  * @return	string	使用者登入碼
 			"NoActiveErr": 帳號未啟用
 			"PasswdErr": 密碼錯誤
+			"NoFound": 找不到存在的使用者
 			"DBErr": 資料庫寫入錯誤
  * 
  * @author	元兒～ <yuan817@moztw.org>
@@ -193,7 +194,10 @@ function user_login($userid, $userpasswd){
 			
 		}
 	}
-	
+	//若未找到使用者
+	else {
+		return "NoFound";
+	}
 }
 // ------------------------------------------------------------------------
 
