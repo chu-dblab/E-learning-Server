@@ -4,6 +4,7 @@
 */
 require_once("../../lib/include.php");
 require_once(DOCUMENT_ROOT."lib/user.php");
+require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 
 /**
  *
@@ -39,13 +40,9 @@ if($register_user_active) {
 $account_create_status = user_create($register_user_id, $register_user_password, $register_user_confirm_password, $register_user_group, $register_user_active, $register_user_realName, $register_user_nickName, $register_user_email);
 
 if($account_create_status == "Finish"){
-	$status_message = "<strong>建立成功！</strong>";
-	$status_message .= " '$register_user_id'已成功建立！！";
-	
-	//利用session傳回錯誤訊息
-	session_start();
-	$_SESSION["user_create_status"] = $account_create_status;
-	$_SESSION["user_create_status_message"] = $status_message;
+	$theAlert = new Alert("success", false, "<strong>建立成功！</strong>  '$register_user_id'已成功建立！！");
+	$theAlert->setInSession("user_create");
+
  	header("Location: ../user_list.php");
 }
 else{
@@ -63,9 +60,8 @@ else{
 			break;
 	}
 	
-	//利用session傳回錯誤訊息
-	session_start();
-	$_SESSION["user_create_status"] = $account_create_status;
-	$_SESSION["user_create_status_message"] = $status_message;
+	$theAlert = new Alert("error", false, $status_message);
+	$theAlert->setInSession("user_create");
+	
  	header("Location: ../user_create.php");
 }
