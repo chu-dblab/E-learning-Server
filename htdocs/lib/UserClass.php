@@ -224,6 +224,7 @@ class User {
 			return $this->isPasswordCorrect($inputPasswd, $ENCRYPT_MODE);
 		}
 	}
+	// ------------------------------------------------------------------------
 	
 	/**
 	 * 更改密碼
@@ -297,6 +298,19 @@ class User {
 		}
 	}
 	// ========================================================================
+	/**
+	 * 是否還在登入狀態
+	 *
+	 * @access	public
+	 * @return	bool	是否仍在登入狀態
+	 */
+	function isLogged() {
+		if($this->getQuery()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	/**
 	 * 登出

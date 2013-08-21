@@ -20,7 +20,7 @@ require_once(DOCUMENT_ROOT."lib/UserClass.php");
 			"DBErr": 資料庫寫入錯誤
  * 
  * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 3
+ * @since	Version 1
  *
 */
 function web_userLogin($userid, $userpasswd) {
@@ -34,9 +34,17 @@ function web_userLogin($userid, $userpasswd) {
 	}
 	return $loginCode;
 }
+// ------------------------------------------------------------------------
+
 /**
- *
- *
+ * web_userLogout
+ * 
+ * 登出使用者帳號
+ * 
+ * @access	public
+ * @return	bool	是否成功登出
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
 */
 function web_userLogout() {
 	global $COOKIES_PREFIX;
@@ -58,6 +66,34 @@ function web_userLogout() {
 	else {
 		return false;
 	}
-	
-	
+}
+
+// ========================================================================
+
+/**
+ * web_getLoggedUser
+ * 
+ * 取得目前登入的使用者物件
+ * 
+ * @access	public
+ * @return	object	使用者物件
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+*/
+function web_getLoggedUser() {
+	global $COOKIES_PREFIX;
+	if( isset($_COOKIE[$COOKIES_PREFIX."userLoginCode"]) ) {
+		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
+		
+		$theUser = new User($theUserLoginCode);
+		
+		if( $theUser->isLogged() ) {
+			return $theUser;
+		} else {
+			return null;
+		}
+		
+	} else {
+		return null;
+	}
 }
