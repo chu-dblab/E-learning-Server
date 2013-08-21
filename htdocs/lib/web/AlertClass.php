@@ -22,7 +22,11 @@ private $message_content;
  * 建構子
  *
  * @access	public
- * @param	string	登入碼
+ * @param	string	通知型態（warning, error, success, info）
+ * @param	bool	是否要顯示成一塊
+ * @param	string	通知內容
+ *
+ * 可不帶參數
 */
 function __construct(){
 	//若帶入3個參數
@@ -56,7 +60,7 @@ function getInSession($message_category){
 	//若session內有通知資料
 	if( isset($_SESSION["alert_".$message_category."_type"])
 		&& isset($_SESSION["alert_".$message_category."_isBlock"])
-		isset($_SESSION["alert_".$message_category."_content"]) 
+		&& isset($_SESSION["alert_".$message_category."_content"]) 
 	) {
 		//將session資料紀錄到此物件內的變數
 		$this->message_type = $_SESSION["alert_".$message_category."_type"];
@@ -112,7 +116,6 @@ function set($input_type, $input_isBlock, $input_content){
 * @access      public
 */
 function show(){
-	
 	if($this->message_type){
 		echo "<div class='alert";
 		switch($this->message_type){

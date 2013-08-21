@@ -13,38 +13,19 @@
 	*/
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
+	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 	require_once(DOCUMENT_ROOT."lib/userGroup.php");
+
 	
-	//讀取session資料
-	session_start();
-	if( isset($_SESSION["userGroup_create_status"]) ) {
-		$status_create =  $_SESSION["userGroup_create_status"];
-	}
-	if( isset($_SESSION["userGroup_create_status_message"]) ) {
-		$status_create_message =  $_SESSION["userGroup_create_status_message"];
-	}
-	unset($_SESSION["userGroup_create_status"]);
-	unset($_SESSION["userGroup_create_status_message"]);
+	//取得通知資料
+	$theAlert = new Alert();
+	$theAlert->getInSession("userGroup_create");
 	// ------------------------------------------------------------------------
 	
 	//取得上個頁面傳來的訊息
 	function show_status_notify(){
-		global $status_create, $status_create_message;
-		
-		if($status_create){
-			echo "<div class='alert";
-			switch($status_create){
-				case "Finish":
-					echo " alert-success";
-					break;
-			}
-			echo "'>";
-			
-			echo "<button type='button' class='close' data-dismiss='alert'>&times;</button>";
-			echo $status_create_message;
-			
-			echo "</div>";
-		}
+		global $theAlert;
+		$theAlert->show();
 	}
 	
 	//取得共有幾個使用者
