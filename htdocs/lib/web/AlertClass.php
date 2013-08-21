@@ -117,7 +117,7 @@ function set($input_type, $input_isBlock, $input_content){
 */
 function show(){
 	if($this->message_type){
-		echo "<div class='alert";
+		echo "<div class='alert fade in";
 		switch($this->message_type){
 			case "warning":
 				echo "";
@@ -142,6 +142,7 @@ function show(){
 		echo $this->message_content;
 		
 		echo "</div>";
+		
 	}
 }
 	
