@@ -16,6 +16,7 @@ require_once(DOCUMENT_ROOT."lib/UserClass.php");
  * @return	string	使用者登入碼
 			"NoActiveErr": 帳號未啟用
 			"PasswdErr": 密碼錯誤
+			"NoFound": 找不到存在的使用者
 			"DBErr": 資料庫寫入錯誤
  * 
  * @author	元兒～ <yuan817@moztw.org>
@@ -27,7 +28,7 @@ function web_userLogin($userid, $userpasswd) {
 	$loginCode = user_login($userid, $userpasswd);
 	
 	//當使用者登入成功的話
-	if( $loginCode!="NoActiveErr" && $loginCode!="PasswdErr" && $loginCode!="DBErr"){
+	if( $loginCode!="NoActiveErr" && $loginCode!="PasswdErr" && $loginCode!="DBErr" && $loginCode!="NoFound"){
 		//設定cookies到使用者瀏覽器
 		setcookie($COOKIES_PREFIX."userLoginCode", $loginCode, time() + $COOKIES_LOGIN_TIMEOUT);
 	}
@@ -38,12 +39,25 @@ function web_userLogin($userid, $userpasswd) {
  *
 */
 function web_userLogout() {
-	$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
+	global $COOKIES_PREFIX;
 	
-	$theUser = new User($theUserLoginCode);
+	if( isset($_COOKIE[$COOKIES_PREFIX."userLoginCode"]) ) {
+		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
+		
+		$theUser = new User($theUserLoginCode);
 	
-	if( $theUser->logout() ) {
-		setcookie($COOKIES_PREFIX."userLoginCode", "", time()-3600);
+		if( $result = $theUser->logout() ) {
+			setcookie($COOKIES_PREFIX."userLoginCode", "", time()-3600);
+			
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-	return $theUser;
+	else {
+		return false;
+	}
+	
+	
 }
