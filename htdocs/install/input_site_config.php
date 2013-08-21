@@ -75,6 +75,8 @@
 								<div class="controls">
 									<select name="inputEncryptMode" id="inputEncryptMode">
 										<option value="MD5">MD5</option>
+										<option value="SHA1">SHA1</option>
+										<option value="CRYPT">CRYPT</option>
 										<option value="">無</option>
 									</select>
 								</div>

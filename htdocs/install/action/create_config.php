@@ -31,7 +31,7 @@ $create_txt_content .= "\tdefine('SITE_URL','$inputSiteIndexUrl');\n";
 $create_txt_content .= "\tdefine('SITE_URL_ROOT','$inputSiteRootUrl');\n";
 $create_txt_content .= "\n";
 
-$create_txt_content .= "/**\n * 要用哪種加密方式\n * \n * 目前提供選項: MD5\n*/\n";
+$create_txt_content .= "/**\n * 要用哪種加密方式\n * \n * 目前提供選項: MD5, SHA1, CRYPT\n*/\n";
 $create_txt_content .= "\t\$ENCRYPT_MODE = '$inputEncryptMode';\n";
 $create_txt_content .= "\n";
 

@@ -139,7 +139,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."theme` (
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."user` (
   `UID` varchar(30) NOT NULL COMMENT 'S#',
   `GID` varchar(30) NOT NULL COMMENT '使用者群組',
-  `UPassword` varchar(30) NOT NULL COMMENT '密碼',
+  `UPassword` varchar(40) NOT NULL COMMENT '密碼',
   `ULogged_code` varchar(32) DEFAULT NULL COMMENT '登入碼',
   `ULast_In_Time` timestamp NULL DEFAULT NULL COMMENT '最後登入時間',
   `UBuild_Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '帳號建立時間',

@@ -82,6 +82,12 @@ function encryptText(){
 			case "MD5":
 				return md5($text);
 				break;
+			case "SHA1":
+				return sha1($text);
+				break;
+			case "CRYPT":
+				return crypt($text);
+				break;
 			default:
 				return $text;
 				break;
