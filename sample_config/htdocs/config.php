@@ -16,8 +16,8 @@
 
 	//網站網址
 	//Warning: 網址後面務必加上"/"
-	define('SITE_URL','http://chu-elearning/');             //網站首頁
-	define('SITE_URL_ROOT','http://chu-elearning/');        //本系統的根網址
+	define('SITE_URL','http://localhost/');             //網站首頁
+	define('SITE_URL_ROOT','http://localhost/');        //本系統的根網址
 
 /**
  * 要用哪種加密方式

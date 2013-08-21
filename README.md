@@ -20,52 +20,10 @@
 4. 安裝完後，為了增加安全性，請刪除`/htdocs/install/`整個資料夾。
 
 ### 手動安裝
-1. 請先把`/htdocs/` 整個複製到你的網頁空間
-2. 將內附的chu-elearn.sql匯入進你的資料庫
-3. 修改 /htdocs/config.php 檔案，依你的需求設定
-
-        <?php
-        /**
-        * 網站根目錄
-        */
-                define('DOCUMENT_ROOT',dirname(__FILE__).'/');
-
-        /**
-        * 網站資訊
-        */
-                //網站標題
-                define('SITE_NAME','無所不在學習導引系統');
-                //網站副標題
-                define('SITE_SUBNAME','');
-                //網站標題簡稱
-                define('SITE_NAME_REFERRED','無所不在學習導引系統');
-
-                //網站網址
-                //Warning: 網址後面務必加上"/"
-                define('SITE_URL','http://chu-elearning/');             //網站首頁
-                define('SITE_URL_ROOT','http://chu-elearning/');        //本系統的根網址
-
-        /**
-        * 要用哪種加密方式
-        * 
-        * 目前提供選項: MD5
-        */
-                $ENCRYPT_MODE = 'MD5';
-
-        /**
-        * 你的地區
-        */
-                date_default_timezone_set('Asia/Taipei');       //設定時區
-
-            
-4. 建立 /htdocs/config/db_config.php 檔案，裡面填入
-
-        <?php
-        $DB_SERV = "localhost";    //資料庫伺服器名稱
-        $DB_USER = "user";    //資料庫使用者名稱
-        $DB_PASS = "password";    //資料庫使用者密碼
-        $DB_NAME = "chu-elearn";    //指定要使用哪個資料庫
-        $FORM_PREFIX = "ce_";	//資料表的前綴字元
+1. 請先把 `/htdocs/` 整個複製到你的網頁空間
+2. 將內附的 `chu-elearn.sql` 匯入進你的資料庫
+3. 將 `/sample_config/htdocs/config.php` 檔案挪到 `/htdocs/config.php` ，並依你的需求修改。
+4. 將 `/sample_config/htdocs/config/db_config.php` 檔案挪到 `/htdocs/config/db_config.php` 檔案，並依你的資料庫狀況修改。
 
 
 ## 本站採用的Framework
@@ -74,15 +32,15 @@
 * JQuery v1.10.2
 
 
-
 ## 修改紀錄
 * 2013.8.21
     * 網頁部份的模組化通知類別
     * 改變資料庫密碼長度（改為40），以及新增SHA1, CRYPT加密方式
+	* 修正install在Windows下的編碼問題，並將config.php設定檔挪出
 * 2013.8.20
     * 後端伺服器的所有資料表及欄位名稱都加上"chu"字首，新稱"使用者實體"裡的屬性欄位
     * 後端伺服器的所有欄位名稱都去掉"chu"字首（不然會增加操作SQL的麻煩）
-    * 後端伺服器資料庫的使用者按照當天討論的結果修改，並將所有對應的函式庫、網頁整合
+    * **後端伺服器資料庫的使用者按照當天討論的結果修改，並將所有對應的函式庫、網頁整合**
 * 2013.8.18
     * 使用者群組清單
 * 2013.8.14

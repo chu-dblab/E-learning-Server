@@ -35,6 +35,8 @@ echo "db_config text created";
 */
 //連結資料庫
 $db = mysql_connect($inputSQLHost,$inputSQLUser,$inputSQLPass) or die(mysql_error());
+//設定編碼成UTF-8
+mysql_query("SET NAMES UTF8") or die(mysql_error());
 //建立資料庫
 mysql_query("CREATE DATABASE IF NOT EXISTS `$inputSQLDBName` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci") or die(mysql_error());
 //指定這個資料庫

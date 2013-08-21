@@ -1,4 +1,5 @@
-# 資料庫帳密設定檔
+# 設定檔
+htdocs/config.php
 htdocs/config/db_config.php
 
 # 建立測試用的檔案
