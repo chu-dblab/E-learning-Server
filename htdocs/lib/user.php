@@ -236,6 +236,38 @@ function user_logout($userid){
 // ------------------------------------------------------------------------ 
 
 /**
+ * user_getList
+ *
+ * 取得使用者名單
+ *
+ * @access	public
+ * @param	string	以何種內容傳回
+ * @param	string	以何種方式排序
+ * @return	array	索引: 使用者ID; 值: 真實名字: 暱稱
+ * 
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+*/
+function user_getList(){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = new Database();
+	
+	//取得所有使用者
+	$result_sql = $db->query( "SELECT `UID`, `UReal_Name`, `UNickname` FROM ".$db->table($FORM_USER) );
+		
+	//$result[內部群組名稱] = 使用者看得到的群組名稱
+	while( $db_thisArray = $result_sql->fetch() ) {
+		$output_realName = $db_thisArray['UReal_Name'];
+		$output_nickName = $db_thisArray['UNickname'];
+		$result[ $db_thisArray['UID'] ] = $output_realName."- ".$output_nickName;
+	}
+	return $result;
+}
+// ------------------------------------------------------------------------
+
+/**
  * user_queryAll
  *
  * 查詢使用者帳號
