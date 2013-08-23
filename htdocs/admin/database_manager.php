@@ -39,8 +39,23 @@
 				
 				<div class="span9">
 				
-					<!-- 右側內容區 -->
+					<header>
+						<h1>專案資料庫管理</h1>
+						<h2></h2>
+					</header>
 					
+					<section>
+						<h2>更改資料庫名稱</h2>
+					</section>
+					
+					<section>
+						<h2>更改資料表的前綴字元</h2>
+					</section>
+					
+					<section>
+						<h2>重設資料庫內容</h2>
+					</section>
+
 
 				</div><!--/span-->
 			</div><!--/row-->
