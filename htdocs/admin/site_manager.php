@@ -1,7 +1,7 @@
 ﻿<!--
-  database_manager.php
+  site_manager.php
    
-   管理介面總攬
+   本站管理
    
    Copyright 2013 元兒～ <yuan@Yuan-NB>
    
@@ -19,7 +19,7 @@
 <html lang="zh-tw">
 	<head>
 		<meta charset="utf-8" />
-		<title>後台管理總覽 -<?php echo SITE_NAME_REFERRED ?></title>
+		<title>本站管理 -<?php echo SITE_NAME_REFERRED ?></title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,21 +40,72 @@
 				<div class="span9">
 				
 					<header>
-						<h1>專案資料庫管理</h1>
+						<h1>本站管理</h1>
 						<h2></h2>
 					</header>
-					
-					<section>
-						<h2>更改資料庫名稱</h2>
+					<section id="database-manager">
+						<header>
+							<h2>本站</h2>
+						</header>
+						<section>
+							<h3>網站名稱</h3>
+							<form>
+								<div class="control-group">
+									<label class="control-label" for="inputSiteName">網站名稱: </label>
+									<div class="controls">
+										<input type="text" name="inputSiteName" required="required" id="inputSiteName" placeholder="完整的網站名稱">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="inputSiteSubName">網站副標題: </label>
+									<div class="controls">
+										<input type="text" name="inputSiteSubName" id="inputSiteSubName" placeholder="副標題">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="inputSiteReferred">網站簡稱: </label>
+									<div class="controls">
+										<input type="text" name="inputSiteReferred" id="inputSiteReferred" placeholder="簡稱">
+									</div>
+								</div>
+							</form>
+						</section>
+						<section>
+							<h3>更改預設加密方式</h3>
+							<form>
+								<div class="control-group">
+									<label class="control-label" for="inputEncryptMode">密碼加密方式: </label>
+									<div class="controls">
+										<select name="inputEncryptMode" id="inputEncryptMode">
+											<option value="MD5">MD5</option>
+											<option value="SHA1">SHA1</option>
+											<option value="CRYPT">CRYPT</option>
+											<option value="">無</option>
+										</select>
+									</div>
+								</div>
+							</form>
+						</section>
 					</section>
 					
-					<section>
-						<h2>更改資料表的前綴字元</h2>
+					<section id="database-manager">
+						<header>
+							<h2>資料庫管理</h2>
+						</header>
+						<section>
+							<h3>更改資料庫名稱</h3>
+						</section>
+						
+						<section>
+							<h3>更改資料表的前綴字元</h3>
+						</section>
+						
+						<section>
+							<h3>重設資料庫內容</h3>
+							<!-- TODO 要建立一個管理者帳號 -->
+						</section>
 					</section>
 					
-					<section>
-						<h2>重設資料庫內容</h2>
-					</section>
 
 
 				</div><!--/span-->
