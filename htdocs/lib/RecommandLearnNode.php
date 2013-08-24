@@ -19,7 +19,7 @@
 		 * 參數: $point_number, 學習點的編號
 		 * 回傳值： NONE
 		 */
-		public function addPeople($point_number
+		public function addPeople($point_number)
 		{
 		    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
 			$query->bindParam(":number",$point_number);
