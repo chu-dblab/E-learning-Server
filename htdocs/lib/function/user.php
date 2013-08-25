@@ -12,8 +12,8 @@
  * @filesource
 */
 
-require_once(DOCUMENT_ROOT."lib/password.php");
-require_once(DOCUMENT_ROOT."lib/userGroup.php");
+require_once(DOCUMENT_ROOT."lib/function/password.php");
+require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
 require_once(DOCUMENT_ROOT."config/db_table_config.php");
 
 // ========================================================================
