@@ -2,7 +2,7 @@
 	/*
 	 * Android Phone can access this file to get JSON format message.
 	 */
-	require_once(DOCUMENT_ROOT."/lib/user.php");
+	require_once(DOCUMENT_ROOT."/lib/function/user.php");
 	$ID = $_POST[];
 	$PWD = $_POST[];
 	$login_code = array(code=>user_login($ID,$PWD));

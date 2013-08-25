@@ -2,9 +2,9 @@
 /**
  * 前置作業
 */
-require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
-require_once(DOCUMENT_ROOT."lib/password.php");
-require_once(DOCUMENT_ROOT."lib/userGroup.php");
+require_once(DOCUMENT_ROOT."lib/class/Database.php");
+require_once(DOCUMENT_ROOT."lib/function/password.php");
+require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
 
  /**
  * User
