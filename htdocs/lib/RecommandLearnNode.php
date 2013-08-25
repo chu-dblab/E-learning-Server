@@ -8,6 +8,7 @@
 	class RecommandLearnNode
 	{
 		private $conDB;
+		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
 		public function __construct()
 		{
 		  $conDB = new Database();
