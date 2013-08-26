@@ -1,10 +1,10 @@
 <?php
  	require_once("lib/include.php");
-    require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+        require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	/*
 	 *  類別名稱：推薦學習點
-     */
+         */
 	class RecommandLearnNode
 	{
 		private $conDB;
@@ -73,10 +73,10 @@
 		}
 		
 		/*
-		 * 方法名稱：DetechteIsAllLearnNode
+		 * 方法名稱：DetectAllLearnNodeFull
 		 * 說明：偵測所有的學習點是不是已經達到限制人數
 		 */
-		public function DetechteIsAllLearnNode()
+		public function DetectAllLearnNodeFull()
 		{
 			
 		}
