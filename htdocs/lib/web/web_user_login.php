@@ -2,8 +2,8 @@
 /**
  * 前置作業
 */
-require_once(DOCUMENT_ROOT."lib/user.php");
-require_once(DOCUMENT_ROOT."lib/UserClass.php");
+require_once(DOCUMENT_ROOT."lib/function/user.php");
+require_once(DOCUMENT_ROOT."lib/class/User.php");
 
 /**
  * web_userLogin

@@ -14,7 +14,7 @@
 ### 本專案的連結語法
     //請先引入需要的函式庫
     require_once("lib/include.php");
-    require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+    require_once(DOCUMENT_ROOT."lib/class/Database.php");
     
     //* 資料庫連結
     $db_connect = new Database();

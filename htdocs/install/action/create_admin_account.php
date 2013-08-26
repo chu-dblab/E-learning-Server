@@ -9,6 +9,6 @@ session_start();
 	
 
 require_once("../../lib/include.php");
-require_once(DOCUMENT_ROOT."lib/user.php");
+require_once(DOCUMENT_ROOT."lib/function/user.php");
 	
 user_create($inputSiteAdminUser, $inputSiteAdminPass, $inputSiteAdminPass, "admin", true, $inputSiteAdminUserRealName, $inputSiteAdminUserNickName, $inputSiteAdminUserEmail);

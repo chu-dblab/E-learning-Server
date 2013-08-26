@@ -12,9 +12,9 @@
  * @filesource
 */
 
-require_once(DOCUMENT_ROOT."lib/user.php");
+require_once(DOCUMENT_ROOT."lib/function/user.php");
 require_once(DOCUMENT_ROOT."config/db_table_config.php");
-require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+require_once(DOCUMENT_ROOT."lib/class/Database.php");
 
 // ========================================================================
 

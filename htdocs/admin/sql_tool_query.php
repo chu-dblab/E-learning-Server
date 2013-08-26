@@ -15,7 +15,7 @@
 	*/
 	require_once("../lib/include.php");
 	//require_once(DOCUMENT_ROOT."lib/sql.php");
-	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+	require_once(DOCUMENT_ROOT."lib/class/Database.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	
 	//$sql_query_input = "SELECT * FROM ce_users";
