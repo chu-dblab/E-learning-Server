@@ -38,72 +38,151 @@
 				</div><!--/span-->
 				
 				<div class="span9">
-				
-					<header>
-						<h1>本站管理</h1>
-						<h2></h2>
-					</header>
-					<section id="database-manager">
+
+					<section id="site-manager">
 						<header>
-							<h2>本站</h2>
+							<h2>本站管理</h2>
 						</header>
-						<section>
-							<h3>網站名稱</h3>
-							<form>
-								<div class="control-group">
-									<label class="control-label" for="inputSiteName">網站名稱: </label>
-									<div class="controls">
-										<input type="text" name="inputSiteName" required="required" id="inputSiteName" placeholder="完整的網站名稱">
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="inputSiteSubName">網站副標題: </label>
-									<div class="controls">
-										<input type="text" name="inputSiteSubName" id="inputSiteSubName" placeholder="副標題">
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="inputSiteReferred">網站簡稱: </label>
-									<div class="controls">
-										<input type="text" name="inputSiteReferred" id="inputSiteReferred" placeholder="簡稱">
-									</div>
-								</div>
-							</form>
-						</section>
-						<section>
-							<h3>更改預設加密方式</h3>
-							<form>
-								<div class="control-group">
-									<label class="control-label" for="inputEncryptMode">密碼加密方式: </label>
-									<div class="controls">
-										<select name="inputEncryptMode" id="inputEncryptMode">
-											<option value="MD5">MD5</option>
-											<option value="SHA1">SHA1</option>
-											<option value="CRYPT">CRYPT</option>
-											<option value="">無</option>
-										</select>
-									</div>
-								</div>
-							</form>
-						</section>
+						<div class="row-fluid">
+							<div class="span6">
+								<section>
+									<h3>網站名稱</h3>
+									<form>
+										<div class="control-group">
+											<label class="control-label" for="inputSiteName">網站名稱: </label>
+											<div class="controls">
+												<input type="text" name="inputSiteName" required="required" id="inputSiteName" placeholder="完整的網站名稱">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="inputSiteSubName">網站副標題: </label>
+											<div class="controls">
+												<input type="text" name="inputSiteSubName" id="inputSiteSubName" placeholder="副標題">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="inputSiteReferred">網站簡稱: </label>
+											<div class="controls">
+												<input type="text" name="inputSiteReferred" id="inputSiteReferred" placeholder="簡稱">
+											</div>
+										</div>
+										<button type="submit" class="btn btn-success">更改</button>
+									</form>
+								</section>
+							</div><!--/span-->
+							
+							<div class="span6">
+								<section>
+									<h3>更改預設加密方式</h3>
+									<form>
+										<div class="input-append">
+											<select name="inputEncryptMode" id="inputEncryptMode">
+												<option value="MD5">MD5</option>
+												<option value="SHA1">SHA1</option>
+												<option value="CRYPT">CRYPT</option>
+												<option value="">無</option>
+											</select>
+											<button type="submit" class="btn btn-success">更改</button>
+										</div>
+									</form>
+								</section>
+							</div><!--/span-->
+							
+							<div class="span6">
+								<section>
+									<h3>Cookies設定</h3>
+									<form>
+										<div class="control-group">
+											<label class="control-label" for="inputCookiesPrefix">前綴字元: </label>
+											<div class="controls">
+												<input type="text" name="inputCookiesPrefix" id="inputCookiesPrefix" placeholder="chu_">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="inputCookiesUserExpired">使用者登入期限: </label>
+											<div class="controls">
+												<input type="number" required="required" name="inputCookiesUserExpired" id="inputCookiesUserExpired" value="86400" placeholder="秒為單位">
+											</div>
+										</div>
+										<button type="submit" class="btn btn-success">更改</button>
+									</form>
+								</section>
+							</div><!--/span-->
+						</div><!--/row-->
 					</section>
 					
 					<section id="database-manager">
 						<header>
 							<h2>資料庫管理</h2>
 						</header>
-						<section>
-							<h3>更改資料庫名稱</h3>
-						</section>
+						<div class="row-fluid">
+							<div class="span6">
+								<section>
+									<h3>更改資料庫名稱</h3>
+									<form>
+										<div class="input-append">
+											<input type="text" required="required" name="inputSqlName" id="inputSqlName">
+											<button type="submit" class="btn btn-success">更改</button>
+										</div>
+									</form>
+								</section>
+							</div><!--/span-->
+							
+							<div class="span6">
+								<section>
+									<h3>更改資料表的前綴字元</h3>
+									<form>
+										<div class="input-append">
+											<input type="text" required="required" name="inputSqlPrefix" id="inputSqlPrefix">
+											<button type="submit" class="btn btn-success">更改</button>
+										</div>
+									</form>
+								</section>
+							</div><!--/span-->
+						</div><!--/row-->
 						
-						<section>
-							<h3>更改資料表的前綴字元</h3>
-						</section>
-						
-						<section>
-							<h3>重設資料庫內容</h3>
-							<!-- TODO 要建立一個管理者帳號 -->
-						</section>
+						<div class="row-fluid">
+							<div class="span6">
+								<section>
+									<h3>重設資料庫內容</h3>
+									<p class="text-warning"><strong>警告！</strong>執行此動作，將會刪除所有的資料！！</p>
+									<form>
+										<p class="muted">含所有的使用者帳號將清除，請建立一個管理者帳號</p>
+										<div class="control-group">
+											<label class="control-label" for="inputSiteAdminUser">管理者帳號: </label>
+											<div class="controls">
+												<input type="text" name="inputSiteAdminUser" id="inputSiteAdminUser" placeholder="帳號名稱" value="root" required="required">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="inputSiteAdminPass">管理者密碼: </label>
+											<div class="controls">
+												<input type="password" name="inputSiteAdminPass" id="inputSiteAdminPass" placeholder="請輸入密碼" required="required" oninput="checkPasswords()">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="inputSiteAdminRepPass">管理者確認密碼: </label>
+											<div class="controls">
+												<input type="password" name="inputSiteAdminRepPass" id="inputSiteAdminRepPass" placeholder="確認密碼" required="required" oninput="checkPasswords()">
+											</div>
+										</div>
+										<script>
+											function checkPasswords() {
+												var user_password = document.getElementById('inputSiteAdminPass');
+												var user_confirm_password = document.getElementById('inputSiteAdminRepPass');
+												if (user_password.value != user_confirm_password.value) {
+													user_confirm_password.setCustomValidity('您這兩次輸入的密碼不同，請再次確認！');
+												}
+												else {
+													user_confirm_password.setCustomValidity('');
+												}
+											}
+										</script>
+										<button type="submit" class="btn btn-danger">重設</button>
+									</form>
+								</section>
+							</div><!--/span-->
+						</div><!--/row-->
 					</section>
 					
 

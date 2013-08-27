@@ -16,5 +16,5 @@
 		
 		<li class="nav-header">系統設定</li>
 		<li class="<?php getCurrentActiveClass('sql_tool_query.php') ?>"><a href="<?php echo SITE_URL_ROOT ?>admin/sql_tool_query.php">SQL查詢工具</a></li>
-		<li class="<?php getCurrentActiveClass('') ?>"><a href="#">Link</a></li>
+		<li class="<?php getCurrentActiveClass('site_manager.php') ?>"><a href="<?php echo SITE_URL_ROOT ?>admin/site_manager.php">網站管理</a></li>
 		<li class="<?php getCurrentActiveClass('') ?>"><a href="#">Link</a></li> 
