@@ -4,6 +4,9 @@
 	*/
 	require_once("../../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
+	
+	//更新網站
+	$output = shell_exec("git pull origin publish");
 ?>
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -59,6 +62,8 @@
 				<h2 class="form-signin-heading">網站更新中</h2>
 				
 				<p>已啟動網站更新，約半分鐘後即可上去看看</p>
+				
+				<pre><?php echo $output ?></pre>
 				
 				<a href="<?php echo SITE_URL ?>" class="btn btn-large btn-primary">回首頁</a>
 			</form>
