@@ -1,8 +1,6 @@
 <?php
 function updateSiteOnGit() {
-	$output = shell_exec("git pull origin publish");
-	
- 	echo $output;	//DEBUG
+	shell_exec("git pull origin publish");
 }
 
 $action = $_GET["action"];
