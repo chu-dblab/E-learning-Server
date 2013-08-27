@@ -130,15 +130,15 @@ CREATE TABLE IF NOT EXISTS `chu_target` (
   `TName` varchar(15) NOT NULL,
   `TLearn_Time` int(10) unsigned NOT NULL,
   `MapID` int(10) unsigned NOT NULL,
-  `Map_Url` varchar(50) NOT NULL,
+  `Map_Url` varchar(150) NOT NULL,
   `FloorName` varchar(50) NOT NULL,
   `BlockName` varchar(50) NOT NULL,
   `BlockMap` varchar(50) NOT NULL,
   `CourseName` varchar(50) NOT NULL,
   `MaterialID` int(10) unsigned NOT NULL,
-  `Material_Url` varchar(50) NOT NULL,
-  `PLj` int(11) unsigned NOT NULL COMMENT '學習標的人數限制',
-  `Mj` int(11) unsigned DEFAULT NULL COMMENT '目前人數',
+  `Material_Url` varchar(150) NOT NULL,
+  `PLj` int(200) unsigned NOT NULL COMMENT '學習標的人數限制',
+  `Mj` int(200) unsigned DEFAULT NULL COMMENT '目前人數',
   PRIMARY KEY (`TID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
