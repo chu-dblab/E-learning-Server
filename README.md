@@ -33,6 +33,9 @@
 
 
 ## 修改紀錄
+* 2013.8.27
+    * add 更改使用者至某使用者群組
+    * lib/function/user.php 函式庫再細分成user_admin.php
 * 2013.8.26
     * (規劃調整) **將htdoc/lib/ 裡的所有檔案，再次細分成function, class這兩個子資料夾**
 * 2013.8.21

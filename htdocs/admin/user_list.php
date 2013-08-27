@@ -14,6 +14,7 @@
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/function/user.php");
+	require_once(DOCUMENT_ROOT."lib/function/user_admin.php");
 	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 	
 	//取得通知資料

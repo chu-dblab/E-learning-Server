@@ -311,6 +311,45 @@ class User {
 			return false;
 		}
 	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 是否擁有此權限
+	 *
+	 * @access	public
+	 * @param	string	權限名稱
+	 * @return	bool	是否擁有
+	 */
+	 function havePermission($permissionName) {
+		global $FORM_USER,$FORM_USER_GROUP;
+		
+		//將使用者的選擇轉為資料表的欄位名稱
+		switch($permissionName){
+			case "admin":
+				$db_auth = "Gauth_admin";
+				break;
+		}
+		
+		//對此使用者進行權限查詢
+		$db = new Database();
+		$queryResult = $db->prepare("SELECT `ugroup`.`$db_auth` 
+			FROM `".$db->table($FORM_USER)."` AS `user` 
+			JOIN `".$db->table($FORM_USER_GROUP)."` AS `ugroup` ON `user`.`GID` = `ugroup`.`GID` 
+			WHERE `ULogged_code` = :loggedCode"
+		);
+		$queryResult->bindParam(':loggedCode',$this->loggedCode);
+		$queryResult->execute();
+		
+		$result = $queryResult->fetch(PDO::FETCH_NUM);
+		if($result[0] == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	 }
+	 
+	// ------------------------------------------------------------------------
 	
 	/**
 	 * 登出
