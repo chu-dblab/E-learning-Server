@@ -69,6 +69,12 @@
 										<button type="submit" class="btn btn-success">更改</button>
 									</form>
 								</section>
+								
+								<section>
+									<h3>網站更新</h3>
+									<p>將會在伺服器下<code>git pull origin publish</code></p>
+									<a href="action/update_site_on_git.php" class="btn btn-warning">更新</a>
+								</section>
 							</div><!--/span-->
 							
 							<div class="span6">
@@ -86,9 +92,7 @@
 										</div>
 									</form>
 								</section>
-							</div><!--/span-->
-							
-							<div class="span6">
+								
 								<section>
 									<h3>Cookies設定</h3>
 									<form>
@@ -110,6 +114,8 @@
 							</div><!--/span-->
 						</div><!--/row-->
 					</section>
+					
+					<hr />
 					
 					<section id="database-manager">
 						<header>

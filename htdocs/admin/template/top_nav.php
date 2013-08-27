@@ -1,7 +1,3 @@
-<?php
-require_once("../lib/include.php");
-?>
-
 <!-- 最上方導覽列 -->
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
