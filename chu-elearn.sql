@@ -80,7 +80,7 @@ INSERT INTO `chu_group` (`GID`, `GName`, `Gauth_admin`, `GCompetence`) VALUES
 CREATE TABLE IF NOT EXISTS `chu_question` (
   `QID` int(10) unsigned NOT NULL,
   `QA` varchar(10) NOT NULL,
-  `Q_Url` varchar(50) NOT NULL,
+  `Q_Url` varchar(150) NOT NULL,
   `TID` int(10) unsigned NOT NULL,
   PRIMARY KEY (`QID`),
   UNIQUE KEY `TID` (`TID`)
