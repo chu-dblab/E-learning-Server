@@ -108,6 +108,14 @@
 									</form>
 								</section>
 							</div><!--/span-->
+							
+							<div class="span6">
+								<section>
+									<h3>網站更新</h3>
+									<p>將會在伺服器下<code>git pull origin publish</code></p>
+									<a href="action/site_manager_action.php?action=siteupdate" class="btn btn-warning">更新</a>
+								</section>
+							</div><!--/span-->
 						</div><!--/row-->
 					</section>
 					
