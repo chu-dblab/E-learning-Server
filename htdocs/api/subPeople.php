@@ -3,6 +3,7 @@
     require_once(DOCUMENT_ROOT."/lib/class/RecommandLearnNode.php");
     
     $subpeople = new RecommandLearnNode();
-    $num = $_POST[""];
+    $num = $_POST["numberOfPeople"];
     $subpeople->subPeople($num);
 ?>
+
