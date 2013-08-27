@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `chu_question` (
 CREATE TABLE IF NOT EXISTS `chu_recommend` (
   `TID` int(10) unsigned NOT NULL,
   `UID` varchar(30) NOT NULL COMMENT 'S#',
-  `Order` int(200) unsigned NOT NULL COMMENT '系統推薦標地順序',
+  `Order` int(50) unsigned NOT NULL COMMENT '系統推薦標地順序',
   UNIQUE KEY `TID` (`TID`,`UID`),
   KEY `UID` (`UID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
