@@ -1,6 +1,6 @@
 <?php
- 	require_once("lib/include.php");
-        require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+ 	require_once("../lib/include.php");
+    require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	/*
 	 *  類別名稱：推薦學習點
@@ -52,15 +52,24 @@
 			$result = $conDB->prepare("SELECT Mj FROM ".$conDB->table("target")." WHERE TID = :number AND Mj = 0");
 			$result->bindParam(":number",$point_number);
 			$result->excute();
+			if($result != 0) return true;
+			else return false;
 		}
 		
 		/*
 		 * 方法名稱：getLearningPath
 		 * 說明：取得學習路徑(包含權重值)
+		 * 參數：$point_number	學習點的編號
+		 * 		 $userID	使用者編號
+		 * 回傳值：推薦學習之標的編號
 		 */
-		public function getLearningPath()
+		public function getLearningPath($point_number,$userID)
 		{
-			
+			$result = $conDB->prepare("SELECE DISTINCT ".$conDB->table("edge").".Ti ".$conDB->table("edge").".Tj ".$conDB->table("edge").".Distance"
+			."FROM edge recommand WHERE "$conDB->table("edge").".Ti = :$point_number AND recommand.SID = :userID");
+			$result->bindParam(":point_number",$point_number);
+			$result->bindParam(":userID",$userID);
+			$result->execute();
 		}
 		
 		/*
@@ -75,6 +84,8 @@
 		/*
 		 * 方法名稱：DetectAllLearnNodeFull
 		 * 說明：偵測所有的學習點是不是已經達到限制人數
+		 * 參數：NONE
+		 * 回傳值：true/false
 		 */
 		public function DetectAllLearnNodeFull()
 		{
