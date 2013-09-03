@@ -39,7 +39,7 @@
 		global $userGroup_DBTable;
 		if( userGroupsTotal() > 0 ){	//若已有1個以上的使用者
 			//建立表格
-			echo "<table class='allUsers_table table table-striped'>";
+			echo "<table id='allUserGroups_table' class='allUserGroups_table table table-striped'>";
 			echo "<thead>";
 			echo "<tr>";
 				//第1行: 欄位名稱
@@ -52,7 +52,8 @@
 			echo "<tbody>";
 				foreach ($userGroup_DBTable as $groupKey => $thisGroupArray) {
 					echo "<tr>";
-						echo "<th scrope='row'>".$thisGroupArray['GID']."</th>";
+						echo "<th scrope='row'><input type='checkbox' name='select_GID[]' value='".$thisGroupArray['GID']."'></th>";
+						echo "<td>".$thisGroupArray['GID']."</td>";
 						echo "<td>".$thisGroupArray['GName']."</td>";
 						echo "<td>".$thisGroupArray['in_user']."</td>";
 						echo "<td>".$thisGroupArray['Gauth_admin']."</td>";
@@ -122,7 +123,7 @@
 									<div class="control-group">
 										<label class="control-label" for="userGroup_id">內部群組名稱: </label>
 										<div class="controls">
-											<input autofocus type="text" name="userGroup_id" id="userGroup_id" required="required" placeholder="僅限英文字" />
+											<input type="text" name="userGroup_id" id="userGroup_id" required="required" placeholder="僅限英文字" />
 											<span class="help-inline">*</span>
 										</div>
 									</div>
@@ -167,5 +168,31 @@
 		
 		<script src="<?php echo SITE_URL_ROOT ?>assets/js/jquery.min.js"></script>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
+		<script>
+			//來源: http://jsfiddle.net/mm78k/1/
+			function toggleRow() {
+				var $this = $(this);
+				var $row = $this.parent().parent();
+
+				if ($this.is(':checked'))
+				{
+					$row.addClass('info');
+					//$row.removeClass('off');
+				}
+				else
+				{
+					//$row.addClass('off');
+					$row.removeClass('info');
+				}
+			}
+
+			$().ready(function() {
+				//Assign the toggle
+				$('#allUserGroups_table').find(':checkbox').each(function() {
+				$(this).click(toggleRow);
+				$(this).parent().parent().addClass('off');
+				});
+			});
+		</script>
 	</body>
 </html>
