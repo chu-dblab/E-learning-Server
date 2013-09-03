@@ -1,5 +1,5 @@
 <?php
- 	require_once("lib/include.php");
+ 	require_once("../lib/include.php");
         require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	/*
