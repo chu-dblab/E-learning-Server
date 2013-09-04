@@ -13,6 +13,17 @@
 	*/
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
+	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
+	
+	//取得通知資料
+	$theAlert = new Alert();
+	$theAlert->getInSession("site_manager");
+	
+	//輸出通知資料
+	function show_status_notify(){
+		global $theAlert;
+		$theAlert->show();
+	}
 	
 ?>
 <!DOCTYPE html>
@@ -43,6 +54,11 @@
 						<header>
 							<h2>本站管理</h2>
 						</header>
+						
+						<section id="status-notify">
+							<?php show_status_notify() ?>
+						</section>
+						
 						<div class="row-fluid">
 							<div class="span6">
 								<section>
@@ -131,7 +147,7 @@
 							<div class="span6">
 								<section>
 									<h3>更改資料表的前綴字元</h3>
-									<form>
+									<form action="action/site_manager_action.php?action=rename_db_prefix" method="post">
 										<div class="input-append">
 											<input type="text" required="required" name="inputSqlPrefix" id="inputSqlPrefix">
 											<button type="submit" class="btn btn-success">更改</button>
