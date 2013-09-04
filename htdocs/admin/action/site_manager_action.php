@@ -3,6 +3,7 @@
  * 前置設定
 */
 require_once("../../lib/include.php");
+require_once(DOCUMENT_ROOT."lib/function/site_admin.php");
 require_once(DOCUMENT_ROOT."lib/function/database.php");
 require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 
@@ -12,6 +13,37 @@ require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 $action = $_GET['action'];
 
 switch($action){
+	//更改網站名稱
+	case "rename_site_title":
+		//帶入使用者輸入的資料
+		$inputSiteName = $_POST["inputSiteName"];
+		$inputSiteSubName = $_POST["inputSiteSubName"];
+		$inputSiteReferred = $_POST["inputSiteReferred"];
+		
+		$result = rename_site_title($inputSiteName, $inputSiteSubName, $inputSiteReferred);
+		
+		//更改完成，並成功寫入設定檔
+		if($result == "Finish") {
+			//送出通知訊息
+			$theAlert = new Alert("success", false, "<strong>更改完成！</strong>  更改網站名稱！！");
+			$theAlert->setInSession("site_manager");
+			
+			//回到網站管理頁面
+			header("Location: ../site_manager.php");
+		}
+		//更改完成，但無法寫入設定檔
+		else {
+			//送出通知訊息
+			$theAlert = new Alert("warning", true, "<h4>需手動更改設定檔！</h4>
+			<p>需手動更改以下內容到<code>/config.php</code></p>
+			<pre>".htmlentities($result, ENT_QUOTES, 'UTF-8')."</pre>");
+			$theAlert->setInSession("site_manager");
+			
+			//回到網站管理頁面
+			header("Location: ../site_manager.php");
+		}
+		break;
+
 	//更改資料庫名稱
 	case "rename_db_name":
 		//帶入使用者輸入的資料
@@ -70,6 +102,5 @@ switch($action){
 			//回到網站管理頁面
 			header("Location: ../site_manager.php");
 		}
-		
 		break;
 }

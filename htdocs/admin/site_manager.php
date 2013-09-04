@@ -63,7 +63,7 @@
 							<div class="span6">
 								<section>
 									<h3>網站名稱</h3>
-									<form>
+									<form action="action/site_manager_action.php?action=rename_site_title" method="post">
 										<div class="control-group">
 											<label class="control-label" for="inputSiteName">網站名稱: </label>
 											<div class="controls">
