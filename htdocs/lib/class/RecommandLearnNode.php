@@ -1,6 +1,6 @@
 <?php
  	require_once("../lib/include.php");
-    require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+        require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	/*
 	 *  類別名稱：推薦學習點
@@ -36,11 +36,11 @@
 		public function subPeople($point_number)
 		{
 		    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." set Mj = Mj - 1 where TID = :number");
-			$query->bindParam(":number",$point_number);
+		    $query->bindParam(":number",$point_number);
 		    $result->execute();		    
 		}
 		
-		/* TODO:
+		/* 
 		 * 方法名稱：isZero
 		 * 說明：確認目前的學習點是不是零
 		 * 參數：point_number (data type is an Integer)  學習點的編號
@@ -52,11 +52,11 @@
 			$result = $conDB->prepare("SELECT Mj FROM ".$conDB->table("target")." WHERE TID = :number AND Mj = 0");
 			$result->bindParam(":number",$point_number);
 			$result->excute();
-			if($result != 0) return true;
-			else return false;
+			if($result != 0) return false;
+			else return true;
 		}
 		
-		/*
+		/* TODO:
 		 * 方法名稱：getLearningPath
 		 * 說明：取得學習路徑(包含權重值)
 		 * 參數：$point_number	學習點的編號
@@ -70,6 +70,12 @@
 			$result->bindParam(":point_number",$point_number);
 			$result->bindParam(":userID",$userID);
 			$result->execute();
+			//將陣列內容取出，帶入公式計算
+			while($row=$result->fetch())
+			{
+			   echo '<pre>', print_r($row, true), '</pre>';   //Debug用
+			}
+			//將計算結果以JSON格式包裝
 		}
 		
 		/*
