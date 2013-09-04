@@ -1,5 +1,5 @@
 <?php
-function create_config_txt_content($inputSQLHost, $inputSQLUser, $inputSQLPass, $inputSQLDBName, $inputSQLDBFormPrefix) {
+function create_dbconfig_txt_content($inputSQLHost, $inputSQLUser, $inputSQLPass, $inputSQLDBName, $inputSQLDBFormPrefix) {
 	$create_txt_content = "<?php\n";
 	$create_txt_content .= "\$DB_SERV = '$inputSQLHost';\t//資料庫伺服器名稱\n";
 	$create_txt_content .= "\$DB_USER = '$inputSQLUser';\t//資料庫使用者名稱\n";

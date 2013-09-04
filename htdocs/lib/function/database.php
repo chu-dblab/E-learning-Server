@@ -2,9 +2,10 @@
 require_once(DOCUMENT_ROOT."lib/class/Database.php");
 require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連結變數
 require_once(DOCUMENT_ROOT."config/db_table_config.php");
-require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");
 
 function db_rename_db_name($newName) {
+	require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");
+	
 	//TODO 尚未顧慮資料庫權限問題
 	global $FORM_PREFIX, $DB_NAME;
 	global $FORM_USER, $FORM_USER_GROUP, $FORM_BELONG, $FORM_EDGE, $FORM_QUESTION, $FORM_RECOMMEND, $FORM_STUDY, $FORM_TARGET, $FORM_THEME;
@@ -25,7 +26,7 @@ function db_rename_db_name($newName) {
 	
 	//寫入新的設定檔
 	global $DB_SERV, $DB_USER, $DB_PASS;
-	$create_txt_content = create_config_txt_content($DB_SERV, $DB_USER, $DB_PASS, $newName, $FORM_PREFIX);
+	$create_txt_content = create_dbconfig_txt_content($DB_SERV, $DB_USER, $DB_PASS, $newName, $FORM_PREFIX);
 	if($fp=fopen(DOCUMENT_ROOT."config/db_config.php","w+")){
 		fputs($fp,$create_txt_content);
 		return "Finish";
@@ -37,6 +38,8 @@ function db_rename_db_name($newName) {
 }
 
 function db_rename_prefix($newPrefix) {
+	require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");
+	
 	global $FORM_PREFIX;
 	global $FORM_USER, $FORM_USER_GROUP, $FORM_BELONG, $FORM_EDGE, $FORM_QUESTION, $FORM_RECOMMEND, $FORM_STUDY, $FORM_TARGET, $FORM_THEME;
 	
@@ -54,7 +57,7 @@ function db_rename_prefix($newPrefix) {
 	
 	//寫入新的設定檔
 	global $DB_SERV, $DB_USER, $DB_PASS, $DB_NAME;
-	$create_txt_content = create_config_txt_content($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME, $newPrefix);
+	$create_txt_content = create_dbconfig_txt_content($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME, $newPrefix);
 	if($fp=fopen(DOCUMENT_ROOT."config/db_config.php","w+")){
 		fputs($fp,$create_txt_content);
 		return "Finish";

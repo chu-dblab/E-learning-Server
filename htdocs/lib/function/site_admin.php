@@ -1,8 +1,8 @@
 <?php
 require_once(DOCUMENT_ROOT."config.php"); //取得網站變數
-require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");
 
 function rename_site_title($fullName, $subName, $referredName) {
+	require_once(DOCUMENT_ROOT."lib/create_txt/create_config.php");
 	global $ENCRYPT_MODE, $COOKIES_PREFIX, $COOKIES_LOGIN_TIMEOUT;
 	
 	//如果沒填網站簡稱的話
@@ -25,6 +25,8 @@ function rename_site_title($fullName, $subName, $referredName) {
 }
 
 function change_default_encryptMode($input_encryptMode){
+	//TODO 判斷輸入的參數是否有在支援範圍內
+	require_once(DOCUMENT_ROOT."lib/create_txt/create_config.php");
 	global $ENCRYPT_MODE, $COOKIES_PREFIX, $COOKIES_LOGIN_TIMEOUT;
 	
 	//取得設定檔內容

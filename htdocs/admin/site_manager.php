@@ -90,7 +90,7 @@
 							<div class="span6">
 								<section>
 									<h3>更改預設加密方式</h3>
-									<form>
+									<form action="action/site_manager_action.php?action=change_default_encryptMode" method="post">
 										<div class="input-append">
 											<select name="inputEncryptMode" id="inputEncryptMode">
 												<option value="MD5">MD5</option>
