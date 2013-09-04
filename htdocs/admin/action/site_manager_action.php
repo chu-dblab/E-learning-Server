@@ -87,7 +87,47 @@ switch($action){
 		}
 		
 		break;
-	
+		
+	//更改Cookies設定
+	case "change_cookies_config":
+		//帶入使用者輸入的資料
+		$inputCookiesPrefix = $_POST["inputCookiesPrefix"];
+		$inputCookiesUserExpired = $_POST["inputCookiesUserExpired"];
+		
+		if( !is_numeric($inputCookiesUserExpired) ) {
+			//送出通知訊息
+			$theAlert = new Alert("error", false, "<strong>更改錯誤！</strong> 你輸入的'使用者登入期限'不是數字喔～");
+			$theAlert->setInSession("site_manager");
+			
+			//回到網站管理頁面
+			header("Location: ../site_manager.php");
+		}
+		else {
+			$result = change_cookies_config($inputCookiesPrefix, $inputCookiesUserExpired);
+			
+			//更改完成，並成功寫入設定檔
+			if($result == "Finish") {
+				//送出通知訊息
+				$theAlert = new Alert("success", false, "<strong>更改完成！</strong>");
+				$theAlert->setInSession("site_manager");
+				
+				//回到網站管理頁面
+				header("Location: ../site_manager.php");
+			}
+			//更改完成，但無法寫入設定檔
+			else {
+				//送出通知訊息
+				$theAlert = new Alert("warning", true, "<h4>需手動更改設定檔！</h4>
+				<p>需手動更改以下內容到<code>/config.php</code></p>
+				<pre>".htmlentities($result, ENT_QUOTES, 'UTF-8')."</pre>");
+				$theAlert->setInSession("site_manager");
+				
+				//回到網站管理頁面
+				header("Location: ../site_manager.php");
+			}
+		}
+		break;
+		
 	//更改資料庫名稱
 	case "rename_db_name":
 		//帶入使用者輸入的資料

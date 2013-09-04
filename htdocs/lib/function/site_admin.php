@@ -42,3 +42,22 @@ function change_default_encryptMode($input_encryptMode){
 	}
 	fclose($fp);
 }
+
+function change_cookies_config($set_cookies_prefix, $set_cookies_login_timeout){
+	//TODO 加入防呆
+	require_once(DOCUMENT_ROOT."lib/create_txt/create_config.php");
+	global $ENCRYPT_MODE;
+	
+	//取得設定檔內容
+	$create_txt_content = create_config_txt_content(SITE_NAME, SITE_SUBNAME, SITE_NAME_REFERRED, SITE_URL, SITE_URL_ROOT, $input_encryptMode, $set_cookies_prefix, $set_cookies_login_timeout);
+	
+	//更改進設定檔
+	if($fp=fopen(DOCUMENT_ROOT."config.php","w+")){
+		fputs($fp,$create_txt_content);
+		return "Finish";
+	}
+	else{
+		return $create_txt_content;
+	}
+	fclose($fp);
+}

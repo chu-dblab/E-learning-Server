@@ -14,6 +14,7 @@
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
+	require_once(DOCUMENT_ROOT."config/db_config.php");
 	
 	//取得通知資料
 	$theAlert = new Alert();
@@ -67,19 +68,19 @@
 										<div class="control-group">
 											<label class="control-label" for="inputSiteName">網站名稱: </label>
 											<div class="controls">
-												<input type="text" name="inputSiteName" required="required" id="inputSiteName" placeholder="完整的網站名稱">
+												<input type="text" name="inputSiteName" required="required" id="inputSiteName" placeholder="完整的網站名稱" value="<?php echo SITE_NAME; ?>">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="inputSiteSubName">網站副標題: </label>
 											<div class="controls">
-												<input type="text" name="inputSiteSubName" id="inputSiteSubName" placeholder="副標題">
+												<input type="text" name="inputSiteSubName" id="inputSiteSubName" placeholder="副標題" value="<?php echo SITE_SUBNAME; ?>">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="inputSiteReferred">網站簡稱: </label>
 											<div class="controls">
-												<input type="text" name="inputSiteReferred" id="inputSiteReferred" placeholder="簡稱">
+												<input type="text" name="inputSiteReferred" id="inputSiteReferred" placeholder="簡稱" value="<?php echo SITE_NAME_REFERRED; ?>">
 											</div>
 										</div>
 										<button type="submit" class="btn btn-success">更改</button>
@@ -92,6 +93,7 @@
 									<h3>更改預設加密方式</h3>
 									<form action="action/site_manager_action.php?action=change_default_encryptMode" method="post">
 										<div class="input-append">
+											<!-- TODO 自動選取目前的設定 -->
 											<select name="inputEncryptMode" id="inputEncryptMode">
 												<option value="MD5">MD5</option>
 												<option value="SHA1">SHA1</option>
@@ -107,17 +109,17 @@
 							<div class="span6">
 								<section>
 									<h3>Cookies設定</h3>
-									<form>
+									<form action="action/site_manager_action.php?action=change_cookies_config" method="post">
 										<div class="control-group">
 											<label class="control-label" for="inputCookiesPrefix">前綴字元: </label>
 											<div class="controls">
-												<input type="text" name="inputCookiesPrefix" id="inputCookiesPrefix" placeholder="chu_">
+												<input type="text" required="required" name="inputCookiesPrefix" id="inputCookiesPrefix" value="<?php echo $COOKIES_PREFIX; ?>" placeholder="chu_">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="inputCookiesUserExpired">使用者登入期限: </label>
 											<div class="controls">
-												<input type="number" required="required" name="inputCookiesUserExpired" id="inputCookiesUserExpired" value="86400" placeholder="秒為單位">
+												<input type="number" required="required" name="inputCookiesUserExpired" id="inputCookiesUserExpired" value="<?php echo $COOKIES_LOGIN_TIMEOUT; ?>" placeholder="86400">
 											</div>
 										</div>
 										<button type="submit" class="btn btn-success">更改</button>
@@ -137,7 +139,7 @@
 									<h3>更改資料庫名稱</h3>
 									<form action="action/site_manager_action.php?action=rename_db_name" method="post">
 										<div class="input-append">
-											<input type="text" required="required" name="inputSqlName" id="inputSqlName">
+											<input type="text" required="required" name="inputSqlName" id="inputSqlName" value="<?php echo $DB_NAME; ?>">
 											<button type="submit" class="btn btn-success">更改</button>
 										</div>
 									</form>
@@ -149,7 +151,7 @@
 									<h3>更改資料表的前綴字元</h3>
 									<form action="action/site_manager_action.php?action=rename_db_prefix" method="post">
 										<div class="input-append">
-											<input type="text" required="required" name="inputSqlPrefix" id="inputSqlPrefix">
+											<input type="text" required="required" name="inputSqlPrefix" id="inputSqlPrefix" value="<?php echo $FORM_PREFIX; ?>">
 											<button type="submit" class="btn btn-success">更改</button>
 										</div>
 									</form>
