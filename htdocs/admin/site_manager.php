@@ -135,7 +135,7 @@
 							<div class="span6">
 								<section>
 									<h3>更改資料庫名稱</h3>
-									<form>
+									<form action="action/site_manager_action.php?action=rename_db_name" method="post">
 										<div class="input-append">
 											<input type="text" required="required" name="inputSqlName" id="inputSqlName">
 											<button type="submit" class="btn btn-success">更改</button>
