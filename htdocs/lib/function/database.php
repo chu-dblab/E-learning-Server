@@ -1,5 +1,6 @@
 <?php
 require_once(DOCUMENT_ROOT."lib/class/Database.php");
+require_once(DOCUMENT_ROOT."lib/function/write_txt.php");
 require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連結變數
 require_once(DOCUMENT_ROOT."config/db_table_config.php");
 
@@ -27,14 +28,7 @@ function db_rename_db_name($newName) {
 	//寫入新的設定檔
 	global $DB_SERV, $DB_USER, $DB_PASS;
 	$create_txt_content = create_dbconfig_txt_content($DB_SERV, $DB_USER, $DB_PASS, $newName, $FORM_PREFIX);
-	if($fp=fopen(DOCUMENT_ROOT."config/db_config.php","w+")){
-		fputs($fp,$create_txt_content);
-		return "Finish";
-	}
-	else{
-		return $create_txt_content;
-	}
-	fclose($fp);
+	return write_txt($create_txt_content, DOCUMENT_ROOT."config/db_config.php");
 }
 
 function db_rename_prefix($newPrefix) {
@@ -58,12 +52,5 @@ function db_rename_prefix($newPrefix) {
 	//寫入新的設定檔
 	global $DB_SERV, $DB_USER, $DB_PASS, $DB_NAME;
 	$create_txt_content = create_dbconfig_txt_content($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME, $newPrefix);
-	if($fp=fopen(DOCUMENT_ROOT."config/db_config.php","w+")){
-		fputs($fp,$create_txt_content);
-		return "Finish";
-	}
-	else{
-		return $create_txt_content;
-	}
-	fclose($fp);
+	return write_txt($create_txt_content, DOCUMENT_ROOT."config/db_config.php");
 }
