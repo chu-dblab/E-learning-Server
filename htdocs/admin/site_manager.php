@@ -159,7 +159,7 @@
 						
 						<div class="row-fluid">
 							<div class="span6">
-								<section>
+								<!--<section>
 									<h3>重設資料庫內容</h3>
 									<p class="text-warning"><strong>警告！</strong>執行此動作，將會刪除所有的資料！！</p>
 									<form>
@@ -196,7 +196,7 @@
 										</script>
 										<button type="submit" class="btn btn-danger">重設</button>
 									</form>
-								</section>
+								</section>-->
 							</div><!--/span-->
 						</div><!--/row-->
 					</section>
