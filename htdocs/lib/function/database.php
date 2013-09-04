@@ -1,9 +1,27 @@
 <?php
+/**
+ * 前置設定
+*/
 require_once(DOCUMENT_ROOT."lib/class/Database.php");
 require_once(DOCUMENT_ROOT."lib/function/write_txt.php");
 require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連結變數
 require_once(DOCUMENT_ROOT."config/db_table_config.php");
 
+// ========================================================================
+
+/**
+ * db_rename_db_name
+ *
+ * 更改資料庫名稱
+ *
+ * @param	string	新名稱
+ * @return	string	寫入結果
+ * 		"Finish": 成功寫入
+ * 		其他: 無法寫入，回傳內文
+ * 
+ * @since	Version 1
+ * @author	元兒～ <yuan817@moztw.org>
+*/
 function db_rename_db_name($newName) {
 	require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");
 	
@@ -30,7 +48,21 @@ function db_rename_db_name($newName) {
 	$create_txt_content = create_dbconfig_txt_content($DB_SERV, $DB_USER, $DB_PASS, $newName, $FORM_PREFIX);
 	return write_txt($create_txt_content, DOCUMENT_ROOT."config/db_config.php");
 }
+// ------------------------------------------------------------------------
 
+/**
+ * db_rename_prefix
+ *
+ * 更改資料庫前綴字元
+ *
+ * @param	string	新名稱
+ * @return	string	寫入結果
+ * 		"Finish": 成功寫入
+ * 		其他: 無法寫入，回傳內文
+ * 
+ * @since	Version 1
+ * @author	元兒～ <yuan817@moztw.org>
+*/
 function db_rename_prefix($newPrefix) {
 	require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");
 	
