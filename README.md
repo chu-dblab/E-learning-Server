@@ -33,6 +33,8 @@
 
 
 ## 修改紀錄
+* 2013.9.4
+    * add 網站管理功能
 * 2013.8.27
     * add 更改使用者至某使用者群組
     * lib/function/user.php 函式庫再細分成user_admin.php
