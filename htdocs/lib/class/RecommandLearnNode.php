@@ -1,10 +1,10 @@
 <?php
  	require_once("../lib/include.php");
-        require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+    require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	/*
 	 *  類別名稱：推薦學習點
-         */
+     */
 	class RecommandLearnNode
 	{
 		private $conDB;
@@ -57,34 +57,24 @@
 		}
 		
 		/* TODO:
-		 * 方法名稱：getLearningPath
-		 * 說明：取得學習路徑(包含權重值)
+		 * 方法名稱：getLearningNode
+		 * 說明：取得學習點(包含權重值)
 		 * 參數：$point_number	學習點的編號
 		 * 		 $userID	使用者編號
 		 * 回傳值：推薦學習之標的編號
 		 */
-		public function getLearningPath($point_number,$userID)
+		public function getLearningNode($point_number,$userID)
 		{
-			$result = $conDB->prepare("SELECE DISTINCT ".$conDB->table("edge").".Ti ".$conDB->table("edge").".Tj ".$conDB->table("edge").".Distance"
-			."FROM edge recommand WHERE "$conDB->table("edge").".Ti = :$point_number AND recommand.SID = :userID");
-			$result->bindParam(":point_number",$point_number);
-			$result->bindParam(":userID",$userID);
-			$result->execute();
-			//將陣列內容取出，帶入公式計算
-			while($row=$result->fetch())
-			{
-			   echo '<pre>', print_r($row, true), '</pre>';   //Debug用
-			}
-			//將計算結果以JSON格式包裝
+			$result = $conDB->prepare("SELECT ".$conDB->table("")."FROM WHERE" );
 		}
 		
 		/*
 		 * 方法名稱：getNodeOfLearnOfParameter
 		 * 說明：取得學習點的所有參數
 		 */
-		public function getNodeOfLearnOfParameter()
+		private function getNodeOfLearnOfParameter($next_point_number,$userID)
 		{
-			
+			$result = $conDB->prepare("SELECT ".$conDB->table("target").".Mj,".$conDB->table("target").".PLj,FROM WHERE");
 		}
 		
 		/*
