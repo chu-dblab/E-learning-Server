@@ -41,7 +41,7 @@ $account_create_status = user_create($register_user_id, $register_user_password,
 
 if($account_create_status == "Finish"){
 	$theAlert = new Alert("success", false, "<strong>建立成功！</strong>  '$register_user_id'已成功建立！！");
-	$theAlert->setInSession("user_create");
+	$theAlert->setInSession("user_process");
 
  	header("Location: ../user_list.php");
 }
@@ -61,7 +61,7 @@ else{
 	}
 	
 	$theAlert = new Alert("error", false, $status_message);
-	$theAlert->setInSession("user_create");
+	$theAlert->setInSession("user_process");
 	
  	header("Location: ../user_create.php");
 }

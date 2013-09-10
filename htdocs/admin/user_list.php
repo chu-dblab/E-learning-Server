@@ -15,11 +15,12 @@
 		require_once(DOCUMENT_ROOT."admin/template/template.php");
 		require_once(DOCUMENT_ROOT."lib/function/user.php");
 		require_once(DOCUMENT_ROOT."lib/function/user_admin.php");
+		require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
 		require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 		
 		//取得通知資料
 		$theAlert = new Alert();
-		$theAlert->getInSession("user_create");
+		$theAlert->getInSession("user_process");
 		
 		// ------------------------------------------------------------------------
 		
@@ -124,9 +125,28 @@
 						</section>
 						
 						<section>
-							<p>總共有<?php echo usersTotal(); ?>個使用者</p>
-							<?php showUsersTable(); ?>
-							
+							<form action="action/user_process.php" method="post">
+								<p>總共有<?php echo usersTotal(); ?>個使用者</p>
+								動作: 
+								<select name="action" id="multi-action">
+									<option value="">請選擇動作</option>
+									<option value="enable">啟用</option>
+									<option value="disable">停用</option>
+									<option value="remove">刪除</option>
+									<option value="logout">強制登出</option>
+									<option value="change-userGroup">更換群組至: </option>
+								</select>
+								<select name="user_group" id="user_group">
+									<?php 
+										$userGroup = userGroup_getList();
+										foreach($userGroup as $key=>$value){
+											echo "<option value='$key'>$key: $value</option>";
+										}
+									?>
+								</select>
+								<input class="btn btn-success" type="submit" value="送出">
+								<?php showUsersTable(); ?>
+							</form>
 						</section>
 						
 					</div><!--/span-->
