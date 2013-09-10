@@ -47,7 +47,7 @@
 					//第1行: 欄位名稱
 					echo "<th scpoe='col'>";
 					echo "<div class='btn-group'>";
-						echo "<button class='btn btn-small'><span class='icon-check' /></button>";
+						echo "<a href='#' class='btn btn-small'><span class='icon-check' /></a>";
 						echo "<button class='btn btn-small dropdown-toggle' data-toggle='dropdown'>";
 							echo "<span class='caret'></span>";
 						echo "</button>";
