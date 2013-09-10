@@ -74,7 +74,16 @@
 		 */
 		private function getNodeOfLearnOfParameter($next_point_number,$userID)
 		{
-			$result = $conDB->prepare("SELECT ".$conDB->table("target").".Mj,".$conDB->table("target").".PLj,FROM WHERE");
+			$conString = "SELECT ".$conDB->table("target").".Mj,".$conDB->table("target").".PLj,".$conDB->table("belong").".weight,".$conDB->table("target").".TLearn_Time ".
+				     $conDB->table("edge").".MoveTime FROM ".$conDB->table("target").",".$conDB->table("belong").",".$conDB->table("edge").",".$conDB->table("user")." WHERE ".$conDB->table("user")
+				     .".UID = :UID AND ".$conDB->table("target").".TID = :next_point_number";
+			$result = $conDB->prepare($conString);
+			$result->bindParam(":UID",$userID);
+			$result->bindParam(":next_point_number",$next_point_number);
+			$result->execute();
+			
+			$row = $result->fetchAll();
+			return $row;
 		}
 		
 		/*
