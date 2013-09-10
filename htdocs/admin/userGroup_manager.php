@@ -43,7 +43,23 @@
 			echo "<thead>";
 			echo "<tr>";
 				//第1行: 欄位名稱
-				echo "<th scpoe='col'><span class='icon-check' /></th>";
+				echo "<th scpoe='col'>";
+				
+				echo "<div class='btn-group'>";
+					echo "<button class='btn btn-small'><span class='icon-check' /></button>";
+					echo "<button class='btn btn-small dropdown-toggle' data-toggle='dropdown'>";
+						echo "<span class='caret'></span>";
+					echo "</button>";
+					echo "<ul class='dropdown-menu'>";
+						echo "<li><a href='#'>全選</a></li>";
+						echo "<li><a href='#'>全不選</a></li>";
+						echo "<li class='divider'></li>";
+						echo "<li><a href='#'>反向選</a></li>";
+					echo "</ul>";
+				echo "</div>";
+				
+				echo "</th>";
+				
 				echo "<th scpoe='col'>內部名稱</th>";
 				echo "<th scpoe='col'>顯示名稱</th>";
 				echo "<th scpoe='col'>群組內使用者、</th>";
