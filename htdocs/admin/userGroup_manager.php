@@ -43,6 +43,7 @@
 			echo "<thead>";
 			echo "<tr>";
 				//第1行: 欄位名稱
+				echo "<th scpoe='col'><span class='icon-check' /></th>";
 				echo "<th scpoe='col'>內部名稱</th>";
 				echo "<th scpoe='col'>顯示名稱</th>";
 				echo "<th scpoe='col'>群組內使用者、</th>";
