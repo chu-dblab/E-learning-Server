@@ -54,7 +54,7 @@ function user_logout($userid){
 // ------------------------------------------------------------------------ 
 
 /**
- * user_changeGroup
+ * user_setGroup
  *
  * 切換使用者群組
  *
@@ -70,7 +70,7 @@ function user_logout($userid){
  * @author	元兒～ <yuan817@moztw.org>
  * @since	Version 1
 */
-function user_changeGroup($userid, $toGroup){
+function user_setGroup($userid, $toGroup){
 	global $FORM_USER;
 	
 	if( user_ishave($userid) ) {
@@ -98,6 +98,51 @@ function user_changeGroup($userid, $toGroup){
 		return "NoFoundUser";
 	}
 }
+// ------------------------------------------------------------------------ 
+/**
+ * user_setEnable
+ *
+ * 設定此帳號是否啟用
+ *
+ * @access	public
+ * @param	string	使用者帳號
+ * @param	bool	是否啟用
+ * @return	string	是否更改成功
+ * 			"Finish": 成功更改
+ * 			"NoFoundUser": 無此帳號
+ * 			"DBErr": 其他資料庫錯誤
+ * 
+ * TODO 防呆: 判斷至少要有一個以上的帳號為啟用
+ * 
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+*/
+function user_setEnable($userid, $setEnable){
+	global $FORM_USER;
+	
+	if( user_ishave($userid) ) {
+		//連結資料庫
+		$db = new Database();
+		
+		$queryResult = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `UEnabled` = :toenable WHERE `UID` = :username");
+		$queryResult->bindParam(':username',$userid);
+		$queryResult->bindParam(':toenable',$setEnable);
+		$queryResult->execute();
+		
+		
+		$errmsg = $queryResult->errorInfo();
+		if( $errmsg[1] == 0 ) {
+			return "Finish";
+		}
+		else {
+			return "DBErr";
+		}
+	}
+	else {
+		return "NoFoundUser";
+	}
+}
+
 // ------------------------------------------------------------------------ 
 
 /**
