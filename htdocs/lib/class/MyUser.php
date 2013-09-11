@@ -2,12 +2,12 @@
 /**
  * 前置作業
 */
+require_once(DOCUMENT_ROOT."lib/class/User.php");
 require_once(DOCUMENT_ROOT."lib/class/Database.php");
-require_once(DOCUMENT_ROOT."lib/function/password.php");
-require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
 
  /**
  * User
+ * 以User類別為基底 衍生出以登入碼為主的使用者類別MyUser
  * 一個物件即代表這一位使用者
  *
  * @package	CHU-E-learning
@@ -17,9 +17,9 @@ require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
  * @link	https://github.com/CHU-TDAP/
  * @since	Version 2.0
 */
-class User {
+class MyUser {
 	private $loggedCode;
-	private $infoArray;
+	private $userObject;
 	
 	/**
 	 * 取得此使用者的資料表欄位內容
@@ -33,7 +33,7 @@ class User {
 	 */
 	private function getQueryInfo($colName){
 		
-		return $this->infoArray[0][$colName];
+		return $this->userObject->getQueryInfo($colName);
 	}
 	/**
 	 * 更新此使用者的資料表欄位內容
@@ -47,8 +47,7 @@ class User {
 	 * @since	Version 3
 	 */
 	private function setQueryInfo($colName, $rowContent){
-		$db = new Database();
-		return $db->setTheUserArray($this->loggedCode, $colName, $rowContent);
+		return $this->userObject->setQueryInfo($colName, $rowContent);
 	}
 	// ========================================================================
 	
@@ -59,8 +58,17 @@ class User {
 	 * @param	string	登入碼
 	 */
 	function __construct($inputLoggedCode){
+		global $FORM_USER;
 		$this->loggedCode = $inputLoggedCode;
-		$this->getQuery();
+		
+		$db = new Database();
+		$queryResult = $db->prepare("SELECT UID FROM ".$db->table($FORM_USER)." WHERE `ULogged_code` = :code");
+		$queryResult->bindParam(':code',$this->loggedCode);
+		$queryResult->execute();
+		
+		$result = $queryResult->fetch(PDO::FETCH_NUM);
+		$username = $result[0];
+		$this->userObject = new User($username);
 	}
 	
 	// ========================================================================
@@ -72,7 +80,7 @@ class User {
 	 * @return	string	登入碼
 	 */
 	function getLoggedCode(){
-		return $this->loggedCode;
+		return $this->userObject->getLoggedCode();
 	}
 	// ------------------------------------------------------------------------
 	
@@ -83,7 +91,7 @@ class User {
 	 * @return	string	帳號名稱
 	 */
 	function getUsername(){
-		return $this->getQueryInfo("UID");
+		return $this->userObject->getUsername();
 	}
 	// ------------------------------------------------------------------------
 	
@@ -94,7 +102,7 @@ class User {
 	 * @return	string	登入時間
 	 */
 	function getLoginTime(){
-		return $this->getQueryInfo("ULast_In_Time");
+		return $this->userObject->getLoginTime();
 	}
 	// ------------------------------------------------------------------------
 	
@@ -105,7 +113,7 @@ class User {
 	 * @return	string	建立時間
 	 */
 	function getCreateTime(){
-		return $this->getQueryInfo("UBuild_Time");
+		return $this->userObject->getCreateTime();
 	}
 	// ========================================================================
 	
@@ -116,7 +124,7 @@ class User {
 	 * @return	string	真實姓名
 	 */
 	function getRealName(){
-		return $this->getQueryInfo("UReal_Name");
+		return $this->userObject->getRealName();
 	}
 	
 	/**
@@ -127,7 +135,7 @@ class User {
 	 * @return	bool	是否更改成功
 	 */
 	function setRealName($input){
-		return $this->setQueryInfo("UReal_Name", $input);
+		return $this->userObject->setRealName($input);
 	}
 	// ------------------------------------------------------------------------
 	
@@ -138,7 +146,7 @@ class User {
 	 * @return	string	暱稱
 	 */
 	function getNickName(){
-		return $this->getQueryInfo("UNickname");
+		return $this->userObject->getNickName();
 	}
 	
 	/**
@@ -149,7 +157,7 @@ class User {
 	 * @return	bool	是否更改成功
 	 */
 	function setNickName($input){
-		return $this->setQueryInfo("UNickname", $input);
+		return $this->userObject->setNickName($input);
 	}
 	// ------------------------------------------------------------------------
 	
@@ -160,7 +168,7 @@ class User {
 	 * @return	string	使用者資訊的Email
 	 */
 	function getEmail(){
-		return $this->getQueryInfo("UEmail");
+		return $this->userObject->getEmail();
 	}
 	
 	/**
@@ -171,7 +179,7 @@ class User {
 	 * @return	bool	是否更改成功
 	 */
 	function setEmail($input){
-		return $this->setQueryInfo("UEmail", $input);
+		return $this->userObject->setEmail($input);
 	}
 	// ------------------------------------------------------------------------
 	
@@ -184,9 +192,7 @@ class User {
 	 * @since	Version 0
 	 */
 	function getQuery(){
-		$db = new Database();
-		$this->infoArray = $db->getTheUserArray($this->loggedCode);
-		return $this->infoArray;
+		return $this->userObject->getQuery();
 	}
 	// ========================================================================
 	
@@ -208,20 +214,14 @@ class User {
 			$inputPasswd = $args[0];
 			$mode = $args[1];
 			
-			//動作
-			if( $this->getQueryInfo("UPassword") == encryptText($inputPasswd, $mode) ){
-				return true;
-			}
-			else{
-				return false;
-			}
+			return $this->userObject->isPasswordCorrect($inputPasswd, $mode);
 		}
 		else if(func_num_args() == 1){
-			global $ENCRYPT_MODE;
+			//對應變數
 			$args = func_get_args();
 			$inputPasswd = $args[0];
 			
-			return $this->isPasswordCorrect($inputPasswd, $ENCRYPT_MODE);
+			return $this->userObject->isPasswordCorrect($inputPasswd);
 		}
 	}
 	// ------------------------------------------------------------------------
@@ -243,7 +243,6 @@ class User {
 	 * @since	Version 0
 	 */
 	function changePassword(){
-		global $FORM_USER, $ENCRYPT_MODE;
 		//若帶入兩個參數
 		if(func_num_args() == 5){
 			//對應變數
@@ -256,25 +255,7 @@ class User {
 			
 			
 			//動作
-			//若目前密碼錯誤
-			if( !$this->isPasswordCorrect($currentPasswd, $currentPasswdMode) ){
-				return "CurrentPasswdErr";
-			}
-			//確認密碼錯誤
-			else if($newPasswd != $newPasswd_rep){
-				return "NewRepPasswdErr";
-			}
-			//都沒問題，更改密碼
-			else{
-				
-				//將密碼加密
-				$passwd = encryptText($newPasswd, $newPasswdMode);
-				
-				//登記新的密碼進資料庫
-				$this->setQueryInfo("UPassword", $passwd);
-				
-				return "Finish";
-			}
+			return $this->userObject->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $newPasswd_rep, $newPasswdMode);
 		}
 		else if(func_num_args() == 4){
 			//對應變數
@@ -284,7 +265,7 @@ class User {
 			$newPasswd = $args[2];
 			$newPasswd_rep = $args[3];
 			
-			return $this->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
+			return $this->userObject->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
 			
 		}
 		else if(func_num_args() == 3){
@@ -294,7 +275,7 @@ class User {
 			$newPasswd = $args[1];
 			$newPasswd_rep = $args[2];
 			
-			return $this->changePassword($currentPasswd, $ENCRYPT_MODE, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
+			return $this->userObject->changePassword($currentPasswd, $ENCRYPT_MODE, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
 		}
 	}
 	// ========================================================================
@@ -305,11 +286,7 @@ class User {
 	 * @return	bool	是否仍在登入狀態
 	 */
 	function isLogged() {
-		if($this->getQuery()) {
-			return true;
-		} else {
-			return false;
-		}
+		return $this->userObject->isLogged();
 	}
 	// ------------------------------------------------------------------------
 	
@@ -321,32 +298,7 @@ class User {
 	 * @return	bool	是否擁有
 	 */
 	 function havePermission($permissionName) {
-		global $FORM_USER,$FORM_USER_GROUP;
-		
-		//將使用者的選擇轉為資料表的欄位名稱
-		switch($permissionName){
-			case "admin":
-				$db_auth = "Gauth_admin";
-				break;
-		}
-		
-		//對此使用者進行權限查詢
-		$db = new Database();
-		$queryResult = $db->prepare("SELECT `ugroup`.`$db_auth` 
-			FROM `".$db->table($FORM_USER)."` AS `user` 
-			JOIN `".$db->table($FORM_USER_GROUP)."` AS `ugroup` ON `user`.`GID` = `ugroup`.`GID` 
-			WHERE `ULogged_code` = :loggedCode"
-		);
-		$queryResult->bindParam(':loggedCode',$this->loggedCode);
-		$queryResult->execute();
-		
-		$result = $queryResult->fetch(PDO::FETCH_NUM);
-		if($result[0] == 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return $this->userObject->havePermission($permissionName);
 	 }
 	 
 	// ------------------------------------------------------------------------
@@ -358,15 +310,6 @@ class User {
 	 * @return	bool	是否登出成功
 	 */
 	 function logout(){
-		global $FORM_USER;
-		if($this->loggedCode){
-
-			//清除登入碼進資料庫
-			$this->setQueryInfo("ULogged_code", NULL);
-			
-			$this->loggedCode = NULL;
-			return true;
-		}
-		return false;
+		return $this->userObject->logout();
 	 }
 }
