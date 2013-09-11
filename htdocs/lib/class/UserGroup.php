@@ -32,7 +32,7 @@ class UserGroup {
 	*/
 	function __construct($inputGroupName) {
 		if(userGroup_ishave($inputGroupName)) {
-			$this->$thisGroup = $inputGroupName;
+			$this->thisGroup = $inputGroupName;
 		}
 	}
 	// ------------------------------------------------------------------------
