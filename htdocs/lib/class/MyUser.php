@@ -22,36 +22,6 @@ class MyUser {
 	private $userObject;
 	
 	/**
-	 * 取得此使用者的資料表欄位內容
-	 *
-	 * @access	private
-	 * @param	string	資料表欄位名稱
-	 * @return	(依資料庫型態)	資料表欄位內容
-	 * 
-	 * @author	元兒～ <yuan817@moztw.org>
-	 * @since	Version 1
-	 */
-	private function getQueryInfo($colName){
-		
-		return $this->userObject->getQueryInfo($colName);
-	}
-	/**
-	 * 更新此使用者的資料表欄位內容
-	 *
-	 * @access	private
-	 * @param	string	資料表欄位名稱
-	 * @param	(依輸入型態)	資料表欄位內容
-	 * @return	int	更動到幾筆
-	 * 
-	 * @author	元兒～ <yuan817@moztw.org>
-	 * @since	Version 3
-	 */
-	private function setQueryInfo($colName, $rowContent){
-		return $this->userObject->setQueryInfo($colName, $rowContent);
-	}
-	// ========================================================================
-	
-	/**
 	 * 建構子
 	 *
 	 * @access	public
