@@ -1,6 +1,6 @@
 <?php
  	require_once("../lib/include.php");
-    require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
 	
 	/*
 	 *  類別名稱：推薦學習點
@@ -58,14 +58,35 @@
 		
 		/* TODO:
 		 * 方法名稱：getLearningNode
-		 * 說明：取得學習點(包含權重值)
+		 * 說明：取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
 		 * 參數：$point_number	學習點的編號
-		 * 		 $userID	使用者編號
+		 * 	 $userID	使用者編號
 		 * 回傳值：推薦學習之標的編號
 		 */
 		public function getLearningNode($point_number,$userID)
 		{
-			$result = $conDB->prepare("SELECT ".$conDB->table("")."FROM WHERE" );
+			//從資料抓取目前路徑的資料
+			$result = $conDB->prepare("SELECT DISTINCT".$conDB->table("edge").".Ti,".$conDB->table("edge").".Tj".$conDB->table("edge")."MoveTime"." FROM ".$conDB->table("edge").",".$conDB->table("recommand")." WHERE ".$conDB->table("edge").".Ti = :point_number"." AND ".$conDB->table("recommand").".UID = :userID");
+			$result->bindParam(":point_number",$point_number);
+			$result->bindParam(":UID",$userID);
+			$result->excute();
+			
+			//帶入公式計算下一個要推荐的學習點的編號
+			while($row=$result->fetch())
+			{
+			     $pathCost = -1;
+			     $getNextNodeParameter = getNodeOfLearnOfParameter($row["Tj"],$userID);
+			     if($getNextNodeParameter["Fj"])
+			     {
+			     }
+			     else
+			     {
+				
+			     }
+			}
+			//將計算結果做快速排序
+			//將計算結果存到推薦學習點的表格中
+			//將結果(前三高的學習點)包裝成JSON傳送至手機
 		}
 		
 		/*
