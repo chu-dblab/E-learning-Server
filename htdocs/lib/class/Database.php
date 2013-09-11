@@ -67,16 +67,16 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	* 查詢此使用者
 	*
 	* @access	public
-	* @param	string	登入碼
+	* @param	string	帳戶名稱
 	* @return	array	此使用者的所有查詢結果
 	* 
 	* @since	Version 3
 	* @author	元兒～ <yuan817@moztw.org>
 	*/
-	function getTheUserArray($loggedCode){
+	function getTheUserArray($toUID){
 		global $FORM_USER;
-		$queryResult = $this->prepare("SELECT * FROM ".$this->table($FORM_USER)." WHERE `ULogged_code` = :loggedCode");
-		$queryResult->bindParam(':loggedCode',$loggedCode);
+		$queryResult = $this->prepare("SELECT * FROM ".$this->table($FORM_USER)." WHERE `UID` = :toUID");
+		$queryResult->bindParam(':toUID',$toUID);
 		$queryResult->execute();
 		
 		$result = $queryResult->fetchAll();
@@ -89,7 +89,7 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	* 修改此使用者資料
 	*
 	* @access	public
-	* @param	string	登入碼
+	* @param	string	帳戶名稱
 	* @param	string	欄位名稱
 	* @param	string	內容
 	* @return	int	登動到己筆
@@ -97,11 +97,11 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	* @since	Version 3
 	* @author	元兒～ <yuan817@moztw.org>
 	*/
-	function setTheUserArray($loggedCode, $colName, $content){
+	function setTheUserArray($toUID, $colName, $content){
 		global $FORM_USER;
-		$queryResult = $this->prepare("UPDATE ".$this->table($FORM_USER)." SET $colName = :content WHERE `ULogged_code` = :loggedCode");
+		$queryResult = $this->prepare("UPDATE ".$this->table($FORM_USER)." SET $colName = :content WHERE `UID` = :toUID");
 		$queryResult->bindParam(':content',$content);
-		$queryResult->bindParam(':loggedCode',$loggedCode);
+		$queryResult->bindParam(':toUID',$toUID);
 		$queryResult->execute();
 		
 		return $queryResult->rowCount();
