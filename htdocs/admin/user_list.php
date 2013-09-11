@@ -47,15 +47,15 @@
 					//第1行: 欄位名稱
 					echo "<th scpoe='col'>";
 					echo "<div class='btn-group'>";
-						echo "<a href='#' class='btn btn-small'><span class='icon-check' /></a>";
+						echo "<a href='javascript:usel()' class='btn btn-small'><span class='icon-check' /></a>";
 						echo "<button class='btn btn-small dropdown-toggle' data-toggle='dropdown'>";
 							echo "<span class='caret'></span>";
 						echo "</button>";
 						echo "<ul class='dropdown-menu'>";
-							echo "<li><a href='#'>全選</a></li>";
-							echo "<li><a href='#'>全不選</a></li>";
+							echo "<li><a href='javascript:selAll()'>全選</a></li>";
+							echo "<li><a href='javascript:unselAll()'>全不選</a></li>";
 							echo "<li class='divider'></li>";
-							echo "<li><a href='#'>反向選</a></li>";
+							echo "<li><a href='javascript:usel()'>反向選</a></li>";
 						echo "</ul>";
 					echo "</div>";
 					echo "</th>";
@@ -190,6 +190,31 @@
 					{
 						//$row.addClass('off');
 						$row.removeClass('info');
+					}
+				}
+				
+				//來源: http://blog.xuite.net/abgne/diary1/3855816-%E7%94%A8CheckBox%E4%BE%86%E5%81%9A%E5%85%A8%E9%81%B8%2F%E5%85%A8%E5%8F%96%E6%B6%88%2F%E5%8F%8D%E5%90%91%E9%81%B8%E5%8F%96
+				function selAll(){
+					//變數checkItem為checkbox的集合
+					var checkItem = document.getElementsByName("select_UID[]");
+					for(var i=0;i<checkItem.length;i++){
+						checkItem[i].checked=true;   
+					}
+				}
+				
+				function unselAll(){
+					//變數checkItem為checkbox的集合
+					var checkItem = document.getElementsByName("select_UID[]");
+					for(var i=0;i<checkItem.length;i++){
+						checkItem[i].checked=false;
+					}
+				}
+				
+				function usel(){
+					//變數checkItem為checkbox的集合
+					var checkItem = document.getElementsByName("select_UID[]");
+					for(var i=0;i<checkItem.length;i++){
+						checkItem[i].checked=!checkItem[i].checked;
 					}
 				}
 
