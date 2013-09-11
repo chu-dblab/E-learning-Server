@@ -44,59 +44,15 @@ class User {
 	 * @return	int	更動到幾筆
 	 * 
 	 * @author	元兒～ <yuan817@moztw.org>
-	 * @since	Version 3
+	 * @since	Version 4
 	 */
 	private function setQueryInfo($colName, $rowContent){
-		$db = new Database();
-		return $db->setTheUserArray($this->thisUID, $colName, $rowContent);
-	}
-	// ========================================================================
-
-	/**
-	* getTheUserArray
-	* 
-	* 查詢此使用者
-	*
-	* @access	private
-	* @param	string	帳戶名稱
-	* @return	array	此使用者的所有查詢結果
-	* 
-	* @since	Version 3
-	* @author	元兒～ <yuan817@moztw.org>
-	*/
-	private function getTheUserArray($toUID){
-		global $FORM_USER;
-		$db = new Database();
-		
-		$queryResult = $db->prepare("SELECT * FROM ".$db->table($FORM_USER)." WHERE `UID` = :toUID");
-		$queryResult->bindParam(':toUID',$toUID);
-		$queryResult->execute();
-		
-		$result = $queryResult->fetchAll();
-		return $result;
-	}
-	// ------------------------------------------------------------------------
-	/**
-	* setTheUserArray
-	* 
-	* 修改此使用者資料
-	*
-	* @access	private
-	* @param	string	帳戶名稱
-	* @param	string	欄位名稱
-	* @param	string	內容
-	* @return	int	登動到己筆
-	* 
-	* @since	Version 3
-	* @author	元兒～ <yuan817@moztw.org>
-	*/
-	private function setTheUserArray($toUID, $colName, $content){
 		global $FORM_USER;
 		$db = new Database();
 		
 		$queryResult = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET $colName = :content WHERE `UID` = :toUID");
-		$queryResult->bindParam(':content',$content);
-		$queryResult->bindParam(':toUID',$toUID);
+		$queryResult->bindParam(':content',$rowContent);
+		$queryResult->bindParam(':toUID',$this->thisUID);
 		$queryResult->execute();
 		
 		return $queryResult->rowCount();
@@ -233,11 +189,18 @@ class User {
 	 * @access	public
 	 * @return	object	此使用者的資料表內容(回傳NULL為找不到使用者)
 	 * 
-	 * @since	Version 0
+	 * @since	Version 4
 	 */
 	function getQuery(){
+		global $FORM_USER;
 		$db = new Database();
-		$this->infoArray = $db->getTheUserArray($this->thisUID);
+		
+		$queryResult = $db->prepare("SELECT * FROM ".$db->table($FORM_USER)." WHERE `UID` = :toUID");
+		$queryResult->bindParam(':toUID',$this->thisUID);
+		$queryResult->execute();
+		
+		$result = $queryResult->fetchAll();
+		$this->infoArray = $result;
 		return $this->infoArray;
 	}
 	// ========================================================================
