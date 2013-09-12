@@ -85,6 +85,17 @@ class MyUser {
 	function getCreateTime(){
 		return $this->userObject->getCreateTime();
 	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得所在群組
+	 *
+	 * @access	public
+	 * @return	string	群組名稱
+	 */
+	function getGroup(){
+		return $this->userObject->getGroup();
+	}
 	// ========================================================================
 	
 	/**

@@ -115,6 +115,56 @@ class User {
 	function getCreateTime(){
 		return $this->getQueryInfo("UBuild_Time");
 	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得所在群組
+	 *
+	 * @access	public
+	 * @return	string	群組名稱
+	 */
+	function getGroup(){
+		return $this->getQueryInfo("GID");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 設定所在群組
+	 *
+	 * @access	public
+	 * @param	string	群組
+	 * @return	string	是否更改成功
+	 * 			"Finish": 成功更改
+	 * 			"NoFoundUserGroup": 無此使用者群組
+	 * 			"DBErr": 其他資料庫錯誤
+	 * 
+	 * @author	元兒～ <yuan817@moztw.org>
+	 * @since	Version 1
+	 */
+	function setGroup($toGroup){
+		global $FORM_USER;
+		
+		//連結資料庫
+		$db = new Database();
+		
+		$queryResult = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `GID` = :togroup WHERE `UID` = :username");
+		$queryResult->bindParam(":username",$this->thisUID);
+		$queryResult->bindParam(":togroup",$toGroup);
+		$queryResult->execute();
+		
+		
+		$errmsg = $queryResult->errorInfo();
+		if( $errmsg[1] == 0 ) {
+			return "Finish";
+		}
+		else if ( $errmsg[1] == 1452) {
+			return "NoFoundUserGroup";
+		}
+		else {
+			return "DBErr";
+		}
+	
+	}
 	// ========================================================================
 	
 	/**
