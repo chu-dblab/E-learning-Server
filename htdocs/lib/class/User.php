@@ -115,7 +115,7 @@ class User {
 	function getCreateTime(){
 		return $this->getQueryInfo("UBuild_Time");
 	}
-	// ------------------------------------------------------------------------
+	// ========================================================================
 	
 	/**
 	 * 取得所在群組
@@ -165,6 +165,29 @@ class User {
 		}
 	
 	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號啟用狀態
+	 *
+	 * @access	public
+	 * @return	bool	是否已啟用
+	 */
+	function isEnable(){
+		return $this->getQueryInfo("UEnabled");
+	}
+	
+	/**
+	 * 設定帳號啟用狀態
+	 *
+	 * @access	public
+	 * @param	bool	是否為啟用
+	 * @return	bool	是否更改成功
+	 */
+	function setEnable($isActive){
+		return $this->setQueryInfo("UEnabled", $isActive);
+	}
+	
 	// ========================================================================
 	
 	/**
