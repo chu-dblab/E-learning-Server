@@ -4,7 +4,7 @@
 */
 require_once("../../lib/include.php");
 require_once(DOCUMENT_ROOT."lib/function/user.php");
-require_once(DOCUMENT_ROOT."lib/function/user_admin.php");
+require_once(DOCUMENT_ROOT."lib/class/User.php");
 require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 
 /**
@@ -44,13 +44,17 @@ else {
 		switch($action){
 			case "enable":
 				//設定這個帳號啟用
-				$thisUID_status = user_setEnable($thisUID, true);
+				$thisUser = new User($thisUID);
+				$thisUID_status = $thisUser->setEnable(true);
+				//$thisUID_status = user_setEnable($thisUID, true);
 				//將設定結果紀錄到$select_UID_status陣列
 				$select_UID_status += array($thisUID=>$thisUID_status);
 				break;
 			case "disable":
 				//設定這個帳號停用
-				$thisUID_status = user_setEnable($thisUID, false);
+				$thisUser = new User($thisUID);
+				$thisUID_status = $thisUser->setEnable(false);
+				//$thisUID_status = user_setEnable($thisUID, false);
 				//將設定結果紀錄到$select_UID_status陣列
 				$select_UID_status += array($thisUID=>$thisUID_status);
 				break;
@@ -59,7 +63,9 @@ else {
 				break;
 			case "logout":
 				//登出這個帳號
-				$thisUID_status = user_logout($thisUID);
+				$thisUser = new User($thisUID);
+				$thisUID_status = $thisUser->logout();
+				//$thisUID_status = user_logout($thisUID);
 				//將設定結果紀錄到$select_UID_status陣列
 				$select_UID_status += array($thisUID=>$thisUID_status);
 				break;
@@ -68,7 +74,9 @@ else {
 				$user_group = $_POST["user_group"];
 				
 				//更換使用者群組
-				$thisUID_status = user_setGroup($thisUID, $user_group);
+				$thisUser = new User($thisUID);
+				$thisUID_status = $thisUser->setGroup($user_group);
+				//$thisUID_status = user_setGroup($thisUID, $user_group);
 				//將設定結果紀錄到$select_UID_status陣列
 				$select_UID_status += array($thisUID=>$thisUID_status);
 				break;

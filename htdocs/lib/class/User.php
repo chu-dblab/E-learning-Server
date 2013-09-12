@@ -137,6 +137,7 @@ class User {
 	 * 			"Finish": 成功更改
 	 * 			"NoFoundUserGroup": 無此使用者群組
 	 * 			"DBErr": 其他資料庫錯誤
+	 * TODO 防呆: 判斷至少要有一個以上的帳號為啟用
 	 * 
 	 * @author	元兒～ <yuan817@moztw.org>
 	 * @since	Version 1
