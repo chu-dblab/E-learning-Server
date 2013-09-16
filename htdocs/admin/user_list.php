@@ -166,6 +166,8 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 							<?php showUsersTable(); ?>
 						</form>
 					</section>
+					
+					<!-- 修改使用者資料對話方塊 -->
 					<div id="edit-user-dialog" class="modal hide fade" tabindex="-1" role="dialog" >
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -200,6 +202,50 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 							</div>
 						</form>
 					</div>
+					<!-- End-修改使用者資料對話方塊 -->
+					<!-- 修改使用者密碼對話方塊 -->
+					<div id="edit-user-dialog" class="modal hide fade" tabindex="-1" role="dialog" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3>變更密碼</h3>
+						</div>
+						<form action="action/user_process.php?action=change-userPasswd" method="post">
+							<input type="hidden" name="edit-user_UID" id="edit-user_UID" value="" />
+							<div class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="edit-user_password">密碼: </label>
+									<div class="controls">
+										<input type="password" name="edit-user_password" id="edit-user_password" required="required" oninput="checkPasswords()" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="edit-user_confirm_password">確認密碼: </label>
+									<div class="controls">
+										<input type="password" name="edit-user_confirm_password" id="edit-user_confirm_password" required="required" oninput="checkPasswords()" />
+									</div>
+								</div>
+								<script>
+									//來源: http://blog.bobchao.net/2010/11/firefox-4-html5.html
+									function checkPasswords() {
+										var user_password = document.getElementById('edit-user_password');
+										var user_confirm_password = document.getElementById('edit-user_confirm_password');
+										if (user_password.value != user_confirm_password.value) {
+											user_confirm_password.setCustomValidity('您這兩次輸入的密碼不同，請再次確認！');
+										}
+										else {
+											user_confirm_password.setCustomValidity('');
+										}
+									}
+								</script>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+								<button type="reset" class="btn btn-inverse" id="resetbutton" name="resetbutton">重填</button>
+								<button type="submit" class="btn btn-success" id="sendbutton" name="sendbutton">更改！！</button>
+							</div>
+						</form>
+					</div>
+					<!-- End-修改使用者密碼對話方塊 -->
 					
 				</div><!--/span-->
 			</div><!--/row-->

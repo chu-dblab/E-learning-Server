@@ -47,6 +47,18 @@ switch($action){
 	header("Location: ../user_list.php");
 	break;
 	
+	case "change-userPasswd":
+	//取得填入的選擇群組欄位
+	$user_uid = $_POST["edit-user_UID"];
+	$user_password = $_POST["edit-user_password"];
+	$user_confirm_password = $_POST["edit-user_confirm_password"];
+	
+	//更換使用者資料
+	//$thisUser = new User($user_uid);
+	//$thisUser->changePassword();
+	
+	break;
+	
 	/**
 	 * 大量對帳號進行處理
 	*/
