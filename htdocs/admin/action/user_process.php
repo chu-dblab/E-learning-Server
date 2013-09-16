@@ -10,7 +10,7 @@ require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 /**
  * 取得傳過來的填入的資料
 */
-$action = $_POST['action'];
+$action = $_REQUEST['action'];
 if(isset($_POST["select_UID"])) {
 	$select_UID = $_POST["select_UID"];
 }
