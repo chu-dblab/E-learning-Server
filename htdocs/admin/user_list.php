@@ -87,8 +87,8 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						echo "<td>".$thisUserArray['UReal_Name']."</td>";
 						echo "<td>".$thisUserArray['UNickname']."</td>";
 						echo "<td>".$thisUserArray['UEmail']."</td>";
-						echo "<td><a href='#edit-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>修改</a></td>";
-						echo "<td><a href='#change_passwd-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>更改密碼</a></td>";
+						echo "<td><a href='#edit-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'><span class='icon-edit' /></a></td>";
+						echo "<td><a href='#change_passwd-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>Passwd</a></td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";
