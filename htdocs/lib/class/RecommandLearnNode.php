@@ -22,9 +22,8 @@
 	*/
 	public function addPeople($point_number)
 	{
-<<<<<<< HEAD
 	    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
-		$query->bindParam(":number",$point_number);
+	    $query->bindParam(":number",$point_number);
 	    $result->execute();		    
 	}
 	
