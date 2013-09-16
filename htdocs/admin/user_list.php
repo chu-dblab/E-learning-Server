@@ -171,8 +171,8 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h3>修改資料</h3>
 						</div>
-						<form action="action/user_process.php" method="post">
-							<input type="hidden" name="user_UID" id="user_UID" value="" />
+						<form action="action/user_process.php?action=edit-userData" method="post">
+							<input type="hidden" name="edit-user_UID" id="edit-user_UID" value="" />
 							<div class="form-horizontal">
 								<div class="control-group">
 									<label class="control-label" for="edit-user_realName">姓名: </label>
@@ -213,8 +213,7 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 		<script>
 			function displayUserEditDialog($UID) {
-				$('#user_UID').val($UID);
-				alert("D");
+				$('#edit-user_UID').val($UID);
 			}
 			//來源: http://jsfiddle.net/mm78k/1/
 			function toggleRow() {

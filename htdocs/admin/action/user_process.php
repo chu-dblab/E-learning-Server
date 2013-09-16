@@ -14,6 +14,7 @@ $action = $_REQUEST['action'];
 if(isset($_POST["select_UID"])) {
 	$select_UID = $_POST["select_UID"];
 }
+echo $action;
 
 /**
  * 測試用的顯示
@@ -22,9 +23,35 @@ if(isset($_POST["select_UID"])) {
 //echo '<pre>', print_r($select_UID, true), '</pre>';
 
 /**
- * 對帳號進行處理
+ * 單一對帳號進行處理
 */
-//如果有選擇哪些使用者帳號
+switch($action){
+	case "edit-userData":
+	//取得填入的選擇群組欄位
+	$user_uid = $_POST["edit-user_UID"];
+	$user_realName = $_POST["edit-user_realName"];
+	$user_nickName = $_POST["edit-user_nickName"];
+	$user_email = $_POST["edit-user_email"];
+	
+	//更換使用者資料
+	//TODO 防呆: 有無此使用者
+	$thisUser = new User($user_uid);
+	$thisUser->setRealName($user_realName);
+	$thisUser->setNickName($user_nickName);
+	$thisUser->setEmail($user_email);
+	
+	//產生成功訊息
+	$theAlert = new Alert("success", false, "<strong>處理完成！</strong> $user_uid 更改完成");
+	$theAlert->setInSession("user_process");
+	//回到原本的那一頁
+	header("Location: ../user_list.php");
+	break;
+}
+
+/**
+ * 大量對帳號進行處理
+*/
+/*//如果有選擇哪些使用者帳號
 if(!isset($select_UID)) {
 	//產生錯誤訊息
 	$theAlert = new Alert("error", false, "<strong>尚未處理！</strong>  你忘了選擇要套用哪位使用者喔～");
@@ -90,7 +117,7 @@ else {
 	$theAlert->setInSession("user_process");
 	//回到原本的那一頁
 	header("Location: ../user_list.php");
-}
+}*/
 
 /*if(isset($_SESSION["back_verifyCode"]) && $_SESSION["back_verifyCode"]==$_GET['token']){
 	//驗證成功
