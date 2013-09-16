@@ -87,7 +87,7 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						echo "<td>".$thisUserArray['UReal_Name']."</td>";
 						echo "<td>".$thisUserArray['UNickname']."</td>";
 						echo "<td>".$thisUserArray['UEmail']."</td>";
-						echo "<td><a href='#user-edit' class='btn btn-warning' data-toggle='modal'>修改</a></td>";
+						echo "<td><a href='#edit-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>修改</a></td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";
@@ -166,6 +166,40 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 							<?php showUsersTable(); ?>
 						</form>
 					</section>
+					<div id="edit-user-dialog" class="modal hide fade" tabindex="-1" role="dialog" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3>修改資料</h3>
+						</div>
+						<form action="action/user_process.php" method="post">
+							<input type="hidden" name="user_UID" id="user_UID" value="" />
+							<div class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="edit-user_realName">姓名: </label>
+									<div class="controls">
+										<input type="text" name="edit-user_realName" id="edit-user_realName" value="" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="edit-user_nickName">暱稱: </label>
+									<div class="controls">
+										<input type="text" name="edit-user_nickName" id="edit-user_nickName" value="" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="edit-user_email">e-mail: </label>
+									<div class="controls">
+										<input type="text" name="edit-user_email" id="edit-user_email" value="" />
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+								<button type="reset" class="btn btn-inverse" id="resetbutton" name="resetbutton">重填</button>
+								<button type="submit" class="btn btn-success" id="sendbutton" name="sendbutton">更改！！</button>
+							</div>
+						</form>
+					</div>
 					
 				</div><!--/span-->
 			</div><!--/row-->
@@ -178,6 +212,10 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/js/jquery.min.js"></script>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 		<script>
+			function displayUserEditDialog($UID) {
+				$('#user_UID').val($UID);
+				alert("D");
+			}
 			//來源: http://jsfiddle.net/mm78k/1/
 			function toggleRow() {
 				var $this = $(this);
