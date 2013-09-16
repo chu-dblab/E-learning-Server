@@ -139,6 +139,8 @@
 |          Material_Url       |           教材URL              |   varchar(150) |   N   |           |
 |             PLj             |          人數上限              |    int(200)    |   N   |           |
 |              Mj             |          目前人數              |    int(200)    |   N   |           |
+|              S              |      標的的飽和率上限          |      Float     |   N   |           |
+|              Fj             |          滿額指標              |      Bool      |   N   |           |
 
 *   __chu_question__ ( 題目 Table )
 
