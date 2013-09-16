@@ -33,18 +33,25 @@ switch($action){
 		$user_nickName = $_POST["edit-user_nickName"];
 		$user_email = $_POST["edit-user_email"];
 		
-		//更換使用者資料
-		//TODO 防呆: 有無此使用者
-		$thisUser = new User($user_uid);
-		$thisUser->setRealName($user_realName);
-		$thisUser->setNickName($user_nickName);
-		$thisUser->setEmail($user_email);
-		
-		//產生成功訊息
-		$theAlert = new Alert("success", false, "<strong>處理完成！</strong> $user_uid 更改完成");
-		$theAlert->setInSession("user_process");
-		//回到原本的那一頁
-		header("Location: ../user_list.php");
+		//此帳號不存在
+		if(!user_ishave($user_uid)) {
+			//產生失敗訊息
+			$theAlert = new Alert("error", false, "<strong>操作失敗！</strong> '$user_uid'帳號是不存在的喔～");
+			$theAlert->setInSession("user_process");
+		}
+		else {
+			//更換使用者資料
+			$thisUser = new User($user_uid);
+			$thisUser->setRealName($user_realName);
+			$thisUser->setNickName($user_nickName);
+			$thisUser->setEmail($user_email);
+			
+			//產生成功訊息
+			$theAlert = new Alert("success", false, "<strong>處理完成！</strong> $user_uid 資料更改完成");
+			$theAlert->setInSession("user_process");
+			//回到原本的那一頁
+			header("Location: ../user_list.php");
+		}
 		break;
 	
 	case "change-userPasswd":
