@@ -95,8 +95,8 @@
 	*/
 	private function getNodeOfLearnOfParameter($next_point_number,$userID)
 	{
-		$conString = "SELECT ".$conDB->table("target").".Mj,".$conDB->table("target").".PLj,".$conDB->table("belong").".weight,".
-				      $conDB->table("target").".TLearn_Time ".$conDB->table("edge").".MoveTime".
+		$conString = "SELECT ".$conDB->table("target").".Mj,".$conDB->table("target").".PLj,".$conDB->table("belong").".weight,".$conDB->table("target").".Fj,".
+				      $conDB->table("target").".TLearn_Time,".$conDB->table("edge").".MoveTime,".$conDB->table("target").".S ".
 			     " FROM ".$conDB->table("target").",".$conDB->table("belong").",".$conDB->table("edge").",".$conDB->table("user").
 			     " WHERE ".$conDB->table("user").".UID = :UID AND ".$conDB->table("target").".TID = :next_point_number";
 		$result = $conDB->prepare($conString);
@@ -115,7 +115,7 @@
 	*/
 	public function DetectAllLearnNodeFull()
 	{
-		
+	      
 	}
   }
 ?>
