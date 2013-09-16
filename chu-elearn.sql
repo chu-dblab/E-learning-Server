@@ -156,8 +156,8 @@ CREATE TABLE `chu_target` (
   `Material_Url` varchar(150) NOT NULL,
   `PLj` int(200) unsigned NOT NULL COMMENT '學習標的人數限制',
   `Mj` int(200) unsigned default NULL COMMENT '目前人數',
-  `S` float unsigned default NULL COMMENT '學習標的飽和率上限',
-  `Fj` tinyint(1) default NULL COMMENT '學習標的滿額指標',
+  `S` float unsigned default NOT NULL COMMENT '學習標的飽和率上限',
+  `Fj` tinyint(1) default NOT NULL COMMENT '學習標的滿額指標',
   PRIMARY KEY  (`TID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
