@@ -88,6 +88,7 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						echo "<td>".$thisUserArray['UNickname']."</td>";
 						echo "<td>".$thisUserArray['UEmail']."</td>";
 						echo "<td><a href='#edit-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>修改</a></td>";
+						echo "<td><a href='#change_passwd-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>更改密碼</a></td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";
@@ -204,7 +205,7 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 					</div>
 					<!-- End-修改使用者資料對話方塊 -->
 					<!-- 修改使用者密碼對話方塊 -->
-					<div id="edit-user-dialog" class="modal hide fade" tabindex="-1" role="dialog" >
+					<div id="change_passwd-user-dialog" class="modal hide fade" tabindex="-1" role="dialog" >
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h3>變更密碼</h3>
@@ -259,7 +260,8 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 		<script>
 			function displayUserEditDialog($UID) {
-				$('#edit-user_UID').val($UID);
+				$('#edit-user-dialog #edit-user_UID').val($UID);
+				$('#change_passwd-user-dialog #edit-user_UID').val($UID);
 			}
 			//來源: http://jsfiddle.net/mm78k/1/
 			function toggleRow() {

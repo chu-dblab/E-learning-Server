@@ -27,37 +27,62 @@ echo $action;
 */
 switch($action){
 	case "edit-userData":
-	//取得填入的選擇群組欄位
-	$user_uid = $_POST["edit-user_UID"];
-	$user_realName = $_POST["edit-user_realName"];
-	$user_nickName = $_POST["edit-user_nickName"];
-	$user_email = $_POST["edit-user_email"];
-	
-	//更換使用者資料
-	//TODO 防呆: 有無此使用者
-	$thisUser = new User($user_uid);
-	$thisUser->setRealName($user_realName);
-	$thisUser->setNickName($user_nickName);
-	$thisUser->setEmail($user_email);
-	
-	//產生成功訊息
-	$theAlert = new Alert("success", false, "<strong>處理完成！</strong> $user_uid 更改完成");
-	$theAlert->setInSession("user_process");
-	//回到原本的那一頁
-	header("Location: ../user_list.php");
-	break;
+		//取得填入的選擇群組欄位
+		$user_uid = $_POST["edit-user_UID"];
+		$user_realName = $_POST["edit-user_realName"];
+		$user_nickName = $_POST["edit-user_nickName"];
+		$user_email = $_POST["edit-user_email"];
+		
+		//更換使用者資料
+		//TODO 防呆: 有無此使用者
+		$thisUser = new User($user_uid);
+		$thisUser->setRealName($user_realName);
+		$thisUser->setNickName($user_nickName);
+		$thisUser->setEmail($user_email);
+		
+		//產生成功訊息
+		$theAlert = new Alert("success", false, "<strong>處理完成！</strong> $user_uid 更改完成");
+		$theAlert->setInSession("user_process");
+		//回到原本的那一頁
+		header("Location: ../user_list.php");
+		break;
 	
 	case "change-userPasswd":
-	//取得填入的選擇群組欄位
-	$user_uid = $_POST["edit-user_UID"];
-	$user_password = $_POST["edit-user_password"];
-	$user_confirm_password = $_POST["edit-user_confirm_password"];
-	
-	//更換使用者資料
-	//$thisUser = new User($user_uid);
-	//$thisUser->changePassword();
-	
-	break;
+		//取得填入的選擇群組欄位
+		$user_uid = $_POST["edit-user_UID"];
+		$user_password = $_POST["edit-user_password"];
+		$user_confirm_password = $_POST["edit-user_confirm_password"];
+		
+		//此帳號不存在
+		if(!user_ishave($user_uid)) {
+			//產生失敗訊息
+			$theAlert = new Alert("error", false, "<strong>操作失敗！</strong> '$user_uid'帳號是不存在的喔～");
+			$theAlert->setInSession("user_process");
+		}
+		//使用者沒填入密碼
+		else if($user_password=="") {
+			//產生失敗訊息
+			$theAlert = new Alert("error", false, "<strong>無更改密碼！</strong> 你還沒填入新密碼喔～");
+			$theAlert->setInSession("user_process");
+		}
+		//使用者確認密碼錯誤
+		else if($user_password != $user_confirm_password) {
+			//產生失敗訊息
+			$theAlert = new Alert("error", false, "<strong>無更改密碼！</strong> 你的確認密碼不正確喔～");
+			$theAlert->setInSession("user_process");
+		}
+		//都沒問題
+		else {
+			//更換使用者密碼
+			$thisUser = new User($user_uid);
+			$thisUser->changePassword($user_password);
+			//產生成功訊息
+			$theAlert = new Alert("success", false, "<strong>更改密碼完成！</strong> '$user_uid'帳號密碼已更改～");
+			$theAlert->setInSession("user_process");
+		}
+		//回到原本的那一頁
+		header("Location: ../user_list.php");
+		break;
 	
 	/**
 	 * 大量對帳號進行處理
