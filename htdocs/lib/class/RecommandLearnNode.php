@@ -60,7 +60,7 @@
 		 * 方法名稱：getLearningNode
 		 * 說明：取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
 		 * 參數：$point_number	學習點的編號
-		 * 	 $userID	使用者編號
+		 * 	 	 $userID	使用者編號
 		 * 回傳值：推薦學習之標的編號
 		 */
 		public function getLearningNode($point_number,$userID)
@@ -78,10 +78,11 @@
 			     $getNextNodeParameter = getNodeOfLearnOfParameter($row["Tj"],$userID);
 			     if($getNextNodeParameter["Fj"])
 			     {
+					$pathCost = 0;
 			     }
 			     else
 			     {
-				
+					$pathCost = $getNextNodeParameter["weight"] * (1 - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"] ;
 			     }
 			}
 			//將計算結果做快速排序
