@@ -118,7 +118,9 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 		<link href="<?php echo SITE_URL_ROOT ?>assets/css/bootstrap-top-navbar.css" rel="stylesheet">
 		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<style>
-			
+			.modal form {
+				margin: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -142,17 +144,28 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 					</section>
 					
 					<section>
-						<form action="action/user_process.php" method="post">
+						<form id="user_list-form" action="action/user_process.php" method="post">
 							<p>總共有<?php echo usersTotal(); ?>個使用者</p>
 							動作: 
-							<select name="action" id="multi-action">
-								<option value="">請選擇動作</option>
+							<select name="action" id="multi-action" onInput="checkChoose()">
+								<option value="none">請選擇動作</option>
 								<option value="enable">啟用</option>
 								<option value="disable">停用</option>
 								<!-- <option value="remove">刪除</option> -->
 								<option value="logout">強制登出</option>
 								<option value="change-userGroup">更換群組至: </option>
 							</select>
+							<script>
+								function checkChoose() {
+									var multi_action = document.getElementById('multi-action');
+									if(multi_action.value == 'none') {
+										multi_action.setCustomValidity('請選擇您的動作!!');
+									}
+									else {
+										multi_action.setCustomValidity('');
+									}
+								}
+							</script>
 							<select name="user_group" id="user_group">
 								<?php 
 									$userGroup = userGroup_getList();
@@ -259,10 +272,37 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/js/jquery.min.js"></script>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 		<script>
+			//更改使用者資料、更改使用者密碼對話方塊
 			function displayUserEditDialog($UID) {
 				$('#edit-user-dialog #edit-user_UID').val($UID);
 				$('#change_passwd-user-dialog #edit-user_UID').val($UID);
 			}
+
+			//預設不選擇動作時，停用傳送鈕
+			$("#user_list-form input[type='submit']").attr("disabled","true");
+			
+			//預設不選擇移動到某群組選項時，隱藏群組名單清單
+			$("select#user_group").css("display","none");
+			
+			//當使用者更動選項時
+			$("select#multi-action").change(function(){
+				//不選擇動作時，停用傳送鈕
+				if(this.value == "none") {
+					$("#user_list-form input[type='submit']").attr("disabled","disabled");
+				}
+				else {
+					$("#user_list-form input[type='submit']").removeAttr("disabled");
+				}
+				
+				//不選擇移動到某群組選項時，隱藏群組名單清單
+				if(this.value == "change-userGroup") {
+					$("select#user_group").css("display","");
+				}
+				else {
+					$("select#user_group").css("display","none");
+				}
+			});
+			
 			//來源: http://jsfiddle.net/mm78k/1/
 			function toggleRow() {
 				var $this = $(this);
