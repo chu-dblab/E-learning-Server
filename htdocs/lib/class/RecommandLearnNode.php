@@ -1,10 +1,10 @@
 <?php
  	require_once("../lib/include.php");
-	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+	require_once(DOCUMENT_ROOT."lib/class/Database.php");
 	
 	/*
 	 *  類別名稱：推薦學習點
-     */
+	 */
 	class RecommandLearnNode
 	{
 		private $conDB;
@@ -76,9 +76,7 @@
 			{
 			     $pathCost = -1;
 			     $getNextNodeParameter = getNodeOfLearnOfParameter($row["Tj"],$userID);
-			     if($getNextNodeParameter["Fj"])
-			     {
-			     }
+			     if($getNextNodeParameter["Fj"]) pathCost = 0;
 			     else
 			     {
 				
