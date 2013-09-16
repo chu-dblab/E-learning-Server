@@ -22,6 +22,7 @@
 	*/
 	public function addPeople($point_number)
 	{
+<<<<<<< HEAD
 	    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
 		$query->bindParam(":number",$point_number);
 	    $result->execute();		    
@@ -81,7 +82,7 @@
 		  if($getNextNodeParameter["Fj"]) pathCost = 0;
 		  else
 		  {
-		      
+		      $pathCost = $getNextNodeParameter["weight"] * (1 - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"] ;
 		  }
 	      }
 	      //將計算結果做快速排序
@@ -102,8 +103,7 @@
 		$result = $conDB->prepare($conString);
 		$result->bindParam(":UID",$userID);
 		$result->bindParam(":next_point_number",$next_point_number);
-		$result->execute();
-		
+		$result->execute();		
 		$row = $result->fetchAll();
 		return $row;
 	}
