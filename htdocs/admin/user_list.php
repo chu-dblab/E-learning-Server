@@ -87,8 +87,10 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						echo "<td>".$thisUserArray['UReal_Name']."</td>";
 						echo "<td>".$thisUserArray['UNickname']."</td>";
 						echo "<td>".$thisUserArray['UEmail']."</td>";
-						echo "<td><a href='#edit-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'><span class='icon-edit' /></a></td>";
-						echo "<td><a href='#change_passwd-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>Passwd</a></td>";
+						echo "<td>";
+							echo "<a href='#edit-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'><span class='icon-edit icon-white' /></a>";
+							echo "<a href='#change_passwd-user-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisUserArray['UID']."&#39;)'>Passwd</a>";
+						echo "</td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";
@@ -146,36 +148,37 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 					<section>
 						<form id="user_list-form" action="action/user_process.php" method="post">
 							<p>總共有<?php echo usersTotal(); ?>個使用者</p>
-							動作: 
-							<select name="action" id="multi-action" onInput="checkChoose()">
-								<option value="none">請選擇動作</option>
-								<option value="enable">啟用</option>
-								<option value="disable">停用</option>
-								<!-- <option value="remove">刪除</option> -->
-								<option value="logout">強制登出</option>
-								<option value="change-userGroup">更換群組至: </option>
-							</select>
-							<script>
-								function checkChoose() {
-									var multi_action = document.getElementById('multi-action');
-									if(multi_action.value == 'none') {
-										multi_action.setCustomValidity('請選擇您的動作!!');
+							<div id="action_dashboard">
+								動作: 
+								<select name="action" id="multi-action" onInput="checkChoose()">
+									<option value="none">請選擇動作</option>
+									<option value="enable">啟用</option>
+									<option value="disable">停用</option>
+									<!-- <option value="remove">刪除</option> -->
+									<option value="logout">強制登出</option>
+									<option value="change-userGroup">更換群組至: </option>
+								</select>
+								<script>
+									function checkChoose() {
+										var multi_action = document.getElementById('multi-action');
+										if(multi_action.value == 'none') {
+											multi_action.setCustomValidity('請選擇您的動作!!');
+										}
+										else {
+											multi_action.setCustomValidity('');
+										}
 									}
-									else {
-										multi_action.setCustomValidity('');
-									}
-								}
-							</script>
-							<select name="user_group" id="user_group">
-								<?php 
-									$userGroup = userGroup_getList();
-									foreach($userGroup as $key=>$value){
-										echo "<option value='$key'>$key: $value</option>";
-									}
-								?>
-							</select>
-							<input class="btn btn-success" type="submit" value="送出">
-							
+								</script>
+								<select name="user_group" id="user_group">
+									<?php 
+										$userGroup = userGroup_getList();
+										foreach($userGroup as $key=>$value){
+											echo "<option value='$key'>$key: $value</option>";
+										}
+									?>
+								</select>
+								<input class="btn btn-success" type="submit" value="送出">
+							</div>
 							<hr />
 							<?php showUsersTable(); ?>
 						</form>

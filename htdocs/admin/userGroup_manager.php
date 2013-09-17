@@ -62,6 +62,7 @@
 				echo "<th scpoe='col'>顯示名稱</th>";
 				echo "<th scpoe='col'>群組內使用者、</th>";
 				echo "<th scpoe='col'>管理員權限</th>";
+				echo "<th scpoe='col'>操作</th>";
 			echo "</tr>";
 			echo "</thead>";
 			echo "<tbody>";
@@ -72,6 +73,10 @@
 						echo "<td>".$thisGroupArray['GName']."</td>";
 						echo "<td>".$thisGroupArray['in_user']."</td>";
 						echo "<td>".$thisGroupArray['Gauth_admin']."</td>";
+						echo "<td>";
+							echo "<a href='#edit-userGroup-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisGroupArray['GID']."&#39;)'><span class='icon-edit icon-white' /></a>";
+							echo "<a href='#edit-userGroup-dialog' class='btn btn-danger' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisGroupArray['GID']."&#39;)'><span class='icon-remove icon-white' /></a>";
+						echo "</td>";
 					echo "</tr>";
 				}
 			echo "<tbody>";
@@ -123,7 +128,19 @@
 					
 					<section>
 						<p>總共有<?php echo userGroupsTotal(); ?>個使用者群組</p>
-						<?php showuserGroupsTable(); ?>
+						<form id="userGroup_list-form" action="action/userGroup_process.php" method="post">
+							<div id="action_dashboard">
+									動作: 
+									<select name="action" id="multi-action" onInput="checkChoose()">
+										<option value="none">請選擇動作</option>
+										<option value="remove">刪除</option>
+
+									</select>
+									<input class="btn btn-success" type="submit" value="送出">
+								</div>
+							
+							<?php showuserGroupsTable(); ?>
+						</form>
 						
 					</section>
 					
@@ -184,6 +201,26 @@
 		<script src="<?php echo SITE_URL_ROOT ?>assets/js/jquery.min.js"></script>
 		<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
 		<script>
+			//更改使用者資料、更改使用者密碼對話方塊
+			function displayUserEditDialog($UID) {
+				//$('#edit-user-dialog #edit-user_UID').val($UID);
+			}
+
+			//預設不選擇動作時，停用傳送鈕
+			$("#userGroup_list-form input[type='submit']").attr("disabled","true");
+			
+			
+			//當使用者更動選項時
+			$("select#multi-action").change(function(){
+				//不選擇動作時，停用傳送鈕
+				if(this.value == "none") {
+					$("#userGroup_list-form input[type='submit']").attr("disabled","disabled");
+				}
+				else {
+					$("#userGroup_list-form input[type='submit']").removeAttr("disabled");
+				}
+			});
+			
 			//來源: http://jsfiddle.net/mm78k/1/
 			function toggleRow() {
 				var $this = $(this);
