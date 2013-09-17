@@ -19,7 +19,7 @@
 	
 	//取得通知資料
 	$theAlert = new Alert();
-	$theAlert->getInSession("userGroup_create");
+	$theAlert->getInSession("userGroup_process");
 	// ------------------------------------------------------------------------
 	
 	//取得上個頁面傳來的訊息
@@ -43,21 +43,6 @@
 			echo "<thead>";
 			echo "<tr>";
 				//第1行: 欄位名稱
-				echo "<th scpoe='col'>";
-				echo "<div class='btn-group'>";
-					echo "<a href='javascript:usel()' class='btn btn-small'><span class='icon-check' /></a>";
-					echo "<button class='btn btn-small dropdown-toggle' data-toggle='dropdown'>";
-						echo "<span class='caret'></span>";
-					echo "</button>";
-					echo "<ul class='dropdown-menu'>";
-						echo "<li><a href='javascript:selAll()'>全選</a></li>";
-						echo "<li><a href='javascript:unselAll()'>全不選</a></li>";
-						echo "<li class='divider'></li>";
-						echo "<li><a href='javascript:usel()'>反向選</a></li>";
-					echo "</ul>";
-				echo "</div>";
-				echo "</th>";
-				
 				echo "<th scpoe='col'>內部名稱</th>";
 				echo "<th scpoe='col'>顯示名稱</th>";
 				echo "<th scpoe='col'>群組內使用者、</th>";
@@ -68,14 +53,13 @@
 			echo "<tbody>";
 				foreach ($userGroup_DBTable as $groupKey => $thisGroupArray) {
 					echo "<tr>";
-						echo "<th scrope='row'><input type='checkbox' name='select_GID[]' value='".$thisGroupArray['GID']."'></th>";
-						echo "<td>".$thisGroupArray['GID']."</td>";
+						echo "<th scrope='row'>".$thisGroupArray['GID']."</th>";
 						echo "<td>".$thisGroupArray['GName']."</td>";
 						echo "<td>".$thisGroupArray['in_user']."</td>";
 						echo "<td>".$thisGroupArray['Gauth_admin']."</td>";
 						echo "<td>";
 							echo "<a href='#edit-userGroup-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisGroupArray['GID']."&#39;)'><span class='icon-edit icon-white' /></a>";
-							echo "<a href='#edit-userGroup-dialog' class='btn btn-danger' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisGroupArray['GID']."&#39;)'><span class='icon-remove icon-white' /></a>";
+							echo "<a href='#remove-userGroup-dialog' class='btn btn-danger' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisGroupArray['GID']."&#39;)'><span class='icon-remove icon-white' /></a>";
 						echo "</td>";
 					echo "</tr>";
 				}
@@ -105,6 +89,11 @@
 		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="<?php echo SITE_URL_ROOT ?>assets/css/bootstrap-top-navbar.css" rel="stylesheet">
 		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<style>
+			.modal form {
+				margin: 0;
+			}
+		</style>
 	</head>
 	<body>
 		<?php template_admin_top_nav() ?>
@@ -128,28 +117,78 @@
 					
 					<section>
 						<p>總共有<?php echo userGroupsTotal(); ?>個使用者群組</p>
-						<form id="userGroup_list-form" action="action/userGroup_process.php" method="post">
-							<div id="action_dashboard">
-									動作: 
-									<select name="action" id="multi-action" onInput="checkChoose()">
-										<option value="none">請選擇動作</option>
-										<option value="remove">刪除</option>
-
-									</select>
-									<input class="btn btn-success" type="submit" value="送出">
-								</div>
-							
-							<?php showuserGroupsTable(); ?>
-						</form>
+						<?php showuserGroupsTable(); ?>
 						
 					</section>
+					<!-- 修改使用者群組資料對話方塊 -->
+					<div id="edit-userGroup-dialog" class="modal hide fade" tabindex="-1" role="dialog" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3>修改資料</h3>
+						</div>
+						<form action="action/userGroup_process.php?action=edit-data" method="post">
+							<input type="hidden" name="edit-userGroup_GID" id="edit-userGroup_GID" value="" />
+							<div class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="edit-userGroup_displayName">顯式名稱: </label>
+									<div class="controls">
+										<input type="text" name="edit-userGroup_displayName" id="edit-userGroup_displayName" value="" />
+									</div>
+								</div>
+								<hr />
+								<div class="control-group">
+									<label class="control-label">授予權限: </label>
+									<div class="controls">
+										<ul>
+											<li>
+												<label class="checkbox">
+													<input type="checkbox" name="edit-userGroup_auth[]" value="admin" > 總管理
+												</label>
+											</li>
+											<!--<li>
+												<label class="checkbox">
+													<input type="checkbox" name="edit-userGroup_auth[]" value="admin" > 總管理
+												</label>
+											</li>
+											<li>
+												<label class="checkbox">
+													<input type="checkbox" name="edit-userGroup_auth[]" value="admin" > 總管理
+												</label>
+											</li>-->
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">關閉</button>
+								<button type="submit" class="btn btn-success" id="sendbutton" name="sendbutton">更改！！</button>
+							</div>
+						</form>
+					</div>
+					<!-- End-修改使用者群組資料對話方塊 -->
 					
+					<!-- 確認刪除對話方塊 -->
+					<div id="remove-userGroup-dialog" class="modal hide fade" tabindex="-1" role="dialog" >
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3>刪除群組</h3>
+						</div>
+						<form action="action/userGroup_process.php?action=remove" method="post">
+							<input type="hidden" name="edit-userGroup_GID" id="edit-userGroup_GID" value="" />
+							<div class="modal-body">
+								<p class="text-error">這個群組將被刪除，確定嗎？？</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+								<button type="submit" class="btn btn-danger" id="sendbutton" name="sendbutton">刪除</button>
+							</div>
+						</form>
+					</div>
+					<!-- End-確認刪除對話方塊 -->
 					<hr />
 					
 					<section>
 						<div class="well"><h2>新增使用者群組</h2>
-						
-<!--  -->
 							<form class="form-horizontal" action="action/userGroup_toCreate.php" method="post">
 								<fieldset>
 									<div class="control-group">
@@ -203,73 +242,9 @@
 		<script>
 			//更改使用者資料、更改使用者密碼對話方塊
 			function displayUserEditDialog($UID) {
-				//$('#edit-user-dialog #edit-user_UID').val($UID);
+				$('#edit-userGroup-dialog #edit-userGroup_GID').val($UID);
+				$('#remove-userGroup-dialog #edit-userGroup_GID').val($UID);
 			}
-
-			//預設不選擇動作時，停用傳送鈕
-			$("#userGroup_list-form input[type='submit']").attr("disabled","true");
-			
-			
-			//當使用者更動選項時
-			$("select#multi-action").change(function(){
-				//不選擇動作時，停用傳送鈕
-				if(this.value == "none") {
-					$("#userGroup_list-form input[type='submit']").attr("disabled","disabled");
-				}
-				else {
-					$("#userGroup_list-form input[type='submit']").removeAttr("disabled");
-				}
-			});
-			
-			//來源: http://jsfiddle.net/mm78k/1/
-			function toggleRow() {
-				var $this = $(this);
-				var $row = $this.parent().parent();
-
-				if ($this.is(':checked'))
-				{
-					$row.addClass('info');
-					//$row.removeClass('off');
-				}
-				else
-				{
-					//$row.addClass('off');
-					$row.removeClass('info');
-				}
-			}
-			
-			//來源: http://blog.xuite.net/abgne/diary1/3855816-%E7%94%A8CheckBox%E4%BE%86%E5%81%9A%E5%85%A8%E9%81%B8%2F%E5%85%A8%E5%8F%96%E6%B6%88%2F%E5%8F%8D%E5%90%91%E9%81%B8%E5%8F%96
-			function selAll(){
-				//變數checkItem為checkbox的集合
-				var checkItem = document.getElementsByName("select_GID[]");
-				for(var i=0;i<checkItem.length;i++){
-					checkItem[i].checked=true;   
-				}
-			}
-			
-			function unselAll(){
-				//變數checkItem為checkbox的集合
-				var checkItem = document.getElementsByName("select_GID[]");
-				for(var i=0;i<checkItem.length;i++){
-					checkItem[i].checked=false;
-				}
-			}
-			
-			function usel(){
-				//變數checkItem為checkbox的集合
-				var checkItem = document.getElementsByName("select_GID[]");
-				for(var i=0;i<checkItem.length;i++){
-					checkItem[i].checked=!checkItem[i].checked;
-				}
-			}
-
-			$().ready(function() {
-				//Assign the toggle
-				$('#allUserGroups_table').find(':checkbox').each(function() {
-				$(this).click(toggleRow);
-				$(this).parent().parent().addClass('off');
-				});
-			});
 		</script>
 	</body>
 </html>

@@ -192,23 +192,25 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						</div>
 						<form action="action/user_process.php?action=edit-userData" method="post">
 							<input type="hidden" name="edit-user_UID" id="edit-user_UID" value="" />
-							<div class="form-horizontal">
-								<div class="control-group">
-									<label class="control-label" for="edit-user_realName">姓名: </label>
-									<div class="controls">
-										<input type="text" name="edit-user_realName" id="edit-user_realName" value="" />
+							<div class="modal-body">
+								<div class="form-horizontal">
+									<div class="control-group">
+										<label class="control-label" for="edit-user_realName">姓名: </label>
+										<div class="controls">
+											<input type="text" name="edit-user_realName" id="edit-user_realName" value="" />
+										</div>
 									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="edit-user_nickName">暱稱: </label>
-									<div class="controls">
-										<input type="text" name="edit-user_nickName" id="edit-user_nickName" value="" />
+									<div class="control-group">
+										<label class="control-label" for="edit-user_nickName">暱稱: </label>
+										<div class="controls">
+											<input type="text" name="edit-user_nickName" id="edit-user_nickName" value="" />
+										</div>
 									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="edit-user_email">e-mail: </label>
-									<div class="controls">
-										<input type="text" name="edit-user_email" id="edit-user_email" value="" />
+									<div class="control-group">
+										<label class="control-label" for="edit-user_email">e-mail: </label>
+										<div class="controls">
+											<input type="text" name="edit-user_email" id="edit-user_email" value="" />
+										</div>
 									</div>
 								</div>
 							</div>
@@ -228,32 +230,34 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						</div>
 						<form action="action/user_process.php?action=change-userPasswd" method="post">
 							<input type="hidden" name="edit-user_UID" id="edit-user_UID" value="" />
-							<div class="form-horizontal">
-								<div class="control-group">
-									<label class="control-label" for="edit-user_password">密碼: </label>
-									<div class="controls">
-										<input type="password" name="edit-user_password" id="edit-user_password" required="required" oninput="checkPasswords()" />
+							<div class="modal-body">
+								<div class="form-horizontal">
+									<div class="control-group">
+										<label class="control-label" for="edit-user_password">密碼: </label>
+										<div class="controls">
+											<input type="password" name="edit-user_password" id="edit-user_password" required="required" oninput="checkPasswords()" />
+										</div>
 									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="edit-user_confirm_password">確認密碼: </label>
-									<div class="controls">
-										<input type="password" name="edit-user_confirm_password" id="edit-user_confirm_password" required="required" oninput="checkPasswords()" />
+									<div class="control-group">
+										<label class="control-label" for="edit-user_confirm_password">確認密碼: </label>
+										<div class="controls">
+											<input type="password" name="edit-user_confirm_password" id="edit-user_confirm_password" required="required" oninput="checkPasswords()" />
+										</div>
 									</div>
+									<script>
+										//來源: http://blog.bobchao.net/2010/11/firefox-4-html5.html
+										function checkPasswords() {
+											var user_password = document.getElementById('edit-user_password');
+											var user_confirm_password = document.getElementById('edit-user_confirm_password');
+											if (user_password.value != user_confirm_password.value) {
+												user_confirm_password.setCustomValidity('您這兩次輸入的密碼不同，請再次確認！');
+											}
+											else {
+												user_confirm_password.setCustomValidity('');
+											}
+										}
+									</script>
 								</div>
-								<script>
-									//來源: http://blog.bobchao.net/2010/11/firefox-4-html5.html
-									function checkPasswords() {
-										var user_password = document.getElementById('edit-user_password');
-										var user_confirm_password = document.getElementById('edit-user_confirm_password');
-										if (user_password.value != user_confirm_password.value) {
-											user_confirm_password.setCustomValidity('您這兩次輸入的密碼不同，請再次確認！');
-										}
-										else {
-											user_confirm_password.setCustomValidity('');
-										}
-									}
-								</script>
 							</div>
 							<div class="modal-footer">
 								<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
