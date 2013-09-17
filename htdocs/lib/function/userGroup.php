@@ -229,12 +229,25 @@ function userGroup_queryAll(){
 	$db = new Database();
 	
 	//資料庫查詢
+	//	SELECT `groups`.`GID`, `groups`.`GName`, COUNT(`users`.`GID`) AS `in_user`, `groups`.`Gauth_admin` 
+	//	FROM `chu_user` AS `users` 
+	//	JOIN `chu_group` AS `groups` ON `users`.`GID` = `groups`.`GID` 
+	//	GROUP BY `users`.`GID`
+	//UNION
+	//	SELECT DISTINCT `GID`, `GName`, "0", `Gauth_admin`
+	//	FROM `chu_group` AS `groups`
+	//	WHERE (SELECT COUNT(`UID`) FROM `chu_user` WHERE `GID` = `groups`.`GID` ) = 0
 	$db_userGroup_query = $db->query("
 		SELECT `groups`.`GID`, `groups`.`GName`, count(`users`.`GID`) AS `in_user`, `groups`.`Gauth_admin` 
 		FROM `".$db->table($FORM_USER)."` AS `users` 
 		JOIN `".$db->table($FORM_USER_GROUP)."` AS `groups` ON `users`.`GID` = `groups`.`GID` 
-		GROUP BY `users`.`GID`"
-	);
+		GROUP BY `users`.`GID` 
+		UNION 
+		SELECT `GID`, `GName`, '0', `Gauth_admin` 
+		FROM `".$db->table($FORM_USER_GROUP)."` AS `groups` 
+		WHERE (SELECT COUNT(`UID`) FROM `".$db->table($FORM_USER)."` WHERE `GID` = `groups`.`GID` ) = 0 
+		ORDER BY `in_user` DESC
+	");
 	
 	return $db_userGroup_query->fetchAll();
 }
