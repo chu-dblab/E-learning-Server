@@ -142,19 +142,9 @@
 										<ul>
 											<li>
 												<label class="checkbox">
-													<input type="checkbox" name="edit-userGroup_auth[]" value="admin" > 總管理
+													<input type="checkbox" name="edit-userGroup_auth-admin" value="on" > 總管理
 												</label>
 											</li>
-											<!--<li>
-												<label class="checkbox">
-													<input type="checkbox" name="edit-userGroup_auth[]" value="admin" > 總管理
-												</label>
-											</li>
-											<li>
-												<label class="checkbox">
-													<input type="checkbox" name="edit-userGroup_auth[]" value="admin" > 總管理
-												</label>
-											</li>-->
 										</ul>
 									</div>
 								</div>

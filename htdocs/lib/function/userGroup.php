@@ -176,7 +176,7 @@ function userGroup_ishave($name){
 		return false;
 	}
 }
-// ------------------------------------------------------------------------ 
+// ========================================================================
 
 /**
  * userGroup_getName
@@ -254,6 +254,21 @@ function userGroup_setDiaplayName($groupName, $displayName){
 		}
 	}
 }
+// ========================================================================
+
+/**
+ * userGroup_havePermission
+ *
+ * 取得此使用者群組的名稱
+ *
+ * @access	public
+ * @param	string	權限名稱
+ * @return	bool	是否擁有
+ * 
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+*/
+
 // ========================================================================
 
 /**
