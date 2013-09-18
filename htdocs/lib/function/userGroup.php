@@ -72,7 +72,7 @@ function userGroup_create($name, $display_name, $adminPermissions){
  * @access	public
  * @param	string	名稱
  * @return	string	是否有成功刪除
- *			"Finish": 成功建立
+ *			"Finish": 成功刪除
  *			"UserExist": 尚有存在的使用者
 			"NoFound": 找不到存在的群組
 			"DBErr": 資料庫錯誤
@@ -209,7 +209,51 @@ function userGroup_getDiaplayName($groupName){
 		return null;
 	}
 }
+// ------------------------------------------------------------------------ 
 
+/**
+ * userGroup_setDiaplayName
+ *
+ * 取得此使用者群組的名稱
+ *
+ * @access	public
+ * @param	string	groupName
+ * @param	string	要更改的顯示名稱
+ * @return	string	狀態回傳
+ * 			"Finish": 成功更改
+ * 			"NoFound": 無此使用者群組
+ * 			"DBErr": 其他資料庫錯誤
+ * 
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+*/
+function userGroup_setDiaplayName($groupName, $displayName){
+	global $FORM_USER_GROUP;
+	
+	//資料庫連結
+	$db = new Database();
+	
+	//若沒有這個群組
+	if(!userGroup_ishave($groupName)) {
+		return "NoFound";
+	}
+	else {
+		//寫入資料庫
+		$queryResult = $db->prepare("UPDATE ".$db->table($FORM_USER_GROUP)." SET `GName` = :name WHERE `GID` = :gid");
+		$queryResult->bindParam(":name",$displayName);
+		$queryResult->bindParam(":gid",$groupName);
+		$queryResult->execute();
+		
+		
+		$errmsg = $queryResult->errorInfo();
+		if( $errmsg[1] == 0 ) {
+			return "Finish";
+		}
+		else {
+			return "DBErr";
+		}
+	}
+}
 // ========================================================================
 
 /**
@@ -229,12 +273,25 @@ function userGroup_queryAll(){
 	$db = new Database();
 	
 	//資料庫查詢
+	//	SELECT `groups`.`GID`, `groups`.`GName`, COUNT(`users`.`GID`) AS `in_user`, `groups`.`Gauth_admin` 
+	//	FROM `chu_user` AS `users` 
+	//	JOIN `chu_group` AS `groups` ON `users`.`GID` = `groups`.`GID` 
+	//	GROUP BY `users`.`GID`
+	//UNION
+	//	SELECT DISTINCT `GID`, `GName`, "0", `Gauth_admin`
+	//	FROM `chu_group` AS `groups`
+	//	WHERE (SELECT COUNT(`UID`) FROM `chu_user` WHERE `GID` = `groups`.`GID` ) = 0
 	$db_userGroup_query = $db->query("
 		SELECT `groups`.`GID`, `groups`.`GName`, count(`users`.`GID`) AS `in_user`, `groups`.`Gauth_admin` 
 		FROM `".$db->table($FORM_USER)."` AS `users` 
 		JOIN `".$db->table($FORM_USER_GROUP)."` AS `groups` ON `users`.`GID` = `groups`.`GID` 
-		GROUP BY `users`.`GID`"
-	);
+		GROUP BY `users`.`GID` 
+		UNION 
+		SELECT `GID`, `GName`, '0', `Gauth_admin` 
+		FROM `".$db->table($FORM_USER_GROUP)."` AS `groups` 
+		WHERE (SELECT COUNT(`UID`) FROM `".$db->table($FORM_USER)."` WHERE `GID` = `groups`.`GID` ) = 0 
+		ORDER BY `in_user` DESC
+	");
 	
 	return $db_userGroup_query->fetchAll();
 }

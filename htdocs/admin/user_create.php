@@ -19,7 +19,7 @@
 	
 	//取得通知資料
 	$theAlert = new Alert();
-	$theAlert->getInSession("user_create");
+	$theAlert->getInSession("user_process");
 	
 	//輸出通知資料
 	function show_status_notify(){

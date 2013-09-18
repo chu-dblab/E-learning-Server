@@ -118,6 +118,80 @@ class User {
 	// ========================================================================
 	
 	/**
+	 * 取得所在群組
+	 *
+	 * @access	public
+	 * @return	string	群組名稱
+	 */
+	function getGroup(){
+		return $this->getQueryInfo("GID");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 設定所在群組
+	 *
+	 * @access	public
+	 * @param	string	群組
+	 * @return	string	是否更改成功
+	 * 			"Finish": 成功更改
+	 * 			"NoFoundUserGroup": 無此使用者群組
+	 * 			"DBErr": 其他資料庫錯誤
+	 * TODO 防呆: 判斷至少要有一個以上的帳號為啟用
+	 * 
+	 * @author	元兒～ <yuan817@moztw.org>
+	 * @since	Version 1
+	 */
+	function setGroup($toGroup){
+		global $FORM_USER;
+		
+		//連結資料庫
+		$db = new Database();
+		
+		$queryResult = $db->prepare("UPDATE ".$db->table($FORM_USER)." SET `GID` = :togroup WHERE `UID` = :username");
+		$queryResult->bindParam(":username",$this->thisUID);
+		$queryResult->bindParam(":togroup",$toGroup);
+		$queryResult->execute();
+		
+		
+		$errmsg = $queryResult->errorInfo();
+		if( $errmsg[1] == 0 ) {
+			return "Finish";
+		}
+		else if ( $errmsg[1] == 1452) {
+			return "NoFoundUserGroup";
+		}
+		else {
+			return "DBErr";
+		}
+	
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號啟用狀態
+	 *
+	 * @access	public
+	 * @return	bool	是否已啟用
+	 */
+	function isEnable(){
+		return $this->getQueryInfo("UEnabled");
+	}
+	
+	/**
+	 * 設定帳號啟用狀態
+	 *
+	 * @access	public
+	 * @param	bool	是否為啟用
+	 * @return	bool	是否更改成功
+	 */
+	function setEnable($isActive){
+		return $this->setQueryInfo("UEnabled", $isActive);
+	}
+	
+	// ========================================================================
+	
+	/**
 	 * 取得真實姓名
 	 *
 	 * @access	public
@@ -245,71 +319,36 @@ class User {
 	 * 更改密碼
 	 *
 	 * @access	public
-	 * @param	string	舊密碼
-	 * @param	string	舊密碼加密方式（可省略）
 	 * @param	string	新密碼
-	 * @param	string	新密碼確認
 	 * @param	string	新密碼加密方式（可省略）
 	 * @return	string	狀態回傳
 				"Finish": 密碼更改完成
-				"CurrentPasswdErr": 目前密碼錯誤
-				"NewRepPasswdErr": 新密碼確認密碼錯誤
 	 * 
 	 * @since	Version 0
 	 */
 	function changePassword(){
 		global $FORM_USER, $ENCRYPT_MODE;
 		//若帶入兩個參數
-		if(func_num_args() == 5){
+		if(func_num_args() == 2){
 			//對應變數
 			$args = func_get_args();
-			$currentPasswd = $args[0];
-			$currentPasswdMode = $args[1];
-			$newPasswd = $args[2];
-			$newPasswd_rep = $args[3];
-			$newPasswdMode = $args[4];
+			$newPasswd = $args[0];
+			$newPasswdMode = $args[1];
 			
+			//將密碼加密
+			$passwd = encryptText($newPasswd, $newPasswdMode);
 			
-			//動作
-			//若目前密碼錯誤
-			if( !$this->isPasswordCorrect($currentPasswd, $currentPasswdMode) ){
-				return "CurrentPasswdErr";
-			}
-			//確認密碼錯誤
-			else if($newPasswd != $newPasswd_rep){
-				return "NewRepPasswdErr";
-			}
-			//都沒問題，更改密碼
-			else{
-				
-				//將密碼加密
-				$passwd = encryptText($newPasswd, $newPasswdMode);
-				
-				//登記新的密碼進資料庫
-				$this->setQueryInfo("UPassword", $passwd);
-				
-				return "Finish";
-			}
+			//登記新的密碼進資料庫
+			$this->setQueryInfo("UPassword", $passwd);
+			
+			return "Finish";
 		}
-		else if(func_num_args() == 4){
+		else if(func_num_args() == 1){
 			//對應變數
 			$args = func_get_args();
-			$currentPasswd = $args[0];
-			$currentPasswdMode = $args[1];
-			$newPasswd = $args[2];
-			$newPasswd_rep = $args[3];
+			$newPasswd = $args[0];
 			
-			return $this->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
-			
-		}
-		else if(func_num_args() == 3){
-			//對應變數
-			$args = func_get_args();
-			$currentPasswd = $args[0];
-			$newPasswd = $args[1];
-			$newPasswd_rep = $args[2];
-			
-			return $this->changePassword($currentPasswd, $ENCRYPT_MODE, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
+			return $this->changePassword($newPasswd, $ENCRYPT_MODE);
 		}
 	}
 	// ========================================================================

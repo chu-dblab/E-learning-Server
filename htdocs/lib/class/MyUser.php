@@ -85,6 +85,17 @@ class MyUser {
 	function getCreateTime(){
 		return $this->userObject->getCreateTime();
 	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得所在群組
+	 *
+	 * @access	public
+	 * @return	string	群組名稱
+	 */
+	function getGroup(){
+		return $this->userObject->getGroup();
+	}
 	// ========================================================================
 	
 	/**
@@ -203,49 +214,51 @@ class MyUser {
 	 * @param	string	舊密碼
 	 * @param	string	舊密碼加密方式（可省略）
 	 * @param	string	新密碼
-	 * @param	string	新密碼確認
 	 * @param	string	新密碼加密方式（可省略）
 	 * @return	string	狀態回傳
 				"Finish": 密碼更改完成
 				"CurrentPasswdErr": 目前密碼錯誤
-				"NewRepPasswdErr": 新密碼確認密碼錯誤
 	 * 
 	 * @since	Version 0
 	 */
 	function changePassword(){
+		global $ENCRYPT_MODE;
 		//若帶入兩個參數
-		if(func_num_args() == 5){
+		if(func_num_args() == 4){
 			//對應變數
 			$args = func_get_args();
 			$currentPasswd = $args[0];
 			$currentPasswdMode = $args[1];
 			$newPasswd = $args[2];
-			$newPasswd_rep = $args[3];
-			$newPasswdMode = $args[4];
+			$newPasswdMode = $args[3];
 			
+			//若目前密碼錯誤
+			if( !$this->isPasswordCorrect($currentPasswd, $currentPasswdMode) ){
+				return "CurrentPasswdErr";
+			}
 			
-			//動作
-			return $this->userObject->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $newPasswd_rep, $newPasswdMode);
-		}
-		else if(func_num_args() == 4){
-			//對應變數
-			$args = func_get_args();
-			$currentPasswd = $args[0];
-			$currentPasswdMode = $args[1];
-			$newPasswd = $args[2];
-			$newPasswd_rep = $args[3];
-			
-			return $this->userObject->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
-			
+			//都沒問題，更改密碼
+			else{
+				return $this->userObject->changePassword($newPasswd, $newPasswdMode);
+			}
 		}
 		else if(func_num_args() == 3){
 			//對應變數
 			$args = func_get_args();
 			$currentPasswd = $args[0];
-			$newPasswd = $args[1];
-			$newPasswd_rep = $args[2];
+			$currentPasswdMode = $args[1];
+			$newPasswd = $args[2];
 			
-			return $this->userObject->changePassword($currentPasswd, $ENCRYPT_MODE, $newPasswd, $newPasswd_rep, $ENCRYPT_MODE);
+			return $this->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $ENCRYPT_MODE);
+			
+		}
+		else if(func_num_args() == 2){
+			//對應變數
+			$args = func_get_args();
+			$currentPasswd = $args[0];
+			$newPasswd = $args[1];
+			
+			return $this->changePassword($currentPasswd, $ENCRYPT_MODE, $newPasswd, $ENCRYPT_MODE);
 		}
 	}
 	// ========================================================================

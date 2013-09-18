@@ -34,7 +34,7 @@ $account_create_status = userGroup_create($register_userGroup_id, $register_user
 if($account_create_status == "Finish"){
 	//利用session傳回錯誤訊息
 	$theAlert = new Alert("success", false, "<strong>建立成功！</strong>  '$register_userGroup_id'已成功建立！！");
-	$theAlert->setInSession("userGroup_create");
+	$theAlert->setInSession("userGroup_process");
 	
  	header("Location: ../userGroup_manager.php");
 }
@@ -52,7 +52,7 @@ else{
 	
 	//利用session傳回錯誤訊息
 	$theAlert = new Alert("error", false, $status_message);
-	$theAlert->setInSession("userGroup_create");
+	$theAlert->setInSession("userGroup_process");
 	
  	header("Location: ../userGroup_manager.php");
 }
