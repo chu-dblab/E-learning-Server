@@ -117,5 +117,7 @@
 	{
 	      
 	}
+	
+	public function getLearningStatus()
   }
 ?>
