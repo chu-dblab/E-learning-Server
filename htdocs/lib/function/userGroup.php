@@ -262,13 +262,97 @@ function userGroup_setDiaplayName($groupName, $displayName){
  * 取得此使用者群組的名稱
  *
  * @access	public
+ * @param	string	groupName
  * @param	string	權限名稱
  * @return	bool	是否擁有
  * 
  * @author	元兒～ <yuan817@moztw.org>
  * @since	Version 1
 */
+function userGroup_havePermission($groupName, $permissionName){
+	global $FORM_USER_GROUP;
+	
+	//將使用者的選擇轉為資料表的欄位名稱
+	switch($permissionName){
+		case "admin":
+			$db_auth = "Gauth_admin";
+			break;
+		default:
+			$db_auth = $permissionName;
+			break;
+	}
+	
+	//對此使用者進行權限查詢
+	$db = new Database();
+	//SELECT `Gauth_admin` FROM `chu_group` WHERE `GID` = 'admin'
+	$queryResult = $db->prepare("SELECT `$db_auth` FROM `".$db->table($FORM_USER_GROUP)."` WHERE `GID` = :gid");
+	$queryResult->bindParam(':gid',$groupName);
+	$queryResult->execute();
+	
+	$result = $queryResult->fetch(PDO::FETCH_NUM);
+	
+	if($result[0] == 1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+// ------------------------------------------------------------------------ 
 
+/**
+ * userGroup_setPermission
+ *
+ * 取得此使用者群組的名稱
+ *
+ * @access	public
+ * @param	string	groupName
+ * @param	string	權限名稱
+ * @param	bool	是否擁有
+ * @return	bool	是否設定成功
+ * 
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+*/
+function userGroup_setPermission($groupName, $permissionName, $permissionEnable){
+	global $FORM_USER_GROUP;
+	
+	//若沒有這個群組
+	if(!userGroup_ishave($groupName)) {
+		return false;
+	}
+	else {
+		//將使用者的選擇轉為資料表的欄位名稱
+		switch($permissionName){
+			case "admin":
+				$db_auth = "Gauth_admin";
+				break;
+			default:
+				$db_auth = $permissionName;
+				break;
+		}
+		
+		//對此使用者進行權限查詢
+		$db = new Database();
+		//UPDATE ".$db->table($FORM_USER_GROUP)." SET `GName` = :name WHERE `GID` = :gid
+		$queryResult = $db->prepare("UPDATE ".$db->table($FORM_USER_GROUP)." SET `$db_auth` = :isenable WHERE `GID` = :gid");
+		$queryResult->bindParam(':isenable', $permissionEnable);
+		$queryResult->bindParam(':gid', $groupName);
+		$queryResult->execute();
+		
+		$errmsg = $queryResult->errorInfo();
+		if( $errmsg[1] == 0 ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
+	
+	
+}
 // ========================================================================
 
 /**
