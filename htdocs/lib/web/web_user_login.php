@@ -52,7 +52,7 @@ function web_userLogout() {
 	if( isset($_COOKIE[$COOKIES_PREFIX."userLoginCode"]) ) {
 		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
 		
-		$theUser = new User($theUserLoginCode);
+		$theUser = new MyUser($theUserLoginCode);
 	
 		if( $result = $theUser->logout() ) {
 			setcookie($COOKIES_PREFIX."userLoginCode", "", time()-3600, "/");
