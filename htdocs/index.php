@@ -58,7 +58,7 @@
 			<a class="btn btn-large btn-success" href="#">咱們開始吧～</a>
 		</div>
 		<!-- End Jumbotron -->
-		
+		<?php echo $_COOKIE[$COOKIES_PREFIX."userLoginCode"]; ?>
 		<hr />
 		<?php template_footer() ?>
 		

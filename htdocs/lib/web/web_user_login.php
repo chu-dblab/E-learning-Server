@@ -3,7 +3,7 @@
  * 前置作業
 */
 require_once(DOCUMENT_ROOT."lib/function/user.php");
-require_once(DOCUMENT_ROOT."lib/class/User.php");
+require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
 
 /**
  * web_userLogin
@@ -30,7 +30,7 @@ function web_userLogin($userid, $userpasswd) {
 	//當使用者登入成功的話
 	if( $loginCode!="NoActiveErr" && $loginCode!="PasswdErr" && $loginCode!="DBErr" && $loginCode!="NoFound"){
 		//設定cookies到使用者瀏覽器
-		setcookie($COOKIES_PREFIX."userLoginCode", $loginCode, time() + $COOKIES_LOGIN_TIMEOUT);
+		setcookie($COOKIES_PREFIX."userLoginCode", $loginCode, time() + $COOKIES_LOGIN_TIMEOUT, "/");
 	}
 	return $loginCode;
 }
@@ -55,7 +55,7 @@ function web_userLogout() {
 		$theUser = new User($theUserLoginCode);
 	
 		if( $result = $theUser->logout() ) {
-			setcookie($COOKIES_PREFIX."userLoginCode", "", time()-3600);
+			setcookie($COOKIES_PREFIX."userLoginCode", "", time()-3600, "/");
 			
 			return true;
 		}
@@ -82,10 +82,11 @@ function web_userLogout() {
 */
 function web_isLogged() {
 	global $COOKIES_PREFIX;
+	
 	if( isset($_COOKIE[$COOKIES_PREFIX."userLoginCode"]) ) {
 		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
 		
-		$theUser = new User($theUserLoginCode);
+		$theUser = new MyUser($theUserLoginCode);
 		
 		if( $theUser->isLogged() ) {
 			return true;
@@ -114,7 +115,7 @@ function web_getLoggedUser() {
 	if( isset($_COOKIE[$COOKIES_PREFIX."userLoginCode"]) ) {
 		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
 		
-		$theUser = new User($theUserLoginCode);
+		$theUser = new MyUser($theUserLoginCode);
 		
 		if( $theUser->isLogged() ) {
 			return $theUser;
