@@ -82,7 +82,15 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						echo "<td>".$thisUserArray['ULogged_code']."</td>";
 						echo "<td>".$thisUserArray['ULast_In_Time']."</td>";
 						echo "<td>".$thisUserArray['UBuild_Time']."</td>";
-						echo "<td>".$thisUserArray['UEnabled']."</td>";
+						
+						//啟用狀態
+						if($thisUserArray['UEnabled'] == 1) {
+							echo "<td> <span class='label label-success'>啟用</span> </td>";
+						}
+						else {
+							echo "<td> <span class='label'>停用</span> </td>";
+						}
+						
 						echo "<td>".$thisUserArray['In_Learn_Time']."</td>";
 						echo "<td>".$thisUserArray['UReal_Name']."</td>";
 						echo "<td>".$thisUserArray['UNickname']."</td>";
