@@ -4,6 +4,7 @@
 */
 require_once(DOCUMENT_ROOT."lib/class/Database.php");
 require_once(DOCUMENT_ROOT."lib/function/password.php");
+require_once(DOCUMENT_ROOT."lib/class/UserGroup.php");
 require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
 
  /**
@@ -125,6 +126,18 @@ class User {
 	 */
 	function getGroup(){
 		return $this->getQueryInfo("GID");
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得所在群組顯式名稱
+	 *
+	 * @access	public
+	 * @return	string	群組顯示名稱
+	 */
+	function getGroupName(){
+		$thisGroup = new UserGroup($this->getQueryInfo("GID"));
+		return $thisGroup->getDiaplayName();
 	}
 	// ------------------------------------------------------------------------
 	

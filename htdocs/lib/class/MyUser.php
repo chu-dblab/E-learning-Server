@@ -96,6 +96,17 @@ class MyUser {
 	function getGroup(){
 		return $this->userObject->getGroup();
 	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得所在群組顯式名稱
+	 *
+	 * @access	public
+	 * @return	string	群組顯示名稱
+	 */
+	function getGroupName(){
+		return $this->userObject->getGroupName();
+	}
 	// ========================================================================
 	
 	/**

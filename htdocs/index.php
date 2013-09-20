@@ -38,7 +38,7 @@
 			text-align: center;
 		}
 		.jumbotron h1 {
-			font-size: 80px;
+			font-size: 40px;
 			line-height: 1;
 		}
 		.jumbotron .lead {
@@ -61,11 +61,32 @@
 		
 		<!-- Jumbotron -->
 		<div class="jumbotron">
-			<h1>歡迎使用我們的系統</h1>
-			<p class="lead">此系統會依學生狀況、現場人數分配而規劃最佳的學習路徑給學生，並紀錄學生學習時的狀況。</p>
+			<h1>混合式情境感知無所不在學習導引機制</h1>
+			<p class="lead">這套導引機制讓學習標的同時具有實體學習教材與虛擬學習教材，並在這個混合的架構上，提出了一套適合的導引方法，讓學習者可以進行實體學習標的之觀察或是直接檢視虛擬教材進行學習。</p>
 			<a class="btn btn-large btn-success" href="#">咱們開始吧～</a>
 		</div>
 		<!-- End Jumbotron -->
+		
+		<hr />
+		
+		<!-- Example row of columns -->
+		<div class="row-fluid">
+			<div class="span4">
+				<h2>規劃學習路徑</h2>
+				<p>此系統會依學生狀況、現場人數分配而規劃最佳的學習路徑給學生，並紀錄學生學習時的狀況。</p>
+				<p><a class="btn" href="#">了解更多 »</a></p>
+			</div>
+			<div class="span4">
+				<h2>學習測驗</h2>
+				<p>學生在學習當中，除了提供教材外，會在此學習點學習後，提供測驗給學生評量。</p>
+				<p><a class="btn" href="#">了解更多 »</a></p>
+			</div>
+			<div class="span4">
+				<h2>管理界面</h2>
+				<p>提供界面給老師 or 管理員，進行人員控管、本站設定。</p>
+				<p><a class="btn" href="#">了解更多 »</a></p>
+			</div>
+		</div>
 		
 		<hr />
 		<?php template_footer() ?>
