@@ -16,10 +16,9 @@
 			<div class="nav-collapse collapse">
 			
 				<!-- 導覽列右側 -->
-				<p class="navbar-text pull-right">
-					<!-- TODO 此使用者登入資訊 -->
-					Logged in as <a href="#" class="navbar-link">Username</a>
-				</p>
+				<div class="navbar-text pull-right">
+					<?php template_admin_top_nav_login() ?>
+				</div>
 				
 				<!-- 導覽列導覽連結 -->
 				<ul class="nav">

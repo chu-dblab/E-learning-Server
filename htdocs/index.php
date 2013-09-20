@@ -65,5 +65,8 @@
 	</div>
 	<script src="<?php echo SITE_URL_ROOT ?>assets/js/jquery.min.js"></script>
 	<script src="<?php echo SITE_URL_ROOT ?>assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		
+	</script>
 	</body>
 </html>
