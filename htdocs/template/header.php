@@ -1,7 +1,7 @@
 <!-- header網頁內容表頭 -->
 <header class="head">
 	<div class="masthead">
-		<div class="pull-right" style="">
+		<div class="btn-group pull-right" style="">
 			<?php template_header_login_block(); ?>
 		</div>
 		
