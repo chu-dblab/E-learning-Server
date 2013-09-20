@@ -42,6 +42,8 @@ case "login":
 	
 	//當使用者登入成功的話
 	if($loginCode!="NoActiveErr" && $loginCode!="PasswdErr" && $loginCode!="DBErr" && $loginCode!="NoFound") {
+		$theAlert = new Alert("success", false, "<strong>登入成功</strong> 已成功登入'$ID'帳號！");
+		$theAlert->setInSession("user_login");
 		successToPage();
 	}
 	//若登入失敗的話
@@ -67,9 +69,12 @@ case "login":
 	break;
 
 case "logout":
-	$logCode = $_POST["mCode"];
-	$user = new MyUser($logCode);
-	$user->logout();
+	web_userLogout();
+	
+	//產生登出成功訊息
+	$theAlert = new Alert("success", false, "<strong>Bye!Bye！</strong> 已登出此帳號！");
+	$theAlert->setInSession("user_login");
+	
+	successToPage();
 	break;
-
 }

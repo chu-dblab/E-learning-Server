@@ -54,7 +54,7 @@
 						<div class="control-group">
 							<label class="control-label" for="inputUsername">使用者帳號</label>
 							<div class="controls">
-								<input type="text" name="inputUsername" id="inputUsername" required="required">
+								<input type="text" autofocus name="inputUsername" id="inputUsername" required="required">
 							</div>
 						</div>
 						<div class="control-group">
@@ -91,7 +91,7 @@
 						<div class="control-group">
 							<label class="control-label" for="user_id">帳號: </label>
 							<div class="controls">
-								<input autofocus type="text" name="user_id" id="user_id" required="required" />
+								<input type="text" name="user_id" id="user_id" required="required" />
 								<span class="help-inline">*</span>
 							</div>
 						</div>

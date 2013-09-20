@@ -11,7 +11,11 @@
 	*/
 	require_once("lib/include.php");
 	require_once(DOCUMENT_ROOT."template/template.php");
+	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 	
+	//取得通知資料
+	$loginAlert = new Alert();
+	$loginAlert->getInSession("user_login");
 ?>
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -25,6 +29,7 @@
 		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="<?php echo SITE_URL_ROOT ?>assets/css/bootstrap-Justified_nav.css" rel="stylesheet">
 		<link href="<?php echo SITE_URL_ROOT ?>assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="<?php echo SITE_URL_ROOT ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 		<style>
 		/* Main marketing message and sign up button */
 		/* http://getbootstrap.com/2.3.2/examples/justified-nav.html */
@@ -51,6 +56,9 @@
 	
 		<?php template_header() ?>
 		
+		<!-- 通知區域 -->
+		<?php $loginAlert->show(); ?>
+		
 		<!-- Jumbotron -->
 		<div class="jumbotron">
 			<h1>歡迎使用我們的系統</h1>
@@ -58,7 +66,7 @@
 			<a class="btn btn-large btn-success" href="#">咱們開始吧～</a>
 		</div>
 		<!-- End Jumbotron -->
-		<?php echo $_COOKIE[$COOKIES_PREFIX."userLoginCode"]; ?>
+		
 		<hr />
 		<?php template_footer() ?>
 		
