@@ -11,3 +11,7 @@ function template_header_login_block(){
 function template_header_nav(){
 	include(DOCUMENT_ROOT."template/header-nav.php");
 }
+
+function template_footer(){
+	include(DOCUMENT_ROOT."template/footer.php");
+}
