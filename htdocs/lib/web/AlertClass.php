@@ -55,7 +55,7 @@ function __construct(){
 */
 function getInSession($message_category){
 	//啟動session
-	session_start();
+	if (!isset($_SESSION)) session_start();
 	
 	//若session內有通知資料
 	if( isset($_SESSION["alert_".$message_category."_type"])
@@ -84,7 +84,7 @@ function getInSession($message_category){
 */
 function setInSession($message_category){
 	//啟動session
-	session_start();
+	if (!isset($_SESSION)) session_start();
 	
 	//紀錄到session
 	$_SESSION["alert_".$message_category."_type"] = $this->message_type;

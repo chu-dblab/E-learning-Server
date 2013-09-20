@@ -71,6 +71,35 @@ function web_userLogout() {
 // ========================================================================
 
 /**
+ * web_isLogged
+ * 
+ * 取得目前登入的使用者物件
+ * 
+ * @access	public
+ * @return	object	使用者物件
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+*/
+function web_isLogged() {
+	global $COOKIES_PREFIX;
+	if( isset($_COOKIE[$COOKIES_PREFIX."userLoginCode"]) ) {
+		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
+		
+		$theUser = new User($theUserLoginCode);
+		
+		if( $theUser->isLogged() ) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	} else {
+		return false;
+	}
+}
+// ------------------------------------------------------------------------
+
+/**
  * web_getLoggedUser
  * 
  * 取得目前登入的使用者物件

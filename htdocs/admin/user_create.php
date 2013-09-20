@@ -66,7 +66,7 @@
 								<div class="control-group">
 									<label class="control-label" for="user_id">帳號: </label>
 									<div class="controls">
-										<input autofocus type="text" name="user_id" id="user_id" required="required" placeholder="完整的網站名稱" />
+										<input autofocus type="text" name="user_id" id="user_id" required="required" placeholder="" />
 										<span class="help-inline">*</span>
 									</div>
 								</div>

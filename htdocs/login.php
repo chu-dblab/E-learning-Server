@@ -11,7 +11,14 @@
 	*/
 	require_once("lib/include.php");
 	require_once(DOCUMENT_ROOT."template/template.php");
+	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 	
+	//取得通知資料
+	$loginAlert = new Alert();
+	$loginAlert->getInSession("user_login");
+	
+	$registrationAlert = new Alert();
+	$registrationAlert->getInSession("user_registration");
 ?>
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -36,27 +43,24 @@
 			<!-- 使用者登入 -->
 			<div class="span6">
 				<div class="area">
-					<form class="form-horizontal">
+					<form class="form-horizontal" action="action/login.php?action=login" method="post">
 						<div class="heading">
 							<h4 class="form-heading">使用者登入</h4>
 						</div>
 						
 						<!-- 通知區域 -->
-						<div class="alert alert-error">
-							<button type="button" class="close" data-dismiss="alert">×</button>
-							<strong>Access Denied!</strong> Please provide valid authorization.
-						</div>
+						<?php $loginAlert->show(); ?>
 						
 						<div class="control-group">
 							<label class="control-label" for="inputUsername">使用者帳號</label>
 							<div class="controls">
-								<input type="text" id="inputUsername" placeholder="E.g. ashwinhegde">
+								<input type="text" name="inputUsername" id="inputUsername" required="required">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="inputPassword">密碼</label>
 							<div class="controls">
-								<input type="password" id="inputPassword" placeholder="Min. 8 Characters">
+								<input type="password" name="inputPassword" id="inputPassword" required="required">
 							</div>
 						</div>
 						<div class="control-group">
@@ -82,16 +86,12 @@
 						</div>
 						
 						<!-- 通知區域 -->
-						<div class="alert alert-info">
-							<button type="button" class="close" data-dismiss="alert">×</button>
-							<strong>Confirmation: </strong> A confirmation email has been sent to your email.<br>
-							Thank you for your registration.
-						</div>
+						<?php $registrationAlert->show(); ?>
 						
 						<div class="control-group">
 							<label class="control-label" for="user_id">帳號: </label>
 							<div class="controls">
-								<input autofocus type="text" name="user_id" id="user_id" required="required" placeholder="完整的網站名稱" />
+								<input autofocus type="text" name="user_id" id="user_id" required="required" />
 								<span class="help-inline">*</span>
 							</div>
 						</div>
