@@ -249,6 +249,26 @@ class User {
 	// ------------------------------------------------------------------------
 	
 	/**
+	 * 取得名稱
+	 *
+	 * @access	public
+	 * @return	string	依照有填入多少名字（優先順序: 暱稱→真實名字→帳號名稱）
+	 */
+	function getName(){
+		if($this->getNickName() != "") {
+			return $this->getNickName();
+		}
+		else if($this->getRealName() != "") {
+			return $this->getRealName();
+		}
+		else {
+			return $this->getUsername();
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	/**
 	 * 取得帳號Email
 	 *
 	 * @access	public

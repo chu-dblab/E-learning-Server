@@ -62,7 +62,7 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 				
 				echo "<th scpoe='col'>帳號</th>";
 				echo "<th scpoe='col'>群組</th>";
-				echo "<th scpoe='col'>登入碼</th>";
+				echo "<th scpoe='col'>狀態</th>";
 				echo "<th scpoe='col'>登入時間</th>";
 				echo "<th scpoe='col'>建立時間</th>";
 				echo "<th scpoe='col'>啟用</th>";
@@ -79,7 +79,16 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 						echo "<th scrope='row'><input type='checkbox' name='select_UID[]' value='".$thisUserArray['UID']."'></th>";
 						echo "<td>".$thisUserArray['UID']."</td>";
 						echo "<td>".$thisUserArray['GID']."</td>";
-						echo "<td>".$thisUserArray['ULogged_code']."</td>";
+						
+// 						echo "<td>".$thisUserArray['ULogged_code']."</td>";
+						//登入狀態
+						if($thisUserArray['ULogged_code'] != "") {
+							echo "<td> <span class='label label-success'>已登入</span> </td>";
+						}
+						else {
+							echo "<td> <span class='label'>未登入</span> </td>";
+						}
+						
 						echo "<td>".$thisUserArray['ULast_In_Time']."</td>";
 						echo "<td>".$thisUserArray['UBuild_Time']."</td>";
 						

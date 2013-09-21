@@ -12,7 +12,7 @@ require_once(DOCUMENT_ROOT."lib/web/web_user_login.php");
 
 <?php
 	if(web_isLogged()) {
-		echo "<a href='#' class='btn dropdown-toggle' data-toggle='dropdown'><i class='icon-user'></i> ".web_getLoggedUser()->getNickName()." <span class='caret'></span></a>";
+		echo "<a href='#' class='btn dropdown-toggle' data-toggle='dropdown'><i class='icon-user'></i> ".web_getLoggedUser()->getName()." <span class='caret'></span></a>";
 		echo "<ul class='dropdown-menu'>";
 			echo "<li class='nav-header'>帳號資訊</li>";
 			echo "<li class='nav-list'><i class='icon-user'></i> 帳號名稱: ".web_getLoggedUser()->getUsername()."</li>";
