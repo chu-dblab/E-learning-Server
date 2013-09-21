@@ -1,29 +1,25 @@
+<?php
+require_once(DOCUMENT_ROOT."lib/web/web_user_login.php");
+?>
+
 <ul class="nav pull-right">
-	<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">歡迎, User <b class="caret"></b></a>
-	<ul class="dropdown-menu">
-	
-		<!-- 使用者帳號區塊 -->
-		<!--<div class="span4">
-			<div class="row">
-				<div class="span1"><a href="http://critterapp.pagodabox.com/others/admin" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt=""></a></div>
-				<div class="span3">
-					<p>admin</p>
-				<p><strong>First Last Name</strong></p>
-					<span class=" badge badge-warning">8 messages</span> <span class=" badge badge-info">15 followers</span>
-				</div>
-			</div>
-		</div>-->
-		<!-- End 使用者帳號區塊 -->
-		
-		<li class="nav-header">帳號資訊</li>
-		<li class="nav-list">帳號名稱: </li>
-		<li class="nav-list">所在群組: </li>
-		<li class="nav-list">登入時間: </li>
-		<li class="divider"></li>
-		<li><a href="/user/preferences"><i class="icon-cog"></i> 帳號設定</a></li>
-		<li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
-		<li class="divider"></li>
-		<li><a href="/auth/logout"><i class="icon-off"></i> 登出</a></li>
-	</ul>
+	<li class="dropdown">
+	<?php
+	if(web_isLogged()) {
+		echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-user'></i> ".web_getLoggedUser()->getNickName()." <span class='caret'></span></a>";
+		echo "<ul class='dropdown-menu'>";
+			echo "<li class='nav-header'>帳號資訊</li>";
+			echo "<li class='nav-list'><i class='icon-user'></i> 帳號名稱: ".web_getLoggedUser()->getUsername()."</li>";
+			echo "<li class='nav-list'><i class='icon-group'></i> 所在群組: ".web_getLoggedUser()->getGroupName()."</li>";
+			echo "<li class='nav-list'><i class='icon-time'></i> 登入時間: ".web_getLoggedUser()->getLoginTime()."</li>";
+			echo "<li class='divider'></li>";
+			echo "<li><a href='#'><i class='icon-cog'></i> 帳號設定</a></li>";
+			echo "<li><a href='".SITE_URL_ROOT."action/login.php?action=logout'><i class='icon-signout'></i> 登出</a></li>";
+		echo "</ul>";
+	}
+	else {
+		echo "<a href='".SITE_URL_ROOT."login.php'>登入/帳號</a>";
+	}
+	?>
 	</li>
 </ul>
