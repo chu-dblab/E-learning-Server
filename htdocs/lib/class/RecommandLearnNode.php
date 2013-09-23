@@ -118,6 +118,16 @@
 	      
 	}
 	
+       /* TODO
+	* 方法名稱：getLearningStatus
+	* 說明：取得使用者學習的狀態
+	* 參數：$userID  使用者編號
+	*	$point_number  學習點的編號
+	* 回傳值：學習狀態資訊(以JSON格式回傳)
+	*/	
 	public function getLearningStatus()
+	{
+	    $conDB->prepare("SELECT ")
+	}
   }
 ?>
