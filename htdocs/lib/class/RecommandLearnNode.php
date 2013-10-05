@@ -57,7 +57,7 @@
 		else return true;
 	}
 	
-	/* TODO:
+       /*
 	* 方法名稱：getLearningNode
 	* 說明：取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
 	* 參數：$point_number	學習點的編號
@@ -96,11 +96,10 @@
 		  }
 	      }
 	      //將計算結果做快速排序
-	      array($temp,$row["Ti"]);
-	      array($temp,$row["Tj"]);
-	      array($temp,$pathCost);
-	      //將計算結果存到推薦學習點的表格中
+	      $temp = array("crrentNode" => $row["Ti"],"nextNode" => $row["Tj"],"PathCost" => $pathCost);
+	      $sorted = arsort($temp);
 	      //將結果(前三高的學習點)包裝成JSON傳送至手機
+	      echo json_encode($sorted);
 	}
 	
        /*
@@ -130,7 +129,7 @@
 	* 參數：NONE
 	* 回傳值：true/false
 	*/
-	private function DetectAllLearnNodeFull()
+	public function DetectAllLearnNodeFull()
 	{
 	      for($count=2;$count<=10;$count++)
 	      {
