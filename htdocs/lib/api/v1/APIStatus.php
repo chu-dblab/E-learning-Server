@@ -22,7 +22,6 @@ require_once(DOCUMENT_ROOT."config/dev_config.php"); //取得除錯參數
 */
 class APIStatus {
 	private $ID;
-	private $content;
 	
 	// ========================================================================
 	
@@ -32,24 +31,49 @@ class APIStatus {
 	 * @access	public
 	*/
 	function __construct() {
-		
+		//若帶入兩個參數
+		if(func_num_args() == 1){
+			//對應變數
+			$args = func_get_args();
+			$setid = $args[0];
+			
+			//動作
+			$this->setID($setid);
+		}
 	}
 	// ========================================================================
 	
+	/**
+	 * 設定狀態碼
+	 *
+	 * @access	public
+	 * @param	string	狀態碼
+	 * @return	string	狀態回傳
+				"Finish": 密碼更改完成
+	 * 
+	 * @since	Version 0
+	 */
  	function setID($setid) {
 		$this->ID = $setid;
  	}
-	// ------------------------------------------------------------------------
+
+	// ========================================================================
 	
-	function setContent($input) {
-		$this->content = $input;
-	}
-	// ------------------------------------------------------------------------
+	/**
+	 * 取得狀態陣列
+	 *
+	 * @access	public
+	 * @return	string	狀態陣列
+				id: 狀態碼
+				description: 狀態描述
+				content: 詳細的狀態內容
+	 * 
+	 * @since	Version 0
+	 */
 	function getArray() {
 		$output = array(
-			"id" => $this->ID,
-			"description" => null,
-			"content" => $this->content
+			"status_id" => $this->ID,
+			"status_description" => null,
 		);
 		return $output;
 	}
@@ -61,8 +85,7 @@ class APIStatus {
 	// ------------------------------------------------------------------------
 
 	function printJson() {
-		$output = array("status"=>$this->getArray());
-		echo json_encode( $output );
+		echo json_encode( $this->getArray() );
 	}
 	
 	// ========================================================================
