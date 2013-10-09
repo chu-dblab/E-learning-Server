@@ -38,7 +38,15 @@ class MyUser {
 		
 		$result = $queryResult->fetch(PDO::FETCH_NUM);
 		$username = $result[0];
-		$this->userObject = new User($username);
+		
+		//若有找到使用者
+		if( isset($username) ) {
+			$this->userObject = new User($username);
+		}
+		//若沒有找到使用者
+		else {
+			unset($this->loggedCode);
+		}
 	}
 	
 	// ========================================================================
@@ -61,7 +69,12 @@ class MyUser {
 	 * @return	string	帳號名稱
 	 */
 	function getUsername(){
-		return $this->userObject->getUsername();
+		if(isset($this->userObject)) {
+			return $this->userObject->getUsername();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -72,7 +85,12 @@ class MyUser {
 	 * @return	string	登入時間
 	 */
 	function getLoginTime(){
-		return $this->userObject->getLoginTime();
+		if(isset($this->userObject)) {
+			return $this->userObject->getLoginTime();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -83,7 +101,12 @@ class MyUser {
 	 * @return	string	建立時間
 	 */
 	function getCreateTime(){
-		return $this->userObject->getCreateTime();
+		if(isset($this->userObject)) {
+			return $this->userObject->getCreateTime();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -94,7 +117,12 @@ class MyUser {
 	 * @return	string	群組名稱
 	 */
 	function getGroup(){
-		return $this->userObject->getGroup();
+		if(isset($this->userObject)) {
+			return $this->userObject->getGroup();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -105,7 +133,12 @@ class MyUser {
 	 * @return	string	群組顯示名稱
 	 */
 	function getGroupName(){
-		return $this->userObject->getGroupName();
+		if(isset($this->userObject)) {
+			return $this->userObject->getGroupName();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ========================================================================
 	
@@ -116,7 +149,12 @@ class MyUser {
 	 * @return	string	真實姓名
 	 */
 	function getRealName(){
-		return $this->userObject->getRealName();
+		if(isset($this->userObject)) {
+			return $this->userObject->getRealName();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	
 	/**
@@ -127,7 +165,12 @@ class MyUser {
 	 * @return	bool	是否更改成功
 	 */
 	function setRealName($input){
-		return $this->userObject->setRealName($input);
+		if(isset($this->userObject)) {
+			return $this->userObject->setRealName($input);
+		}
+		else {
+			return false;
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -138,7 +181,12 @@ class MyUser {
 	 * @return	string	暱稱
 	 */
 	function getNickName(){
-		return $this->userObject->getNickName();
+		if(isset($this->userObject)) {
+			return $this->userObject->getNickName();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	
 	/**
@@ -149,7 +197,12 @@ class MyUser {
 	 * @return	bool	是否更改成功
 	 */
 	function setNickName($input){
-		return $this->userObject->setNickName($input);
+		if(isset($this->userObject)) {
+			return $this->userObject->setNickName($input);
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -160,7 +213,12 @@ class MyUser {
 	 * @return	string	依照有填入多少名字（優先順序: 暱稱→真實名字→帳號名稱）
 	 */
 	function getName(){
-		return $this->userObject->getName();
+		if(isset($this->userObject)) {
+			return $this->userObject->getName();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -171,7 +229,12 @@ class MyUser {
 	 * @return	string	使用者資訊的Email
 	 */
 	function getEmail(){
-		return $this->userObject->getEmail();
+		if(isset($this->userObject)) {
+			return $this->userObject->getEmail();
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	
 	/**
@@ -182,7 +245,12 @@ class MyUser {
 	 * @return	bool	是否更改成功
 	 */
 	function setEmail($input){
-		return $this->userObject->setEmail($input);
+		if(isset($this->userObject)) {
+			return $this->userObject->setEmail($input);
+		}
+		else {
+			return "NoUserFound";
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -195,7 +263,12 @@ class MyUser {
 	 * @since	Version 0
 	 */
 	function getQuery(){
-		return $this->userObject->getQuery();
+		if(isset($this->userObject)) {
+			return $this->userObject->getQuery();
+		}
+		else {
+			return null;
+		}
 	}
 	// ========================================================================
 	
@@ -210,21 +283,26 @@ class MyUser {
 	 * @since	Version 0
 	 */
 	function isPasswordCorrect(){
-		//若帶入兩個參數
-		if(func_num_args() == 2){
-			//對應變數
-			$args = func_get_args();
-			$inputPasswd = $args[0];
-			$mode = $args[1];
-			
-			return $this->userObject->isPasswordCorrect($inputPasswd, $mode);
+		if(isset($this->userObject)) {
+			//若帶入兩個參數
+			if(func_num_args() == 2){
+				//對應變數
+				$args = func_get_args();
+				$inputPasswd = $args[0];
+				$mode = $args[1];
+				
+				return $this->userObject->isPasswordCorrect($inputPasswd, $mode);
+			}
+			else if(func_num_args() == 1){
+				//對應變數
+				$args = func_get_args();
+				$inputPasswd = $args[0];
+				
+				return $this->userObject->isPasswordCorrect($inputPasswd);
+			}
 		}
-		else if(func_num_args() == 1){
-			//對應變數
-			$args = func_get_args();
-			$inputPasswd = $args[0];
-			
-			return $this->userObject->isPasswordCorrect($inputPasswd);
+		else {
+			return false;
 		}
 	}
 	// ------------------------------------------------------------------------
@@ -245,42 +323,47 @@ class MyUser {
 	 */
 	function changePassword(){
 		global $ENCRYPT_MODE;
-		//若帶入兩個參數
-		if(func_num_args() == 4){
-			//對應變數
-			$args = func_get_args();
-			$currentPasswd = $args[0];
-			$currentPasswdMode = $args[1];
-			$newPasswd = $args[2];
-			$newPasswdMode = $args[3];
-			
-			//若目前密碼錯誤
-			if( !$this->isPasswordCorrect($currentPasswd, $currentPasswdMode) ){
-				return "CurrentPasswdErr";
+		if(isset($this->userObject)) {
+			//若帶入兩個參數
+			if(func_num_args() == 4){
+				//對應變數
+				$args = func_get_args();
+				$currentPasswd = $args[0];
+				$currentPasswdMode = $args[1];
+				$newPasswd = $args[2];
+				$newPasswdMode = $args[3];
+				
+				//若目前密碼錯誤
+				if( !$this->isPasswordCorrect($currentPasswd, $currentPasswdMode) ){
+					return "CurrentPasswdErr";
+				}
+				
+				//都沒問題，更改密碼
+				else{
+					return $this->userObject->changePassword($newPasswd, $newPasswdMode);
+				}
 			}
-			
-			//都沒問題，更改密碼
-			else{
-				return $this->userObject->changePassword($newPasswd, $newPasswdMode);
+			else if(func_num_args() == 3){
+				//對應變數
+				$args = func_get_args();
+				$currentPasswd = $args[0];
+				$currentPasswdMode = $args[1];
+				$newPasswd = $args[2];
+				
+				return $this->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $ENCRYPT_MODE);
+				
+			}
+			else if(func_num_args() == 2){
+				//對應變數
+				$args = func_get_args();
+				$currentPasswd = $args[0];
+				$newPasswd = $args[1];
+				
+				return $this->changePassword($currentPasswd, $ENCRYPT_MODE, $newPasswd, $ENCRYPT_MODE);
 			}
 		}
-		else if(func_num_args() == 3){
-			//對應變數
-			$args = func_get_args();
-			$currentPasswd = $args[0];
-			$currentPasswdMode = $args[1];
-			$newPasswd = $args[2];
-			
-			return $this->changePassword($currentPasswd, $currentPasswdMode, $newPasswd, $ENCRYPT_MODE);
-			
-		}
-		else if(func_num_args() == 2){
-			//對應變數
-			$args = func_get_args();
-			$currentPasswd = $args[0];
-			$newPasswd = $args[1];
-			
-			return $this->changePassword($currentPasswd, $ENCRYPT_MODE, $newPasswd, $ENCRYPT_MODE);
+		else {
+			return "NoUserFound";
 		}
 	}
 	// ========================================================================
@@ -291,7 +374,12 @@ class MyUser {
 	 * @return	bool	是否仍在登入狀態
 	 */
 	function isLogged() {
-		return $this->userObject->isLogged();
+		if(isset($this->userObject)) {
+			return $this->userObject->isLogged();
+		}
+		else {
+			return false;
+		}
 	}
 	// ------------------------------------------------------------------------
 	
@@ -303,7 +391,12 @@ class MyUser {
 	 * @return	bool	是否擁有
 	 */
 	 function havePermission($permissionName) {
-		return $this->userObject->havePermission($permissionName);
+		if(isset($this->userObject)) {
+			return $this->userObject->havePermission($permissionName);
+		}
+		else {
+			return false;
+		}
 	 }
 	 
 	// ------------------------------------------------------------------------
@@ -315,6 +408,11 @@ class MyUser {
 	 * @return	bool	是否登出成功
 	 */
 	 function logout(){
-		return $this->userObject->logout();
+		if(isset($this->userObject)) {
+			return $this->userObject->logout();
+		}
+		else {
+			return false;
+		}
 	 }
 }
