@@ -17,6 +17,7 @@ $output = array();
 
 switch($action){
 case "login":
+	$output += array("action"=>"login");
 	//有填入登入資料
 	if(isset($id) && isset($pwd)) {
 		//登入使用者
@@ -68,23 +69,34 @@ case "login":
 	break;
 
 case "logout":
+	$output += array("action"=>"logout");
+	//有填入登入碼
 	if(isset($logCode)) {
 		$user = new MyUser($logCode);
 		if( $user->isLogged() ) {
+			$userid = $user->getUsername();
 			$user->logout();
 			$output += array(
-				"logincode"=>$login_code,
+				"logincode"=>$logCode,
+				"uid"=>$userid,
 				"status"=>"OK"
 			);
 		}
 		else {
 			$output += array(
-				"logincode"=>$login_code,
+				"logincode"=>$logCode,
 				"status"=>"NoUserFound"
 			);
 		}
 	}
+	//未填入登入碼
+	else {
+		$output += array(
+			"status"=>"CmdErr"
+		);
+	}
 	break;
+	
 default:
 	$output += array(
 		"status"=>"CmdErr"
