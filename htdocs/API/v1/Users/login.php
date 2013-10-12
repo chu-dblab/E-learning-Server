@@ -1,11 +1,14 @@
 <?php
 require_once("../../../lib/include.php");
-require_once(DOCUMENT_ROOT."/lib/function/user.php");
-require_once(DOCUMENT_ROOT."/lib/class/MyUser.php");
-require_once(DOCUMENT_ROOT."lib/api/v1/apiTamplate.php");
+require_once(DOCUMENT_ROOT."lib/function/user.php");
+require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
+require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
 
 //-------------------設定區-----------------------//
-$action = (empty($_REQUEST['op']))?"":$_REQUEST['op'];
+$action = (empty($_REQUEST['op']))?null:$_REQUEST['op'];
+$id = (empty($_REQUEST['uid']))?null:$_REQUEST['uid'];
+$pwd = (empty($_REQUEST['upasswd']))?null:$_REQUEST['upasswd'];
+$logCode = (empty($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
 
 //---------------流程控制區----------------------//
 
@@ -14,61 +17,78 @@ $output = array();
 
 switch($action){
 case "login":
-	$ID = $_REQUEST["uid"];
-	$PWD = $_REQUEST["upasswd"];
-	//登入使用者
-	$login_code = user_login($ID,$PWD);
-	
-	//找不到此使用者
-	if($login_code=="NoFound") {
-		$output += array(
-			"uid"=>$ID,
-			"status"=>"NoFound"
-		);
+	//有填入登入資料
+	if(isset($id) && isset($pwd)) {
+		//登入使用者
+		$login_code = user_login($id,$pwd);
+		
+		//找不到此使用者
+		if($login_code=="NoFound") {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"NoFound"
+			);
+		}
+		//帳號未啟用
+		else if($login_code=="NoActiveErr") {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"NoActiveErr"
+			);
+		}
+		//密碼錯誤
+		else if($login_code=="PasswdErr") {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"PasswdErr"
+			);
+		}
+		//資料庫錯誤
+		else if($login_code=="DBErr") {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"DBErr"
+			);
+		}
+		//已登入成功
+		else {
+			$output += array(
+				"uid"=>$id,
+				"logincode"=>$login_code,
+				"status"=>"OK"
+			);
+		}
 	}
-	//帳號未啟用
-	else if($login_code=="NoActiveErr") {
-		$output += array(
-			"uid"=>$ID,
-			"status"=>"NoActiveErr"
-		);
-	}
-	//密碼錯誤
-	else if($login_code=="PasswdErr") {
-		$output += array(
-			"uid"=>$ID,
-			"status"=>"PasswdErr"
-		);
-	}
-	//資料庫錯誤
-	else if($login_code=="DBErr") {
-		$output += array(
-			"uid"=>$ID,
-			"status"=>"DBErr"
-		);
-	}
-	//已登入成功
+	//未填入登入資料
 	else {
 		$output += array(
-			"uid"=>$ID,
-			"code"=>$login_code
-			"status"=>"OK"
+			"status"=>"CmdErr"
 		);
 	}
 	break;
 
 case "logout":
-	$logCode = $_REQUEST["ucode"];
-	if( user_ishave() )
-	$user = new MyUser($logCode);
-	$user->logout();
+	if(isset($logCode)) {
+		$user = new MyUser($logCode);
+		if( $user->isLogged() ) {
+			$user->logout();
+			$output += array(
+				"logincode"=>$login_code,
+				"status"=>"OK"
+			);
+		}
+		else {
+			$output += array(
+				"logincode"=>$login_code,
+				"status"=>"NoUserFound"
+			);
+		}
+	}
 	break;
-
-case "test":
-	$output = array("id"=>"test");
-	$status = new APIStatus();
-	$status->setSuccess();
-	$output += array("status" => $status->getArray());
+default:
+	$output += array(
+		"status"=>"CmdErr"
+	);
 }
 
 //---------------輸出區----------------------//
