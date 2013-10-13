@@ -7,14 +7,13 @@ require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
 $op = (empty($_REQUEST['op']))?null:$_REQUEST['op'];
 $ucode = (empty($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
 
-//---------------流程控制區----------------------//
-//宣告輸出的陣列內容
-$output = array();
+$upasswd = (empty($_REQUEST['upasswd']))?null:$_REQUEST['upasswd'];
+$upasswd_chg = (empty($_REQUEST['upasswd-new']))?null:$_REQUEST['upasswd-new'];
+$upasswd_chgrep = (empty($_REQUEST['upasswd-new-rep']))?null:$_REQUEST['upasswd-new-rep'];
 
-switch($op){
-//取得帳號資訊
-case "get_info":
-	$output += array("action"=>"get-info");
+//---------------函式區----------------------//
+function createUserObj() {
+	global $ucode, $output, $theUser;
 	
 	//有輸入登入碼
 	if( isset($ucode) ) {
@@ -25,48 +24,129 @@ case "get_info":
 		if( !$theUser->isLogged() ) {
 			$output += array(
 				"logincode"=>$ucode,
+				"status_ok"=>false,
 				"status"=>"NoUserFound"
 			);
 		}
 		//找到此使用者
 		else {
-			$output += array(
-				"logincode"=>$ucode,
-			);
-			
-			$output += array(
-				"uid" => $theUser->getUsername(),
-				"ulogin_time" => $theUser->getLoginTime(),
-				"ucreate_time" => $theUser->getCreateTime(),
-				"ugid" => $theUser->getGroup(),
-				"ugname" => $theUser->getGroupName(),
-				"urealname" => $theUser->getRealName(),
-				"unickname" => $theUser->getNickName(),
-				"uemail" => $theUser->getEmail()
-			);
-			
-			$output += array(
-				"status"=>"OK"
-			);
+			return true;
 		}
 	}
 	//未輸入登入碼
 	else {
 		$output += array(
+			"status_ok"=>false,
+			"status"=>"CmdErr"
+		);
+		return false;
+	}
+}
+
+//---------------流程控制區----------------------//
+//宣告輸出的陣列內容
+$output = array();
+
+switch($op){
+//取得帳號資訊
+case "get_info":
+	$output += array("action"=>"get_info");
+	
+	if( createUserObj() ) {
+		$output += array(
+			"logincode"=>$ucode,
+		);
+		
+		$output += array(
+			"uid" => $theUser->getUsername(),
+			"ulogin_time" => $theUser->getLoginTime(),
+			"ucreate_time" => $theUser->getCreateTime(),
+			"ugid" => $theUser->getGroup(),
+			"ugname" => $theUser->getGroupName(),
+			"urealname" => $theUser->getRealName(),
+			"unickname" => $theUser->getNickName(),
+			"uemail" => $theUser->getEmail()
+		);
+		
+		$output += array(
+			"status_ok"=>true,
+			"status"=>"OK"
+		);
+	}
+	
+//更改密碼
+case "chg_passwd":
+	$output += array("action"=>"chg_passwd");
+	
+	//有輸入資料
+	if( isset($upasswd) && isset($upasswd_chg)) {
+		if( createUserObj() ) {
+			$result = $theUser->changePassword($upasswd, $upasswd_chg);
+			
+			if($result == "CurrentPasswdErr") {
+				$output += array(
+					"uid" => $theUser->getUsername(),
+					"ischanged"=>false,
+					"status_ok"=>false,
+					"status"=>"CurrentPasswdErr"
+				);
+			}
+			else if($result == "Finish") {
+				$output += array(
+					"uid" => $theUser->getUsername(),
+					"ischanged"=>true,
+					"status_ok"=>true,
+					"status"=>"OK"
+				);
+			}
+			else {
+				$output += array(
+					"ischanged"=>false,
+					"status_ok"=>false,
+					"status"=>"InErr"
+				);
+			}
+			$output += array(
+				"uid" => $theUser->getUsername(),
+				"iscorrect" => $theUser->isPasswordCorrect($upasswd)
+			);
+			
+		}
+	}
+	//未輸入資料
+	else {
+		$output += array(
+			"status_ok"=>false,
 			"status"=>"CmdErr"
 		);
 	}
 	
 	break;
-	
-//更改密碼
-case "chg_passwd":
-	
-	
-	break;
 
 //檢查密碼
 case "chk_passwd":
+	$output += array("action"=>"chk_passwd");
+	
+	//有輸入資料
+	if( isset($upasswd) ) {
+		if( createUserObj() ) {
+			$output += array(
+				"uid" => $theUser->getUsername(),
+				"iscorrect" => $theUser->isPasswordCorrect($upasswd)
+			);
+			$output += array(
+				"status_ok"=>true,
+				"status"=>"OK"
+			);
+		}
+	}
+	//未輸入資料
+	else {
+		$output += array(
+			"status_ok"=>false,
+			"status"=>"CmdErr"
+		);
+	}
 	
 	break;
 

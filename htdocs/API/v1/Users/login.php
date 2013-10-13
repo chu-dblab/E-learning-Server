@@ -28,6 +28,7 @@ case "login":
 		if($login_code=="NoFound") {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>false,
 				"status"=>"NoFound"
 			);
 		}
@@ -35,6 +36,7 @@ case "login":
 		else if($login_code=="NoActiveErr") {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>false,
 				"status"=>"NoActiveErr"
 			);
 		}
@@ -42,6 +44,7 @@ case "login":
 		else if($login_code=="PasswdErr") {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>false,
 				"status"=>"PasswdErr"
 			);
 		}
@@ -49,6 +52,7 @@ case "login":
 		else if($login_code=="DBErr") {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>false,
 				"status"=>"DBErr"
 			);
 		}
@@ -57,6 +61,7 @@ case "login":
 			$output += array(
 				"uid"=>$id,
 				"logincode"=>$login_code,
+				"status_ok"=>true,
 				"status"=>"OK"
 			);
 		}
@@ -64,6 +69,7 @@ case "login":
 	//未填入登入資料
 	else {
 		$output += array(
+			"status_ok"=>false,
 			"status"=>"CmdErr"
 		);
 	}
@@ -81,12 +87,14 @@ case "logout":
 			$output += array(
 				"logincode"=>$logCode,
 				"uid"=>$userid,
+				"status_ok"=>true,
 				"status"=>"OK"
 			);
 		}
 		else {
 			$output += array(
 				"logincode"=>$logCode,
+				"status_ok"=>false,
 				"status"=>"NoUserFound"
 			);
 		}
@@ -94,6 +102,7 @@ case "logout":
 	//未填入登入碼
 	else {
 		$output += array(
+			"status_ok"=>false,
 			"status"=>"CmdErr"
 		);
 	}
@@ -111,6 +120,7 @@ case "is_login_enable":
 		if($result=="NoFound") {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>false,
 				"status"=>"NoFound"
 			);
 		}
@@ -118,6 +128,7 @@ case "is_login_enable":
 		else if($result=="NoActiveErr") {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>false,
 				"status"=>"NoActiveErr"
 			);
 		}
@@ -125,13 +136,15 @@ case "is_login_enable":
 		else if($result=="PasswdErr") {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>false,
 				"status"=>"PasswdErr"
 			);
 		}
-		//已登入成功
+		//可登入
 		else {
 			$output += array(
 				"uid"=>$id,
+				"status_ok"=>true,
 				"status"=>"OK"
 			);
 		}
@@ -139,6 +152,7 @@ case "is_login_enable":
 	//未填入登入資料
 	else {
 		$output += array(
+			"status_ok"=>false,
 			"status"=>"CmdErr"
 		);
 	}
@@ -146,6 +160,7 @@ case "is_login_enable":
 	
 default:
 	$output += array(
+		"status_ok"=>false,
 		"status"=>"CmdErr"
 	);
 }
