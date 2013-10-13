@@ -16,6 +16,7 @@ $logCode = (empty($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
 $output = array();
 
 switch($action){
+//登入此使用者
 case "login":
 	$output += array("action"=>"login");
 	//有填入登入資料
@@ -68,6 +69,7 @@ case "login":
 	}
 	break;
 
+//登出此使用者
 case "logout":
 	$output += array("action"=>"logout");
 	//有填入登入碼
@@ -90,6 +92,51 @@ case "logout":
 		}
 	}
 	//未填入登入碼
+	else {
+		$output += array(
+			"status"=>"CmdErr"
+		);
+	}
+	break;
+
+//這個帳號使否可登入
+case "is-login-enable":
+	$output += array("action"=>"is-login-enable");
+	//有填入登入資料
+	if(isset($id) && isset($pwd)) {
+		//登入使用者
+		$result = user_isLoginEnable($id,$pwd);
+		
+		//找不到此使用者
+		if($result=="NoFound") {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"NoFound"
+			);
+		}
+		//帳號未啟用
+		else if($result=="NoActiveErr") {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"NoActiveErr"
+			);
+		}
+		//密碼錯誤
+		else if($result=="PasswdErr") {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"PasswdErr"
+			);
+		}
+		//已登入成功
+		else {
+			$output += array(
+				"uid"=>$id,
+				"status"=>"OK"
+			);
+		}
+	}
+	//未填入登入資料
 	else {
 		$output += array(
 			"status"=>"CmdErr"
