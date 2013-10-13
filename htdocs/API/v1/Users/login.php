@@ -1,8 +1,8 @@
 <?php
 require_once("../../../lib/include.php");
+require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
 require_once(DOCUMENT_ROOT."lib/function/user.php");
 require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
-require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
 
 //-------------------設定區-----------------------//
 $action = (empty($_REQUEST['op']))?null:$_REQUEST['op'];
@@ -100,8 +100,8 @@ case "logout":
 	break;
 
 //這個帳號使否可登入
-case "is-login-enable":
-	$output += array("action"=>"is-login-enable");
+case "is_login_enable":
+	$output += array("action"=>"is_login_enable");
 	//有填入登入資料
 	if(isset($id) && isset($pwd)) {
 		//登入使用者

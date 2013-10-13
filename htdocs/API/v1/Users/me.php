@@ -1,45 +1,67 @@
 <?php
-require_once("../lib/include.php");
-require_once(DOCUMENT_ROOT."/lib/class/MyUser.php");
+require_once("../../../lib/include.php");
+require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
+require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
 
 //-------------------設定區-----------------------//
-$op = (empty($_REQUEST['op']))?"":$_REQUEST['op'];
-$ucode = (empty($_REQUEST['ucode']))?"":$_REQUEST['ucode'];
+$op = (empty($_REQUEST['op']))?null:$_REQUEST['op'];
+$ucode = (empty($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
 
 //---------------流程控制區----------------------//
+//宣告輸出的陣列內容
+$output = array();
+
 switch($op){
 //取得帳號資訊
 case "get_info":
+	$output += array("action"=>"get-info");
 	
-	//宣告輸出的陣列內容
-	$output = array();
+	//有輸入登入碼
+	if( isset($ucode) ) {
+		//建立此使用者物件
+		$theUser = new MyUser($ucode);
+		
+		//未找到此使用者
+		if( !$theUser->isLogged() ) {
+			$output += array(
+				"logincode"=>$ucode,
+				"status"=>"NoUserFound"
+			);
+		}
+		//找到此使用者
+		else {
+			$output += array(
+				"logincode"=>$ucode,
+			);
+			
+			$output += array(
+				"uid" => $theUser->getUsername(),
+				"ulogin_time" => $theUser->getLoginTime(),
+				"ucreate_time" => $theUser->getCreateTime(),
+				"ugid" => $theUser->getGroup(),
+				"ugname" => $theUser->getGroupName(),
+				"urealname" => $theUser->getRealName(),
+				"unickname" => $theUser->getNickName(),
+				"uemail" => $theUser->getEmail()
+			);
+			
+			$output += array(
+				"status"=>"OK"
+			);
+		}
+	}
+	//未輸入登入碼
+	else {
+		$output += array(
+			"status"=>"CmdErr"
+		);
+	}
 	
-	//建立此使用者物件
-	$theUser = new MyUser($ucode);
-	
-	//未找到此使用者
-	//if() {
-	//	$output = array();
-	//}
-	////找到此使用者
-	//else {
-		$output = array();
-		$output += array("uid"=>$theUser->getUsername());
-		$output += array("ulogin_time"=>$theUser->getLoginTime());
-		$output += array("ucreate_time"=>$theUser->getCreateTime());
-		$output += array("ugid"=>$theUser->getGroup());
-		$output += array("ugname"=>$theUser->getGroupName());
-		$output += array("urealname"=>$theUser->getRealName());
-		$output += array("unickname"=>$theUser->getNickName());
-		$output += array("uemail"=>$theUser->getEmail());
-	//}
-	
-	//以json輸出帳號資訊
-	echo json_encode($output);
 	break;
 	
 //更改密碼
 case "chg_passwd":
+	
 	
 	break;
 
@@ -70,6 +92,12 @@ case "chg_email":
 
 //其他動作
 default:
-	
+	$output += array(
+		"status"=>"CmdErr"
+	);
 
 }
+
+//---------------輸出區----------------------//
+apitemplate_header();
+echo json_encode($output);
