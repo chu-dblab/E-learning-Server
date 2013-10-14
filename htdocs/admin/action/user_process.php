@@ -38,6 +38,7 @@ switch($action){
 			//產生失敗訊息
 			$theAlert = new Alert("error", false, "<strong>操作失敗！</strong> '$user_uid'帳號是不存在的喔～");
 			$theAlert->setInSession("user_process");
+			header("Location: ../user_list.php");
 		}
 		else {
 			//更換使用者資料
