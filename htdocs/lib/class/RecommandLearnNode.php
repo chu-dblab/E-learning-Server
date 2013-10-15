@@ -75,24 +75,19 @@
 	      $result->excute();
 	      
 	      //帶入公式計算下一個要推荐的學習點的編號
-	      while($row=$result->fetch())
-	      {
+	      while($row=$result->fetch()) {
 		  $pathCost = -1;
 		  $getNextNodeParameter = getNodeOfLearnOfParameter($row["Tj"],$userID);
 		  if($getNextNodeParameter["Fj"]) pathCost = 0;
-		  else
-		  {
-		      $pathCost = $getNextNodeParameter["weight"] * ($getNextNodeParameter["S"] - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"];
-		      
-		      if($getNextNodeParameter["TID"] <= 11)
-		      {
-			  //實體學習點
-		      }
-		      else
-		      {
-			  //虛擬學習點
-			  $pathCost = $pathCost * 0.06;
-		      }
+		  else{
+			  $pathCost = $getNextNodeParameter["weight"] * ($getNextNodeParameter["S"] - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"];
+			  if($getNextNodeParameter["TID"] <= 11){
+			      //實體學習點
+			  }
+			  else{
+			      //虛擬學習點
+			      $pathCost = $pathCost * 0.06;
+			  }
 		  }
 	      }
 	      //將計算結果做快速排序
