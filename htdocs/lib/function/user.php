@@ -199,3 +199,60 @@ function user_login($userid, $userpasswd){
 		return "NoFound";
 	}
 }
+// ------------------------------------------------------------------------
+
+/**
+ * user_isLoginEnable
+ *
+ * 此帳號是否可登入
+ *
+ * @access	public
+ * @param	string	帳號
+ * @param	string	密碼
+ * @return	string	"OK": 可登入
+			"NoActiveErr": 帳號未啟用
+			"PasswdErr": 密碼錯誤
+			"NoFound": 找不到存在的使用者
+ * 
+ * @author	元兒～ <yuan817@moztw.org>
+ * @since	Version 1
+ *
+*/
+
+function user_isLoginEnable($userid, $userpasswd){
+	global $FORM_USER;
+	
+	//將密碼加密
+	$userpasswd = encryptText($userpasswd);
+	
+	//開啟資料庫
+	$db = new Database();
+	
+	//查詢使用者登入資訊
+	$db_user_query = $db->prepare("SELECT `UID`,`UPassword`,`UEnabled` FROM ".$db->table($FORM_USER)." WHERE `UID` = :username");
+	$db_user_query->bindParam(":username",$userid);
+	$db_user_query->execute();
+	
+	//若有找到使用者
+	if( $db_user_array = $db_user_query->fetch() ) {
+		//echo '<pre>', print_r($db_user_array, true), '</pre>';
+		
+		//若這個帳戶未啟用
+		if( !$db_user_array['UEnabled'] ) {
+			return "NoActiveErr";
+		}
+		//若密碼錯誤
+		else if(  $userpasswd != $db_user_array['UPassword'] ) {
+			return "PasswdErr";
+		}
+		//符合登入條件
+		else{
+			return "OK";
+			
+		}
+	}
+	//若未找到使用者
+	else {
+		return "NoFound";
+	}
+}
