@@ -34,7 +34,7 @@ function generatorText($password_len)
     $password = '';
 
     // remove o,0,1,l
-    $word = 'abcdefghijkmnpqrstuvwxyz!@#%^*()-=ABCDEFGHIJKLMNPQRSTUVWXYZ;{}[]23456789';
+    $word = 'abcdefghijkmnpqrstuvwxyz!@#%^*()-ABCDEFGHIJKLMNPQRSTUVWXYZ;{}[]23456789';
     $len = strlen($word);
 
     for ($i = 0; $i < $password_len; $i++) {

@@ -201,7 +201,7 @@ class MyUser {
 			return $this->userObject->setNickName($input);
 		}
 		else {
-			return "NoUserFound";
+			return false;
 		}
 	}
 	// ------------------------------------------------------------------------
@@ -249,7 +249,7 @@ class MyUser {
 			return $this->userObject->setEmail($input);
 		}
 		else {
-			return "NoUserFound";
+			return false;
 		}
 	}
 	// ------------------------------------------------------------------------

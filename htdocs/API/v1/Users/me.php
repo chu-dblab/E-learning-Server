@@ -9,7 +9,11 @@ $ucode = (empty($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
 
 $upasswd = (empty($_REQUEST['upasswd']))?null:$_REQUEST['upasswd'];
 $upasswd_chg = (empty($_REQUEST['upasswd-new']))?null:$_REQUEST['upasswd-new'];
-$upasswd_chgrep = (empty($_REQUEST['upasswd-new-rep']))?null:$_REQUEST['upasswd-new-rep'];
+
+$realname_chg = (empty($_REQUEST['urealname-new']))?null:$_REQUEST['urealname-new'];
+$nickname_chg = (empty($_REQUEST['unickname-new']))?null:$_REQUEST['unickname-new'];
+$email_chg = (empty($_REQUEST['uemail-new']))?null:$_REQUEST['uemail-new'];
+
 
 //---------------函式區----------------------//
 function createUserObj() {
@@ -49,8 +53,8 @@ $output = array();
 
 switch($op){
 //取得帳號資訊
-case "get_info":
-	$output += array("action"=>"get_info");
+case "get-info":
+	$output += array("action"=>"get-info");
 	
 	if( createUserObj() ) {
 		$output += array(
@@ -63,6 +67,7 @@ case "get_info":
 			"ucreate_time" => $theUser->getCreateTime(),
 			"ugid" => $theUser->getGroup(),
 			"ugname" => $theUser->getGroupName(),
+			"uname" => $theUser->getName(),
 			"urealname" => $theUser->getRealName(),
 			"unickname" => $theUser->getNickName(),
 			"uemail" => $theUser->getEmail()
@@ -75,8 +80,8 @@ case "get_info":
 	}
 	
 //更改密碼
-case "chg_passwd":
-	$output += array("action"=>"chg_passwd");
+case "chg-passwd":
+	$output += array("action"=>"chg-passwd");
 	
 	//有輸入資料
 	if( isset($upasswd) && isset($upasswd_chg)) {
@@ -101,6 +106,7 @@ case "chg_passwd":
 			}
 			else {
 				$output += array(
+					"uid" => $theUser->getUsername(),
 					"ischanged"=>false,
 					"status_ok"=>false,
 					"status"=>"InErr"
@@ -124,8 +130,8 @@ case "chg_passwd":
 	break;
 
 //檢查密碼
-case "chk_passwd":
-	$output += array("action"=>"chk_passwd");
+case "chk-passwd":
+	$output += array("action"=>"chk-passwd");
 	
 	//有輸入資料
 	if( isset($upasswd) ) {
@@ -151,22 +157,94 @@ case "chk_passwd":
 	break;
 
 //取得權限資訊
-case "get_auth":
+case "get-auth":
 	
 	break;
 
 //更改名字
-case "chg_realname":
+case "chg-realname":
+	$output += array("action"=>"chg-realname");
+	
+	//有輸入資料
+	if( isset($realname_chg)) {
+		if( createUserObj() ) {
+			$result = $theUser->setRealName($realname_chg);
+			
+			//更改資料
+			$output += array(
+				"uid" => $theUser->getUsername(),
+				"urealname" => $realname_chg,
+				"ischanged"=>true,
+				"status_ok"=>true,
+				"status"=>"OK"
+			);
+		}
+	}
+	//未輸入資料
+	else {
+		$output += array(
+			"status_ok"=>false,
+			"status"=>"CmdErr"
+		);
+	}
 	
 	break;
 
 //更改暱稱
-case "chg_nickname":
+case "chg-nickname":
+	$output += array("action"=>"chg-nickname");
+	
+	//有輸入資料
+	if( isset($nickname_chg)) {
+		if( createUserObj() ) {
+			$result = $theUser->setNickName($nickname_chg);
+			
+			//更改資料
+			$output += array(
+				"uid" => $theUser->getUsername(),
+				"unickname" => $nickname_chg,
+				"ischanged"=>true,
+				"status_ok"=>true,
+				"status"=>"OK"
+			);
+		}
+	}
+	//未輸入資料
+	else {
+		$output += array(
+			"status_ok"=>false,
+			"status"=>"CmdErr"
+		);
+	}
 	
 	break;
 	
 //更改email
-case "chg_email":
+case "chg-email":
+	$output += array("action"=>"chg-email");
+	
+	//有輸入資料
+	if( isset($email_chg)) {
+		if( createUserObj() ) {
+			$result = $theUser->setEmail($email_chg);
+			
+			//更改資料
+			$output += array(
+				"uid" => $theUser->getUsername(),
+				"uemail" => $email_chg,
+				"ischanged"=>true,
+				"status_ok"=>true,
+				"status"=>"OK"
+			);
+		}
+	}
+	//未輸入資料
+	else {
+		$output += array(
+			"status_ok"=>false,
+			"status"=>"CmdErr"
+		);
+	}
 	
 	break;
 
