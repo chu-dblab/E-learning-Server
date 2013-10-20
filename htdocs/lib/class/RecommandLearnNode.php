@@ -159,5 +159,17 @@
 	   $row = $result->fetchAll();
 	   return $row;
 	}
+	
+	
+       /* TODO
+	* 方法名稱：updateUserLearnData
+	* 說明：更新使用者的學習狀態
+	* 參數：$userID 使用者編號
+	*	 $point_number 學習點的編號
+	* 回傳值：NONE
+	*/
+	public function updateUserLearnData($userID,$point_number)
+	{
+	}
   }
 ?>
