@@ -25,7 +25,7 @@
 	{
 	    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
 	    $query->bindParam(":number",$point_number);
-	    $result->execute();		    
+	    $query->execute();		    
 	}
 	
 	/*
@@ -38,7 +38,7 @@
 	{
 	    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." set Mj = Mj - 1 where TID = :number");
 	    $query->bindParam(":number",$point_number);
-	    $result->execute();		    
+	    $query->execute();		    
 	}
 	
 	/* 
@@ -161,15 +161,24 @@
 	}
 	
 	
-       /* TODO
+       /*
 	* 方法名稱：updateUserLearnData
 	* 說明：更新使用者的學習狀態
-	* 參數：$userID 使用者編號
-	*	 $point_number 學習點的編號
+	* 參數：$JSONData Client端所傳過來的JSON格式資料
 	* 回傳值：NONE
 	*/
-	public function updateUserLearnData($userID,$point_number)
+	public function updateUserLearnData($JSONData)
 	{
+	   $ClientData = json_decode($JSONData);
+	   $result = $conDB->prepare("UPDATE ".$conDB->table("study").
+				     " SET ".$conDB->table("study").".Answer = ".$ClientData->Answer.",".
+					     $conDB->table("study").".Answer_Time = ".$ClientData->Answer_Time.",".
+					     $conDB->table("study").".In_TargetTime = ".$ClientData->.In_TargetTime.",".
+					     $conDB->table("study").".Out_TargetTime = ".$ClientData->Out_TargetTime.",".
+					     $conDB->table("study").".TCheck = ".$ClientData->TCheck.
+					     $conDB->table("study").".QID = ".$ClientData->QID.
+				    " WHERE ".$conDB->table("study").".TID = ".$ClientData->TID." AND ".$conDB->table("study").".UID = ".$ClientData->UID );
+	  $result->excute();
 	}
   }
 ?>
