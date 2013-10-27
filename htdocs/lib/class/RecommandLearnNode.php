@@ -2,8 +2,11 @@
   require_once("../lib/include.php");
   require_once(DOCUMENT_ROOT."lib/class/Database.php");
 
- /*
-  *  類別名稱：推薦學習點
+ /**
+  * @Class_Name：推薦學習點
+  * @author	~kobayashi();
+  * @link	https://github.com/CHU-TDAP/
+  * @since	Version 1.0
   */
   class RecommandLearnNode
   {
@@ -15,25 +18,25 @@
 	  $fullflag = false;
 	}
 	
-	/*
-	* 方法名稱：加人數
-	* 說明：當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
-	* 參數: $point_number, 學習點的編號
-	* 回傳值： NONE
-	*/
-	public function addPeople($point_number)
-	{
-	    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
-	    $query->bindParam(":number",$point_number);
-	    $query->execute();		    
-	}
+     /**
+      * @Method_Name	加人數
+      * @description	當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
+      * @param	   string  $point_number, 學習點的編號
+      * @return   NONE
+      */
+      public function addPeople($point_number)
+      {
+	  $query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
+	  $query->bindParam(":number",$point_number);
+	  $query->execute();		    
+      }
 	
-	/*
-	* 方法名稱：減人數
-	* 說明：當使用者按下"離開"按鈕時, 則人數減一
-	* 參數: $point_number, 學習點的編號
-	* 回傳值： NONE
-	*/		
+     /**
+      *  @Method_Name		減人數
+      *  @description		當使用者按下"離開"按鈕時, 則人數減一
+      *  @param		$point_number, 學習點的編號
+      *  @return		NONE
+      */		
 	public function subPeople($point_number)
 	{
 	    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." set Mj = Mj - 1 where TID = :number");
@@ -41,12 +44,12 @@
 	    $query->execute();		    
 	}
 	
-	/* 
-	* 方法名稱：isZero
-	* 說明：確認目前的學習點是不是零
-	* 參數：point_number (data type is an Integer)  學習點的編號
-	* 回傳值：Boolean (true/false)
-	*/
+     /** 
+      * @Method_Name	isZero
+      * @description	確認目前的學習點是不是零
+      * @param		$point_number (data type is an Integer)  學習點的編號
+      * @return	Boolean (true/false)
+      */
 	private function isZero($point_number)
 	{
 		$isZero = false;
@@ -57,12 +60,12 @@
 		else return true;
 	}
 	
-       /*
-	* 方法名稱：getLearningNode
-	* 說明：取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
-	* 參數：$point_number	學習點的編號
-	* 	 $userID	使用者編號
-	* 回傳值：推薦學習之標的編號
+       /**
+	* @Method_Name	getLearningNode
+	* @description	取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
+	* @param		$point_number_學習點的編號
+	* @param		$userID_使用者編號
+	* @return		推薦學習之標的編號
 	*/
 	public function getLearningNode($point_number,$userID)
 	{
@@ -97,12 +100,12 @@
 	      echo json_encode($sorted);
 	}
 	
-       /*
-	* 方法名稱：getNodeOfLearnOfParameter
-	* 說明：取得學習點的所有參數
-	* 參數：$next_point_number 學習點的編號
-	*	$userID		   學習者的帳號
-	* 回傳值：取得學習點之所有參數(2D array);
+       /**
+	* @Method_Name		getNodeOfLearnOfParameter
+	* @description		取得學習點的所有參數
+	* @param			$next_point_number_學習點的編號
+	* @param			$userID_學習者的帳號
+	* @return			取得學習點之所有參數(2D array);
 	*/
 	private function getNodeOfLearnOfParameter($next_point_number,$userID)
 	{
@@ -118,11 +121,11 @@
 		return $row;
 	}
 	
-       /*
-	* 方法名稱：DetectAllLearnNodeFull
-	* 說明：偵測所有的學習點是不是已經達到限制人數
-	* 參數：NONE
-	* 回傳值：true/false
+       /**
+	* @Method_Name		DetectAllLearnNodeFull
+	* @description		偵測所有的學習點是不是已經達到限制人數
+	* @param			NONE
+	* @return			true/false
 	*/
 	public function DetectAllLearnNodeFull()
 	{
@@ -141,12 +144,12 @@
 	      }
 	}
 	
-       /* 
-	* 方法名稱：getLearningStatus
-	* 說明：取得使用者學習的狀態
-	* 參數：$userID  使用者編號
-	*	$point_number  學習點的編號
-	* 回傳值：學習狀態資訊
+       /**
+	* @Method_Name		getLearningStatus
+	* @description		取得使用者學習的狀態
+	* @param			$userID_使用者編號
+	* @param			$point_number_學習點的編號
+	* @return			學習狀態資訊
 	*/	
 	public function getLearningStatus($userID,$point_number)
 	{
@@ -161,11 +164,11 @@
 	}
 	
 	
-       /*
-	* 方法名稱：updateUserLearnData
-	* 說明：更新使用者的學習狀態
-	* 參數：$JSONData Client端所傳過來的JSON格式資料
-	* 回傳值：NONE
+       /**
+	* @Method_Name		updateUserLearnData
+	* @description		更新使用者的學習狀態
+	* @param			$JSONData Client端所傳過來的JSON格式資料
+	* @return			NONE
 	*/
 	public function updateUserLearnData($JSONData)
 	{

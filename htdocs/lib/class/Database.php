@@ -31,7 +31,7 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	 *
 	 * @access	public
 	 */
-	function __construct(){
+	public function __construct(){
 		global $DB_SERV, $DB_NAME, $DB_USER, $DB_PASS;
 		parent::__construct("mysql:dbname={$DB_NAME};host:{$DB_SERV};charset=utf8", $DB_USER, $DB_PASS);
 
@@ -54,7 +54,7 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	* @since	Version 2
 	* @author	元兒～ <yuan817@moztw.org>
 	*/
-	function table($inputName){
+	public function table($inputName){
 		global $FORM_PREFIX;
 		return $FORM_PREFIX.$inputName;
 	}
@@ -72,7 +72,7 @@ require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連�
 	* @author	shuliu <https://github.com/shuliu>
 	* @source	https://github.com/shuliu/myPDO/blob/master/PDO.class.php
 	*/
-	function ErrorMsg(){
+	public function ErrorMsg(){
 		$err = parent ::errorinfo();
 		if( $err[0]!='00000' ){
 			return array('errorCode'=>$err[0],'number'=>$err[1],'message'=>$err[2]);
