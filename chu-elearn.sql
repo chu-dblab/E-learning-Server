@@ -4,7 +4,7 @@
   Gauth_admin tinyint(1) NOT NULL default '0',
   GCompetence varchar(10) NOT NULL,
   PRIMARY KEY (GID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='群組 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='群組';
 
 INSERT
 INTO chu_group
@@ -28,7 +28,7 @@ CREATE TABLE chu_user(
   UEmail varchar(50) default NULL COMMENT '使用者email',
   PRIMARY KEY (SID),
   FOREIGN KEY (GID) REFERENCES chu_group (GID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者';
 
 INSERT
 INTO chu_user
@@ -51,7 +51,7 @@ CREATE TABLE chu_target(
   S float unsigned default NULL COMMENT '學習標的飽和率上限',
   Fj tinyint(1) default NULL COMMENT '學習標的滿額指標',
   PRIMARY KEY (TID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的';
 
 CREATE TABLE chu_theme(
   ThemeID int(10) unsigned NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE chu_theme(
   Theme_LearnTotal int(10) unsigned NOT NULL COMMENT '學習此主題要花的總時間(hr)',
   Theme_Introduction varchar(70) NOT NULL,
   PRIMARY KEY (ThemeID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='主題 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='主題';
 
 CREATE TABLE chu_study(
   TID int(10) unsigned NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE chu_study(
   PRIMARY KEY (TID,SID),
   FOREIGN KEY (TID) REFERENCES chu_target (TID),
   FOREIGN KEY (SID) REFERENCES chu_user (SID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者與標的間study 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者與標的間study';
 
 CREATE TABLE chu_recommend(
   TID int(10) unsigned NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE chu_recommend(
   PRIMARY KEY (TID,SID),
   FOREIGN KEY (TID) REFERENCES chu_target (TID),
   FOREIGN KEY (SID) REFERENCES chu_user (SID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='推薦 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='推薦';
 
 CREATE TABLE chu_belong(
   TID int(10) unsigned NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE chu_belong(
   PRIMARY KEY (TID,ThemeID),
   FOREIGN KEY (TID) REFERENCES chu_target (TID),
   FOREIGN KEY (ThemeID) REFERENCES chu_theme(ThemeID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和主題之間 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和主題之間';
 
 CREATE TABLE chu_edge(
   Ti int(10) unsigned NOT NULL,
@@ -102,4 +102,4 @@ CREATE TABLE chu_edge(
   PRIMARY KEY (Ti,Tj),
   FOREIGN KEY (Ti) REFERENCES chu_target (TID),
   FOREIGN KEY (Tj) REFERENCES chu_target (TID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和標的之間 資料表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和標的之間';
