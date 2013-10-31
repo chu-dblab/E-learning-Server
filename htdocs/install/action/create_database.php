@@ -57,8 +57,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."belong` (
   ThemeID int(10) unsigned NOT NULL,
   Weights float NOT NULL COMMENT '當次學習主題的某一個學習標的之權重',
   PRIMARY KEY (TID,ThemeID),
-  FOREIGN KEY (TID) REFERENCES chu_target (TID),
-  FOREIGN KEY (ThemeID) REFERENCES chu_theme(ThemeID)
+  FOREIGN KEY (TID) REFERENCES ".$inputSQLDBFormPrefixtarget."target (TID),
+  FOREIGN KEY (ThemeID) REFERENCES ".$inputSQLDBFormPrefixtarget."theme(ThemeID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和主題之間';") or die(mysql_error());
 
 
@@ -68,8 +68,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."edge` (
   MoveTime varchar(20) NOT NULL COMMENT '移動時間(分鐘)',
   Distance varchar(20) NOT NULL COMMENT '距離(M)',
   PRIMARY KEY (Ti,Tj),
-  FOREIGN KEY (Ti) REFERENCES chu_target (TID),
-  FOREIGN KEY (Tj) REFERENCES chu_target (TID)
+  FOREIGN KEY (Ti) REFERENCES ".$inputSQLDBFormPrefixtarget." (TID),
+  FOREIGN KEY (Tj) REFERENCES ".$inputSQLDBFormPrefixtarget."target (TID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和標的之間';") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."group` (
@@ -89,8 +89,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."recommend` (
   SID varchar(30) NOT NULL COMMENT '使用者帳號',
   gradation int(50) unsigned NOT NULL COMMENT '系統推薦標地順序',
   PRIMARY KEY (TID,SID),
-  FOREIGN KEY (TID) REFERENCES chu_target (TID),
-  FOREIGN KEY (SID) REFERENCES chu_user (SID)
+  FOREIGN KEY (TID) REFERENCES ".$inputSQLDBFormPrefixtarget."target (TID),
+  FOREIGN KEY (SID) REFERENCES ".$inputSQLDBFormPrefixtarget."user (SID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='推薦';") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."study` (
@@ -103,8 +103,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."study` (
   In_TargetTime datetime NOT NULL,
   Out_TargetTime datetime default NULL,
   PRIMARY KEY (TID,SID),
-  FOREIGN KEY (TID) REFERENCES chu_target (TID),
-  FOREIGN KEY (SID) REFERENCES chu_user (SID)
+  FOREIGN KEY (TID) REFERENCES ".$inputSQLDBFormPrefixtarget."target (TID),
+  FOREIGN KEY (SID) REFERENCES ".$inputSQLDBFormPrefixtarget."user (SID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者與標的間study';") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."target` (
@@ -148,7 +148,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."user` (
   UNickname varchar(20) default NULL COMMENT '使用者暱稱',
   UEmail varchar(50) default NULL COMMENT '使用者email',
   PRIMARY KEY (SID),
-  FOREIGN KEY (GID) REFERENCES chu_group (GID)
+  FOREIGN KEY (GID) REFERENCES ".$inputSQLDBFormPrefixtarget."group (GID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者';") or die(mysql_error());
 
 mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."user` (`UID`, `GID`, `UPassword`, `ULogged_code`, `ULast_In_Time`, `UBuild_Time`, `UEnabled`, `In_Learn_Time`, `UReal_Name`, `UNickname`, `UEmail`) VALUES
