@@ -52,7 +52,7 @@ mysql_select_db($inputSQLDBName,$db);
 mysql_query("SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO'") or die(mysql_error());
 mysql_query("SET time_zone = '+00:00'") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."group(
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."group(
   GID varchar(30) NOT NULL,
   GName varchar(15) NOT NULL,
   Gauth_admin tinyint(1) NOT NULL default '0',
@@ -69,8 +69,8 @@ mysql_query("INSERT
 INTO ".$inputSQLDBFormPrefix."group
 VALUES ('user', '使用者', 0, '')") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."user(
-  SID varchar(30) NOT NULL COMMENT '使用者帳號',
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."user(
+  UID varchar(30) NOT NULL COMMENT '使用者帳號',
   GID varchar(30) NOT NULL COMMENT '使用者群組',
   UPassword varchar(40) NOT NULL COMMENT '密碼',
   ULogged_code varchar(32) default NULL COMMENT '登入碼',
@@ -81,7 +81,7 @@ mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."user(
   UReal_Name varchar(20) default NULL COMMENT '真實姓名',
   UNickname varchar(20) default NULL COMMENT '使用者暱稱',
   UEmail varchar(50) default NULL COMMENT '使用者email',
-  PRIMARY KEY (SID),
+  PRIMARY KEY (UID),
   FOREIGN KEY (GID) REFERENCES ".$inputSQLDBFormPrefix."group (GID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者'") or die(mysql_error());
 
@@ -89,7 +89,7 @@ mysql_query("INSERT
 INTO ".$inputSQLDBFormPrefix."user
 VALUES ('root', 'admin', '63a9f0ea7bb98050796b649e854818', NULL, NULL, '2013-08-20 14:58:38', 1, '0000-00-00 00:00:00', '', '', '')") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."target(
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."target(
   TID int(10) unsigned NOT NULL,
   TName varchar(15) NOT NULL,
   TLearn_Time int(10) unsigned NOT NULL,
@@ -108,7 +108,7 @@ mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."target(
   PRIMARY KEY (TID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的'") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."theme(
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."theme(
   ThemeID int(10) unsigned NOT NULL,
   ThemeName varchar(15) NOT NULL,
   theme_Learn_DateTime datetime NOT NULL COMMENT '本次學習此主題發生的日期時間',
@@ -117,30 +117,30 @@ mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."theme(
   PRIMARY KEY (ThemeID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='主題'") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."study(
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."study(
   TID int(10) unsigned NOT NULL,
-  SID varchar(30) NOT NULL COMMENT '使用者帳號',
+  UID varchar(30) NOT NULL COMMENT '使用者帳號',
   QID int(10) unsigned default NULL,
   TCheck varchar(5) NOT NULL COMMENT '有無正確到推薦點',
   Answer varchar(5) default NULL COMMENT '答題對錯 Y=對 N=錯',
   Answer_Time varchar(10) default NULL COMMENT '作答時間',
   In_TargetTime datetime NOT NULL,
   Out_TargetTime datetime default NULL,
-  PRIMARY KEY (TID,SID),
+  PRIMARY KEY (TID,UID),
   FOREIGN KEY (TID) REFERENCES ".$inputSQLDBFormPrefix."target (TID),
-  FOREIGN KEY (SID) REFERENCES ".$inputSQLDBFormPrefix."user (SID)
+  FOREIGN KEY (UID) REFERENCES ".$inputSQLDBFormPrefix."user (UID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者與標的間study'") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."recommend(
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."recommend(
   TID int(10) unsigned NOT NULL,
-  SID varchar(30) NOT NULL COMMENT '使用者帳號',
+  UID varchar(30) NOT NULL COMMENT '使用者帳號',
   gradation int(50) unsigned NOT NULL COMMENT '系統推薦標地順序',
-  PRIMARY KEY (TID,SID),
+  PRIMARY KEY (TID,UID),
   FOREIGN KEY (TID) REFERENCES ".$inputSQLDBFormPrefix."target (TID),
-  FOREIGN KEY (SID) REFERENCES ".$inputSQLDBFormPrefix."user (SID)
+  FOREIGN KEY (UID) REFERENCES ".$inputSQLDBFormPrefix."user (UID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='推薦'") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."belong(
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."belong(
   TID int(10) unsigned NOT NULL,
   ThemeID int(10) unsigned NOT NULL,
   Weights float NOT NULL COMMENT '當次學習主題的某一個學習標的之權重',
@@ -149,7 +149,7 @@ mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."belong(
   FOREIGN KEY (ThemeID) REFERENCES ".$inputSQLDBFormPrefix."theme(ThemeID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和主題之間'") or die(mysql_error());
 
-mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."edge(
+mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."edge(
   Ti int(10) unsigned NOT NULL,
   Tj int(10) unsigned NOT NULL,
   MoveTime varchar(20) NOT NULL COMMENT '移動時間(分鐘)',
