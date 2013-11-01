@@ -86,25 +86,25 @@ mysql_query("INSERT INTO `".$inputSQLDBFormPrefix."group` (`GID`, `GName`, `Gaut
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."recommend` (
   TID int(10) unsigned NOT NULL,
-  SID varchar(30) NOT NULL COMMENT '使用者帳號',
+  UID varchar(30) NOT NULL COMMENT '使用者帳號',
   gradation int(50) unsigned NOT NULL COMMENT '系統推薦標地順序',
-  PRIMARY KEY (TID,SID),
+  PRIMARY KEY (TID,UID),
   FOREIGN KEY (TID) REFERENCES ".$inputSQLDBFormPrefixtarget."target (TID),
-  FOREIGN KEY (SID) REFERENCES ".$inputSQLDBFormPrefixtarget."user (SID)
+  FOREIGN KEY (UID) REFERENCES ".$inputSQLDBFormPrefixtarget."user (UID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='推薦';") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."study` (
   TID int(10) unsigned NOT NULL,
-  SID varchar(30) NOT NULL COMMENT '使用者帳號',
+  UID varchar(30) NOT NULL COMMENT '使用者帳號',
   QID int(10) unsigned default NULL,
   TCheck varchar(5) NOT NULL COMMENT '有無正確到推薦點',
   Answer varchar(5) default NULL COMMENT '答題對錯 Y=對 N=錯',
   Answer_Time varchar(10) default NULL COMMENT '作答時間',
   In_TargetTime datetime NOT NULL,
   Out_TargetTime datetime default NULL,
-  PRIMARY KEY (TID,SID),
+  PRIMARY KEY (TID,UID),
   FOREIGN KEY (TID) REFERENCES ".$inputSQLDBFormPrefixtarget."target (TID),
-  FOREIGN KEY (SID) REFERENCES ".$inputSQLDBFormPrefixtarget."user (SID)
+  FOREIGN KEY (UID) REFERENCES ".$inputSQLDBFormPrefixtarget."user (UID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者與標的間study';") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."target` (
@@ -136,7 +136,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."theme` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='主題';") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."user` (
-  SID varchar(30) NOT NULL COMMENT '使用者帳號',
+  UID varchar(30) NOT NULL COMMENT '使用者帳號',
   GID varchar(30) NOT NULL COMMENT '使用者群組',
   UPassword varchar(40) NOT NULL COMMENT '密碼',
   ULogged_code varchar(32) default NULL COMMENT '登入碼',
@@ -147,7 +147,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$inputSQLDBFormPrefix."user` (
   UReal_Name varchar(20) default NULL COMMENT '真實姓名',
   UNickname varchar(20) default NULL COMMENT '使用者暱稱',
   UEmail varchar(50) default NULL COMMENT '使用者email',
-  PRIMARY KEY (SID),
+  PRIMARY KEY (UID),
   FOREIGN KEY (GID) REFERENCES ".$inputSQLDBFormPrefixtarget."group (GID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者';") or die(mysql_error());
 
