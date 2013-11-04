@@ -6,14 +6,6 @@
   PRIMARY KEY (GID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='群組';
 
-INSERT
-INTO chu_group
-VALUES ('admin', '管理者', 1, '');
-
-INSERT
-INTO chu_group
-VALUES ('user', '使用者', 0, '');
-
 CREATE TABLE chu_user(
   UID varchar(30) NOT NULL COMMENT '使用者帳號',
   GID varchar(30) NOT NULL COMMENT '使用者群組',
@@ -29,10 +21,6 @@ CREATE TABLE chu_user(
   PRIMARY KEY (UID),
   FOREIGN KEY (GID) REFERENCES chu_group (GID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者';
-
-INSERT
-INTO chu_user
-VALUES ('root', 'admin', '63a9f0ea7bb98050796b649e854818', NULL, NULL, '2013-08-20 14:58:38', 1, '0000-00-00 00:00:00', '', '', '');
 
 CREATE TABLE chu_target(
   TID int(10) unsigned NOT NULL,
