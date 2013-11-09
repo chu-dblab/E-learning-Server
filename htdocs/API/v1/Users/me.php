@@ -27,7 +27,7 @@ function createUserObj() {
 		//未找到此使用者
 		if( !$theUser->isLogged() ) {
 			$output += array(
-				"logincode"=>$ucode,
+				"ucode"=>$ucode,
 				"status_ok"=>false,
 				"status"=>"NoUserFound"
 			);
@@ -58,7 +58,7 @@ case "get-info":
 	
 	if( createUserObj() ) {
 		$output += array(
-			"logincode"=>$ucode,
+			"ucode"=>$ucode,
 		);
 		
 		$output += array(

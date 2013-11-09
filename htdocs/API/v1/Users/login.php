@@ -60,7 +60,7 @@ case "login":
 		else {
 			$output += array(
 				"uid"=>$id,
-				"logincode"=>$login_code,
+				"ucode"=>$login_code,
 				"status_ok"=>true,
 				"status"=>"OK"
 			);
@@ -85,7 +85,7 @@ case "logout":
 			$userid = $user->getUsername();
 			$user->logout();
 			$output += array(
-				"logincode"=>$logCode,
+				"ucode"=>$logCode,
 				"uid"=>$userid,
 				"status_ok"=>true,
 				"status"=>"OK"
@@ -93,7 +93,7 @@ case "logout":
 		}
 		else {
 			$output += array(
-				"logincode"=>$logCode,
+				"ucode"=>$logCode,
 				"status_ok"=>false,
 				"status"=>"NoUserFound"
 			);
