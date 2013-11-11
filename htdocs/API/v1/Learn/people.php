@@ -15,36 +15,36 @@
      switch($action)
      {
 	case "addPeople":
-	    if(!isset($num)) $message += array("status"=>"CmdErr");
+	    if(!isset($num)) $message += array("status"=>"CommandError");
 	    else
 	    {
-		$learn->addPeople($num);
-		$message += array("status"=>"OK");
+			$learn->addPeople($num);
+			$message += array("status_ok"=>True);
 	    }
 	    break;
 	case "subPeople":
-	    if(!isset($num)) $message += array("status"=>"CmdErr");
+	    if(!isset($num)) $message += array("status_ok"=>false,"status"=>"CommandError");
 	    else 
 	    {
-		$learn->subPeople($num);
-		$message += array("status"=>"OK");
+			$learn->subPeople($num);
+			$message += array("status_ok"=>True);
 	    }
 	    break;
 	case "upgrade":
-	     if(!isset($Data)) $message += array("status"=>"CmdErr");
+	     if(!isset($Data)) array("status_ok"=>false,"status"=>"CommandError");
 	     else 
 	     {
-		$learn->updateUserLearnData($Data);
-		$message += array("status"=>"OK");
+			$learn->updateUserLearnData($Data);
+			$message += array("status_ok"=>True);
 	     }
 	     break;
 	case "recommand" :
 	      if(isset($point) && isset($ID))
 	      {
-		  $learn->getLearningNode($point,$ID);
-		  $message += array("status"=>"OK");
+			$learn->getLearningNode($point,$ID);
+			$message += array("status_ok"=>True);
 	      }
-	      else $message += array("status"=>"CmdErr");
+	      else array("status_ok"=>false,"status"=>"CommandError");
 	    break;
 	default:
 	      $message += array("status"=>"Internal Error!!");
