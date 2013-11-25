@@ -1,0 +1,5 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule API/v1/Material/DownloadZip.zip$ API/v1/Material/DownloadZip.php [L] 
+RewriteRule API/v1/Material/TeachingMaterial.zip$ API/v1/Material/DownloadZip.php [L] 
+RewriteRule API/v1/Material/Material.zip$ API/v1/Material/DownloadZip.php [L] 
