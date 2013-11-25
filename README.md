@@ -6,8 +6,69 @@
 包含每位學生的學習資料、場地狀況、學習教材。以及處理學習路徑規劃。
 
 ## 系統需求
-* PHP5.3 以上 （要支援pdo_mysql）
+* PHP5.3 以上，需要有以下Extension:
+    * pdo_mysql
+    * zip
 * MariaDB 5.5.31 (可用MySQL)
+
+## 拷貝專案
+1. `$ git clone git@github.com:CHU-TDAP/E-learning-Server.git`
+
+        Cloning into 'E-learning-Server'...
+        remote: Counting objects: 2275, done.
+        remote: Compressing objects: 100% (820/820), done.
+        remote: Total 2275 (delta 1503), reused 2164 (delta 1393)
+        Receiving objects: 100% (2275/2275), 682.27 KiB | 89.00 KiB/s, done.
+        Resolving deltas: 100% (1503/1503), done.
+        Checking connectivity... done
+    
+2. `$ cd E-learning-Server`
+        
+3. `$ git submodule init`
+
+        Submodule 'htdocs/Material' (git@github.com:CHU-TDAP/E-learning-material.git) registered for path 'htdocs/Material'
+
+4. `$ git submodule update`
+
+        Cloning into 'htdocs/Material'...
+        remote: Counting objects: 322, done.
+        remote: Compressing objects: 100% (261/261), done.
+        remote: Total 322 (delta 143), reused 220 (delta 44)
+        Receiving objects: 100% (322/322), 26.76 MiB | 76.00 KiB/s, done.
+        Resolving deltas: 100% (143/143), done.
+        Checking connectivity... done
+        Submodule path 'htdocs/Material': checked out 'aff4987f61755f0f66fe1bf382b4a3250f080344'
+        
+## 架設到你自己的伺服器
+### Apache
+編輯以下文件:
+
+* ArchLinux: `/etc/httpd/conf/extra/httpd-vhosts.conf`
+* Ubuntu: `/etc/apache2/sites-available/chu-elearning.conf`
+
+加入以下內容:
+
+    # Chu E-learning Website
+    <VirtualHost *:80>
+        ServerName chu-elearning.yourdomain.name
+        ServerAdmin admin@yourdomain.name
+        
+        DocumentRoot /srv/http/website/chu-elearning/htdocs
+        DirectoryIndex index.php index.shtml index.html
+    </VirtualHost>
+    <Directory /srv/http/website/chu-elearning/htdocs/>
+        Options FollowSymLinks MultiViews
+        AllowOverride All
+        Allow from All
+        Order allow,deny
+    </Directory>
+
+啟用本站/重新啟動伺服器:
+
+* ArchLinux: `$ sudo systemctl restart httpd.service`
+* Ubuntu:
+    1. `$ sudo a2ensite chu-elearning`
+    2. `$ sudo /etc/init.d/apache2 restart`
 
 ## 如何安裝
 ### 引導式安裝
@@ -33,6 +94,8 @@
 
 
 ## 修改紀錄
+* 2013.11.25
+    * 新增教材打包下載的功能
 * 2013.11.9
     * 更改API輸出ID: logincode -> ucode
 * 2013.10.1
@@ -53,7 +116,7 @@
 * 2013.8.21
     * 網頁部份的模組化通知類別
     * 改變資料庫密碼長度（改為40），以及新增SHA1, CRYPT加密方式
-	* 修正install在Windows下的編碼問題，並將config.php設定檔挪出
+    * 修正install在Windows下的編碼問題，並將config.php設定檔挪出
 * 2013.8.20
     * 後端伺服器的所有資料表及欄位名稱都加上"chu"字首，新稱"使用者實體"裡的屬性欄位
     * 後端伺服器的所有欄位名稱都去掉"chu"字首（不然會增加操作SQL的麻煩）
