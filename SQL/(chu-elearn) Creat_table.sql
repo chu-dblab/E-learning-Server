@@ -31,7 +31,6 @@ CREATE TABLE chu_target(
   FloorName varchar(50) NOT NULL,
   BlockName varchar(50) NOT NULL,
   BlockMap varchar(50) NOT NULL,
-  CourseName varchar(50) NOT NULL,
   MaterialID int(10) unsigned NOT NULL,
   Material_Url varchar(150) NOT NULL,
   PLj int(200) unsigned NOT NULL COMMENT '學習標的人數限制',
