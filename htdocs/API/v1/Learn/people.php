@@ -1,5 +1,5 @@
 <?php
-     require_once("../lib/include.php");
+     require_once("../../../lib/include.php");
      require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
      require_once(DOCUMENT_ROOT."lib/class/RecommandLearnNode.php");
      
@@ -15,11 +15,11 @@
      switch($action)
      {
 	case "addPeople":
-	    if(!isset($num)) $message += array("status"=>"CommandError");
+	    if(!isset($num)) $message += array("status_ok"=>false,"status"=>"CommandError");
 	    else
 	    {
 			$learn->addPeople($num);
-			$message += array("status_ok"=>True);
+			$message += array("status_ok"=>True,"status"=>"add people sccessed.");
 	    }
 	    break;
 	case "subPeople":
@@ -41,8 +41,8 @@
 	case "recommand" :
 	      if(isset($point) && isset($ID))
 	      {
-			$learn->getLearningNode($point,$ID);
-			$message += array("status_ok"=>True);
+			$data = $learn->getLearningNode($point,$ID);
+			$message += array("status_ok"=>True,"data"=>$data);
 	      }
 	      else array("status_ok"=>false,"status"=>"CommandError");
 	    break;

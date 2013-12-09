@@ -26,9 +26,9 @@
       */
       public function addPeople($point_number)
       {
-	  $query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
-	  $query->bindParam(":number",$point_number);
-	  $query->execute();		    
+			$query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
+			$query->bindParam(":number",$point_number);
+			$query->execute();		    
       }
 	
      /**
@@ -81,7 +81,7 @@
 	      while($row=$result->fetch()) {
 		  $pathCost = -1;
 		  $getNextNodeParameter = getNodeOfLearnOfParameter($row["Tj"],$userID);
-		  if($getNextNodeParameter["Fj"]) pathCost = 0;
+		  if($getNextNodeParameter["Fj"] == 1) pathCost = 0;
 		  else{
 			  $pathCost = $getNextNodeParameter["weight"] * ($getNextNodeParameter["S"] - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"];
 			  if($getNextNodeParameter["TID"] <= 11){
@@ -131,16 +131,16 @@
 	{
 	      for($count=2;$count<=10;$count++)
 	      {
-		  $result = $conDB->prepare("SELECT ".$conDB->table("target").".Fj FROM ".$conDB->table("target")." WHERE ".$conDB->table("target").".TID = :count");
-		  $result->bindParam(":count",$count);
-		  $result->execute();
-		  
-		  while($row=$result->fetch())
-		  {
-		      $getNextNodeParameter = getNodeOfLearnOfParameter($row[Tj],1);
-		      if(!$row["Fj"]) fullflag = true;
-		  }
-		  return $fullflag
+				$result = $conDB->prepare("SELECT ".$conDB->table("target").".Fj FROM ".$conDB->table("target")." WHERE ".$conDB->table("target").".TID = :count");
+				$result->bindParam(":count",$count);
+				$result->execute();
+				
+				while($row=$result->fetch())
+				{
+					$getNextNodeParameter = getNodeOfLearnOfParameter($row[Tj],1);
+					if(!$row["Fj"]) $fullflag = true;
+				}
+				return $fullflag
 	      }
 	}
 	
@@ -154,8 +154,8 @@
 	public function getLearningStatus($userID,$point_number)
 	{
 	   $result = $conDB->prepare("SELECT ".$conDB->table("user").".UID,".$conDB->table("user").".UNickname,".$conDB->table("target").".TLearn_Time".$conDB->table("target").".Mj ".
-				     "FROM ".$conDB->table("user").",".$conDB->table("target").
-				     "WHERE ".$conDB->table("user").".UID = :UID AND ".$conDB->table("target").".TID = :TID");
+								 "FROM ".$conDB->table("user").",".$conDB->table("target").
+								 "WHERE ".$conDB->table("user").".UID = :UID AND ".$conDB->table("target").".TID = :TID");
 	   $result->bindParam(":UID",$userID);
 	   $result->bindParam(":TID",$point_number);
 	   $result->execute();
@@ -182,6 +182,12 @@
 					     $conDB->table("study").".QID = ".$ClientData->QID.
 				    " WHERE ".$conDB->table("study").".TID = ".$ClientData->TID." AND ".$conDB->table("study").".UID = ".$ClientData->UID );
 	  $result->excute();
+	}
+	
+	public function userInWhere($userID,$position)
+	{
+		$result = $conDB->prepare("UPDATE ".$conDB->table("target").
+								  " SET ".$conDB->table("target").".");
 	}
   }
 ?>
