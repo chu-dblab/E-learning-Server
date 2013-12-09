@@ -1,5 +1,0 @@
-Options +FollowSymlinks
-RewriteEngine on
-RewriteRule DownloadZip.zip$ DownloadZip.php [L] 
-RewriteRule TeachingMaterial.zip$ DownloadZip.php [L] 
-RewriteRule Material.zip$ DownloadZip.php [L] 

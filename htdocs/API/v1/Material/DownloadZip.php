@@ -5,7 +5,7 @@ require_once(DOCUMENT_ROOT."lib/class/FlxZipArchive.php");
 $the_folder = DOCUMENT_ROOT."Material";
 
 //$zip_file_name = time().".zip"; // Zip name
-$zip_file_name = "TeachingMaterial.zip"; // Zip name
+$zip_file_name = "TeachingMaterial".time().rand(1000, 9999).".zip"; // Zip name
 
 $requestURLArray = explode("/",$_SERVER['REQUEST_URI']);
 $requestLastURL = explode("?",end($requestURLArray));

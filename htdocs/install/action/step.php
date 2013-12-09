@@ -34,7 +34,7 @@ function input_site_config(){
 		backPage("input_site_config.php","網站名稱是必填的喔");
 	}
 	//密碼加密選項
-	else if( !($inputEncryptMode=="MD5" || $inputEncryptMode=="") ) {
+	else if( !($inputEncryptMode=="MD5" || $inputEncryptMode=="SHA1" || $inputEncryptMode=="CRYPT" || $inputEncryptMode=="") ) {
 		backPage("input_site_config.php","沒有你選擇的密碼加密選項");
 	}
 	else if($inputSiteRootUrl == ""){

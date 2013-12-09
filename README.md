@@ -61,6 +61,7 @@
         AllowOverride All
         Allow from All
         Order allow,deny
+        Require all granted
     </Directory>
 
 啟用本站/重新啟動伺服器:

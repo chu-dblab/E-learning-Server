@@ -72,7 +72,7 @@ VALUES ('user', '使用者', 0, '')") or die(mysql_error());
 mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."user(
   UID varchar(30) NOT NULL COMMENT '使用者帳號',
   GID varchar(30) NOT NULL COMMENT '使用者群組',
-  UPassword varchar(40) NOT NULL COMMENT '密碼',
+  UPassword varchar(50) NOT NULL COMMENT '密碼',
   ULogged_code varchar(32) default NULL COMMENT '登入碼',
   ULast_In_Time timestamp NULL default NULL COMMENT '最後登入時間',
   UBuild_Time timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '帳號建立時間',
@@ -84,10 +84,6 @@ mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."user(
   PRIMARY KEY (UID),
   FOREIGN KEY (GID) REFERENCES ".$inputSQLDBFormPrefix."group (GID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用者'") or die(mysql_error());
-
-mysql_query("INSERT
-INTO ".$inputSQLDBFormPrefix."user
-VALUES ('root', 'admin', '63a9f0ea7bb98050796b649e854818', NULL, NULL, '2013-08-20 14:58:38', 1, '0000-00-00 00:00:00', '', '', '')") or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS ".$inputSQLDBFormPrefix."target(
   TID int(10) unsigned NOT NULL,
