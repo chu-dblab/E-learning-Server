@@ -9,7 +9,7 @@
 	$output = shell_exec("git checkout publish");
 	$output .= "\n";
 	$output .= shell_exec("git pull origin publish");
-	$output .= shell_exec("git submodule update");
+	//$output .= shell_exec("git submodule update");
 ?>
 <!DOCTYPE html>
 <html lang="zh-tw">
