@@ -7,8 +7,15 @@ session_start();
 	$inputSiteAdminUserNickName = $_SESSION["install_inputSiteAdminUserNickName"];
 	$inputSiteAdminUserEmail = $_SESSION["install_inputSiteAdminUserEmail"];
 	
-
-require_once("../../lib/include.php");
-require_once(DOCUMENT_ROOT."lib/function/user.php");
 	
-user_create($inputSiteAdminUser, $inputSiteAdminPass, $inputSiteAdminPass, "admin", true, $inputSiteAdminUserRealName, $inputSiteAdminUserNickName, $inputSiteAdminUserEmail);
+	$inputEncryptMode = $_SESSION["install_inputEncryptMode"];
+	
+error_reporting(E_ALL);
+ini_set("display_errors", 1);	
+
+echo "a";
+define('DOCUMENT_ROOT',dirname(__FILE__).'/../../');
+echo "b";
+require_once(DOCUMENT_ROOT."lib/function/user.php");
+echo "c";	
+user_create($inputSiteAdminUser, $inputSiteAdminPass, $inputEncryptMode, "admin", true, $inputSiteAdminUserRealName, $inputSiteAdminUserNickName, $inputSiteAdminUserEmail);

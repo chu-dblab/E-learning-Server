@@ -78,9 +78,40 @@ function user_ishave($username){
  * @author	元兒～ <yuan817@moztw.org>
  * @since	Version 3
 */
-function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, $nickname, $email){
+function user_create($username, $passwd, $group, $isActive, $name, $nickname, $email){
 	global $FORM_USER;
 	
+	if(func_num_args() == 7){
+		// 帶入參數
+		$args = func_get_args();
+		$username = $args[0];
+		$passwd = $args[1];
+		$group = $args[2];
+		$isActive = $args[3];
+		$name = $args[4];
+		$nickname = $args[5];
+		$email = $args[6];
+		
+		//將密碼加密
+		$passwd = encryptText($passwd);
+	}
+	if(func_num_args() == 8){
+		// 帶入參數
+		$args = func_get_args();
+		$username = $args[0];
+		$passwd = $args[1];
+		$encryptMode = $args[2];
+		$group = $args[3];
+		$isActive = $args[4];
+		$name = $args[5];
+		$nickname = $args[6];
+		$email = $args[7];
+		
+		//將密碼加密
+		$passwd = encryptText($passwd, $encryptMode);
+	}
+	
+	// 動作
 	//是否已有這個使用者
 	if(user_ishave($username)){
 		return "UsernameCreatedErr";
@@ -89,17 +120,10 @@ function user_create($username, $passwd, $passwd_rep, $group, $isActive, $name, 
 	else if( !userGroup_ishave($group) ){
 		return "NoGroupErr";
 	}
-	//確認密碼錯誤
-	else if($passwd != $passwd_rep) {
-		return "RepPasswdErr";
-	}
 	//都沒有問題，新增帳號
 	else{
 		//開啟資料庫
 		$db = new Database();
-		
-		//將密碼加密
-		$passwd = encryptText($passwd);
 		
 		//紀錄使用者帳號進資料庫
 		$db_sqlString = "INSERT INTO ".$db->table($FORM_USER)." 
