@@ -55,8 +55,8 @@ mysql_query("SET time_zone = '+00:00'") or die(mysql_error());
 mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."group(
   GID varchar(30) NOT NULL,
   GName varchar(15) NOT NULL,
-  Gauth_admin tinyint(1) NOT NULL default '0',
-  GCompetence varchar(10) NOT NULL,
+  Gauth_Admin tinyint(1) NOT NULL DEFAULT '0',
+  Gauth_ClientAdmin tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (GID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='群組'") or die(mysql_error());
 
