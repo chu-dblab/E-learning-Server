@@ -45,8 +45,9 @@
 				//第1行: 欄位名稱
 				echo "<th scpoe='col'>內部名稱</th>";
 				echo "<th scpoe='col'>顯示名稱</th>";
-				echo "<th scpoe='col'>群組內使用者、</th>";
+				echo "<th scpoe='col'>群組內使用者</th>";
 				echo "<th scpoe='col'>管理員權限</th>";
+				echo "<th scpoe='col'>Client端管理權限</th>";
 				echo "<th scpoe='col'>操作</th>";
 			echo "</tr>";
 			echo "</thead>";
@@ -56,7 +57,8 @@
 						echo "<th scrope='row'>".$thisGroupArray['GID']."</th>";
 						echo "<td>".$thisGroupArray['GName']."</td>";
 						echo "<td>".$thisGroupArray['in_user']."</td>";
-						echo "<td>".$thisGroupArray['Gauth_admin']."</td>";
+						echo "<td>".$thisGroupArray['Gauth_Admin']."</td>";
+						echo "<td>".$thisGroupArray['Gauth_ClientAdmin']."</td>";
 						echo "<td>";
 							echo "<a href='#edit-userGroup-dialog' class='btn btn-warning' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisGroupArray['GID']."&#39;)'><span class='icon-edit icon-white' /></a>";
 							echo "<a href='#remove-userGroup-dialog' class='btn btn-danger' data-toggle='modal' onclick='displayUserEditDialog(&#39;".$thisGroupArray['GID']."&#39;)'><span class='icon-remove icon-white' /></a>";
@@ -146,6 +148,11 @@
 													<input type="checkbox" name="edit-userGroup_auth-admin" value="on" > 總管理
 												</label>
 											</li>
+											<li>
+												<label class="checkbox">
+													<input type="checkbox" name="edit-userGroup_auth-client_admin" value="on" > 客戶端管理
+												</label>
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -203,6 +210,9 @@
 										<div class="controls">
 											<label class="checkbox">
 												<input type="checkbox" name="userGroup_admin" value="active"> 管理者權限
+											</label>
+											<label class="checkbox">
+												<input type="checkbox" name="userGroup_client_admin" value="active"> 客戶端管理
 											</label>
 										</div>
 									</div>

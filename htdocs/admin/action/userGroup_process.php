@@ -40,6 +40,12 @@ switch($action){
 			else {
 				userGroup_setPermission($input_gid,"admin", false);
 			}
+			if(isset($_POST["edit-userGroup_auth-client_admin"])) {
+				userGroup_setPermission($input_gid,"Gauth_ClientAdmin", true);
+			}
+			else {
+				userGroup_setPermission($input_gid,"Gauth_ClientAdmin", false);
+			}
 			
 			//產生成功訊息
 			$theAlert = new Alert("success", false, "<strong>處理完成！</strong> $input_gid 資料更改完成");

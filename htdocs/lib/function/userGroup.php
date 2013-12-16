@@ -34,7 +34,7 @@ require_once(DOCUMENT_ROOT."lib/class/Database.php");
 * @author	元兒～ <yuan817@moztw.org>
  * @since	Version 2
 */
-function userGroup_create($name, $display_name, $adminPermissions){
+function userGroup_create($name, $display_name, $adminPermissions, $clientAdminPermissions){
 	global $FORM_USER_GROUP;
 	//檢查有無重複的名稱
 	if( userGroup_ishave($name) ){
@@ -46,10 +46,11 @@ function userGroup_create($name, $display_name, $adminPermissions){
 		$db = new Database();
 		
 		//紀錄使用者帳號進資料庫
-		$db_userGroup_query = $db->prepare("INSERT INTO `".$db->table($FORM_USER_GROUP)."` (`GID`, `GName`, `Gauth_admin`) VALUES (:groupName, :display_name , :adminPermissions )");
+		$db_userGroup_query = $db->prepare("INSERT INTO `".$db->table($FORM_USER_GROUP)."` (`GID`, `GName`, `Gauth_Admin`, `Gauth_ClientAdmin`) VALUES (:groupName, :display_name, :adminPermissions, :clientAdminPermissions)");
 		$db_userGroup_query->bindParam(":groupName",$name);
 		$db_userGroup_query->bindParam(":display_name",$display_name);
 		$db_userGroup_query->bindParam(":adminPermissions",$adminPermissions);
+		$db_userGroup_query->bindParam(":clientAdminPermissions",$clientAdminPermissions);
 		$db_userGroup_query->execute();
 		
 		//若有有加入
@@ -381,12 +382,12 @@ function userGroup_queryAll(){
 	//	FROM `chu_group` AS `groups`
 	//	WHERE (SELECT COUNT(`UID`) FROM `chu_user` WHERE `GID` = `groups`.`GID` ) = 0
 	$db_userGroup_query = $db->query("
-		SELECT `groups`.`GID`, `groups`.`GName`, count(`users`.`GID`) AS `in_user`, `groups`.`Gauth_admin` 
+		SELECT `groups`.`GID`, `groups`.`GName`, count(`users`.`GID`) AS `in_user`, `groups`.`Gauth_Admin`, `groups`.`Gauth_ClientAdmin`
 		FROM `".$db->table($FORM_USER)."` AS `users` 
 		JOIN `".$db->table($FORM_USER_GROUP)."` AS `groups` ON `users`.`GID` = `groups`.`GID` 
 		GROUP BY `users`.`GID` 
 		UNION 
-		SELECT `GID`, `GName`, '0', `Gauth_admin` 
+		SELECT `GID`, `GName`, '0', `Gauth_Admin`, `Gauth_ClientAdmin`
 		FROM `".$db->table($FORM_USER_GROUP)."` AS `groups` 
 		WHERE (SELECT COUNT(`UID`) FROM `".$db->table($FORM_USER)."` WHERE `GID` = `groups`.`GID` ) = 0 
 		ORDER BY `in_user` DESC

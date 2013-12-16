@@ -14,8 +14,12 @@ require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
 $register_userGroup_id = $_POST["userGroup_id"];
 $register_userGroup_displayName = $_POST["userGroup_displayName"];
 $register_userGroup_admin = false;
+$register_userGroup_clientAdmin = false;
 if($_POST["userGroup_admin"]){
 	$register_userGroup_admin = true;
+}
+if($_POST["userGroup_client_admin"]){
+	$register_userGroup_clientAdmin = true;
 }
 
 //若為填入顯示名稱的話，顯示名稱即和內部名稱一樣
@@ -23,13 +27,13 @@ if(!$register_userGroup_displayName) {
 	$register_userGroup_displayName = $register_userGroup_id;
 }
 
-//debug
+/*//debug
 echo $register_userGroup_id."<br />";
 echo $register_userGroup_displayName."<br />";
-echo $register_userGroup_admin."<br />";
+echo $register_userGroup_admin."<br />";*/
 
 
-$account_create_status = userGroup_create($register_userGroup_id, $register_userGroup_displayName, $register_userGroup_admin);
+$account_create_status = userGroup_create($register_userGroup_id, $register_userGroup_displayName, $register_userGroup_admin, $register_userGroup_clientAdmin);
 
 if($account_create_status == "Finish"){
 	//利用session傳回錯誤訊息
