@@ -114,5 +114,54 @@ class UserGroup {
 			}
 		}
 	}
-	
+	// ------------------------------------------------------------------------
+	/**
+	* remove
+	*
+	* 刪除使用者群組
+	*
+	* @access	public
+	* @return	string	是否有成功刪除
+	*			"Finish": 成功建立
+	*			"UserExist": 尚有存在的使用者
+				"NoFound": 找不到存在的群組
+				"DBErr": 資料庫錯誤
+	* @author	元兒～ <yuan817@moztw.org>
+	* @since	Version 2
+	*/
+	public function getPermissionList() {
+		global $FORM_USER_GROUP;
+		
+		//資料庫連結
+		$db = new Database();
+		
+		//資料庫查詢
+		$db_userGroup_query = $db->prepare("SELECT * FROM ".$db->table($FORM_USER_GROUP)." WHERE `GID` = :groupName");
+		$db_userGroup_query->bindParam(":groupName",$this->thisGroup);
+		$db_userGroup_query->execute();
+		
+		//取得權限欄位
+		if( $groupArray = $db_userGroup_query->fetch(PDO::FETCH_ASSOC) ) {
+			$output = array();
+			
+			foreach ($groupArray as $key => $value) {
+				// 如果是"非權限"欄位，則跳過
+				if($key == "GID" || $key == "GName") {
+					continue;
+				}
+				
+				// 如果有有此權限，加入置清單
+				if($value == true) {
+					//$output += array($key);
+					array_push($output,$key);
+				}
+				
+			}
+			return $output;
+		}
+		else {
+			return null;
+		}
+		
+	}
 }

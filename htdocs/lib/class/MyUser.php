@@ -384,6 +384,21 @@ class MyUser {
 	// ------------------------------------------------------------------------
 	
 	/**
+	 * 取得權限清單
+	 *
+	 * @access	public
+	 * @return	array	權限清單
+	 */
+	 public function getPermissionList() {
+		if(isset($this->userObject)) {
+			return $this->userObject->getPermissionList();
+		}
+		else {
+			return "NoUserFound";
+		}		
+	 }
+	
+	/**
 	 * 是否擁有此權限
 	 *
 	 * @access	public

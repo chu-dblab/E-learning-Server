@@ -67,7 +67,7 @@ class User {
 	 * @access	public
 	 * @param	string	登入碼
 	 */
-	function __construct($inputUID){
+	public function __construct($inputUID){
 		$this->thisUID = $inputUID;
 		$this->getQuery();
 	}
@@ -80,7 +80,7 @@ class User {
 	 * @access	public
 	 * @return	string	登入碼
 	 */
-	function getLoggedCode(){
+	public function getLoggedCode(){
 		return $this->getQueryInfo("ULogged_code");
 	}
 	// ------------------------------------------------------------------------
@@ -91,7 +91,7 @@ class User {
 	 * @access	public
 	 * @return	string	帳號名稱
 	 */
-	function getUsername(){
+	public function getUsername(){
 		return $this->thisUID;
 	}
 	// ------------------------------------------------------------------------
@@ -102,7 +102,7 @@ class User {
 	 * @access	public
 	 * @return	string	登入時間
 	 */
-	function getLoginTime(){
+	public function getLoginTime(){
 		return $this->getQueryInfo("ULast_In_Time");
 	}
 	// ------------------------------------------------------------------------
@@ -113,7 +113,7 @@ class User {
 	 * @access	public
 	 * @return	string	建立時間
 	 */
-	function getCreateTime(){
+	public function getCreateTime(){
 		return $this->getQueryInfo("UBuild_Time");
 	}
 	// ========================================================================
@@ -124,7 +124,7 @@ class User {
 	 * @access	public
 	 * @return	string	群組名稱
 	 */
-	function getGroup(){
+	public function getGroup(){
 		return $this->getQueryInfo("GID");
 	}
 	// ------------------------------------------------------------------------
@@ -135,7 +135,7 @@ class User {
 	 * @access	public
 	 * @return	string	群組顯示名稱
 	 */
-	function getGroupName(){
+	public function getGroupName(){
 		$thisGroup = new UserGroup($this->getQueryInfo("GID"));
 		return $thisGroup->getDiaplayName();
 	}
@@ -155,7 +155,7 @@ class User {
 	 * @author	元兒～ <yuan817@moztw.org>
 	 * @since	Version 1
 	 */
-	function setGroup($toGroup){
+	public function setGroup($toGroup){
 		global $FORM_USER;
 		
 		//連結資料庫
@@ -187,7 +187,7 @@ class User {
 	 * @access	public
 	 * @return	bool	是否已啟用
 	 */
-	function isEnable(){
+	public function isEnable(){
 		return $this->getQueryInfo("UEnabled");
 	}
 	
@@ -198,7 +198,7 @@ class User {
 	 * @param	bool	是否為啟用
 	 * @return	bool	是否更改成功
 	 */
-	function setEnable($isActive){
+	public function setEnable($isActive){
 		return $this->setQueryInfo("UEnabled", $isActive);
 	}
 	
@@ -210,7 +210,7 @@ class User {
 	 * @access	public
 	 * @return	string	真實姓名
 	 */
-	function getRealName(){
+	public function getRealName(){
 		return $this->getQueryInfo("UReal_Name");
 	}
 	
@@ -221,7 +221,7 @@ class User {
 	 * @param	string	新真實姓名
 	 * @return	bool	是否更改成功
 	 */
-	function setRealName($input){
+	public function setRealName($input){
 		return $this->setQueryInfo("UReal_Name", $input);
 	}
 	// ------------------------------------------------------------------------
@@ -232,7 +232,7 @@ class User {
 	 * @access	public
 	 * @return	string	暱稱
 	 */
-	function getNickName(){
+	public function getNickName(){
 		return $this->getQueryInfo("UNickname");
 	}
 	
@@ -243,7 +243,7 @@ class User {
 	 * @param	string	新暱稱
 	 * @return	bool	是否更改成功
 	 */
-	function setNickName($input){
+	public function setNickName($input){
 		return $this->setQueryInfo("UNickname", $input);
 	}
 	// ------------------------------------------------------------------------
@@ -254,7 +254,7 @@ class User {
 	 * @access	public
 	 * @return	string	依照有填入多少名字（優先順序: 暱稱→真實名字→帳號名稱）
 	 */
-	function getName(){
+	public function getName(){
 		if($this->getNickName() != "") {
 			return $this->getNickName();
 		}
@@ -274,7 +274,7 @@ class User {
 	 * @access	public
 	 * @return	string	使用者資訊的Email
 	 */
-	function getEmail(){
+	public function getEmail(){
 		return $this->getQueryInfo("UEmail");
 	}
 	
@@ -285,7 +285,7 @@ class User {
 	 * @param	string	新Email
 	 * @return	bool	是否更改成功
 	 */
-	function setEmail($input){
+	public function setEmail($input){
 		return $this->setQueryInfo("UEmail", $input);
 	}
 	// ------------------------------------------------------------------------
@@ -298,7 +298,7 @@ class User {
 	 * 
 	 * @since	Version 4
 	 */
-	function getQuery(){
+	public function getQuery(){
 		global $FORM_USER;
 		$db = new Database();
 		
@@ -322,7 +322,7 @@ class User {
 	 * 
 	 * @since	Version 0
 	 */
-	function isPasswordCorrect(){
+	public function isPasswordCorrect(){
 		//若帶入兩個參數
 		if(func_num_args() == 2){
 			//對應變數
@@ -359,7 +359,7 @@ class User {
 	 * 
 	 * @since	Version 0
 	 */
-	function changePassword(){
+	public function changePassword(){
 		global $FORM_USER, $ENCRYPT_MODE;
 		//若帶入兩個參數
 		if(func_num_args() == 2){
@@ -391,7 +391,7 @@ class User {
 	 * @access	public
 	 * @return	bool	是否仍在登入狀態
 	 */
-	function isLogged() {
+	public function isLogged() {
 		if($this->getQuery()) {
 			return true;
 		} else {
@@ -401,13 +401,25 @@ class User {
 	// ------------------------------------------------------------------------
 	
 	/**
+	 * 取得權限清單
+	 *
+	 * @access	public
+	 * @return	array	權限清單
+	 */
+	 public function getPermissionList() {
+		$thisGroup = new UserGroup($this->getQueryInfo("GID"));
+		return $thisGroup->getPermissionList();
+		
+	 }
+	 
+	/**
 	 * 是否擁有此權限
 	 *
 	 * @access	public
 	 * @param	string	權限名稱
 	 * @return	bool	是否擁有
 	 */
-	 function havePermission($permissionName) {
+	 public function havePermission($permissionName) {
 		global $FORM_USER,$FORM_USER_GROUP;
 		
 		//將使用者的選擇轉為資料表的欄位名稱
@@ -447,7 +459,7 @@ class User {
 	 * @access	public
 	 * @return	bool	是否登出成功
 	 */
-	 function logout(){
+	 public function logout(){
 		global $FORM_USER;
 		if($this->thisUID){
 

@@ -47,6 +47,24 @@ function createUserObj() {
 	}
 }
 
+function outputUserInfo() {
+	global $theUser;
+	$output = array(
+		"uid" => $theUser->getUsername(),
+		"ulogin_time" => $theUser->getLoginTime(),
+		"ucreate_time" => $theUser->getCreateTime(),
+		"ugid" => $theUser->getGroup(),
+		"uauthlist" => $theUser->getPermissionList(),
+		"ugname" => $theUser->getGroupName(),
+		"uname" => $theUser->getName(),
+		"urealname" => $theUser->getRealName(),
+		"unickname" => $theUser->getNickName(),
+		"uemail" => $theUser->getEmail()
+	);
+	
+	return $output;
+}
+
 //---------------流程控制區----------------------//
 //宣告輸出的陣列內容
 $output = array();
@@ -61,17 +79,7 @@ case "get-info":
 			"ucode"=>$ucode,
 		);
 		
-		$output += array(
-			"uid" => $theUser->getUsername(),
-			"ulogin_time" => $theUser->getLoginTime(),
-			"ucreate_time" => $theUser->getCreateTime(),
-			"ugid" => $theUser->getGroup(),
-			"ugname" => $theUser->getGroupName(),
-			"uname" => $theUser->getName(),
-			"urealname" => $theUser->getRealName(),
-			"unickname" => $theUser->getNickName(),
-			"uemail" => $theUser->getEmail()
-		);
+		$output += outputUserInfo();
 		
 		$output += array(
 			"status_ok"=>true,
