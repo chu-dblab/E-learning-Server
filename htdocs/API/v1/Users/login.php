@@ -74,7 +74,65 @@ case "login":
 		);
 	}
 	break;
-
+	
+//登入此使用者驗證
+case "check-login":
+	$output += array("action"=>"login");
+	//有填入登入資料
+	if(isset($id) && isset($pwd)) {
+		//登入使用者
+		$isLoginEnable = user_isLoginEnable($id,$pwd);
+		
+		//找不到此使用者
+		if($isLoginEnable=="NoFound") {
+			$output += array(
+				"uid"=>$id,
+				"status_ok"=>false,
+				"status"=>"NoFound"
+			);
+		}
+		//帳號未啟用
+		else if($isLoginEnable=="NoActiveErr") {
+			$output += array(
+				"uid"=>$id,
+				"status_ok"=>false,
+				"status"=>"NoActiveErr"
+			);
+		}
+		//密碼錯誤
+		else if($isLoginEnable=="PasswdErr") {
+			$output += array(
+				"uid"=>$id,
+				"status_ok"=>false,
+				"status"=>"PasswdErr"
+			);
+		}
+		//資料庫錯誤
+		else if($isLoginEnable=="DBErr") {
+			$output += array(
+				"uid"=>$id,
+				"status_ok"=>false,
+				"status"=>"DBErr"
+			);
+		}
+		//已登入成功
+		else {
+			$output += array(
+				"uid"=>$id,
+				"status_ok"=>true,
+				"status"=>"OK"
+			);
+		}
+	}
+	//未填入登入資料
+	else {
+		$output += array(
+			"status_ok"=>false,
+			"status"=>"CmdErr"
+		);
+	}
+	break;
+	
 //登出此使用者
 case "logout":
 	$output += array("action"=>"logout");
