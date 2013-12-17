@@ -90,3 +90,11 @@ CREATE TABLE chu_edge(
   FOREIGN KEY (Ti) REFERENCES chu_target (TID),
   FOREIGN KEY (Tj) REFERENCES chu_target (TID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和標的之間';
+
+CREATE TABLE chu_question(
+	QID varchar(5) PRIMARY KEY NOT NULL,
+	TID int(10) unsigned NOT NULL,
+	Cnumber int(10) unsigned COMMENT '答對次數',
+	Wnumber int(10) unsigned COMMENT '答錯次數',
+	FOREIGN KEY (TID) REFERENCES chu_target (TID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='題目';
