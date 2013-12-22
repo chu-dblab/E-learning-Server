@@ -24,16 +24,16 @@ CREATE TABLE chu_user(
 
 CREATE TABLE chu_target(
   TID int(10) unsigned NOT NULL,
-  TName varchar(15) NOT NULL,
-  TLearn_Time int(10) unsigned NOT NULL,
-  MapID int(10) unsigned NOT NULL,
-  Map_Url varchar(150) NOT NULL,
-  FloorName varchar(50) NOT NULL,
-  BlockName varchar(50) NOT NULL,
-  BlockMap varchar(50) NOT NULL,
-  MaterialID int(10) unsigned NOT NULL,
-  Material_Url varchar(150) NOT NULL,
-  PLj int(200) unsigned NOT NULL COMMENT '學習標的人數限制',
+  MapID int(10) unsigned NOT NULL COMMENT '地圖編號',
+  MaterialID int(10) unsigned NOT NULL COMMENT '教材編號',
+  Map_Url varchar(150) NOT NULL COMMENT '地圖URL',
+  Material_Url varchar(150) NOT NULL COMMENT '教材URL',
+  TName varchar(15) NOT NULL COMMENT '標的名稱',
+  TLearn_Time int(10) unsigned NOT NULL COMMENT '預估此標的應該學習的時間',
+  FloorName varchar(50) NOT NULL COMMENT '標的位於的樓層名稱',
+  BlockName varchar(50) NOT NULL COMMENT '標的位於的區塊名稱',
+  BlockMap varchar(50) NOT NULL COMMENT '標的位於的區塊地圖',
+  PLj int(200) unsigned NOT NULL COMMENT '學習標的的人數限制',
   Mj int(200) unsigned default NULL COMMENT '目前人數',
   S float unsigned default NULL COMMENT '學習標的飽和率上限',
   Fj tinyint(1) default NULL COMMENT '學習標的滿額指標',
@@ -90,3 +90,11 @@ CREATE TABLE chu_edge(
   FOREIGN KEY (Ti) REFERENCES chu_target (TID),
   FOREIGN KEY (Tj) REFERENCES chu_target (TID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的和標的之間';
+
+CREATE TABLE chu_question(
+	QID varchar(5) PRIMARY KEY NOT NULL,
+	TID int(10) unsigned NOT NULL,
+	Cnumber int(10) unsigned COMMENT '答對次數',
+	Wnumber int(10) unsigned COMMENT '答錯次數',
+	FOREIGN KEY (TID) REFERENCES chu_target (TID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='題目';

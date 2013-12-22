@@ -1,5 +1,5 @@
 <?php
-  require_once("../lib/include.php");
+  require_once("../../../lib/include.php");
   require_once(DOCUMENT_ROOT."lib/class/Database.php");
 
  /**
@@ -11,11 +11,13 @@
   class RecommandLearnNode
   {
 	private $conDB;
+	
 	private $fullflag;  //偵測目前這個學習點的人數是否已達上限
+	
 	public function __construct()
 	{
-	  $conDB = new Database();
-	  $fullflag = false;
+	  $this->conDB = new Database();
+	  $this->fullflag = false;
 	}
 	
      /**
@@ -26,7 +28,7 @@
       */
       public function addPeople($point_number)
       {
-			$query = $conDB->prepare("UPDATE ".$conDB->table("target")." Mj = Mj + 1 where TID = :number");
+			$query = $this->conDB->prepare("UPDATE ".$this->conDB->table("target")." Mj = Mj + 1 where TID = :number");
 			$query->bindParam(":number",$point_number);
 			$query->execute();		    
       }
@@ -39,7 +41,7 @@
       */		
 	public function subPeople($point_number)
 	{
-	    $query = $conDB->prepare("UPDATE ".$conDB->table("target")." set Mj = Mj - 1 where TID = :number");
+	    $query = $this->conDB->prepare("UPDATE ".$this->conDB->table("target")." set Mj = Mj - 1 where TID = :number");
 	    $query->bindParam(":number",$point_number);
 	    $query->execute();		    
 	}
@@ -53,9 +55,9 @@
 	private function isZero($point_number)
 	{
 		$isZero = false;
-		$result = $conDB->prepare("SELECT Mj FROM ".$conDB->table("target")." WHERE TID = :number AND Mj = 0");
+		$result = $this->conDB->prepare("SELECT Mj FROM ".$this->conDB->table("target")." WHERE TID = :number AND Mj = 0");
 		$result->bindParam(":number",$point_number);
-		$result->excute();
+		$result->execute();
 		if($result != 0) return false;
 		else return true;
 	}
@@ -69,22 +71,22 @@
 	*/
 	public function getLearningNode($point_number,$userID)
 	{
-	      //從資料抓取目前路徑的資料
-	      $result = $conDB->prepare("SELECT DISTINCT".$conDB->table("edge").".Ti,".$conDB->table("edge").".Tj".$conDB->table("edge")."MoveTime".
-					" FROM ".$conDB->table("edge").",".$conDB->table("recommand").
-					" WHERE ".$conDB->table("edge").".Ti = :point_number"." AND ".$conDB->table("recommand").".UID = :userID");
-	      $result->bindParam(":point_number",$point_number);
-	      $result->bindParam(":UID",$userID);
-	      $result->excute();
+		//從資料抓取目前路徑的資料
+		$result = $this->conDB->prepare("SELECT DISTINCT".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj".$this->conDB->table("edge")."MoveTime".
+					" FROM ".$this->conDB->table("edge").",".$this->conDB->table("recommand").
+					" WHERE ".$this->conDB->table("edge").".Ti = :point_number"." AND ".$this->conDB->table("recommand").".UID = :userID");
+		$result->bindParam(":point_number",$point_number);
+		$result->bindParam(":userID",$userID);
+		$result->execute();
 	      
 	      //帶入公式計算下一個要推荐的學習點的編號
 	      while($row=$result->fetch()) {
 		  $pathCost = -1;
 		  $getNextNodeParameter = getNodeOfLearnOfParameter($row["Tj"],$userID);
-		  if($getNextNodeParameter["Fj"] == 1) pathCost = 0;
+		  if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
 		  else{
-			  $pathCost = $getNextNodeParameter["weight"] * ($getNextNodeParameter["S"] - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"];
-			  if($getNextNodeParameter["TID"] <= 11){
+			  $pathCost = $getNextNodeParameter["weight"] * ($getNextNodeParameter["S"] - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"]+$getNextNodeParameter["TLearn_Time"]);
+			  if($getNextNodeParameter["TID"] > 15){
 			      //實體學習點
 			  }
 			  else{
@@ -93,11 +95,10 @@
 			  }
 		  }
 	      }
-	      //將計算結果做快速排序
-	      $temp = array("crrentNode" => $row["Ti"],"nextNode" => $row["Tj"],"PathCost" => $pathCost);
-	      $sorted = arsort($temp);
+	      //將計算結果做排序
+	      $temp = array("crrentNode" => $row["Ti"],"nextNode" => $row["Tj"]);
 	      //將結果(前三高的學習點)包裝成JSON傳送至手機
-	      echo json_encode($sorted);
+	      return $temp;
 	}
 	
        /**
@@ -109,11 +110,11 @@
 	*/
 	private function getNodeOfLearnOfParameter($next_point_number,$userID)
 	{
-		$conString = "SELECT ".$conDB->table("target").".Mj,".$conDB->table("target").".PLj,".$conDB->table("belong").".weight,".$conDB->table("target").".Fj,".
-				      $conDB->table("target").".TLearn_Time,".$conDB->table("edge").".MoveTime,".$conDB->table("target").".S".
-			     " FROM ".$conDB->table("target").",".$conDB->table("belong").",".$conDB->table("edge").",".$conDB->table("user").
-			     " WHERE ".$conDB->table("user").".UID = :UID AND ".$conDB->table("target").".TID = :next_point_number";
-		$result = $conDB->prepare($conString);
+		$conString = "SELECT ".$this->conDB->table("target").".Mj,".$this->conDB->table("target").".PLj,".$this->conDB->table("belong").".weight,".$this->conDB->table("target").".Fj,".
+				      $this->conDB->table("target").".TLearn_Time,".$this->conDB->table("edge").".MoveTime,".$this->conDB->table("target").".S".
+			     " FROM ".$this->conDB->table("target").",".$this->conDB->table("belong").",".$this->conDB->table("edge").",".$this->conDB->table("user").
+			     " WHERE ".$this->conDB->table("user").".UID = :UID AND ".$this->conDB->table("target").".TID = :next_point_number";
+		$result = $this->conDB->prepare($conString);
 		$result->bindParam(":UID",$userID);
 		$result->bindParam(":next_point_number",$next_point_number);
 		$result->execute();		
@@ -131,16 +132,16 @@
 	{
 	      for($count=2;$count<=10;$count++)
 	      {
-				$result = $conDB->prepare("SELECT ".$conDB->table("target").".Fj FROM ".$conDB->table("target")." WHERE ".$conDB->table("target").".TID = :count");
+				$result = $this->conDB->prepare("SELECT ".$this->conDB->table("target").".Fj FROM ".$this->conDB->table("target")." WHERE ".$this->conDB->table("target").".TID = :count");
 				$result->bindParam(":count",$count);
 				$result->execute();
 				
 				while($row=$result->fetch())
 				{
 					$getNextNodeParameter = getNodeOfLearnOfParameter($row[Tj],1);
-					if(!$row["Fj"]) $fullflag = true;
+					if(!$row["Fj"]) $this->fullflag = true;
 				}
-				return $fullflag
+				return $this->fullflag;
 	      }
 	}
 	
@@ -153,9 +154,9 @@
 	*/	
 	public function getLearningStatus($userID,$point_number)
 	{
-	   $result = $conDB->prepare("SELECT ".$conDB->table("user").".UID,".$conDB->table("user").".UNickname,".$conDB->table("target").".TLearn_Time".$conDB->table("target").".Mj ".
-								 "FROM ".$conDB->table("user").",".$conDB->table("target").
-								 "WHERE ".$conDB->table("user").".UID = :UID AND ".$conDB->table("target").".TID = :TID");
+	   $result = $this->conDB->prepare("SELECT ".$this->conDB->table("user").".UID,".$this->conDB->table("user").".UNickname,".$this->conDB->table("target").".TLearn_Time".$this->conDB->table("target").".Mj ".
+								 "FROM ".$this->conDB->table("user").",".$this->conDB->table("target").
+								 "WHERE ".$this->conDB->table("user").".UID = :UID AND ".$this->conDB->table("target").".TID = :TID");
 	   $result->bindParam(":UID",$userID);
 	   $result->bindParam(":TID",$point_number);
 	   $result->execute();
@@ -173,21 +174,19 @@
 	public function updateUserLearnData($JSONData)
 	{
 	   $ClientData = json_decode($JSONData);
-	   $result = $conDB->prepare("UPDATE ".$conDB->table("study").
-				     " SET ".$conDB->table("study").".Answer = ".$ClientData->Answer.",".
-					     $conDB->table("study").".Answer_Time = ".$ClientData->Answer_Time.",".
-					     $conDB->table("study").".In_TargetTime = ".$ClientData->.In_TargetTime.",".
-					     $conDB->table("study").".Out_TargetTime = ".$ClientData->Out_TargetTime.",".
-					     $conDB->table("study").".TCheck = ".$ClientData->TCheck.
-					     $conDB->table("study").".QID = ".$ClientData->QID.
-				    " WHERE ".$conDB->table("study").".TID = ".$ClientData->TID." AND ".$conDB->table("study").".UID = ".$ClientData->UID );
+	   $result = $this->conDB->prepare("UPDATE ".$this->conDB->table("study")." SET ".$this->conDB->table("study").".Answer = ".$ClientData->Answer.","
+										  .$this->conDB->table("study").".Answer_Time = ".$ClientData->Answer_Time.","
+										  .$this->conDB->table("study").".In_TargetTime = ".$ClientData->In_TargetTime.","
+										  .$this->conDB->table("study").".Out_TargetTime = ".$ClientData->Out_TargetTime.","
+										  .$this->conDB->table("study").".TCheck = ".$ClientData->TCheck
+										  .$this->conDB->table("study").".QID = ".$ClientData->QID." WHERE ".$this->conDB->table("study").".TID = ".$ClientData->TID." AND ".$this->conDB->table("study").".UID = ".$ClientData->UID );
 	  $result->excute();
 	}
 	
 	public function userInWhere($userID,$position)
 	{
-		$result = $conDB->prepare("UPDATE ".$conDB->table("target").
-								  " SET ".$conDB->table("target").".");
+		$result = $this->conDB->prepare("UPDATE ".$this->conDB->table("target").
+								  " SET ".$this->conDB->table("target").".");
 	}
   }
 ?>
