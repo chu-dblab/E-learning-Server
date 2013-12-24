@@ -66,7 +66,7 @@
 			else return true;
 		}
 		
-		/** TODO
+		/**
 		* @Method_Name	getLearningNode
 		* @description	取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
 		* @param		$point_number_學習點的編號
@@ -83,15 +83,13 @@
 			$result->bindParam(":userID",$userID);
 			$result->execute();
 			
+			$node=array();
 			//帶入公式計算下一個要推荐的學習點的編號
 			while($row=$result->fetch()) 
 			{
-				//echo print_r($row,true);
 				$nextNode=array();
 				$pathCost = -1;
 				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);
-				
-				//echo print_r($getNextNodeParameter,true)."\n";
 				
 				if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
 				else
@@ -107,11 +105,16 @@
 					}
 				}
 				//儲存計算好的下一個學習點
+				$thisArray = array("Ti"=>$row["Ti"],"Tj"=>$row["Tj"],"pathCost"=>$pathCost);
+				array_push($node,$thisArray);
 			}
-			
 			//將下一個學習點的陣列排序
+			foreach($node as $key=>$value) $tmp[$key] = $value["pathCost"];
+			array_multisort($tmp,SORT_DESC,$node,SORT_DESC);
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
-			//return $nextNode;
+			$content = array("first"=>(int)$node[0]["Tj"],"second"=>(int)$node[1]["Tj"],"third"=>(int)$node[2]["Tj"]);
+			$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
+			return $recommand;
 		}
 		
 		/**
@@ -179,11 +182,6 @@
 			$result->execute();
 			$row = $result->fetchAll();
 			return $row;
-		}
-		public function userInWhere($userID,$position)
-		{
-			$result = $this->conDB->prepare("UPDATE ".$this->conDB->table("target").
-									" SET ".$this->conDB->table("target").".");
 		}
 		
 		/**

@@ -42,7 +42,8 @@
 	      if(isset($point) && isset($ID))
 	      {
 			$data = $learn->getLearningNode($point,$ID);
-			$message += array("status_ok"=>True,"data"=>$data);
+			$message += array("status_ok"=>True);
+			$message += $data;
 	      }
 	      else array("status_ok"=>false,"status"=>"CommandError");
 	    break;
