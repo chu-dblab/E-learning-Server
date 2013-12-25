@@ -52,10 +52,6 @@ CREATE TABLE chu_theme(
 CREATE TABLE chu_study(
   TID int(10) unsigned NOT NULL,
   UID varchar(30) NOT NULL COMMENT '使用者帳號',
-  QID int(10) unsigned default NULL,
-  TCheck varchar(5) NOT NULL COMMENT '有無正確到推薦點',
-  Answer varchar(5) default NULL COMMENT '答題對錯 Y=對 N=錯',
-  Answer_Time varchar(10) default NULL COMMENT '作答時間',
   In_TargetTime datetime NOT NULL,
   Out_TargetTime datetime default NULL,
   PRIMARY KEY (TID,UID),
