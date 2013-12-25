@@ -4,42 +4,34 @@
      require_once(DOCUMENT_ROOT."lib/class/RecommandLearnNode.php");
 //======================================================================================================//   
      $action = (empty($_REQUEST["op"])) ? null : $_REQUEST["op"];
-     $num = (empty($_POST["amount"])) ? null : $_POST["amount"];
      $Data = (empty($_POST["data"])) ? null : $_POST["data"];
      $point = (empty($_POST["point"])) ? null : $_POST["point"];
+     $question = (empty($_POST["QID"])) ? null : $_POST["QID"];
      $ID = (empty($_POST["uid"])) ? null : $_POST["uid"];
 //======================================================================================================//
-     $learn = new RecommandLearnNode();
+     $renew = new UpdateInfo();
      
      $message = array();
 //=====================================================================================================//
      switch($action)
      {
-		case "addPeople":
-			if(!isset($num)) $message += array("status_ok"=>false,"status"=>"CommandError");
-			else
-			{
-				$learn->addPeople($num);
-				$message += array("status_ok"=>True,"status"=>"add people sccessed.");
-			}
-			break;
-		case "subPeople":
-			if(!isset($num)) $message += array("status_ok"=>false,"status"=>"CommandError");
+		case "upgrade":
+			if(!isset($Data)) array("status_ok"=>false,"status"=>"CommandError");
 			else 
 			{
-				$learn->subPeople($num);
+				$renew->updateUserLearnData($Data);
 				$message += array("status_ok"=>True);
 			}
 			break;
-		case "recommand" :
-			if(isset($point) && isset($ID))
+		case "sendQuestionData":
+			if(isset($point) && isset($question))
 			{
-				$data = $learn->getLearningNode($point,$ID);
+				$renew->receiveQuestionData($question,$point);
+				$renew->updateQestionStatus();
 				$message += array("status_ok"=>True);
-				$message += $data;
 			}
 			else $message += array("status_ok"=>false,"status"=>"CommandError");
-			break;
+			
 		default:
 			$message += array("status"=>"Internal Error!!");
      }
