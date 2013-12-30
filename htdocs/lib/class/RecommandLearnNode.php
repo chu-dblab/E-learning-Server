@@ -109,7 +109,7 @@
 				array_push($node,$thisArray);
 			}
 			//將下一個學習點的陣列排序
-			foreach($node as $key=>$value) $tmp[$key] = $value["pathCost"];
+			foreach($node as $key=>$value) {$tmp[$key] = $value["pathCost"];
 			array_multisort($tmp,SORT_DESC,$node,SORT_DESC);
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
 			$info_1 = array("node"=>(int)$node[0]["Tj"],"LearnTime"=>$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);

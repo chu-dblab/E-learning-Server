@@ -23,68 +23,60 @@
 		 */
 		public function receiveQuestionData($num_of_question,$point_number)
 		{
-			$result = $this->conDB->prepare("INSERT INTO ".$this->conDB->table("question")." VALUES(:qid,:tid:)");
+			$result = $this->conDB->prepare("INSERT INTO ".$this->conDB->table("question")." VALUES(:qid,:tid,0,0)");
 			$result->bindParam(":qid",$num_of_question);
-			$result->bindParam("tid",$point_number);
+			$result->bindParam(":tid",$point_number);
 			$result->execute();
 			
-			$result->errorInfo();
-			echo "String = ".$result->errorInfo();
+			$test = $result->errorInfo();
+			echo print_r($test);
 		}
 		
 		/**
 		 *	更新答題狀態
+		 *	@param $questionNumber
+		 *	@param $receiveData
 		 */
-		public function updateQestionStatus()
+		public function updateQestionStatus($questionNumber,$receiveData)
 		{
-			$receiveData = json_decode($JSONData);
-			$result = $this->conDB->prepare("SELECT * FROM ".$this->conDB->table("question"));
-			$result->execute();
-			
-			$result->errorInfo();
-			echo "String = ".$result->errorInfo();
-			
-			/*
-			if($result != null)
-			{
 				if($receiveData["correct"] == 1)
 				{
 					$result = $this->conDB->prepare("UPDATE `".$this->conDB->table("question")."` SET `Cnumber` = `Cnumber` + 1 WHERE `QID` = :qid");
 					$result->bindParam(":qid",$receiveData["QID"]);
 					$result->execute();
 					$result->errorInfo();
-					echo "String = ".$result->errorInfo();
+					$info = $result->errorInfo();
+					return print_r($info);
 				}
 				else if($receiveData["wrong"] == 1)
 				{
 					$result = $this->conDB->prepare("UPDATE `".$this->conDB->table("question")."` SET `Wnumber` = `Wnumber` + 1 WHERE `QID` = :qid");
 					$result->bindParam(":qid",$receiveData["QID"]);
 					$result->execute();
-					$result->errorInfo();
-					echo "String = ".$result->errorInfo();
+					$info = $result->errorInfo();
+					return print_r($info);
 				}
 				else return false;
-			}*/
 		}
 		
 		/**
 		* @Method_Name		updateUserLearnData
 		* @description		更新使用者的學習狀態
-		* @param			$JSONData Client端所傳過來的JSON格式資料
+		* @param			$InTime
+		* @param			$OutTime
 		* @return			NONE
 		*/
-		public function updateUserLearnData($JSONData)
+		public function updateUserLearnData($userID,$point_number,$InTime,$OutTime)
 		{
-			$ClientData = json_decode($JSONData);
-			$result = $this->conDB->prepare("UPDATE ".$this->conDB->table("study")." SET ".$this->conDB->table("study").".Answer = ".$ClientData->Answer.","
-												.$this->conDB->table("study").".Answer_Time = ".$ClientData->Answer_Time.","
-												.$this->conDB->table("study").".In_TargetTime = ".$ClientData->In_TargetTime.","
-												.$this->conDB->table("study").".Out_TargetTime = ".$ClientData->Out_TargetTime.","
-												.$this->conDB->table("study").".TCheck = ".$ClientData->TCheck
-												.$this->conDB->table("study").".QID = ".$ClientData->QID." WHERE ".$this->conDB->table("study").".TID = ".$ClientData->TID." AND ".$this->conDB->table("study").".UID = ".$ClientData->UID );
-			$result->excute();
-			$result->errorInfo();
-			echo "String = ".$result->errorInfo();
+			$result = $this->conDB->prepare("INSERT INTO `".$this->conDB->table("study")."` VALUES (:point,:ID,:in,:out)");
+			$result->bindParam(":point",$point_number);
+			$result->bindParam(":ID",$userID);
+			$result->bindParam(":in",$InTime);
+			$result->bindParam(":out",$OutTime);
+			$result->execute();
+			
+			$info=$result->errorInfo();
+			echo print_r($info);
 		}
 		
 		
