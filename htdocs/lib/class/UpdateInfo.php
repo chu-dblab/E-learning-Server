@@ -31,7 +31,6 @@
 			$test = $result->errorInfo();
 			echo print_r($test);
 		}
-		
 		/**
 		 *	更新答題狀態
 		 *	@param $questionNumber

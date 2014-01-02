@@ -8,8 +8,8 @@
   * @link	https://github.com/CHU-TDAP/
   * @since	Version 1.0
   */
-  class RecommandLearnNode
-  {
+class RecommandLearnNode
+{
 		private $conDB;
 		
 		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
@@ -28,9 +28,13 @@
 		*/
 		public function addPeople($point_number)
 		{
-			$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Mj` = `Mj` + 1 where `TID` = :number");
-			$query->bindParam(":number",$point_number);
-			$query->execute(); 
+			if(!$this->isCurrentPointFull($point_number))
+			{
+				$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Mj` = `Mj` + 1 where `TID` = :number");
+				$query->bindParam(":number",$point_number);
+				$query->execute(); 
+			}
+			else return "該學習點人數已達上限";
 		}
 		
 		/**
@@ -41,7 +45,7 @@
 		*/		
 		public function subPeople($point_number)
 		{
-			if(!isZero($point_number))
+			if(!$this->isZero($point_number))
 			{
 				$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Mj` =`Mj` - 1 WHERE `TID` = :number");
 				$query->bindParam(":number",$point_number);
@@ -52,7 +56,7 @@
 		
 		/** 
 		* @Method_Name	isZero
-		* @description	確認目前的學習點是不是零
+		* @description	確認目前的學習點的人數是不是零
 		* @param		$point_number (data type is an Integer)  學習點的編號
 		* @return	Boolean (true/false)
 		*/
@@ -62,8 +66,26 @@
 			$result = $this->conDB->prepare("SELECT Mj FROM ".$this->conDB->table("target")." WHERE TID = :number AND Mj = 0");
 			$result->bindParam(":number",$point_number);
 			$result->execute();
-			if($result != 0) return false;
-			else return true;
+			
+			$row = $result->fetchAll();
+			if($row["Mj"] == 0) $isZero = true;
+		}
+		
+		private function isCurrentPointFull($point_number)
+		{
+			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("target").".Mj,".$this->conDB->table("target").".PLj".
+											" FROM ".$this->conDB->table("target")." WHERE TID = :point");
+			$result->bindParam(":point",$point_number);
+			$result->execute();
+			$row = $result->fetch();
+			if($row["Mj"] == $row["PLj"]) 
+			{
+				$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Fj` = `Fj` + 1 WHERE TID = :point");
+				$query->bindParam(":point",$point_number);
+				$query->execute();
+				return true;
+			}
+			else return false;
 		}
 		
 		/**
@@ -87,14 +109,13 @@
 			//帶入公式計算下一個要推荐的學習點的編號
 			while($row=$result->fetch()) 
 			{
-				$nextNode=array();
 				$pathCost = -1;
 				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);
 				
 				if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
 				else
 				{
-					$pathCost = $getNextNodeParameter["weights"] * ($getNextNodeParameter["S"] - ($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"]+$getNextNodeParameter["TLearn_Time"]);
+					$pathCost = $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
 					if($getNextNodeParameter["TID"] > 15)
 					{
 						//實體學習點
@@ -109,12 +130,15 @@
 				array_push($node,$thisArray);
 			}
 			//將下一個學習點的陣列排序
-			foreach($node as $key=>$value) {$tmp[$key] = $value["pathCost"];
+			foreach($node as $key=>$value)
+			{
+				$tmp[$key] = $value["pathCost"];
+			}
 			array_multisort($tmp,SORT_DESC,$node,SORT_DESC);
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
-			$info_1 = array("node"=>(int)$node[0]["Tj"],"LearnTime"=>$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
-			$info_2 = array("node"=>(int)$node[1]["Tj"],"LearnTime"=>$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
-			$info_3 = array("node"=>(int)$node[2]["Tj"],"LearnTime"=>$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
+			$info_1 = array("node"=>(int)$node[0]["Tj"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
+			$info_2 = array("node"=>(int)$node[1]["Tj"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
+			$info_3 = array("node"=>(int)$node[2]["Tj"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
 			$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
 			$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
 			return $recommand;
@@ -196,12 +220,12 @@
 		public function getLearningStatus($userID,$point_number)
 		{
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("user").".UID,".$this->conDB->table("user").".UNickname,".$this->conDB->table("target").".TLearn_Time,".$this->conDB->table("target").".Mj ".
-										"FROM ".$this->conDB->table("user").",".$this->conDB->table("target").
-										"WHERE ".$this->conDB->table("user").".UID = :UID AND ".$this->conDB->table("target").".TID = :TID");
+										" FROM ".$this->conDB->table("user").",".$this->conDB->table("target").
+										" WHERE ".$this->conDB->table("user").".UID = :UID AND ".$this->conDB->table("target").".TID = :TID");
 			$result->bindParam(":UID",$userID);
 			$result->bindParam(":TID",$point_number);
 			$result->execute();
-			$row = $result->fetchAll();
+			$row = $result->fetch();
 			return $row;
 		}
 }

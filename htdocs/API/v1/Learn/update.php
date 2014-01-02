@@ -21,12 +21,12 @@
 			if(!isset($Data)) array("status_ok"=>false,"status"=>"CommandError");
 			else 
 			{
-				$renew->updateUserLearnData($ID,$point,$inTime,$outTime);
+				$renew->updateUserLearnData($ID,(int)$point,$inTime,$outTime);
 				$message += array("status_ok"=>True);
 			}
 			break;
 		case "sendQuestionData":
-			if(isset($point) && isset($question))
+			if(isset($point) && isset($question)&&isset($Data))
 			{
 				$renew->receiveQuestionData($question,$point);
 				$renew->updateQestionStatus($question,$Data);

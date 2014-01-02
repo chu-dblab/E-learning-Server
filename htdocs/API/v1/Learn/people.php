@@ -40,6 +40,12 @@
 			}
 			else $message += array("status_ok"=>false,"status"=>"CommandError");
 			break;
+		case "getUserStatus":
+			if(isset($ID)&&isset($point))
+			{
+				$data=$learn->getUserStatus
+			}
+			break;
 		default:
 			$message += array("status"=>"Internal Error!!");
      }
