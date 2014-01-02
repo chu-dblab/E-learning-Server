@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   index.php
    
    Copyright 2013 元兒～ <yuan@Yuan-NB>

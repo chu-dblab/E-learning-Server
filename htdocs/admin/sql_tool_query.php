@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   sql_tool_query.php
    
    SQL查詢工具

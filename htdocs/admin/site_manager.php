@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   site_manager.php
    
    本站管理
