@@ -1,5 +1,9 @@
 INSERT
 INTO chu_target
+VALUES ('00', '1F.gif', '', '入口','1', '100', '0', '0.6', '0');
+
+INSERT
+INTO chu_target
 VALUES ('01', 'map_01_02_03.png', '01.html', '含有生物遺跡的岩石','7', '100', '0', '0.6', '0');
 
 INSERT
