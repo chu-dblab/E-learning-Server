@@ -39,7 +39,7 @@ CREATE TABLE chu_theme(
   ThemeID int(10) unsigned NOT NULL,
   ThemeName varchar(15) NOT NULL,
   theme_Learn_DateTime datetime NOT NULL COMMENT '本次學習此主題發生的日期時間',
-  Theme_LearnTotal int(10) unsigned NOT NULL COMMENT '學習此主題要花的總時間(hr)',
+  Theme_LearnTotal int(10) unsigned NOT NULL COMMENT '學習此主題要花的總時間(m)',
   Theme_Introduction varchar(70) NOT NULL,
   PRIMARY KEY (ThemeID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='主題';
