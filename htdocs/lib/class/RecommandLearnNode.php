@@ -161,8 +161,8 @@ class RecommandLearnNode
 														$this->conDB->table("target").".TLearn_Time,".
 														$this->conDB->table("edge").".MoveTime,".
 														$this->conDB->table("target").".S,".
-														$this->conDB->table("target").".Map_Url,".
-														$this->conDB->table("target").".Material_Url".
+														$this->conDB->table("target").".MapID,".
+														$this->conDB->table("target").".MaterialID".
 											" FROM ".$this->conDB->table("target").",".
 													$this->conDB->table("belong").",".
 													$this->conDB->table("edge").",".
@@ -182,7 +182,7 @@ class RecommandLearnNode
 							"Fj"=>$row["Fj"],
 							"MoveTime"=>$row["MoveTime"],
 							"weights"=>$row["weights"],
-							"TLearn_Time"=>$row["TLearn_Time"],"Map_Url"=>$row["Map_Url"],"Material_Url"=>$row["Material_Url"]);
+							"TLearn_Time"=>$row["TLearn_Time"],"Map_Url"=>$row["MapID"],"Material_Url"=>$row["MaterialID"]);
 			}
 			return $node;
 		}
