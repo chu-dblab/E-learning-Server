@@ -37,7 +37,7 @@ if($register_user_active) {
 }
 
 
-$account_create_status = user_create($register_user_id, $register_user_password, $register_user_confirm_password, $register_user_group, $register_user_active, $register_user_realName, $register_user_nickName, $register_user_email);
+$account_create_status = user_create($register_user_id, $register_user_password, $register_user_group, $register_user_active, $register_user_realName, $register_user_nickName, $register_user_email);
 
 if($account_create_status == "Finish"){
 	$theAlert = new Alert("success", false, "<strong>建立成功！</strong>  '$register_user_id'已成功建立！！");

@@ -78,7 +78,7 @@ function user_ishave($username){
  * @author	元兒～ <yuan817@moztw.org>
  * @since	Version 3
 */
-function user_create($username, $passwd, $group, $isActive, $name, $nickname, $email){
+function user_create(){
 	global $FORM_USER;
 	
 	if(func_num_args() == 7){
