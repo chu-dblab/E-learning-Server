@@ -24,8 +24,8 @@ CREATE TABLE chu_user(
 
 CREATE TABLE chu_target(
   TID int(10) unsigned NOT NULL,
-  MapID int(10) unsigned NOT NULL COMMENT '地圖編號',
-  MaterialID int(10) unsigned NOT NULL COMMENT '教材編號',
+  MapID varchar(20) unsigned NOT NULL COMMENT '地圖編號',
+  MaterialID varchar(20) unsigned NOT NULL COMMENT '教材編號',
   TName varchar(15) NOT NULL COMMENT '標的名稱',
   TLearn_Time int(10) unsigned NOT NULL COMMENT '預估此標的應該學習的時間',
   PLj int(200) unsigned NOT NULL COMMENT '學習標的的人數限制',
