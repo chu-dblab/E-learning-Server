@@ -4,15 +4,15 @@ require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
 require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
 
 //-------------------設定區-----------------------//
-$op = (is_null($_REQUEST['op']))?null:$_REQUEST['op'];
-$ucode = (is_null($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
+$op = ( isset( $_REQUEST['op']) )?$_REQUEST['op']:null;
+$ucode = ( isset($_REQUEST['ucode']) )?$_REQUEST['ucode']:null;
 
-$upasswd = (is_null($_REQUEST['upasswd']))?null:$_REQUEST['upasswd'];
-$upasswd_chg = (is_null($_REQUEST['upasswd-new']))?null:$_REQUEST['upasswd-new'];
+$upasswd = ( isset($_REQUEST['upasswd']) )?$_REQUEST['upasswd']:null;
+$upasswd_chg = ( isset($_REQUEST['upasswd-new']) )?$_REQUEST['upasswd-new']:null;
 
-$realname_chg = (is_null($_REQUEST['urealname-new']))?null:$_REQUEST['urealname-new'];
-$nickname_chg = (is_null($_REQUEST['unickname-new']))?null:$_REQUEST['unickname-new'];
-$email_chg = (is_null($_REQUEST['uemail-new']))?null:$_REQUEST['uemail-new'];
+$realname_chg = ( isset($_REQUEST['urealname-new']) )?$_REQUEST['urealname-new']:null;
+$nickname_chg = ( isset($_REQUEST['unickname-new']) )?$_REQUEST['unickname-new']:null;
+$email_chg = ( isset($_REQUEST['uemail-new']) )?$_REQUEST['uemail-new']:null;
 
 
 //---------------函式區----------------------//
