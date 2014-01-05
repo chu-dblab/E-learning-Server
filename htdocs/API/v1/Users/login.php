@@ -5,10 +5,10 @@ require_once(DOCUMENT_ROOT."lib/function/user.php");
 require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
 
 //-------------------設定區-----------------------//
-$action = (empty($_REQUEST['op']))?null:$_REQUEST['op'];
-$id = (empty($_REQUEST['uid']))?null:$_REQUEST['uid'];
-$pwd = (empty($_REQUEST['upasswd']))?null:$_REQUEST['upasswd'];
-$logCode = (empty($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
+$action = (is_null($_REQUEST['op']))?null:$_REQUEST['op'];
+$id = (is_null($_REQUEST['uid']))?null:$_REQUEST['uid'];
+$pwd = (is_null($_REQUEST['upasswd']))?null:$_REQUEST['upasswd'];
+$logCode = (is_null($_REQUEST['ucode']))?null:$_REQUEST['ucode'];
 
 //---------------流程控制區----------------------//
 

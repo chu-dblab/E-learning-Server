@@ -3,11 +3,11 @@
      require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
      require_once(DOCUMENT_ROOT."lib/class/RecommandLearnNode.php");
 //======================================================================================================//   
-     $action = (empty($_REQUEST["op"])) ? null : $_REQUEST["op"];
-     $num = (empty($_POST["amount"])) ? null : $_POST["amount"];
-     $Data = (empty($_POST["data"])) ? null : $_POST["data"];
-     $point = (empty($_POST["point"])) ? null : $_POST["point"];
-     $ID = (empty($_POST["uid"])) ? null : $_POST["uid"];
+     $action = (is_null($_REQUEST["op"])) ? null : $_REQUEST["op"];
+     $num = (is_null($_POST["amount"])) ? null : $_POST["amount"];
+     $Data = (is_null($_POST["data"])) ? null : $_POST["data"];
+     $point = (is_null($_POST["point"])) ? null : $_POST["point"];
+     $ID = (is_null($_POST["uid"])) ? null : $_POST["uid"];
 //======================================================================================================//
      $learn = new RecommandLearnNode();
      

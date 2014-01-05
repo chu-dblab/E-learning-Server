@@ -3,13 +3,13 @@
      require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
      require_once(DOCUMENT_ROOT."lib/class/UpdateInfo.php");
 //======================================================================================================//   
-     $action = (empty($_REQUEST["op"])) ? null : $_REQUEST["op"];
-     $Data = (empty($_POST["data"])) ? null : $_POST["data"];
-     $point = (empty($_POST["point"])) ? null : $_POST["point"];
-     $question = (empty($_POST["QID"])) ? null : $_POST["QID"];
-     $ID = (empty($_POST["uid"])) ? null : $_POST["uid"];
-     $inTime = (empty($_POST["inTime"])) ? null : $_POST["inTime"];
-     $outTime = (empty($_POST["outTime"])) ? null : $_POST["outTime"];
+     $action = (is_null($_REQUEST["op"])) ? null : $_REQUEST["op"];
+     $Data = (is_null($_POST["data"])) ? null : $_POST["data"];
+     $point = (is_null($_POST["point"])) ? null : $_POST["point"];
+     $question = (is_null($_POST["QID"])) ? null : $_POST["QID"];
+     $ID = (is_null($_POST["uid"])) ? null : $_POST["uid"];
+     $inTime = (is_null($_POST["inTime"])) ? null : $_POST["inTime"];
+     $outTime = (is_null($_POST["outTime"])) ? null : $_POST["outTime"];
 //======================================================================================================//
      $renew = new UpdateInfo();
      
