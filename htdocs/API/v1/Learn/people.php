@@ -43,8 +43,11 @@
 		case "getUserStatus":
 			if(isset($ID)&&isset($point))
 			{
-				$data=$learn->getUserStatus
+				$data=$learn->getLearningStatus($ID,$point);
+				$message += array("status_ok"=>True);
+				$message += $data;
 			}
+			else $message += array("status_ok"=>false,"status"=>"CommandError");
 			break;
 		default:
 			$message += array("status"=>"Internal Error!!");
