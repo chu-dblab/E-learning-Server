@@ -126,7 +126,7 @@ class RecommandLearnNode
 					}
 				}
 				//儲存計算好的下一個學習點
-				$thisArray = array("Ti"=>$row["Ti"],"Tj"=>$row["Tj"],"pathCost"=>$pathCost,"LearnTime"=>$getNextNodeParameter["TLearn_Time"],"mapURL"=>$getNextNodeParameter["Map_Url"],"materialUrl"=>$getNextNodeParameter["Material_Url"]);
+				$thisArray = array("Ti"=>$row["Ti"],"Tj"=>$row["Tj"],"pathCost"=>$pathCost,"TName"=>$getNextNodeParameter["TName"],"LearnTime"=>$getNextNodeParameter["TLearn_Time"],"mapURL"=>$getNextNodeParameter["Map_Url"],"materialUrl"=>$getNextNodeParameter["Material_Url"]);
 				array_push($node,$thisArray);
 			}
 			//將下一個學習點的陣列排序
@@ -136,9 +136,9 @@ class RecommandLearnNode
 			}
 			array_multisort($tmp,SORT_DESC,$node,SORT_DESC);
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
-			$info_1 = array("node"=>(int)$node[0]["Tj"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
-			$info_2 = array("node"=>(int)$node[1]["Tj"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
-			$info_3 = array("node"=>(int)$node[2]["Tj"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
+			$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
+			$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
+			$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
 			$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
 			$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
 			return $recommand;
@@ -156,6 +156,7 @@ class RecommandLearnNode
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("target").".TID,".
 														$this->conDB->table("target").".Mj,".
 														$this->conDB->table("target").".PLj,".
+														$this->conDB->table("target").".TName,".
 														$this->conDB->table("belong").".weights,".
 														$this->conDB->table("target").".Fj,".
 														$this->conDB->table("target").".TLearn_Time,".
@@ -182,32 +183,10 @@ class RecommandLearnNode
 							"Fj"=>$row["Fj"],
 							"MoveTime"=>$row["MoveTime"],
 							"weights"=>$row["weights"],
+							"TName"=>$row["TName"],
 							"TLearn_Time"=>$row["TLearn_Time"],"Map_Url"=>$row["MapID"],"Material_Url"=>$row["MaterialID"]);
 			}
 			return $node;
-		}
-		
-		/**
-		* @Method_Name		DetectAllLearnNodeFull
-		* @description		偵測所有的學習點是不是已經達到限制人數
-		* @param			NONE
-		* @return			true/false
-		*/
-		public function DetectAllLearnNodeFull()
-		{
-			for($count=2;$count<=10;$count++)
-			{
-					$result = $this->conDB->prepare("SELECT ".$this->conDB->table("target").".Fj FROM ".$this->conDB->table("target")." WHERE ".$this->conDB->table("target").".TID = :count");
-					$result->bindParam(":count",$count);
-					$result->execute();
-					
-					while($row=$result->fetch())
-					{
-						$getNextNodeParameter = getNodeOfLearnOfParameter($row[Tj],1);
-						if(!$row["Fj"]) $this->fullflag = true;
-					}
-					return $this->fullflag;
-			}
 		}
 		
 		/**
