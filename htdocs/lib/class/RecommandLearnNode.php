@@ -112,19 +112,22 @@ class RecommandLearnNode
 				$pathCost = -1;
 				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);
 				
-				if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
-				else
+				do
 				{
-					$pathCost = $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
-					if($getNextNodeParameter["TID"] > 15)
+					if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
+					else
 					{
-						//實體學習點
+						$pathCost = $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+						if($getNextNodeParameter["TID"] > 15)
+						{
+							//實體學習點
+						}
+						else 
+						{
+							$pathCost = $pathCost * 0.06;
+						}
 					}
-					else 
-					{
-						$pathCost = $pathCost * 0.06;
-					}
-				}
+				}while($this->checkFinish($userID,$getNextNodeParameter["TID"]));
 				//儲存計算好的下一個學習點
 				$thisArray = array("Ti"=>$row["Ti"],"Tj"=>$row["Tj"],"pathCost"=>$pathCost,"TName"=>$getNextNodeParameter["TName"],"LearnTime"=>$getNextNodeParameter["TLearn_Time"],"mapURL"=>$getNextNodeParameter["Map_Url"],"materialUrl"=>$getNextNodeParameter["Material_Url"]);
 				array_push($node,$thisArray);
@@ -206,6 +209,17 @@ class RecommandLearnNode
 			$result->execute();
 			$row = $result->fetch();
 			return $row;
+		}
+		
+		private function checkFinish($userID,$point)
+		{
+			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("study").".TID FROM ".$this->conDB->table("study")." WHERE UID = :uid AND TID = :point");
+			$result->bindParam(":uid",$userID);
+			$result->bindParam(":point",$point);
+			$result->execute();
+			$row = $result->fetch(PDO::FETCH_ASSOC);
+			if($point == $row["TID"]) return true;
+			else return false;
 		}
 }
 ?>

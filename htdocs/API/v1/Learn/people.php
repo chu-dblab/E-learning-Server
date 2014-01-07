@@ -49,6 +49,15 @@
 			}
 			else $message += array("status_ok"=>false,"status"=>"CommandError");
 			break;
+		//方法獨立測試用
+		case "test":
+			if(isset($ID)&&isset($point))
+			{
+				$data=$learn->checkFinish($ID,$point);
+				$message += array("status_ok"=>true,"data"=>$data);
+			}
+			else $message += array("status_ok"=>false,"status"=>"CommandError");
+			break;
 		default:
 			$message += array("status"=>"Internal Error!!");
      }
