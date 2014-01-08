@@ -18,12 +18,13 @@
      switch($action)
      {
 		case "upgrade":
-			if(!isset($Data)) array("status_ok"=>false,"status"=>"CommandError");
-			else 
+		
+			if(isset($ID)&&isset($point)&&isset($inTime)&&isset($outTime))
 			{
 				$renew->updateUserLearnData($ID,(int)$point,$inTime,$outTime);
 				$message += array("status_ok"=>True);
 			}
+			else array("status_ok"=>false,"status"=>"CommandError");
 			break;
 		case "sendQuestionData":
 			if(isset($point) && isset($question)&&isset($Data))

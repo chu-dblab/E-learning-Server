@@ -67,15 +67,13 @@
 		*/
 		public function updateUserLearnData($userID,$point_number,$InTime,$OutTime)
 		{
+			
 			$result = $this->conDB->prepare("INSERT INTO `".$this->conDB->table("study")."` VALUES (:point,:ID,:in,:out)");
 			$result->bindParam(":point",$point_number);
 			$result->bindParam(":ID",$userID);
 			$result->bindParam(":in",$InTime);
 			$result->bindParam(":out",$OutTime);
 			$result->execute();
-			
-			$info=$result->errorInfo();
-			echo print_r($info);
 		}
 		
 		
