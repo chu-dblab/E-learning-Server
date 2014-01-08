@@ -67,7 +67,7 @@ class RecommandLearnNode
 			$result->bindParam(":number",$point_number);
 			$result->execute();
 			
-			$row = $result->fetchAll();
+			$row = $result->fetch();
 			if($row["Mj"] == 0) $isZero = true;
 		}
 		
