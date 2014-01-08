@@ -137,7 +137,8 @@ class RecommandLearnNode
 			array_multisort($tmp,SORT_DESC,$node,SORT_DESC);
 			
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
-			if($this->checkFinish($userID,$node[0]["Tj"])) array_shift($node);
+			// TODO 判斷有沒有學習完，不然會陷入無限迴圈
+			while($this->checkFinish($userID,$node[0]["Tj"])) array_shift($node);
 			$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
 			$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
 			$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
