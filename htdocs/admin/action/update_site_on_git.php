@@ -6,9 +6,9 @@
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	
 	//更新網站
-	$output = shell_exec("git checkout publish");
+	$output = shell_exec("git checkout master");
 	$output .= "\n";
-	$output .= shell_exec("git pull origin publish");
+	$output .= shell_exec("git pull origin master");
 	//$output .= shell_exec("git submodule update");
 ?>
 <!DOCTYPE html>
