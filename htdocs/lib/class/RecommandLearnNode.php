@@ -111,7 +111,7 @@ class RecommandLearnNode
 			while($row=$result->fetch()) 
 			{
 				$pathCost = -1;
-				$isEntity = true;
+				$isEntity = 1;
 				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);
 				
 					if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
@@ -121,7 +121,7 @@ class RecommandLearnNode
 						if($getNextNodeParameter["TID"] <= 15)
 						{
 							$pathCost = $pathCost * 0.06;
-							$isEntity = false;
+							$isEntity = 0;
 						}
 					}
 				//儲存計算好的下一個學習點
