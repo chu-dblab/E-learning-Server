@@ -106,6 +106,7 @@ class RecommandLearnNode
 			$result->execute();
 			
 			$node=array();
+			set_time_limit(60);
 			//帶入公式計算下一個要推荐的學習點的編號
 			while($row=$result->fetch()) 
 			{
