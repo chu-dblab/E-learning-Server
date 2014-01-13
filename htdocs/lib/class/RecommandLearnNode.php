@@ -142,6 +142,13 @@ class RecommandLearnNode
 			$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
 			$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
 			$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
+			//檢查content陣列的每一個元素是不是空的
+			foreach($content as $key)
+			{
+				if(isset($content[$key])) continue;
+				else array_pop($content);　//有空值，就將空值刪除
+			}
+			if(!isset($content))　$content = array("first"=>null);
 			$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
 			return $recommand;
 		}
