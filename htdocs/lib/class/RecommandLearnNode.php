@@ -156,15 +156,15 @@ class RecommandLearnNode
 				$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
 			
 			$content = array();
-			if(isset($node[0]))
-				array_push($content, $info_1);
-			if(isset($node[1]))
-				array_push($content, $info_2);
-			if(isset($node[2]))
-				array_push($content, $info_3);
-			//$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
 			
-			if(isset($content[0])) {
+			if(isset($info_1) && isset($info_2) && isset($info_3))
+				$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
+			else if(isset($info_1) && isset($info_2))
+				$content = array("first"=>$info_1,"second"=>$info_2);
+			else if(isset($info_1))
+				$content = array("first"=>$info_1);
+			
+			if(isset($content["first"])) {
 				$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
 			}
 			else {
