@@ -50,14 +50,14 @@
 					<section>
 						<div class="row-fluid">
 							<div class="span4">
-								<h2>使用者</h2>
-								<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-								<p><a class="btn" href="#">建立使用者 &raquo;</a></p>
+								<h2>使用者管理</h2>
+								<p>可在此新增學生、老師、管理員的帳號</p>
+								<p><a class="btn" href="user_list.php">使用者管理 &raquo;</a></p>
 							</div><!--/span-->
 							<div class="span4">
-								<h2>教材</h2>
-								<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-								<p><a class="btn" href="#">View details &raquo;</a></p>
+								<h2>網站管理</h2>
+								<p>更改站名、預設加密方式</p>
+								<p><a class="btn" href="site_manager.php">進入網站管理 &raquo;</a></p>
 							</div><!--/span-->
 						</div><!--/row-->
 					</section>

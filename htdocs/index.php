@@ -9,6 +9,9 @@
 	/**
 	 * 前置設定
 	*/
+	// 因為後端網頁界面尚未實作完成，故先轉到管理界面
+	header("Location: admin/index.php");
+	
 	require_once("lib/include.php");
 	require_once(DOCUMENT_ROOT."template/template.php");
 	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
