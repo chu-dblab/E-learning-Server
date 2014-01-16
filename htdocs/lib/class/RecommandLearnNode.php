@@ -1,7 +1,6 @@
 <?php
   require_once("../../../lib/include.php");
   require_once(DOCUMENT_ROOT."lib/class/Database.php");
-
  /**
   * @Class_Name：推薦學習點
   * @author	~kobayashi();
@@ -11,10 +10,9 @@
 class RecommandLearnNode
 {
 		private $conDB;
-		
+		private $alpha = 0.5; //調和參數
 		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
-		private define(ALPHA,0.5); //調和參數
-		private 
+		private $gamma;  //正規化參數
 		
 		public function __construct()
 		{
@@ -99,6 +97,7 @@ class RecommandLearnNode
 		*/
 		public function getLearningNode($point_number,$userID)
 		{
+			$this->gamma = $this->computeNormalizationParam($userID);
 			//從資料抓取目前路徑的資料
 			$result = $this->conDB->prepare("SELECT DISTINCT ".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj,".$this->conDB->table("edge").".MoveTime".
 						" FROM ".$this->conDB->table("edge").",".$this->conDB->table("user").
@@ -121,10 +120,14 @@ class RecommandLearnNode
 					{
 						if($getNextNodeParameter["TID"] <= 15)
 						{
-							$pathCost = ALPHA * $getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"];
+							$pathCost = $this->alpha * $this->gamma * ($getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"]);
 							$isEntity = 0;
 						}
-						else $pathCost = $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+						else 
+						{
+							$pathCost = (1-$this->alpha) * $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+							
+						}
 					}
 				//儲存計算好的下一個學習點
 				$thisArray = array("Ti"=>$row["Ti"],"Tj"=>$row["Tj"],"pathCost"=>$pathCost,"TName"=>$getNextNodeParameter["TName"],"isEntity"=>$isEntity,"LearnTime"=>$getNextNodeParameter["TLearn_Time"],"mapURL"=>$getNextNodeParameter["Map_Url"],"materialUrl"=>$getNextNodeParameter["Material_Url"]);
@@ -179,9 +182,27 @@ class RecommandLearnNode
 		* @param
 		* @return
 		*/
-		private final function computeNormalizationParam()
+		public function computeNormalizationParam($userID)
 		{
+			$result = $this->conDB->prepare("SELECT DISTINCT ".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj,".$this->conDB->table("edge").".MoveTime".
+						" FROM ".$this->conDB->table("edge")." WHERE ".$this->conDB->table("edge").".Ti = 0");
+			$result->execute();
 			
+			$sum1 = 0;
+			$sum2 = 0;
+			while($row=$result->fetch())
+			{
+				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);				
+				
+				if($getNextNodeParameter["TID"] <= 15 ) $sum2 += $getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"];
+				else
+				{
+					$Rj = $getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"];
+					$sum1 += ($getNextNodeParameter["weights"] * ($getNextNodeParameter["S"]-$Rj+1)) / ($getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+				}				
+			}
+			$normal = $sum1 / $sum2;
+			return $normal;
 		}
 		
 		/**
