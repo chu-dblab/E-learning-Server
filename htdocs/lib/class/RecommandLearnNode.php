@@ -93,8 +93,8 @@ class RecommandLearnNode
 		/**
 		* @Method_Name	getLearningNode
 		* @description	取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
-		* @param		$point_number_學習點的編號
-		* @param		$userID_使用者編號
+		* @param		$point_number 目前學習點的編號
+		* @param		$userID 使用者編號
 		* @return		推薦學習之標的編號
 		*/
 		public function getLearningNode($point_number,$userID)
@@ -139,19 +139,39 @@ class RecommandLearnNode
 			
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
 			// TODO 判斷有沒有學習完，不然會陷入無限迴圈
-			while($this->checkFinish($userID,$node[0]["Tj"])) array_shift($node);
-			$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"isEntity"=>$node[0]["isEntity"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
-			$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
-			$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
-			$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
-			if(isset($content))
-			{
-				if(!isset($content["third"])) array_pop($content);
-				else if(!isset($content["second"])) array_pop($content);
-				else if(!isset($content["first"])) array_pop($content);
+			$i = 0;
+			while(isset($node) && isset($node[$i+1])) {
+				while($this->checkFinish($userID,$node[$i]["Tj"]) && isset($node[$i+1])) array_splice($node, $i, 1);
+				$i++;
+			};
+			
+			if(isset($node[$i-1])) {
+				if( $this->checkFinish($userID,$node[$i-1]["Tj"]) ) array_pop($node);
 			}
-			else $content = array();
-			$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
+			
+			if(isset($node[0]))
+				$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"isEntity"=>$node[0]["isEntity"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
+			
+			if(isset($node[1]))
+				$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
+			if(isset($node[2]))
+				$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
+			
+			$content = array();
+			if(isset($node[0]))
+				array_push($content, $info_1);
+			if(isset($node[1]))
+				array_push($content, $info_2);
+			if(isset($node[2]))
+				array_push($content, $info_3);
+			//$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
+			
+			if(isset($content[0])) {
+				$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
+			}
+			else {
+				$recommand = array("currentNode"=>(int)$point_number,"nextNode"=>null);
+			}
 			return $recommand;
 		}
 		
