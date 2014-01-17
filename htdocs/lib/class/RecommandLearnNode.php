@@ -153,12 +153,12 @@ class RecommandLearnNode
 			}
 			
 			if(isset($node[0]))
-				$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"isEntity"=>$node[0]["isEntity"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
+				$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"pathCost"=>$node[0]["pathCost"],"isEntity"=>$node[0]["isEntity"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
 			
 			if(isset($node[1]))
-				$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
+				$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"pathCost"=>$node[1]["pathCost"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
 			if(isset($node[2]))
-				$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
+				$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"pathCost"=>$node[2]["pathCost"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
 			
 			$content = array();
 			if(isset($node[0]))
@@ -167,7 +167,6 @@ class RecommandLearnNode
 				array_push($content, $info_2);
 			if(isset($node[2]))
 				array_push($content, $info_3);
-			//$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
 			
 			if(isset($content[0])) {
 				$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
@@ -278,6 +277,11 @@ class RecommandLearnNode
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			if($point == $row["TID"]) return true;
 			else return false;
+		}
+		
+		private function turnToRealPointNumber($point_number)
+		{
+			return ($point_number % 15) + 1;
 		}
 }
 ?>
