@@ -33,7 +33,7 @@ class RecommandLearnNode
 		 * @access private
 		 * @var int
 		 */
-		private const $alpha = 0.5; //調和參數
+		const ALPHA = 0.5; //調和參數
 		
 		/**
 		 * 滿額指標
@@ -176,12 +176,12 @@ class RecommandLearnNode
 					{
 						if($getNextNodeParameter["TID"] <= 15)
 						{
-							$pathCost = $this->alpha * $this->gamma * ($getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"]);
+							$pathCost = RecommandLearnNode::ALPHA * $this->gamma * ($getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"]);
 							$isEntity = 0;
 						}
 						else 
 						{
-							$pathCost = (1-$this->alpha) * $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+							$pathCost = (1-RecommandLearnNode::ALPHA) * $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
 							
 						}
 					}
