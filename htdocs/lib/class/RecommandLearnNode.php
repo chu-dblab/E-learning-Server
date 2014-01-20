@@ -22,6 +22,7 @@ class RecommandLearnNode
 		 * 資料庫PDO物件
 		 *
 		 * @access private
+		 * @var PDO Object
 		 */
 		private $conDB;
 		
@@ -30,14 +31,16 @@ class RecommandLearnNode
 		 *
 		 * 此欄位是常數值
 		 * @access private
+		 * @var int
 		 */
-		private $alpha = 0.5; //調和參數
+		private const $alpha = 0.5; //調和參數
 		
 		/**
 		 * 滿額指標
 		 *
 		 * 偵測目前這個學習點的人數是否已達上限，其值為true/false
 		 * @access private
+		 * @var Boolean
 		 */
 		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
 		
