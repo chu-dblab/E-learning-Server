@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+function create_dbconfig_txt_content($inputSQLHost, $inputSQLUser, $inputSQLPass, $inputSQLDBName, $inputSQLDBFormPrefix) {
+	$create_txt_content = &quot;&lt;?php\n&quot;;
+	$create_txt_content .= &quot;\$DB_SERV = '$inputSQLHost';\t//資料庫伺服器名稱\n&quot;;
+	$create_txt_content .= &quot;\$DB_USER = '$inputSQLUser';\t//資料庫使用者名稱\n&quot;;
+	$create_txt_content .= &quot;\$DB_PASS = '$inputSQLPass';\t//資料庫使用者密碼\n&quot;;
+	$create_txt_content .= &quot;\$DB_NAME = '$inputSQLDBName';\t//指定要使用哪個資料庫\n&quot;;
+	$create_txt_content .= &quot;\$FORM_PREFIX = '$inputSQLDBFormPrefix';\t//資料表的前綴字元&quot;;
+
+	return $create_txt_content;
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

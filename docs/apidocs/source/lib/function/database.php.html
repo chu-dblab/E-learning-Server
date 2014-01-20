@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * 資料庫函式庫
+ */
+// 前置設定
+require_once(DOCUMENT_ROOT.&quot;lib/class/Database.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;lib/function/write_txt.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;config/db_config.php&quot;); //取得連結資料庫連結變數
+require_once(DOCUMENT_ROOT.&quot;config/db_table_config.php&quot;);
+
+// ========================================================================
+
+/**
+ * 更改資料庫名稱
+ *
+ * @param string $newName 新名稱
+ * @return string
+ *          寫入結果
+ *          &lt;ul&gt;
+ *            &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;
+ *            &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;
+ *          &lt;/ul&gt;
+ * @version Version 1
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+*/
+function db_rename_db_name($newName) {
+	require_once(DOCUMENT_ROOT.&quot;lib/create_txt/create_db_config.php&quot;);
+	
+	//TODO 尚未顧慮資料庫權限問題
+	global $FORM_PREFIX, $DB_NAME;
+	global $FORM_USER, $FORM_USER_GROUP, $FORM_BELONG, $FORM_EDGE, $FORM_QUESTION, $FORM_RECOMMEND, $FORM_STUDY, $FORM_TARGET, $FORM_THEME;
+	
+	$db = new Database();
+	$db-&gt;exec(&quot;CREATE DATABASE `&quot;.$newName.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_USER.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_USER.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_USER_GROUP.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_USER_GROUP.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_BELONG.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_BELONG.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_EDGE.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_EDGE.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_QUESTION.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_QUESTION.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_RECOMMEND.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_RECOMMEND.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_STUDY.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_STUDY.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_TARGET.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_TARGET.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$DB_NAME.&quot;`.`&quot;.$FORM_PREFIX.$FORM_THEME.&quot;` TO `&quot;.$newName.&quot;`.`&quot;.$FORM_PREFIX.$FORM_THEME.&quot;`&quot;);
+	$db-&gt;exec(&quot;DROP DATABASE`&quot;.$DB_NAME.&quot;`&quot;);
+	
+	
+	//寫入新的設定檔
+	global $DB_SERV, $DB_USER, $DB_PASS;
+	$create_txt_content = create_dbconfig_txt_content($DB_SERV, $DB_USER, $DB_PASS, $newName, $FORM_PREFIX);
+	return write_txt($create_txt_content, DOCUMENT_ROOT.&quot;config/db_config.php&quot;);
+}
+// ------------------------------------------------------------------------
+
+/**
+ * 更改資料庫前綴字元
+ *
+ * @param string $newPrefix 新名稱
+ * @return string
+ *          寫入結果
+ *          &lt;ul&gt;
+ *            &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;
+ *            &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;
+ *          &lt;/ul&gt;
+ * 
+ * @version Version 1
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+*/
+function db_rename_prefix($newPrefix) {
+	require_once(DOCUMENT_ROOT.&quot;lib/create_txt/create_db_config.php&quot;);
+	
+	global $FORM_PREFIX;
+	global $FORM_USER, $FORM_USER_GROUP, $FORM_BELONG, $FORM_EDGE, $FORM_QUESTION, $FORM_RECOMMEND, $FORM_STUDY, $FORM_TARGET, $FORM_THEME;
+	
+	//更改所有資料表名稱的前綴字元
+	$db = new Database();
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_USER.&quot;` TO `&quot;.$newPrefix.$FORM_USER.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_USER_GROUP.&quot;` TO `&quot;.$newPrefix.$FORM_USER_GROUP.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_BELONG.&quot;` TO `&quot;.$newPrefix.$FORM_BELONG.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_EDGE.&quot;` TO `&quot;.$newPrefix.$FORM_EDGE.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_QUESTION.&quot;` TO `&quot;.$newPrefix.$FORM_QUESTION.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_RECOMMEND.&quot;` TO `&quot;.$newPrefix.$FORM_RECOMMEND.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_STUDY.&quot;` TO `&quot;.$newPrefix.$FORM_STUDY.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_TARGET.&quot;` TO `&quot;.$newPrefix.$FORM_TARGET.&quot;`&quot;);
+	$db-&gt;exec(&quot;RENAME TABLE `&quot;.$FORM_PREFIX.$FORM_THEME.&quot;` TO `&quot;.$newPrefix.$FORM_THEME.&quot;`&quot;);
+	
+	//寫入新的設定檔
+	global $DB_SERV, $DB_USER, $DB_PASS, $DB_NAME;
+	$create_txt_content = create_dbconfig_txt_content($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME, $newPrefix);
+	return write_txt($create_txt_content, DOCUMENT_ROOT.&quot;config/db_config.php&quot;);
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

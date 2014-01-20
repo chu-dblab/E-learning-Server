@@ -1,0 +1,2441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project title="API Documentation" version="2.1.0&#10;">
+  <partials/>
+  <file path="test.php" generated-path="test.html" hash="2dcbef046374af7064db0db45fa129b5" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="config.php" generated-path="config.html" hash="157cba1cf5c7a9436bcfc94e3365ed88" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJydkl9v0lAYh6/Lp2gWkzIyPfHCG8QpjrO4ZIApJcark8YdR5OuEOhuvIKFmTDB+W9LGCwpXpBGHTANyuJkH0beHvotLAWlY8uyeNPz5j3t8z7ndxq6n0llfBwKBHwcH+DZ96/sc9UyTlitZZeLbu+Bsq6ls3RUIx+3Rp8rGvULkfhSMopjEhHjcUlYWFOymrxB/YQsr6xiQuZvCUiYv+v7h56QzardKF+BTaxImMTCUSwsCKzYsEr5Qa8CdROOeuzsHXRew+ke+/aTdY9HdM7F8x51KLWvNyORfDgZMwV5I3AhrNNg5vF1dImIl7Eo4ogDxDdVKmc1RVs/l8CEbDf3baPg1HCYd9vu48n4gyA/3oB+2T78CK+qcLYNO8agtzOH5i548DMiSXHVGZ/S9UwQITX9TFZT6ZyOZg5o1b+MExxd84wG6zZZdw86leGPNvTfsg8mOyj+zm/9v+NFxckfc7nnVHPYLDjj4f0nZrYcPLRfWvsncLrrka21oFSxdt8M+jW70LON7eB4I7SpLroFz4dUZTEauRNCzuppJR6Fb8/2lsSnj6VpM4T+Us4f5waOuW+SaDyC+Xu8MGIJXvPBL8NJDeodqOQvy0PWKXFCkTdVnejKBn2R1ijJUd0vhHOKjCRZyVDFCYNDaGgeQevAqm65qD8Aal1h</source>
+  </file>
+  <file path="index.php" generated-path="index.html" hash="3504dc95d82400a9dda81436314a72c8" package="Default">
+    <docblock line="0">
+      <description>前置設定</description>
+      <long-description></long-description>
+    </docblock>
+    <source>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</source>
+  </file>
+  <file path="config/db_config.php" generated-path="config.db_config.html" hash="1b85ce05d0fc329978f604def375ae5c" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJyzsS/IKOBScXGKD3YNClOwVVDPyU9OzMnILy5Rt+bU13+xuf3ZtJlPd61+smfXszm9T2eueDqh9/mKjWAtoUA9IC2VpYl5aKr37n8+ZcWLhlYk1QGOwcFg1UV+iRkOFpbmZkamuHStb3u+aA9Yl5+jrytIV3JGqW5qTmpiEcSmZz3tT9fNerGsEaLn6eRVTxu64QZxqbj5B/nGBwS5unlGQHXHI9n1YuGK57Nannb2Pt+25ena6U9bmxW4AE08fkA=</source>
+  </file>
+  <file path="config/dev_config.php" generated-path="config.dev_config.html" hash="135b0ce64443ab3da5e303259eb80bb3" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJyzsS/IKOBScXENi3dxdQ91V7BVKCkqTbXmSi0qyi+KL0otyC8qycxL13CNd/Tx0bTmyszLjC9OLdFQSsksLshJrIwHKyxW0lEw1LQGAOjPGb4=</source>
+  </file>
+  <file path="config/db_config.sample.php" generated-path="config.db_config.sample.html" hash="b9cbcc00ab35934232f4ba7f03f16538" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJyzsS/IKOBScXGKD3YNClOwVVDPyU9OzMnILy5Rt+bU13+xuf3ZtJlPd61+smfXszm9T2eueDqh9/mKjWAtoUA9IC2lxalFaKr37n8+ZcWLhlYk1QGOwcEw1QWJKSnlKbj0rG97vmgPWI+fo68rSE9yRqluak5qYlEeWM+znvan62a9WNYI0fN08qqnDd1wg7hU3PyDfOMDglzdPCOguuOR7HqxcMXzWS1PO3ufb9vydO30p63NClwAQId+7g==</source>
+  </file>
+  <file path="config/db_table_config.php" generated-path="config.db_table_config.html" hash="624115ccce1d567b6e8107e6f162f4b8" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJyzsS/IKFDgUnHzD/KNDw12DVKwVVAqLU4tUrLm1Nd/snf/8ykrXjS0Pt2x+cXM+S82tz+bNvPFwhVI6uPdg/xDA0C60ovySwuI0ebk6uPv5w7SkpSak5+XrmQNlXB1cXcFCaempKfCBQNDXYNDPP39QBKFpanFJZn5eXDJIFdnf19fVz8XkGxRanJ+bm5qXgpcOjgk1CUSJFVcUppSCRcOcQxydw0BiZckFqWnliAkPFx9wS4oyUjNBToBADj8ZP8=</source>
+  </file>
+  <file path="login.php" generated-path="login.html" hash="9e4685cc24f4687591d44db7f93b27b4" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="config.sample.php" generated-path="config.sample.html" hash="e24025a29782ee0e3b46fcc035a54e04" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <constant namespace="" line="5" package="Default">
+      <name>DOCUMENT_ROOT</name>
+      <full_name>\\DOCUMENT_ROOT</full_name>
+      <value>dirname(__FILE__) . '/'</value>
+      <docblock line="5">
+        <description>網站根目錄</description>
+        <long-description></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="" line="10" package="Default">
+      <name>SITE_NAME</name>
+      <full_name>\\SITE_NAME</full_name>
+      <value>'無所不在學習導引系統'</value>
+      <docblock line="10">
+        <description>網站標題</description>
+        <long-description></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="" line="15" package="Default">
+      <name>SITE_SUBNAME</name>
+      <full_name>\\SITE_SUBNAME</full_name>
+      <value>''</value>
+      <docblock line="15">
+        <description>網站副標題</description>
+        <long-description></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="" line="20" package="Default">
+      <name>SITE_NAME_REFERRED</name>
+      <full_name>\\SITE_NAME_REFERRED</full_name>
+      <value>'E-learning'</value>
+      <docblock line="20">
+        <description>網站標題簡稱</description>
+        <long-description></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="" line="27" package="Default">
+      <name>SITE_URL</name>
+      <full_name>\\SITE_URL</full_name>
+      <value>'http://localhost/'</value>
+      <docblock line="27">
+        <description>網站首頁網址</description>
+        <long-description>Warning: 網址後面務必加上"/"</long-description>
+      </docblock>
+    </constant>
+    <constant namespace="" line="35" package="Default">
+      <name>SITE_URL_ROOT</name>
+      <full_name>\\SITE_URL_ROOT</full_name>
+      <value>'http://localhost/'</value>
+      <docblock line="35">
+        <description>本系統根網址</description>
+        <long-description>給絕對路徑用的。
+Warning: 網址後面務必加上"/"</long-description>
+      </docblock>
+    </constant>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJyVkV9v0lAYxq/hUzSLSRmZnnjhDdYZHGdxyQBTSoxXJ42r0qQrZHQ3XsHCTJjg/LclDJYUL0ijDpgGZXGyDyNvD/0WHkqV2rkLb9qT5837e57nHOFuIVcIh1A0Gg5xUY5+/Uw/NmzzjDa7Tq0y1VA4tKE8UXUlwifSK9kkTklETKclfmlD3dLlTSVCyOraOiZk8QaP+MXb4T84j2Y1nHYtgMqsSZik4knML/G00rarpfGwDi0LTob04g30X8L5Af3ynQ5Op8SQi+R8EaHau5qbyd7z0PNlfz13kfbb1Dq9KhYR8SoWRZxgEHxdU+QtXdWf/tXOozmdQ8csszMcl1zZ/TycLcS42QBGNef4PbxowMUu7Jnj4d4CWnC9uYB5VlxnljnDKMQQ0vKPZS2XLxooUMRufZrdzvSpAtZ00KGDA+jXJ996MHpN31n0qPKztPN/uS7H8l7939nm0SadMrOEtx+o1WVI6D23D8/gfN8XsNmFat3efzUeNZ3y0DF3Y7OBsK0tuweOEzR1OZm4JSD290mZ+/GbQW1FfPRAmosC8iiswjWccqckmU5g7g7HT/d5f9rxD5PdDrT6UC/97i0bCmHl5W3NIIa6qTzL6wopKkaEjxdVGUmyWlBUVjqE0MQ6ge6R3dhx138BG+1DWQ==</source>
+  </file>
+  <file path="lib/test.php" generated-path="lib.test.html" hash="1138e6af8bc3226355025ae082ac1d7d" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJyNkl9PgzAUxZ/Zp2iaPrA/ttmrA3wQNSa6JWZ7WszSdVe5kQG2gFmM390yBmOLRukL6T3nd3pv611lUdbT8F6ghlWaKHAp5yLGtcBExcUGuBXQ/uRUE86uF4830/nqaTabc1rJVSyNEQsD+k6nRdbYeo4Qf1kLa2r0/5SfZDiVC1SUkra0eoX8PnSp3GwxOXDPFGgiWdp2zW8IpUHmVlDSETXG0FGuC/gRpWGblntlg2Jtkfinp3pAk7t7yuAl1S5DfzwhDD1fpUWSu0djv9oeDvufPcfZ5zHk9JJQfpQsGT5z6q11QC3wayAOVJAq6pCINIS9wc4PWClj24NFEvvVVFvg1K66doZrm60neRY/7qSzPELTdJzAB2mfQvcW6shWehHYiYQos1jupnILbj2/atWpXjQObjGxd+UJ+0sn39CI1W0=</source>
+  </file>
+  <file path="lib/include.php" generated-path="lib.include.html" hash="4a0267b1f80e2a7fdc46e82dfdc75ee4" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJyzsS/IKFDg0tfS4lLQUuDS0udS8fRz9gl1cY0P8vcPiXfz9HFVsFVIySzKS8xN1YgHC8THa+op6evp6StZc+rrP1uw8/nsdS97Wp7Panmyt/f53nVcRamFpZlFqfH5ecmpGpgG6ikl5+elZabrAe1W0rRW0Nd/2j/t6b7pz7dter56Jtw8qGGoprn4O4f6uvqFgE2DGaSfkloWj93MlzOXvOxZ/7S/+dnUHUSZlITLoIbFz7dOeLG5/dm0mU93rYZy13URb25JYlJOKg7TIea+WLji6YbeZ+2dAI69ra8=</source>
+  </file>
+  <file path="lib/json.php" generated-path="lib.json.html" hash="2452a65639672c8c9371f4aa84eb0f26" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJwBOADH/zw/cGhwCi8qCgnlhafpg6jop6PmnpBKU09O5qC85byP55qE6LOH5paZ5L2/55SoCiAqLwo/PiAKKrUcRA==</source>
+  </file>
+  <file path="lib/web/AlertClass.php" generated-path="lib.web.AlertClass.html" hash="e51f51ce1e690ef61f937118fc76bf0c" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="10" package="Default">
+      <extends/>
+      <name>Alert</name>
+      <full_name>\Alert</full_name>
+      <docblock line="10">
+        <description>顯示通知訊息</description>
+        <long-description>需搭配Bootstrap 2.x 使用</long-description>
+        <tag name="author" line="10" description="CHU-TDAP"/>
+        <tag name="link" line="10" description="https://github.com/CHU-TDAP/" link="https://github.com/CHU-TDAP/"/>
+        <tag name="version" line="10" description="Version 1.0"/>
+      </docblock>
+      <property static="false" visibility="private" line="17" namespace="" package="Default">
+        <name>$message_type</name>
+        <default></default>
+        <docblock line="17">
+          <description>通知型態</description>
+          <long-description></long-description>
+          <tag name="access" line="17" description="private"/>
+          <tag name="var" line="17" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="23" namespace="" package="Default">
+        <name>$message_isBlock</name>
+        <default></default>
+        <docblock line="23">
+          <description>是否要顯示成一塊</description>
+          <long-description></long-description>
+          <tag name="access" line="23" description="private"/>
+          <tag name="var" line="23" description="" type="bool" variable="">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="29" namespace="" package="Default">
+        <name>$message_content</name>
+        <default></default>
+        <docblock line="29">
+          <description>通知內容</description>
+          <long-description></long-description>
+          <tag name="access" line="29" description="private"/>
+          <tag name="var" line="29" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="39" package="Default">
+        <name>__construct</name>
+        <full_name>\Alert::__construct()</full_name>
+        <docblock line="39">
+          <description>建構子</description>
+          <long-description></long-description>
+          <tag name="access" line="39" description="public"/>
+          <tag name="param" line="39" description="&lt;p&gt;通知型態（warning, error, success, info）(選填)&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="39" description="&lt;p&gt;是否要顯示成一塊(選填)&lt;/p&gt;&#10;" type="bool" variable="">
+            <type>bool</type>
+          </tag>
+          <tag name="param" line="39" description="&lt;p&gt;通知內容(選填)&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="64" package="Default">
+        <name>getInSession</name>
+        <full_name>\Alert::getInSession()</full_name>
+        <docblock line="64">
+          <description>從Session取得通知訊息</description>
+          <long-description></long-description>
+          <tag name="access" line="64" description="public"/>
+          <tag name="param" line="64" description="&lt;p&gt;通知session內的分類&lt;/p&gt;&#10;" type="string" variable="$message_category">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$message_category</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="93" package="Default">
+        <name>setInSession</name>
+        <full_name>\Alert::setInSession()</full_name>
+        <docblock line="93">
+          <description>通知訊息紀錄到Session</description>
+          <long-description></long-description>
+          <tag name="access" line="93" description="public"/>
+          <tag name="param" line="93" description="&lt;p&gt;通知session內的分類&lt;/p&gt;&#10;" type="string" variable="$message_category">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$message_category</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="114" package="Default">
+        <name>set</name>
+        <full_name>\Alert::set()</full_name>
+        <docblock line="114">
+          <description>設定通知訊息</description>
+          <long-description></long-description>
+          <tag name="access" line="114" description="public"/>
+          <tag name="param" line="114" description="&lt;p&gt;通知型態（warning, error, success, info）&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="114" description="&lt;p&gt;是否要顯示成一塊&lt;/p&gt;&#10;" type="bool" variable="">
+            <type>bool</type>
+          </tag>
+          <tag name="param" line="114" description="&lt;p&gt;通知內容&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$input_type</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0">
+          <name>$input_isBlock</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0">
+          <name>$input_content</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="126" package="Default">
+        <name>show</name>
+        <full_name>\Alert::show()</full_name>
+        <docblock line="126">
+          <description>輸出通知訊息</description>
+          <long-description></long-description>
+          <tag name="access" line="126" description="public"/>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="114" code="PPC:ERR-50015">Argument $input_type is missing from the Docblock of set()</error>
+      <error line="114" code="PPC:ERR-50015">Argument $input_isBlock is missing from the Docblock of set()</error>
+      <error line="114" code="PPC:ERR-50015">Argument $input_content is missing from the Docblock of set()</error>
+    </parse_markers>
+    <source>eJy1Vktv20YQPpO/YkMElmRIYh630HKbtAWaS1vATS5BIFA0LRGmSIFc2gkCAzJa1Q8liA912hiBAwN27KKwHaBFoDpu+me8lHTKX+i+xIcotWZg6yBBOzPfzs73zexOfdaoNUR5clIEk6C/c9zdPek3t7qv93oH6/7yMV6lhldNf+Ow33p2x7ahCx21AW4UH4Gzv//p/nxAHD5XPVizHfDF1/cK3395+zu6ZhrWPKhB2HBvyXLVgDWvUtTsujxwkqnXgu64hm2B+/z3evEaXpdFzVRdF9w2dQeCJ2KQIk0Obbf9VpttrGk69ms4xoIKdYaoOgAnaVhVCsRN4GodO6pVvQwfN3RlAOj/eow23vTeLLPD+6sbZ50m2ln/L/CKbZujoQ33jmlr88pQuq19dPTXp6ar2RbULagENUDvT/z9Njrc4OwEoF7FNDS60lAdtc5RYzX7eLq6qDoWXs4D3XFsJw9cj4bngWHN2R9P17L95Q7a+T0XASIHHlupEf7xjenpAy98xDnP0iDhukwOh509DWZzT0RBlnvtPdR5h1p7N1GzjZ7/4G92RMGYy5KQsuXVy6pTdbM5UCqBmzmsCwHHoLfP/JW13tE6dRauEhdQAjSkqkMeohCTYTU8SAWAHajjg2sPIxbOX2C8HjVyIgLjDWqkKfQODtHRVoxtHAZrhluYdnWYjWycB/G9gv8cniS6JAq66er0fBEUyzPNPAi/mesSFoaMC3IxH6YyLLIP2zNYFZgl9PwF+vBLbCoQhyHVDXMfyheLuWo7j7kaXA7a2u9u/YhWf+rvbMckgQm7a/GdswkQJhK0+Rq1NzkSkQfIXjFcWufyzFczM3e//SaXA9xedqHqQMo/F1iYgv9qjZ/rjxX/xUuqNDCE9EBSyQwqS8VENkWJMio9zGGeJibSRXL6Py2YawUHA1EI+2CFH40dp/tns/8U1/itf7jbXfvt7P07VvWwU5i0onORiDvNyZUkTKSHUlZiBFik51JWhrURI93vtPovd2PFEQXPSs+zkjIsJDltZMiwgjscN3jhgj6DBo82dKAU3niX2eDuJTd4cJYgPBXFRGnJtlDOjRIwngQKHgfnxQo0kMQKHwWXM/6jF9r5h37Kl4Z4vgfGuG3YPTukrVRXLRbbmBkYgigJn8iAi8EnPSPTK7axwlm7sJ7mpJ120MrJ/5IWLVjNXqQvL3zxjagEsQi6VrOBNDVrLAD6Ji9lqGbBnDqrYyYlMrXdRQNqtbEQgqbi14zE9SDdIkscl4YLQsXR1XkldKWKiTkCumuBGUYHcX2NChuYRgcSPY6KoutDIUvszZcsGFcBu43jOBU6EgbRzJSZlvjzkRe44kGIKSFFK2XYn8yg4pppu3oGzKpQLcwabt0IaMhMT0ADp6BMySyGwVLMcTMjuquMeR1kQt6Sgrj0L0TYAYs=</source>
+  </file>
+  <file path="lib/web/web_user_login.php" generated-path="lib.web.web_user_login.html" hash="582fb4633bcec0eaf5d99476549bd4a3" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="24" package="Default">
+      <name>web_userLogin</name>
+      <full_name>\web_userLogin()</full_name>
+      <docblock line="24">
+        <description>登入使用者帳號</description>
+        <long-description></long-description>
+        <tag name="access" line="24" description="public"/>
+        <tag name="param" line="24" description="&lt;p&gt;帳號&lt;/p&gt;&#10;" type="string" variable="$userid">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="24" description="&lt;p&gt;密碼&lt;/p&gt;&#10;" type="string" variable="$userpasswd">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="24" description="使用者登入碼&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;NoActiveErr&quot;: 帳號未啟用&lt;/li&gt;&#10;           &lt;li&gt;&quot;PasswdErr&quot;: 密碼錯誤&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoFound&quot;: 找不到存在的使用者&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 資料庫寫入錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="24" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="24" description="Version 1"/>
+      </docblock>
+      <argument line="0">
+        <name>$userid</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$userpasswd</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="45" package="Default">
+      <name>web_userLogout</name>
+      <full_name>\web_userLogout()</full_name>
+      <docblock line="45">
+        <description>登出使用者帳號</description>
+        <long-description></long-description>
+        <tag name="access" line="45" description="public"/>
+        <tag name="return" line="45" description="是否成功登出" type="bool">
+          <type>bool</type>
+        </tag>
+        <tag name="author" line="45" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="45" description="Version 1"/>
+      </docblock>
+    </function>
+    <function namespace="" line="77" package="Default">
+      <name>web_isLogged</name>
+      <full_name>\web_isLogged()</full_name>
+      <docblock line="77">
+        <description>取得目前登入的使用者物件</description>
+        <long-description></long-description>
+        <tag name="access" line="77" description="public"/>
+        <tag name="return" line="77" description="使用者物件" type="object">
+          <type>object</type>
+        </tag>
+        <tag name="author" line="77" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="77" description="Version 1"/>
+      </docblock>
+    </function>
+    <function namespace="" line="105" package="Default">
+      <name>web_getLoggedUser</name>
+      <full_name>\web_getLoggedUser()</full_name>
+      <docblock line="105">
+        <description>取得目前登入的使用者物件</description>
+        <long-description></long-description>
+        <tag name="access" line="105" description="public"/>
+        <tag name="return" line="105" description="使用者物件" type="object">
+          <type>object</type>
+        </tag>
+        <tag name="author" line="105" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="105" description="Version 1"/>
+      </docblock>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJzdle1LU1Ecx1/f+1ecLiO2NXeVoCKnWTpjpJvYFkHE2MNx3rres+5Dw0IQaqmRKJHmTBIiZSq6QhDRZv+MZ1uv+hc692F3d253FtmLvOzV7/n8vp9z5ruRHk3TLAvwzGy5uHNcXCmtbdMifKJwIowiIQGdfaHeyKA/GI4Oh0JhL8NzcXZEERIyhwRWkaDoJRUYV+epSQk+Jkns4HjEkkOzbjcN3KCcO8TZtePi9/K7fGUyi/d3K7lV4lB9PbFEAkoSSCtxnktolnRMjI0BSRY5IQUc6hBcEphJzfxp0jtDYgqvyp++aTEilBVRqAapJvMz59DHMjLMz6fw3XUGYuK5biaIbpKtPIV+UWSuG+OUVjbxwiqp5mNJSLOsIW0yI0cb78ebQmXzs21CEPUjRUiS8NLM0fH+LJ7+greX8Eq+vPzSnNw2u++W3qqyO1VazOGDLVzYIme06+ljjcP2xBR5FIkAZ1/g7NufxY/AN67EhGsdV3vG0DM540ViSg+UOAIAuAdFiRACOlQV3SxdRQZkYDyqKjKAUpzgNMTzWFVygec0leJRPMYDR28odCfgvxsdGvb3B+57aoaB0O1AMBoODPpDkXAnTTl4tWAvSkLQBdRiUd6+A4mnKZYtL+yd0Lo0PY9fr5JNVja+0hQ34gS1uhe66iQGFy/WO2tKNrj0rTeYq1K6yIHJOJX8Nt5ZTiD0mIMSkbU22+RcZb2Ic3kSJkFZj3Ce2I2XMdeqlmc8ll4eIHNj0OkCl2wW6AEMq15IaoKmjJtRy+6kJ9Qnou2MvrpbP3XQeOuBzbU3BosjxIPSUgHPrxtyaXX+jlIbRJEiO1vwqHGkUsJJRBenI6q7H5wizUMX0IpSDnkURqwuwu5vFyHNKUsNkirADNAfWGdDZZ15HWkRSgovq72MqLZuvnpWfbA/wYxhqni1Xb7S3m6ipE1XpUkWFajaCF8U5CWodzGcIzFiMbzkZ/pPuCcIhyqIXWf0mSDiuUV89L78YUf9F9TffMtbWp7ZOD7cO51LFH8EEzJoknd2WHIS2XwKJs8RlCaVJouWQ7rqODEhAi0RIhUtEU0g+heP2f/DUArK+n41TVqDdC4xqobYoCQoPN+KJMNPQPoFK+jRSA==</source>
+  </file>
+  <file path="lib/function/write_txt.php" generated-path="lib.function.write_txt.html" hash="8b97bdfd58c40a7d0e200c9df37031ef" package="Default">
+    <docblock line="0">
+      <description>寫入檔案函式庫</description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="21" package="Default">
+      <name>write_txt</name>
+      <full_name>\write_txt()</full_name>
+      <docblock line="21">
+        <description>寫入txt檔案</description>
+        <long-description></long-description>
+        <tag name="param" line="21" description="&lt;p&gt;檔案內文&lt;/p&gt;&#10;" type="string" variable="$create_txt_content">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="21" description="&lt;p&gt;路徑&lt;/p&gt;&#10;" type="string" variable="$writeURL">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="21" description="寫入結果&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;&#10;           &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="since" line="21" description="Version 1"/>
+        <tag name="author" line="21" description="元兒～" link="mailto:yuan817@moztw.org"/>
+      </docblock>
+      <argument line="0">
+        <name>$create_txt_content</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$writeURL</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <source>eJytkTFPwkAcxWf6KS4NA63EhkmDBZmcnEx0JU1zhUvKtbm7BpWwqA3EmIhGWTQYBmMiAwNREwU/jVfc+ApeaYUQO3rje7/3/9+907fdqitpqioBFfDhgPuPwfNN0G/z1oSPL/n7QFI1SdI0UPins7qMHbJon5BCteQaxKgBygjCFZA2CTQYLAuqbDqYQcxAfD3/Kei2EhJ1ghjc39sF329D/nk1JwhkHsExEiqLE11i+tIJevcrhu7ZxRVBSDYqyjsII1qV8yBod/j5Q5TXNWEl0Nx//fro5sH0rB+MbiN2Nr7gdz1+Mope8Deqa/HqEkXYhOAAEoocDHJzzfBY1SGA+6fcv55NekA/8gy8mdso1ZxjVl93SKUY/pjlYZOFsXkfYYGZhDKzy74U0JBSyMqkLbdgOS7EmYWVletrsqIIP2W5HqMhk02YpmwJIu76tyghNaUUtClsLM2EbMRZpu1QGM4Xs5o/Cwvtgg==</source>
+  </file>
+  <file path="lib/function/user.php" generated-path="lib.function.user.html" hash="3959f604464735363869603e00d59144" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="24" package="Default">
+      <name>user_ishave</name>
+      <full_name>\user_ishave()</full_name>
+      <docblock line="24">
+        <description>是否已有這個使用者</description>
+        <long-description></long-description>
+        <tag name="param" line="24" description="&lt;p&gt;帳號&lt;/p&gt;&#10;" type="string" variable="$username">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="24" description="是否已有這個使用者" type="bool">
+          <type>bool</type>
+        </tag>
+        <tag name="version" line="24" description="Version 3"/>
+      </docblock>
+      <argument line="0">
+        <name>$username</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="71" package="Default">
+      <name>user_create</name>
+      <full_name>\user_create()</full_name>
+      <docblock line="71">
+        <description>建立使用者帳號</description>
+        <long-description></long-description>
+        <tag name="param" line="71" description="&lt;p&gt;帳號&lt;/p&gt;&#10;" type="string" variable="$username">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="71" description="&lt;p&gt;密碼&lt;/p&gt;&#10;" type="string" variable="$passwd">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="71" description="&lt;p&gt;群組&lt;/p&gt;&#10;" type="string" variable="$group">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="71" description="&lt;p&gt;是否啟用&lt;/p&gt;&#10;" type="string" variable="$isActive">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="71" description="&lt;p&gt;姓名&lt;/p&gt;&#10;" type="string" variable="$name">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="71" description="&lt;p&gt;暱稱&lt;/p&gt;&#10;" type="string" variable="$nickname">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="71" description="&lt;p&gt;e-mail&lt;/p&gt;&#10;" type="string" variable="$email">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="71" description="是否有成功建立&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功建立&lt;/li&gt;&#10;           &lt;li&gt;&quot;UsernameCreatedErr&quot;: 已有這個帳號&lt;/li&gt;&#10;           &lt;li&gt;&quot;RepPasswdErr&quot;: 確認密碼錯誤&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoGroupErr&quot;: 沒有指定的群組&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 資料庫錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="71" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="version" line="71" description="Version 3"/>
+      </docblock>
+    </function>
+    <function namespace="" line="162" package="Default">
+      <name>user_login</name>
+      <full_name>\user_login()</full_name>
+      <docblock line="162">
+        <description>登入使用者帳號</description>
+        <long-description></long-description>
+        <tag name="param" line="162" description="&lt;p&gt;帳號&lt;/p&gt;&#10;" type="string" variable="$userid">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="162" description="&lt;p&gt;密碼&lt;/p&gt;&#10;" type="string" variable="$userpasswd">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="162" description="使用者登入碼&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;NoActiveErr&quot;: 帳號未啟用&lt;/li&gt;&#10;           &lt;li&gt;&quot;PasswdErr&quot;: 密碼錯誤&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoFound&quot;: 找不到存在的使用者&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 資料庫寫入錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="162" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="version" line="162" description="Version 3"/>
+      </docblock>
+      <argument line="0">
+        <name>$userid</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$userpasswd</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="232" package="Default">
+      <name>user_isLoginEnable</name>
+      <full_name>\user_isLoginEnable()</full_name>
+      <docblock line="232">
+        <description>此帳號是否可登入</description>
+        <long-description></long-description>
+        <tag name="param" line="232" description="&lt;p&gt;帳號&lt;/p&gt;&#10;" type="string" variable="$userid">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="232" description="&lt;p&gt;密碼&lt;/p&gt;&#10;" type="string" variable="$userpasswd">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="232" description="&lt;ul&gt;&#10;           &lt;li&gt;&quot;OK&quot;: 可登入&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoActiveErr&quot;: 帳號未啟用&lt;/li&gt;&#10;           &lt;li&gt;&quot;PasswdErr&quot;: 密碼錯誤&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoFound&quot;: 找不到存在的使用者&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="232" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="version" line="232" description="Version 1"/>
+      </docblock>
+      <argument line="0">
+        <name>$userid</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$userpasswd</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="lib/function/database.php" generated-path="lib.function.database.html" hash="5d2926891f8e0a5c4bad4380702000ed" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="26" package="Default">
+      <name>db_rename_db_name</name>
+      <full_name>\db_rename_db_name()</full_name>
+      <docblock line="26">
+        <description>更改資料庫名稱</description>
+        <long-description></long-description>
+        <tag name="param" line="26" description="&lt;p&gt;新名稱&lt;/p&gt;&#10;" type="string" variable="$newName">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="26" description="寫入結果&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;&#10;           &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="version" line="26" description="Version 1"/>
+        <tag name="author" line="26" description="元兒～" link="mailto:yuan817@moztw.org"/>
+      </docblock>
+      <argument line="0">
+        <name>$newName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="68" package="Default">
+      <name>db_rename_prefix</name>
+      <full_name>\db_rename_prefix()</full_name>
+      <docblock line="68">
+        <description>更改資料庫前綴字元</description>
+        <long-description></long-description>
+        <tag name="param" line="68" description="&lt;p&gt;新名稱&lt;/p&gt;&#10;" type="string" variable="$newPrefix">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="68" description="寫入結果&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;&#10;           &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="version" line="68" description="Version 1"/>
+        <tag name="author" line="68" description="元兒～" link="mailto:yuan817@moztw.org"/>
+      </docblock>
+      <argument line="0">
+        <name>$newPrefix</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <markers>
+      <todo line="29">尚未顧慮資料庫權限問題</todo>
+    </markers>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJzdV1tPGkEUfmZ/xYTwgAbZ+NRG0YruSk2Upcti2idccNVNcKHLUm2bJqaVWI1G0yjGS2xI02i0Whut6UX7azqLPvkXOsteYPE2G2jSdF+Y2znfzJkz5/sIPMiMZQiyuZkAzeD8aEYtrMEfe3DmDJ4uogYaJQmSBHB2oXR2cL6zDw/WCVl4mhNlIZ6WkoKXYnpiA3SYi7MMw/ndKTFBJlN8NktSvMIn+KzgRwDupvY7rUZyUlIR0xI5IYuKEFcmFRzLZFoaEUfJ4URcbxk2gCThYgH+Wr2Y+lD6umQdzOgezKkr3zD9olOkBLt3QgtJR4M+woy+unGsLn+v3MHSQmnnC5rQ5royvMyPg6wii9Io8EjCRJgfF4BaOLSWgS5ZUHKyZCzSRqwPft6D+Y/o5OrWpm0ikEt12gbQUErsdPeKkpgdc7cB9e0SnHuv2wdINHXNapg/+f2z0AZK00X1aEVfe3k6Dze24OsjmN9WCzNXTQOkAd31TJCz6N7BoPHbWh7lc8pYWgYw/wbm312ebYHA8xwv3W+91zWefqFM+NPyaCeBktNMG4CuShYkFJU4amm/XjNMTeAl4bozaWWB19PObNbmFOEiXCTJMRQD4OG6url7UdxW8wfWhamf5i7WluDK4kVxnnCNptIJPgU8vQw7EI+wdG/fYx/wUN3xcHCAbq+Zj0Vp1lfVjodYJhYxR7rpfiYcMns0FaLN9qMYHeX6mLDZZ+keZgAdjDIHolyMemJ2uCAbojmr95Aub4RweYYToAOgYAHzzXq106Lhlk5hUkh63T0sHeRoQAW5YHcwSoMht98Mrt895K5ZzdLaGQFa268vNU6Nlvq1blVI/JUzo1nAMTWub1/fGGA92E7hLav6N6Hfr5MNWBb1g2vp5ATaWF8/sJm7TsCrbOrfgPVYnOyg2qj+LZSfpxN406B+aL0YOMG2LBoArtUeR9iGQS00xTIRqyzZoY2KrdVsnZIQWZbWp3UNo+4uV0owskEPelAvz0YpRq1IMBrV0CrMoPGBIkgKqpYWR+gUUT3rvc2hzyJvn40btM0a/G3pH+810D6AJ4CIV5pGaWnQd6NGQbLw5BjuryKavlGpRGRhRJz8L7TK39ErmXKAvJVYNVCwXCND/i3xQZJ6TqmzU+rmrJ5Z58UdPVXQe7WlGIZUuVKMcNSGHnaH4gJfTVxxjy8e8NSCDQBfHOCoAZtrXPLHZXubcyfkjs3mNgRH5I3F1jb32OSMx8Y23/jki8W2dt/V5FofX9r+4jScOQ3XvipaaTxv/gHHOWUT</source>
+  </file>
+  <file path="lib/function/site_admin.php" generated-path="lib.function.site_admin.html" hash="60118439aef1dda403ede9f2f6ad5c5c" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="26" package="Default">
+      <name>rename_site_title</name>
+      <full_name>\rename_site_title()</full_name>
+      <docblock line="26">
+        <description>更改網站名稱</description>
+        <long-description></long-description>
+        <tag name="param" line="26" description="&lt;p&gt;網站名稱&lt;/p&gt;&#10;" type="string" variable="$fullName">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="26" description="&lt;p&gt;網站副標題&lt;/p&gt;&#10;" type="string" variable="$subName">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="26" description="&lt;p&gt;網站簡稱&lt;/p&gt;&#10;" type="string" variable="$referredName">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="26" description="寫入結果&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;&#10;           &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="version" line="26" description="Version 1"/>
+        <tag name="author" line="26" description="元兒～" link="mailto:yuan817@moztw.org"/>
+      </docblock>
+      <argument line="0">
+        <name>$fullName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$subName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$referredName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="54" package="Default">
+      <name>change_default_encryptMode</name>
+      <full_name>\change_default_encryptMode()</full_name>
+      <docblock line="54">
+        <description>更改預設加密</description>
+        <long-description></long-description>
+        <tag name="param" line="54" description="&lt;p&gt;加密方式&lt;/p&gt;&#10;" type="string" variable="$input_encryptMode">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="54" description="寫入結果&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;&#10;           &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="version" line="54" description="Version 1"/>
+        <tag name="author" line="54" description="元兒～" link="mailto:yuan817@moztw.org"/>
+      </docblock>
+      <argument line="0">
+        <name>$input_encryptMode</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="79" package="Default">
+      <name>change_cookies_config</name>
+      <full_name>\change_cookies_config()</full_name>
+      <docblock line="79">
+        <description>更改Cookies存取</description>
+        <long-description></long-description>
+        <tag name="param" line="79" description="&lt;p&gt;前綴字元&lt;/p&gt;&#10;" type="string" variable="$set_cookies_prefix">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="79" description="&lt;p&gt;使用者登入期限(秒)&lt;/p&gt;&#10;" type="int" variable="$set_cookies_login_timeout">
+          <type>int</type>
+        </tag>
+        <tag name="return" line="79" description="寫入結果&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;&#10;           &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="version" line="79" description="Version 1"/>
+        <tag name="author" line="79" description="元兒～" link="mailto:yuan817@moztw.org"/>
+      </docblock>
+      <argument line="0">
+        <name>$set_cookies_prefix</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$set_cookies_login_timeout</name>
+        <default></default>
+        <type>int</type>
+      </argument>
+    </function>
+    <markers>
+      <todo line="55">判斷輸入的參數是否有在支援範圍內</todo>
+      <todo line="80">加入防呆</todo>
+    </markers>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJztVltPGkEUfmZ/xYT4gIa68amNRWsra0MqrEFs2qfNigNuuu7SZbdqGxOj4i0aqVG8EZWkKi1R6qVWq7Z/xpmFJ/9CZ1lQUGIvsUlv88Jw5pyzZ77zfWfXcS/UGaLoqioKVAF9f0dPLehbCT06jEZO0PEU+pSiqmiKpgEam9RPtjLJTbS1SCnwuSYokJMlP7Q52cY2N+PxcV6W9VVb/bIUEILVJK218i6gaTQVQ5/nzNSZrXE8e3BtuCi00wFN8quCLNHdiqBCTu1R8+koo5K6G1pU4dp4aQ/PHJoVouikntwmVuOgIcQrfBcIq4ogBUFFQBNFD98FwSXXy35hrb3YbSyNkwvZxEQZTwUGoKLAjiJ3/X2ikFWBqqZIBWfDdL5QOoUia/qHKF6Olxw4NLG+xEBMolBvbRIkIdxprQV4NIrGV8x4B02OynijyP7pUawW6EMJvDtr+p4dT6ClZTSwiyIbODZyNdRB5x/d8AIqYdI98Dj/W5Oz8praKSsARQZRZPrsZBk4ejVeulNzu6FLfql2V8tKsN7gWqH5QIESgYUL5yggqCK0nXfAfg6yvRTESvCKsnyLXn4F8iatCtsSzlKWoCi38yKoYDyN3qctPs7NOhnyoEaWfeRiWrkWL9PkelJkaGYfujycz+Vm2DYfiacshPbrA6Q3eGcaJVLFndUXhzJvtymLELCVtr+uDlitlaR8yyX7BfFI6j4zu0nZbP+OKUj8boayVFzcy7iQCiWVBJfcsPjsO9C0g1aXj+HavM0XuxyO9p/ExgA3z+pzadvK1G0H1w0Vqs8YA7duaF0aA9nVqIHp+CpKD5cfA4IU0lQOSn6lN6S65Q4ITG8cOyQT879yJeDv5KUg5DpggNfEEqhsV9EzKE/TPtbJAjT6Bsc+Zo4PDIQWh9DUIHlb4Pk0iq7j+BiKJ/FMGk/t6ekhFJ8kt/lNpH4TYszJy3PfzeSV1tr2oOifseVIKYzXyzivU+UVdP8maTbK8jMBhtHmPPmmKK/NMDQKzblxITLKhJ7ch8v+HtqcI/wtihBIQ0rcRTkoSORF0wVlTQWnJ1/0mWSmP6IvHBE24vhKdiFq0zemK68K/F/VdwE5kwG2MuDbr4G4WPdkfkbWsvM76PXwL9L0nyHVH0TwhiT7FSjRaZM=</source>
+  </file>
+  <file path="lib/function/password.php" generated-path="lib.function.password.html" hash="2ef7d0959c71f9f4bae43ecb1bb1481e" package="Default">
+    <docblock line="0">
+      <description>密碼處理函式庫</description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="37" package="Default">
+      <name>generatorText</name>
+      <full_name>\generatorText()</full_name>
+      <docblock line="37">
+        <description>取得亂數字串</description>
+        <long-description>The MIT License
+
+Copyright (c) 2007 &lt;Tsung-Hao&gt;
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</long-description>
+        <tag name="author" line="37" description=": tsung http://plog.longwin.com.tw"/>
+        <tag name="desc" line="37" description=": http://blog.longwin.com.tw/2007/11/php_snap_image_block_2007/"/>
+        <tag name="param" line="37" description="&lt;p&gt;字串長度(幾個字)&lt;/p&gt;&#10;" type="int" variable="$password_len">
+          <type>int</type>
+        </tag>
+      </docblock>
+      <argument line="0">
+        <name>$password_len</name>
+        <default></default>
+        <type>int</type>
+      </argument>
+    </function>
+    <function namespace="" line="73" package="Default">
+      <name>encryptText</name>
+      <full_name>\encryptText()</full_name>
+      <docblock line="73">
+        <description>將文字加密</description>
+        <long-description></long-description>
+        <tag name="param" line="73" description="&lt;p&gt;原文內容&lt;/p&gt;&#10;" type="string" variable="$text">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="73" description="&lt;p&gt;加密方式&#10;        目前提供的有:&lt;/p&gt;&#10;&#10;&lt;ul&gt;&#10;          &lt;li&gt;MD5&lt;/li&gt;&#10;          &lt;li&gt;SHA1&lt;/li&gt;&#10;          &lt;li&gt;CRYPT&lt;/li&gt;&#10;          &lt;li&gt;(無加密，留空即可)&lt;/li&gt;&#10;        &lt;/ul&gt;&#10;" type="string" variable="$mode">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="73" description="加密後內容" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="since" line="73" description="Version 1"/>
+        <tag name="author" line="73" description="元兒～" link="mailto:yuan817@moztw.org"/>
+      </docblock>
+    </function>
+    <source>eJy1Vm1v21QU/tz8ikPptKTzkmYwNpq21E3cxiyxg+O0K2NEjnOTeHNsY18v66ZKCPaiwUYnpG4aQ7x9ACHEhuADa7X118wtfNpf4NzrpG26DQlpWJace16ec55z7j03U+94HS+RGR9PwDhED6/t/PD4r3vrO7evRdefRI/Xos1fUJFJZDJw9BU9id1oa3eirbtPNz/ZXn8U/Xr36aPfUcoUeodAWdahZJnECUhfmne9Fd9qdygkzRQcm5g4AVN6EDrto0XDnekbVYjftYLAch2wAugQnzRWoO0bDiVNAVo+IeC2wOwYfpsIQF0wnBXwiB+gg9ughuVYThsMMDEYw0Nj2kGkwG3RnuETtG+CEQSuaRkICU3XDLvEoQZlIVuWTQJIUsx/tNr3GE3xOE1i2AzQcoCpB1roWbTjhhR8ElDfMhmMgEamHTZZJgO1bXWtfhDmzusQMDyEDgOkwhIWoOs2rRb7Es7PCxu2FXQEaFoMvRFSFAZMyAsrMDYZ14eA2Dw5BLGQACe9lyM3Y4E8VlzaL1fAJL2O2x3mY/GsWqHvYGDC3Zoulo/HPUdMyiTMo+XatttjHE3XaVqMWjC5bwMYDfcC4bTipjsuxazjVFhHvL1O91VBx7BtaJB++TC45TA0Jh0w81kaAcX9YBk2eK7P4x5knB7kUZSgqs7rS6ImgVyFiqYuygWpAKNiFdejAizJelGt6YAWmqjoy6DOg6gswylZKQggna5oUrUKqsbQ5HKlJEsolpV8qVaQlQWYQ1dFxZ0u435HXF3lMftoslRleGVJyxdxKc7JJVlfFhjWvKwrDHle1UCEiqjpcr5WEjWo1LSKWpUwiQIiK7Iyr2EgqSwpehoDowykRVxAtSiWSiwagxNrSENjiUJerSxr8kJRh6JaKkgonJMwP3GuJMXRkF2+JMplAQpiWVyQuJeKQJwks4zThKWixKQsqohvXpdVhfHJq4qu4VJAupq+670kVyUBRE2ussrMa2qZM2XVRSeV46CrIsVArPLDDUITtq5VpV1MKEhiCeGwW8rBhg6aPGuEeMb8SaBsmECHUm8yk/Fst522XaeNWzRtut007XHjJgnMyYFR43mjDBtMmWw2g2O1HjiGV7e6RpvU0dQ8X+dKjuMZvtHFDUphzMN50nP9Zt0mDsSD8O/1P6PNH5PRxlb08ecoSsW5ZhKt0OEzAtrEIb5BXV8nF2lyCCOVuJwAfHaFMA2HD+cSXIiD3CdddrRcYULICnZsOjAzGmaTtNod69z5ruN95Ac0vNC7uHLptdnXD304nkwdFefyBWl+oSi/e6pUVirvaVW9trh0evn93OXVM2ePvfHm8bdOnHwbo3FYxmgacPbgjyQPkurn0cKjmByzUDuRA/xODdeByY4cSUHMZJhNejrO9wyO9WYyBYd4nLNxyNUY3icUR9CeUy6BCuReq+KOnWS/iNlxD1QxBWkY/cAZzf0/191v17fvXMdmRp99hxftYPfFG4GNZ9x8YxTzgOiLb5nl1Z+iBxsvsMEhTyAG2b6zgZc0sxk8O/cfRDduba/dfrp1f+erK9tf35jcr54K7Zn9a5TY1ky5cHwqg9/nNTglsi9R5bXliv4SXXLnyvdxhs8e39xZv7fz82Z0649o7WHqOYepTD+l2X7P+jRj92jr5l4duFWA053AIt5B7Bhk951giK5+Gl398tmTb2BqJTSck9kTs133Eu2lXb89M3x8iGP6Kx6N2345MWK1kkxXd8JuHf8bBLgXpqfhGFONjDEBblRu0Ca0b5BjKt4v3I9MdGbiLJfx/gxkWS7DN8Cr3OwkuZbDjphGgP8TsPajk2w50uffbR5PclweYWSk4RPjfG7PgbVk2AMvvuy/uvBWDftw+i9xwglghDYdsueWBwxXE+wlNoZ4cf2ynGjbdht42Y5JCs+jXlYLUu6/1zWxm8v+5nFLYRicQazigX+Vp/gfEV9pBA==</source>
+  </file>
+  <file path="lib/function/user_admin.php" generated-path="lib.function.user_admin.html" hash="6f7c862b3b7bd68eb6832f0362cab9fd" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="21" package="Default">
+      <name>user_getList</name>
+      <full_name>\user_getList()</full_name>
+      <docblock line="21">
+        <description>取得使用者名單</description>
+        <long-description></long-description>
+        <tag name="return" line="21" description="索引: 使用者ID; 值: 真實名字: 暱稱" type="array">
+          <type>array</type>
+        </tag>
+        <tag name="author" line="21" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="21" description="Version 1"/>
+      </docblock>
+    </function>
+    <function namespace="" line="47" package="Default">
+      <name>user_queryAll</name>
+      <full_name>\user_queryAll()</full_name>
+      <docblock line="47">
+        <description>查詢使用者帳號</description>
+        <long-description></long-description>
+        <tag name="return" line="47" description="mysql_query的查詢結果" type="array">
+          <type>array</type>
+        </tag>
+        <tag name="version" line="47" description="Version 3"/>
+      </docblock>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJzNVF1LG0EUfd75FUMQTEKTRfrQYtRqTZRANBBjX0TWSXZMlm524+xuQ1qEgKZWSlFKqyhBqf2ylNqKFUpR+2c62fjUv9CZzSYbUqVSfOi+7M7OPffec+bcGbhTzBeBGAwCGIQ/T3/YL/YblSr9dtTY2rUPXtnrj+nKKT1Zo98/gqAIAMELlkKwpGtZ7I8mR6cnYpNpKZVMpsM+VcmI85aWNRVdE4vIMEo6kcMsvy8QuTrQMjD5J9A40a3iVZBZXZtXcqKckUyUUbHUXLeQQBTh4DU9oKUsXdugZ5uevuvP6MYB2+B7wwSbFtEgIgSVof11j5687PfOIh6NQFo56Yd2bZd+fsehnzb7YX370N4/5HgnB7LMvE4grS7R6vNfpztwoGwh7XbfreGC/tAshXWSG3ICDYUpAu9hYjDdYB/7J4KWjJDLKOWwmVAM0x94BIScqmeQCnvGkqkJaXoqlooAAQiieF55bR+vN45W6htb3BpCj5yBg1DDJRhFTFVkYH/AjW1yr69W6rXVNiuGINiwVFMyFlSGZPjQ0IKFSdkPfVOxRGw0Deem49G5G+yVwkiVJlEBO6tJJXtf4ws4lkpOQF/YwTpH6fcaDUBe32nArTRDq+/Pl/btszf28TKTkck3yyq3W7JrT1mf9MkXe3u5MwgIpbzCcvMeJTOvGCPOQbGePQahoXlsZvN+VhUy2YQe3TKLlikR1jlvvMnQQ8/0eqR6ZyMdCI2xuwTRIu4CXFZ/hMWjvbOQM+tuIuwLcbW6CrFci0BwPegmjYBFPgaha3raY1Dffdv4sNd1zVw4BoUyU1VyDMGOo4ljjqvv1NqWf9D0sNDy8s0LvOwkGFHV/8fM466nE3ouh2V298hNVyeQYUpxTUorrs3vWooqe8uYxg0u828WlcCIdMReMiAOroAUdQ4yw/x9Wrpt0OFsR0Nui9+WgkKT</source>
+  </file>
+  <file path="lib/function/userGroup.php" generated-path="lib.function.userGroup.html" hash="13e4c7f34129bde0702c15a10e84e95b" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="29" package="Default">
+      <name>userGroup_create</name>
+      <full_name>\userGroup_create()</full_name>
+      <docblock line="29">
+        <description>建立使用者群組</description>
+        <long-description></long-description>
+        <tag name="param" line="29" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$name">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="29" description="&lt;p&gt;顯示名稱&lt;/p&gt;&#10;" type="string" variable="$display_name">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="29" description="&lt;p&gt;管理員權限&lt;/p&gt;&#10;" type="string" variable="$adminPermissions">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="29" description="&lt;p&gt;客戶端管理權限&lt;/p&gt;&#10;" type="string" variable="$clientAdminPermissions">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="29" description="是否有成功建立&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功建立&lt;/li&gt;&#10;           &lt;li&gt;&quot;NameCreatedErr&quot;: 有重複名稱&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 資料庫錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="29" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="29" description="Version 2"/>
+      </docblock>
+      <argument line="0">
+        <name>$name</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$display_name</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$adminPermissions</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$clientAdminPermissions</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="75" package="Default">
+      <name>userGroup_remove</name>
+      <full_name>\userGroup_remove()</full_name>
+      <docblock line="75">
+        <description>刪除使用者群組</description>
+        <long-description></long-description>
+        <tag name="param" line="75" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$name">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="75" description="是否有成功刪除&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功刪除&lt;/li&gt;&#10;           &lt;li&gt;&quot;UserExist&quot;: 尚有存在的使用者&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoFound&quot;: 找不到存在的群組&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 資料庫錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="75" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="version" line="75" description="Version 2"/>
+      </docblock>
+      <argument line="0">
+        <name>$name</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="119" package="Default">
+      <name>userGroup_getList</name>
+      <full_name>\userGroup_getList()</full_name>
+      <docblock line="119">
+        <description>取得使用者群組清單</description>
+        <long-description></long-description>
+        <tag name="return" line="119" description="陣列索引為name，值為群組顯示名稱" type="array">
+          <type>array</type>
+        </tag>
+        <tag name="author" line="119" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="119" description="Version 2"/>
+      </docblock>
+    </function>
+    <function namespace="" line="146" package="Default">
+      <name>userGroup_ishave</name>
+      <full_name>\userGroup_ishave()</full_name>
+      <docblock line="146">
+        <description>是否擁有此群組</description>
+        <long-description></long-description>
+        <tag name="param" line="146" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$name">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="146" description="是否已有" type="bool">
+          <type>bool</type>
+        </tag>
+        <tag name="author" line="146" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="version" line="146" description="Version 2"/>
+      </docblock>
+      <argument line="0">
+        <name>$name</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="177" package="Default">
+      <name>userGroup_getDiaplayName</name>
+      <full_name>\userGroup_getDiaplayName()</full_name>
+      <docblock line="177">
+        <description>取得此使用者群組的名稱</description>
+        <long-description></long-description>
+        <tag name="param" line="177" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$groupName">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="177" description="群組名稱" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="177" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="177" description="Version 2"/>
+      </docblock>
+      <argument line="0">
+        <name>$groupName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="213" package="Default">
+      <name>userGroup_setDiaplayName</name>
+      <full_name>\userGroup_setDiaplayName()</full_name>
+      <docblock line="213">
+        <description>取得此使用者群組的名稱</description>
+        <long-description></long-description>
+        <tag name="param" line="213" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$groupName">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="213" description="&lt;p&gt;要更改的顯示名稱&lt;/p&gt;&#10;" type="string" variable="$displayName">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="213" description="狀態回傳&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功更改&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoFound&quot;: 無此使用者群組&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 其他資料庫錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+          <type>string</type>
+        </tag>
+        <tag name="author" line="213" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="213" description="Version 1"/>
+      </docblock>
+      <argument line="0">
+        <name>$groupName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$displayName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="252" package="Default">
+      <name>userGroup_havePermission</name>
+      <full_name>\userGroup_havePermission()</full_name>
+      <docblock line="252">
+        <description>取得此使用者群組的名稱</description>
+        <long-description></long-description>
+        <tag name="param" line="252" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$groupName">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="252" description="&lt;p&gt;權限名稱&lt;/p&gt;&#10;" type="string" variable="$permissionName">
+          <type>string</type>
+        </tag>
+        <tag name="return" line="252" description="是否擁有" type="bool">
+          <type>bool</type>
+        </tag>
+        <tag name="author" line="252" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="since" line="252" description="Version 1"/>
+      </docblock>
+      <argument line="0">
+        <name>$groupName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$permissionName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+    </function>
+    <function namespace="" line="294" package="Default">
+      <name>userGroup_setPermission</name>
+      <full_name>\userGroup_setPermission()</full_name>
+      <docblock line="294">
+        <description>取得此使用者群組的名稱</description>
+        <long-description></long-description>
+        <tag name="param" line="294" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$groupName">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="294" description="&lt;p&gt;權限名稱&lt;/p&gt;&#10;" type="string" variable="$permissionName">
+          <type>string</type>
+        </tag>
+        <tag name="param" line="294" description="&lt;p&gt;是否擁有&lt;/p&gt;&#10;" type="bool" variable="$permissionEnable">
+          <type>bool</type>
+        </tag>
+        <tag name="return" line="294" description="是否設定成功" type="bool">
+          <type>bool</type>
+        </tag>
+        <tag name="author" line="294" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="version" line="294" description="Version 1"/>
+      </docblock>
+      <argument line="0">
+        <name>$groupName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$permissionName</name>
+        <default></default>
+        <type>string</type>
+      </argument>
+      <argument line="0">
+        <name>$permissionEnable</name>
+        <default></default>
+        <type>bool</type>
+      </argument>
+    </function>
+    <function namespace="" line="343" package="Default">
+      <name>userGroup_queryAll</name>
+      <full_name>\userGroup_queryAll()</full_name>
+      <docblock line="343">
+        <description>查詢所有使用者群組</description>
+        <long-description></long-description>
+        <tag name="return" line="343" description="mysql_query的查詢結果" type="array">
+          <type>array</type>
+        </tag>
+        <tag name="author" line="343" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        <tag name="version" line="343" description="Version 2"/>
+      </docblock>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="lib/api/v1/apiTemplate.php" generated-path="lib.api.v1.apiTemplate.html" hash="25824227b1720a36dff3cd6e6a070d78" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="3" package="Default">
+      <name>apitemplate_header</name>
+      <full_name>\apitemplate_header()</full_name>
+      <docblock line="3">
+        <description></description>
+        <long-description></long-description>
+      </docblock>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="3" code="PPC:ERR-50011">No summary for function \apitemplate_header()</error>
+    </parse_markers>
+    <source>eJyzsS/IKODiSivNSy7JzM9TSCzILEnNLchJLEmNz0hNTEkt0tCs5uKEMtWd8/NKUvNKdEMqC1KtgIoLcjKTE0Ea9bOK8/OsFZIzEouKU0tsS0vSdC3UNa25agGcUyIc</source>
+  </file>
+  <file path="lib/class/Database.php" generated-path="lib.class.Database.html" hash="f6dec09640647767ad3d9dd648f14d98" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="19" package="Default">
+      <extends>\PDO</extends>
+      <name>Database</name>
+      <full_name>\Database</full_name>
+      <docblock line="19">
+        <description>資料庫連接專用類別</description>
+        <long-description></long-description>
+        <tag name="extends" line="19" description="PDO"/>
+        <tag name="author" line="19" description="CHU-TDAP"/>
+        <tag name="link" line="19" description="https://github.com/CHU-TDAP/" link="https://github.com/CHU-TDAP/"/>
+        <tag name="version" line="19" description="Version 1.0"/>
+        <tag name="see" line="19" description="" link="\https://github.com/shuliu/myPDO"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="29" package="Default">
+        <name>__construct</name>
+        <full_name>\Database::__construct()</full_name>
+        <docblock line="29">
+          <description>建構子</description>
+          <long-description></long-description>
+          <tag name="access" line="29" description="public"/>
+          <tag name="global" line="29" description="string $DB_SERV 在/config/db_config.php的資料庫URL"/>
+          <tag name="global" line="29" description="string $DB_NAME 在/config/db_config.php的資料庫名稱"/>
+          <tag name="global" line="29" description="string $DB_USER 在/config/db_config.php的資料庫帳號"/>
+          <tag name="global" line="29" description="string $DB_PASS 在/config/db_config.php的資料庫密碼"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="50" package="Default">
+        <name>table</name>
+        <full_name>\Database::table()</full_name>
+        <docblock line="50">
+          <description>取得帶有前綴字元的完整資料表名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="50" description="public"/>
+          <tag name="param" line="50" description="&lt;p&gt;資料表名稱&lt;/p&gt;&#10;" type="string" variable="$inputName">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="50" description="完整的資料表名稱" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="version" line="50" description="Version 2"/>
+          <tag name="author" line="50" description="元兒～" link="mailto:yuan817@moztw.org"/>
+        </docblock>
+        <argument line="0">
+          <name>$inputName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="68" package="Default">
+        <name>ErrorMsg</name>
+        <full_name>\Database::ErrorMsg()</full_name>
+        <docblock line="68">
+          <description>錯誤訊息的陣列</description>
+          <long-description>改寫Adodb -&gt; ErrorMsg</long-description>
+          <tag name="access" line="68" description="public"/>
+          <tag name="return" line="68" description="錯誤訊息" type="array">
+            <type>array</type>
+          </tag>
+          <tag name="since" line="68" description="2013.8.6"/>
+          <tag name="author" line="68" description="shuliu &lt;https://github.com/shuliu&gt;"/>
+          <tag name="see" line="68" description="" link="\https://github.com/shuliu/myPDO/blob/master/PDO.class.php"/>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJytVVtPG0cUfvb+iilihUF4xzZg1jamGGyUSgUsLlGlKrLW67G96nrXmdlNQpAlKkpL0tCgKAkiilKlJKrVCGibNCJp03+zvjz1L3RmdtcxClZ4iF88c+ac75zznctOfV6r1AQ4MgIEMALaL39oPjxw3r7obB42f3ru/L7Tut/oPH3i7DynQqoBBQFC4Nzabb07bjeOnONHAkZXbQ2jvGmoKJhZmltbyC6u5peXllalAdU0SloZFtG1vHuUqLeB4SSA0Ln70Pl3v3PwrHPnxLm71XxweiGkQj+gzcPWX3u98bPr8W2Gy9L7SHb0mWnMoBsWMooE5DJL/K7YVsXEYO7SWmg1k85xma4Z34CKZdVIAsKyZlXsgqSaVegrQa51DWGimQa47P1HpDCXE4TOMyYVW9dsWF13PUNB1RVCQEaxlIJCEOgJDGwIAZZRgMI5f79t/vqjc7THblwyo6gqIiRQswu6prqism4WFB0QC2tGGQxmZvMr2eXLwHncgOfx2nr0XZeqteUv+2EspheyF8Jw9nZbjT/6wazRWC4Gc/qyffBzP5hcemXlYjAn37d++YfBQMFjCZRsQ7VYlfLMiKLaqhUcpjwHPEc+Z6PdzEe7wY92/SepQU3ByLASiV6kgeo6uaonigVDqaLUhg9RT1ZMYiU2fPB6Uq0omCArZVsleeA8D8NJgfqAsLO96+zt5C7lpsCENCbFWF80/7zXfHzLg6CdTZPmunS62ptbCd51rOmKJcWIRCLj0nUTF2uYNgvvwGg4MgbDMRgdh5Sx0ERoLBQLidlJUY6LshyqFU16o8cJUc6I2QkxHqZidkhnxDg/yPNiPCZmZXF2TJQnxWyMXeNx9jSbFtOzXEIRogw1nhblcTE7Ls7KDMFVZlYUmUNRX+mIKM/RKgUGrYpGQtPoBlKDAzQ7wIgkgNM0zFgXAnU6FBCkPtFP8EaMThhfL87pa8ot23uvXzlH+872FmXXOb7TfPDKbaz204bf5tzMG0PgjyGV0M5Qqt2W1YyabS3SNMCHAGAGI8vGhq/sOuo28RlVru4tm4C/bKJuCHx5BWiwzva9/949AVPrtmLIkcmZqnnTui6ZuDxNFc8ZA7p0dBR8H+OZUZhfWl7I55az8198xaj3Qu0VS+8tk7wyn7Y2fmnol6P927N243bz2xNKTufg0NnZ9/hv3n/jnLxIF81iAYSmQRZjEy+Qcv/qeGkoGCvrZ5C7JBONfpcAGxNJlmI9DAN3eYOpvnt92gX4+OqHBUoyrCrEQhjSu8Q/A2yFnV8oPy93WQ0ijEEKuCsIJBKIvWpGyQzyIdFKQcBUvg5f+Sw1FGa/IcANA73ZB4e43ZxZREOpac9gdMiwqwWEfUmESugIEqXcVYpe4V7qSCeoF9SwdZ0/uK0A6v8DsXoH7Q==</source>
+  </file>
+  <file path="lib/class/TimeControl.php" generated-path="lib.class.TimeControl.html" hash="c5b961d95111ca77a58211b10ac3ad78" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="16" package="Default">
+      <extends/>
+      <name>TimeControl</name>
+      <full_name>\TimeControl</full_name>
+      <docblock line="16">
+        <description>時間控制類別</description>
+        <long-description>學習的時間控制</long-description>
+        <tag name="author" line="16" description="~kobayashi();"/>
+        <tag name="link" line="16" description="https://github.com/CHU-TDAP/" link="https://github.com/CHU-TDAP/"/>
+        <tag name="version" line="16" description="2.0"/>
+      </docblock>
+      <property static="false" visibility="private" line="24" namespace="" package="Default">
+        <name>$connection</name>
+        <default></default>
+        <docblock line="24">
+          <description>資料庫PDO連接物件</description>
+          <long-description></long-description>
+          <tag name="access" line="24" description="private"/>
+          <tag name="var" line="24" description="&lt;p&gt;Object&lt;/p&gt;" type="\PDO" variable="">
+            <type link="PDO.html">\PDO</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="26" package="Default">
+        <name>__construct</name>
+        <full_name>\TimeControl::__construct()</full_name>
+        <docblock line="26">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="35" package="Default">
+        <name>getLearnTotalTime</name>
+        <full_name>\TimeControl::getLearnTotalTime()</full_name>
+        <docblock line="35">
+          <description>取得學習的總時間</description>
+          <long-description></long-description>
+          <tag name="return" line="35" description="" type="\學習的總時間">
+            <type link="學習的總時間.html">\學習的總時間</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="26" code="PPC:ERR-50008">No summary for method __construct()</error>
+    </parse_markers>
+    <source>eJy9UkFr1EAYPSe/Ygg97C5sRjyqXVd2Vzy0ptT0JBIm49dmbHYmTma2ilREBOulgsJKPQgiRUQ8CaUo6p8xu+6/cCbJtqXu2ZDTe+/7vvdecuVqlmQubrVc1EKTg6ez8evJ/sdi72j2/l2xd2hQ7DoS7msmIRKcQsPzfVy9KYsx4zTVd8E3W7zm5XPSftDbWB3cDKP1IAh9z+ppSvIc94kiMclPxjBe/k+P69iszuKwBi6p4svx9Ner6dtnZzUl0yVaJUKix9siJg9JnrCGTW2ZlPFtlCiV5Zcw3mIq0bFPxRD3bmy0w/61NVzJRiBzJji66F+wgEHLSlDIhtATXEmRus4j16l82pE/X59PxgfFt89r/WD25MNk/3D64tPv70clW0m6hFIwSzLJRkRBDY6IRGYGBfE9oKoEzTmnFqElKjg3hHFjIjiW0XHKKNrUvERRFBlJrqSmqtE0vLXlLKmE5e3O6TBaRhx20PybloU4u9XGKoRp9OW4+PnmpNfp8Y+q2pLsSlBacrSYxguMbYFaASJ5KBRJbXNn7EnIdaqMqX+MtjuZhIxI8w/fGqwMeiEKExhCdLoKXV8PVpHnLxg14VIzqOyE1ywzzm+1O/AAqFZ1dAOLHXt/zm6CoknN1VEbjKum1d32znvw7tT97f4FdMA2eQ==</source>
+  </file>
+  <file path="lib/class/MyUser.php" generated-path="lib.class.MyUser.html" hash="cecc70d8bcce13d382b648e01079aa26" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="19" package="Default">
+      <extends/>
+      <name>MyUser</name>
+      <full_name>\MyUser</full_name>
+      <docblock line="19">
+        <description>這一位使用者處理專用類別</description>
+        <long-description>以User類別為基底 衍生出以登入碼為主的使用者類別MyUser。
+一個物件即代表這一位使用者。</long-description>
+        <tag name="author" line="19" description="CHU-TDAP"/>
+        <tag name="link" line="19" description="https://github.com/CHU-TDAP/" link="https://github.com/CHU-TDAP/"/>
+        <tag name="version" line="19" description="Version 2.0"/>
+      </docblock>
+      <property static="false" visibility="private" line="25" namespace="" package="Default">
+        <name>$loggedCode</name>
+        <default></default>
+        <docblock line="25">
+          <description>使用者登入碼</description>
+          <long-description></long-description>
+          <tag name="access" line="25" description="private"/>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="33" namespace="" package="Default">
+        <name>$userObject</name>
+        <default></default>
+        <docblock line="33">
+          <description>此帳號的原始物件</description>
+          <long-description>由 __construct 取得</long-description>
+          <tag name="access" line="33" description="private"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="41" package="Default">
+        <name>__construct</name>
+        <full_name>\MyUser::__construct()</full_name>
+        <docblock line="41">
+          <description>建構子</description>
+          <long-description></long-description>
+          <tag name="access" line="41" description="public"/>
+          <tag name="param" line="41" description="&lt;p&gt;登入碼&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$inputLoggedCode</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="71" package="Default">
+        <name>getLoggedCode</name>
+        <full_name>\MyUser::getLoggedCode()</full_name>
+        <docblock line="71">
+          <description>取得登入碼</description>
+          <long-description></long-description>
+          <tag name="access" line="71" description="public"/>
+          <tag name="return" line="71" description="登入碼" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="82" package="Default">
+        <name>getUsername</name>
+        <full_name>\MyUser::getUsername()</full_name>
+        <docblock line="82">
+          <description>取得帳號名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="82" description="public"/>
+          <tag name="return" line="82" description="帳號名稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="98" package="Default">
+        <name>getLoginTime</name>
+        <full_name>\MyUser::getLoginTime()</full_name>
+        <docblock line="98">
+          <description>取得登入時間</description>
+          <long-description></long-description>
+          <tag name="access" line="98" description="public"/>
+          <tag name="return" line="98" description="登入時間" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="114" package="Default">
+        <name>getCreateTime</name>
+        <full_name>\MyUser::getCreateTime()</full_name>
+        <docblock line="114">
+          <description>取得帳號建立時間</description>
+          <long-description></long-description>
+          <tag name="access" line="114" description="public"/>
+          <tag name="return" line="114" description="建立時間" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="130" package="Default">
+        <name>getGroup</name>
+        <full_name>\MyUser::getGroup()</full_name>
+        <docblock line="130">
+          <description>取得所在群組</description>
+          <long-description></long-description>
+          <tag name="access" line="130" description="public"/>
+          <tag name="return" line="130" description="群組名稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="146" package="Default">
+        <name>getGroupName</name>
+        <full_name>\MyUser::getGroupName()</full_name>
+        <docblock line="146">
+          <description>取得所在群組顯式名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="146" description="public"/>
+          <tag name="return" line="146" description="群組顯示名稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="162" package="Default">
+        <name>getRealName</name>
+        <full_name>\MyUser::getRealName()</full_name>
+        <docblock line="162">
+          <description>取得真實姓名</description>
+          <long-description></long-description>
+          <tag name="access" line="162" description="public"/>
+          <tag name="return" line="162" description="真實姓名" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="178" package="Default">
+        <name>setRealName</name>
+        <full_name>\MyUser::setRealName()</full_name>
+        <docblock line="178">
+          <description>修改真實姓名</description>
+          <long-description></long-description>
+          <tag name="access" line="178" description="public"/>
+          <tag name="param" line="178" description="&lt;p&gt;新真實姓名&lt;/p&gt;&#10;" type="string" variable="$input">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="178" description="是否更改成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="194" package="Default">
+        <name>getNickName</name>
+        <full_name>\MyUser::getNickName()</full_name>
+        <docblock line="194">
+          <description>取得暱稱</description>
+          <long-description></long-description>
+          <tag name="access" line="194" description="public"/>
+          <tag name="return" line="194" description="暱稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="210" package="Default">
+        <name>setNickName</name>
+        <full_name>\MyUser::setNickName()</full_name>
+        <docblock line="210">
+          <description>修改暱稱</description>
+          <long-description></long-description>
+          <tag name="access" line="210" description="public"/>
+          <tag name="param" line="210" description="&lt;p&gt;新暱稱&lt;/p&gt;&#10;" type="string" variable="$input">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="210" description="是否更改成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$input</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="226" package="Default">
+        <name>getName</name>
+        <full_name>\MyUser::getName()</full_name>
+        <docblock line="226">
+          <description>取得名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="226" description="public"/>
+          <tag name="return" line="226" description="依照有填入多少名字（優先順序: 暱稱→真實名字→帳號名稱）" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="242" package="Default">
+        <name>getEmail</name>
+        <full_name>\MyUser::getEmail()</full_name>
+        <docblock line="242">
+          <description>取得帳號Email</description>
+          <long-description></long-description>
+          <tag name="access" line="242" description="public"/>
+          <tag name="return" line="242" description="使用者資訊的Email" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="258" package="Default">
+        <name>setEmail</name>
+        <full_name>\MyUser::setEmail()</full_name>
+        <docblock line="258">
+          <description>修改帳號Email</description>
+          <long-description></long-description>
+          <tag name="access" line="258" description="public"/>
+          <tag name="param" line="258" description="&lt;p&gt;新Email&lt;/p&gt;&#10;" type="string" variable="$input">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="258" description="是否更改成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$input</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="276" package="Default">
+        <name>getQuery</name>
+        <full_name>\MyUser::getQuery()</full_name>
+        <docblock line="276">
+          <description>取得此帳號查詢</description>
+          <long-description></long-description>
+          <tag name="access" line="276" description="public"/>
+          <tag name="return" line="276" description="此使用者的資料表內容(回傳NULL為找不到使用者)" type="object">
+            <type>object</type>
+          </tag>
+          <tag name="version" line="276" description="Version 0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="296" package="Default">
+        <name>isPasswordCorrect</name>
+        <full_name>\MyUser::isPasswordCorrect()</full_name>
+        <docblock line="296">
+          <description>驗證密碼是否錯誤</description>
+          <long-description></long-description>
+          <tag name="access" line="296" description="public"/>
+          <tag name="param" line="296" description="&lt;p&gt;密碼&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="296" description="&lt;p&gt;加密方式(可省略)&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="296" description="true:密碼正確 false:密碼錯誤" type="bool">
+            <type>bool</type>
+          </tag>
+          <tag name="version" line="296" description="Version 0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="335" package="Default">
+        <name>changePassword</name>
+        <full_name>\MyUser::changePassword()</full_name>
+        <docblock line="335">
+          <description>更改密碼</description>
+          <long-description>傳回的字串如果是:
+&lt;ul&gt;
+  &lt;li&gt;"Finish":密碼更改完成&lt;/li&gt;
+&lt;/ul&gt;</long-description>
+          <tag name="access" line="335" description="public"/>
+          <tag name="global" line="335" description="string $ENCRYPT_MODE 放在/config.php的加密方式選項"/>
+          <tag name="param" line="335" description="&lt;p&gt;新密碼&lt;/p&gt;&#10;" type="string" variable="$newPasswd">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="335" description="&lt;p&gt;新密碼加密方式（可省略）&lt;/p&gt;&#10;" type="string" variable="$newPasswdMode">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="335" description="狀態回傳" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="version" line="335" description="Version 1"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="367" package="Default">
+        <name>isLogged</name>
+        <full_name>\MyUser::isLogged()</full_name>
+        <docblock line="367">
+          <description>是否還在登入狀態</description>
+          <long-description></long-description>
+          <tag name="access" line="367" description="public"/>
+          <tag name="return" line="367" description="是否仍在登入狀態" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="383" package="Default">
+        <name>getPermissionList</name>
+        <full_name>\MyUser::getPermissionList()</full_name>
+        <docblock line="383">
+          <description>取得權限清單</description>
+          <long-description></long-description>
+          <tag name="access" line="383" description="public"/>
+          <tag name="return" line="383" description="權限清單" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="399" package="Default">
+        <name>havePermission</name>
+        <full_name>\MyUser::havePermission()</full_name>
+        <docblock line="399">
+          <description>是否擁有此權限</description>
+          <long-description></long-description>
+          <tag name="access" line="399" description="public"/>
+          <tag name="param" line="399" description="&lt;p&gt;權限名稱&lt;/p&gt;&#10;" type="string" variable="$permissionName">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="399" description="是否擁有" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$permissionName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="416" package="Default">
+        <name>logout</name>
+        <full_name>\MyUser::logout()</full_name>
+        <docblock line="416">
+          <description>登出</description>
+          <long-description></long-description>
+          <tag name="access" line="416" description="public"/>
+          <tag name="return" line="416" description="是否登出成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="41" code="PPC:ERR-50015">Argument $inputLoggedCode is missing from the Docblock of __construct()</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="lib/class/User.php" generated-path="lib.class.User.html" hash="d621949d98c8470bca3631f91aeeda77" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="19" package="Default">
+      <extends/>
+      <name>User</name>
+      <full_name>\User</full_name>
+      <docblock line="19">
+        <description>使用者處理專用類別</description>
+        <long-description>一個物件即代表這一位使用者</long-description>
+        <tag name="author" line="19" description="CHU-TDAP"/>
+        <tag name="link" line="19" description="https://github.com/CHU-TDAP/" link="https://github.com/CHU-TDAP/"/>
+        <tag name="version" line="19" description="Version 2.0"/>
+      </docblock>
+      <property static="false" visibility="private" line="26" namespace="" package="Default">
+        <name>$thisUID</name>
+        <default></default>
+        <docblock line="26">
+          <description>使用者ID</description>
+          <long-description></long-description>
+          <tag name="access" line="26" description="private"/>
+          <tag name="var" line="26" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="34" namespace="" package="Default">
+        <name>$infoArray</name>
+        <default></default>
+        <docblock line="34">
+          <description>此帳號的所有資訊</description>
+          <long-description>由 $this-&gt;getQuery() 抓取資料表中所有資訊，並放在此陣列裡</long-description>
+          <tag name="access" line="34" description="private"/>
+          <tag name="var" line="34" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="" line="46" package="Default">
+        <name>getQueryInfo</name>
+        <full_name>\User::getQueryInfo()</full_name>
+        <docblock line="46">
+          <description>取得此使用者的資料表欄位內容</description>
+          <long-description></long-description>
+          <tag name="access" line="46" description="private"/>
+          <tag name="param" line="46" description="&lt;p&gt;資料表欄位名稱&lt;/p&gt;&#10;" type="string" variable="$colName">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="46" description="資料表欄位內容" type="int|bool|string">
+            <type>int</type>
+            <type>bool</type>
+            <type>string</type>
+          </tag>
+          <tag name="author" line="46" description="元兒～" link="mailto:yuan817@moztw.org"/>
+          <tag name="version" line="46" description="Version 1"/>
+        </docblock>
+        <argument line="0">
+          <name>$colName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="" line="63" package="Default">
+        <name>setQueryInfo</name>
+        <full_name>\User::setQueryInfo()</full_name>
+        <docblock line="63">
+          <description>更新此使用者的資料表欄位內容</description>
+          <long-description></long-description>
+          <tag name="access" line="63" description="private"/>
+          <tag name="global" line="63" description="string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱"/>
+          <tag name="param" line="63" description="&lt;p&gt;資料表欄位名稱&lt;/p&gt;&#10;" type="string" variable="$colName">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="63" description="&lt;p&gt;資料表此欄位內容&lt;/p&gt;&#10;" type="string" variable="$rowContent">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="63" description="&lt;p&gt;資料表欄位內容&lt;/p&gt;&#10;" type="int|bool|string" variable="">
+            <type>int</type>
+            <type>bool</type>
+            <type>string</type>
+          </tag>
+          <tag name="return" line="63" description="更動到幾筆" type="int">
+            <type>int</type>
+          </tag>
+          <tag name="author" line="63" description="元兒～" link="mailto:yuan817@moztw.org"/>
+          <tag name="version" line="63" description="Version 4"/>
+        </docblock>
+        <argument line="0">
+          <name>$colName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0">
+          <name>$rowContent</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="83" package="Default">
+        <name>__construct</name>
+        <full_name>\User::__construct()</full_name>
+        <docblock line="83">
+          <description>建構子</description>
+          <long-description></long-description>
+          <tag name="access" line="83" description="public"/>
+          <tag name="param" line="83" description="&lt;p&gt;使用者ID&lt;/p&gt;&#10;" type="string" variable="$inputUID">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$inputUID</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="96" package="Default">
+        <name>getLoggedCode</name>
+        <full_name>\User::getLoggedCode()</full_name>
+        <docblock line="96">
+          <description>取得登入碼</description>
+          <long-description></long-description>
+          <tag name="access" line="96" description="public"/>
+          <tag name="return" line="96" description="登入碼" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="107" package="Default">
+        <name>getUsername</name>
+        <full_name>\User::getUsername()</full_name>
+        <docblock line="107">
+          <description>取得帳號名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="107" description="public"/>
+          <tag name="return" line="107" description="帳號名稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="118" package="Default">
+        <name>getLoginTime</name>
+        <full_name>\User::getLoginTime()</full_name>
+        <docblock line="118">
+          <description>取得登入時間</description>
+          <long-description></long-description>
+          <tag name="access" line="118" description="public"/>
+          <tag name="return" line="118" description="登入時間" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="129" package="Default">
+        <name>getCreateTime</name>
+        <full_name>\User::getCreateTime()</full_name>
+        <docblock line="129">
+          <description>取得帳號建立時間</description>
+          <long-description></long-description>
+          <tag name="access" line="129" description="public"/>
+          <tag name="return" line="129" description="建立時間" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="140" package="Default">
+        <name>getGroup</name>
+        <full_name>\User::getGroup()</full_name>
+        <docblock line="140">
+          <description>取得所在群組</description>
+          <long-description></long-description>
+          <tag name="access" line="140" description="public"/>
+          <tag name="return" line="140" description="群組名稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="151" package="Default">
+        <name>getGroupName</name>
+        <full_name>\User::getGroupName()</full_name>
+        <docblock line="151">
+          <description>取得所在群組顯式名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="151" description="public"/>
+          <tag name="return" line="151" description="群組顯示名稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="177" package="Default">
+        <name>setGroup</name>
+        <full_name>\User::setGroup()</full_name>
+        <docblock line="177">
+          <description>設定所在群組</description>
+          <long-description>傳回的字串如果是:</long-description>
+          <tag name="access" line="177" description="public"/>
+          <tag name="global" line="177" description="string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱"/>
+          <tag name="param" line="177" description="&lt;p&gt;群組&lt;/p&gt;&#10;" type="string" variable="$toGroup">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="177" description="是否更改成功&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 密碼更改完成 &lt;/li&gt;&#10;           &lt;li&gt;&quot;NoFoundUserGroup&quot;: 無此使用者群組&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 其他資料庫錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="todo" line="177" description="防呆: 判斷至少要有一個以上的帳號為啟用"/>
+          <tag name="author" line="177" description="元兒～" link="mailto:yuan817@moztw.org"/>
+          <tag name="version" line="177" description="Version 1"/>
+        </docblock>
+        <argument line="0">
+          <name>$toGroup</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="209" package="Default">
+        <name>isEnable</name>
+        <full_name>\User::isEnable()</full_name>
+        <docblock line="209">
+          <description>取得帳號啟用狀態</description>
+          <long-description></long-description>
+          <tag name="access" line="209" description="public"/>
+          <tag name="return" line="209" description="是否已啟用" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="220" package="Default">
+        <name>setEnable</name>
+        <full_name>\User::setEnable()</full_name>
+        <docblock line="220">
+          <description>設定帳號啟用狀態</description>
+          <long-description></long-description>
+          <tag name="access" line="220" description="public"/>
+          <tag name="param" line="220" description="&lt;p&gt;是否為啟用&lt;/p&gt;&#10;" type="bool" variable="$isActive">
+            <type>bool</type>
+          </tag>
+          <tag name="return" line="220" description="是否更改成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$isActive</name>
+          <default></default>
+          <type>bool</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="232" package="Default">
+        <name>getRealName</name>
+        <full_name>\User::getRealName()</full_name>
+        <docblock line="232">
+          <description>取得真實姓名</description>
+          <long-description></long-description>
+          <tag name="access" line="232" description="public"/>
+          <tag name="return" line="232" description="真實姓名" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="243" package="Default">
+        <name>setRealName</name>
+        <full_name>\User::setRealName()</full_name>
+        <docblock line="243">
+          <description>修改真實姓名</description>
+          <long-description></long-description>
+          <tag name="access" line="243" description="public"/>
+          <tag name="param" line="243" description="&lt;p&gt;新真實姓名&lt;/p&gt;&#10;" type="string" variable="$input">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="243" description="是否更改成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$input</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="254" package="Default">
+        <name>getNickName</name>
+        <full_name>\User::getNickName()</full_name>
+        <docblock line="254">
+          <description>取得暱稱</description>
+          <long-description></long-description>
+          <tag name="access" line="254" description="public"/>
+          <tag name="return" line="254" description="暱稱" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="265" package="Default">
+        <name>setNickName</name>
+        <full_name>\User::setNickName()</full_name>
+        <docblock line="265">
+          <description>修改暱稱</description>
+          <long-description></long-description>
+          <tag name="access" line="265" description="public"/>
+          <tag name="param" line="265" description="&lt;p&gt;新暱稱&lt;/p&gt;&#10;" type="string" variable="$input">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="265" description="是否更改成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$input</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="276" package="Default">
+        <name>getName</name>
+        <full_name>\User::getName()</full_name>
+        <docblock line="276">
+          <description>取得名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="276" description="public"/>
+          <tag name="return" line="276" description="依照有填入多少名字（優先順序: 暱稱→真實名字→帳號名稱）" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="296" package="Default">
+        <name>getEmail</name>
+        <full_name>\User::getEmail()</full_name>
+        <docblock line="296">
+          <description>取得帳號Email</description>
+          <long-description></long-description>
+          <tag name="access" line="296" description="public"/>
+          <tag name="return" line="296" description="使用者資訊的Email" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="307" package="Default">
+        <name>setEmail</name>
+        <full_name>\User::setEmail()</full_name>
+        <docblock line="307">
+          <description>修改帳號Email</description>
+          <long-description></long-description>
+          <tag name="access" line="307" description="public"/>
+          <tag name="param" line="307" description="&lt;p&gt;新Email&lt;/p&gt;&#10;" type="string" variable="$input">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="307" description="是否更改成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$input</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="320" package="Default">
+        <name>getQuery</name>
+        <full_name>\User::getQuery()</full_name>
+        <docblock line="320">
+          <description>取得此帳號查詢</description>
+          <long-description></long-description>
+          <tag name="access" line="320" description="public"/>
+          <tag name="global" line="320" description="string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱"/>
+          <tag name="return" line="320" description="此使用者的資料表內容(回傳NULL為找不到使用者)" type="object">
+            <type>object</type>
+          </tag>
+          <tag name="version" line="320" description="Version 4"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="343" package="Default">
+        <name>isPasswordCorrect</name>
+        <full_name>\User::isPasswordCorrect()</full_name>
+        <docblock line="343">
+          <description>驗證密碼是否錯誤</description>
+          <long-description></long-description>
+          <tag name="access" line="343" description="public"/>
+          <tag name="global" line="343" description="string $ENCRYPT_MODE 放在/config.php的加密方式選項"/>
+          <tag name="param" line="343" description="&lt;p&gt;密碼&lt;/p&gt;&#10;" type="string" variable="$inputPasswd">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="343" description="&lt;p&gt;加密方式(可省略)&lt;/p&gt;&#10;" type="string" variable="$mode">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="343" description="true:密碼正確，false:密碼錯誤" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="380" package="Default">
+        <name>changePassword</name>
+        <full_name>\User::changePassword()</full_name>
+        <docblock line="380">
+          <description>更改密碼</description>
+          <long-description></long-description>
+          <tag name="access" line="380" description="public"/>
+          <tag name="global" line="380" description="string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱"/>
+          <tag name="global" line="380" description="string $ENCRYPT_MODE 在/config.php的加密方式選項"/>
+          <tag name="param" line="380" description="&lt;p&gt;新密碼&lt;/p&gt;&#10;" type="string" variable="$newPasswd">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="380" description="&lt;p&gt;新密碼加密方式（可省略）&lt;/p&gt;&#10;" type="string" variable="$newPasswdMode">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="380" description="狀態回傳" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="version" line="380" description="Version 0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="412" package="Default">
+        <name>isLogged</name>
+        <full_name>\User::isLogged()</full_name>
+        <docblock line="412">
+          <description>是否還在登入狀態</description>
+          <long-description></long-description>
+          <tag name="access" line="412" description="public"/>
+          <tag name="return" line="412" description="是否仍在登入狀態" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="427" package="Default">
+        <name>getPermissionList</name>
+        <full_name>\User::getPermissionList()</full_name>
+        <docblock line="427">
+          <description>取得權限清單</description>
+          <long-description></long-description>
+          <tag name="access" line="427" description="public"/>
+          <tag name="return" line="427" description="權限清單" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="442" package="Default">
+        <name>havePermission</name>
+        <full_name>\User::havePermission()</full_name>
+        <docblock line="442">
+          <description>是否擁有此權限</description>
+          <long-description></long-description>
+          <tag name="access" line="442" description="public"/>
+          <tag name="global" line="442" description="string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱"/>
+          <tag name="global" line="442" description="string $FORM_USER_GROUP 在/config/db_table_config.php的使用者群組資料表名稱"/>
+          <tag name="param" line="442" description="&lt;p&gt;權限名稱&lt;/p&gt;&#10;" type="string" variable="$permissionName">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="442" description="是否擁有" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$permissionName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="482" package="Default">
+        <name>logout</name>
+        <full_name>\User::logout()</full_name>
+        <docblock line="482">
+          <description>登出</description>
+          <long-description></long-description>
+          <tag name="access" line="482" description="public"/>
+          <tag name="return" line="482" description="是否登出成功" type="bool">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="lib/class/FlxZipArchive.php" generated-path="lib.class.FlxZipArchive.html" hash="643c4a7508d4658cd40dee030b704db9" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="12" package="Default">
+      <extends>\ZipArchive</extends>
+      <name>FlxZipArchive</name>
+      <full_name>\FlxZipArchive</full_name>
+      <docblock line="12">
+        <description>FlxZipArchive, Extends ZipArchiv.</description>
+        <long-description>Add Dirs with Files and Subdirs.</long-description>
+        <tag name="see" line="12" description="&lt;code&gt;&#10;$archive = new FlxZipArchive;&#10;// .....&#10;$archive-&gt;addDir( 'test/blub', 'blub' );&#10;&lt;/code&gt;" link="\http://ninad.pundaliks.in/blog/2011/05/recursively-zip-a-directory-with-php/"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="22" package="Default">
+        <name>addDir</name>
+        <full_name>\FlxZipArchive::addDir()</full_name>
+        <docblock line="22">
+          <description>Add a Dir with Files and Subdirs to the archive</description>
+          <long-description></long-description>
+          <tag name="param" line="22" description="&lt;p&gt;Real Location&lt;/p&gt;" type="string" variable="$location">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="22" description="&lt;p&gt;Name in Archive&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="author" line="22" description="Nicolas Heimann"/>
+          <tag name="access" line="22" description="private"/>
+        </docblock>
+        <argument line="0">
+          <name>$location</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0">
+          <name>$name</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="" line="37" package="Default">
+        <name>addDirDo</name>
+        <full_name>\FlxZipArchive::addDirDo()</full_name>
+        <docblock line="37">
+          <description>Add Files &amp; Dirs to archive.</description>
+          <long-description></long-description>
+          <tag name="param" line="37" description="&lt;p&gt;Real Location&lt;/p&gt;" type="string" variable="$location">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="37" description="&lt;p&gt;Name in Archive&lt;/p&gt;" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="author" line="37" description="Nicolas Heimann"/>
+          <tag name="access" line="37" description="private"/>
+        </docblock>
+        <argument line="0">
+          <name>$location</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0">
+          <name>$name</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJzNU8tu2zAQPMtfsQejsgxLTAr0ItuJDcRBCxQp0N56oyk6IkKThEjFcRv/e5akID+S3msYEsndnZkdrma3pjYwIOPxYAz38uW3MMuG1eKZT2D14riqLPRnBeYsqwruRGNhJ1wN90JyC1RV8KtdV3jsUxaW8wRq50xJiBKKVoVpVUWleLKFUGQt9SP5fHV9Ta6+kIaztrHIJ/f5H2FymiMMZ043+9xT5KiPIOiM6Yrf4GJIoz6Yg+K7c81TjBMChf+dpOY3tKpQ9AhSx61DAe06nUAa3pD5qhnp8MmASWrtOS7wSys4/B0k3rUkWkK9Kf/wBJwGV3Po1GCJr1oY2tAtWNcI9QhDqRl1Qiv4yamE793ug0RFtxwe/EMoWPaQsKCtq3UDD4Jp7AC+crGlKiJQxjj2ZBrxTJ3PxjaTQWLatRQMNq1igbpzqdcyiWyZ7zUZulrY4ORqa9w+JIboFINncQzd6fcomHfwt7P60RFNvYYTD6Nxn+J4oWedX8V/ZFjcXzr2UbfRs8BdzCElqbfpKPp4hn80BZvAIZKyMwGVIq6vwAHCSdcGxw9XR55g+67GbDzc+NccGgSp/L3gI8sw7jUkYtNnIGmRwusrnOyLNAOmlROq5R4zqnkKH+UEvm0Awcrzz6Esu0nJJsCl5VCWXvYoaELJGrWMPIPbGz46uaoiEmeBGXGR+hbSCJZCGZYeKY1AcaIQb/QOorO5R/QFh8sBw3vBwOENXBd6/g==</source>
+  </file>
+  <file path="lib/class/UpdateInfo.php" generated-path="lib.class.UpdateInfo.html" hash="12ee3f021d8ecfbeeb6fecfdf23e0f20" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="15" package="Default">
+      <extends/>
+      <name>UpdateInfo</name>
+      <full_name>\UpdateInfo</full_name>
+      <docblock line="15">
+        <description>更新所有使用者資訊類別</description>
+        <long-description></long-description>
+        <tag name="author" line="15" description="~kobayashi();"/>
+        <tag name="link" line="15" description="https://github.com/CHU-TDAP/" link="https://github.com/CHU-TDAP/"/>
+        <tag name="version" line="15" description="Version 1.0"/>
+      </docblock>
+      <property static="false" visibility="private" line="22" namespace="" package="Default">
+        <name>$conDB</name>
+        <default></default>
+        <docblock line="22">
+          <description>連接資料庫的PDO物件</description>
+          <long-description></long-description>
+          <tag name="access" line="22" description="private"/>
+          <tag name="var" line="22" description="&lt;p&gt;Object&lt;/p&gt;" type="\PDO" variable="">
+            <type link="PDO.html">\PDO</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="24" package="Default">
+        <name>__construct</name>
+        <full_name>\UpdateInfo::__construct()</full_name>
+        <docblock line="24">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="36" package="Default">
+        <name>receiveQuestionData</name>
+        <full_name>\UpdateInfo::receiveQuestionData()</full_name>
+        <docblock line="36">
+          <description>receiveQuestionData</description>
+          <long-description>接收Client端傳送過來的資料</long-description>
+          <tag name="param" line="36" description="&lt;p&gt;問題編號&lt;/p&gt;&#10;" type="" variable="$num_of_question"/>
+          <tag name="param" line="36" description="&lt;p&gt;標的編號&lt;/p&gt;&#10;" type="" variable="$point_number"/>
+        </docblock>
+        <argument line="0">
+          <name>$num_of_question</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0">
+          <name>$point_number</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="55" package="Default">
+        <name>updateQestionStatus</name>
+        <full_name>\UpdateInfo::updateQestionStatus()</full_name>
+        <docblock line="55">
+          <description>updateQestionStatus</description>
+          <long-description>更新答題狀態</long-description>
+          <tag name="param" line="55" description="" type="" variable="$questionNumber"/>
+          <tag name="param" line="55" description="" type="" variable="$receiveData"/>
+        </docblock>
+        <argument line="0">
+          <name>$questionNumber</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0">
+          <name>$receiveData</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="85" package="Default">
+        <name>updateUserLearnData</name>
+        <full_name>\UpdateInfo::updateUserLearnData()</full_name>
+        <docblock line="85">
+          <description>updateUserLearnData</description>
+          <long-description>更新使用者的學習狀態</long-description>
+          <tag name="param" line="85" description="&lt;p&gt;進入系統推薦的標的的時間&lt;/p&gt;&#10;" type="" variable="$InTime"/>
+          <tag name="param" line="85" description="&lt;p&gt;離開系統推薦得標的的時間&lt;/p&gt;&#10;" type="" variable="$OutTime"/>
+        </docblock>
+        <argument line="0">
+          <name>$userID</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0">
+          <name>$point_number</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0">
+          <name>$InTime</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+        <argument line="0">
+          <name>$OutTime</name>
+          <default></default>
+          <type>mixed</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="24" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="85" code="PPC:ERR-50015">Argument $userID is missing from the Docblock of updateUserLearnData()</error>
+      <error line="85" code="PPC:ERR-50015">Argument $point_number is missing from the Docblock of updateUserLearnData()</error>
+    </parse_markers>
+    <source>eJzFVW1vG0UQ/nz+FatTPpzDxZd8NSRtiC3VUonzYjcfUOWcz+t66eXO2dtNqVCQWxEgBAUJglEoAhUUZFRVvAQKoqL9M/Gd/S+Y3Ts7d45jioSKZdm3N8/MzjPzzO5rV5qNZsqYnk6haeQ/+NVv/+Tvt/yv9s/+eh4cdXqtvd7pB73OR/2HX3c/PAGQkVIo3uaE4orrWFhTMxkj/NqkahDHsnkNZyComn51BJorLpXfyC+XKmvFYimjCrxlm55n5ExmVk1v6GYY8y/tk1IEeeWF2ANKIq+anDVcit697VbNu6bXIJogKyw2cW6jBmNNL2sYtwhr8GrGcreMpWvlmVJuccUIYTuYesR10I3ofy4zKwxglRVB5WbNZLjg1N2U8k5KCXMUnv3Wd/7hCWTlt4+7fz4KvnxvJVcM9n84e/okBFw1LQtDhCYlOxAierljUgRAVKy+hS0mX8JeSgRCU5br5F4HCop4yas2sVCdOxYTuVUqYPUY5RbT0mAX+ShTrEG8mQXph+aRg++gQRdlLZTdMNgwcYotTHbwKseeiCrA0hBagZN/9GTJJthhwaMfu/dP+617/XuHZ8/eB4oh3YhK06TmFppy+FbFrVe2o3io+/kn/YcfB793esffJJFNlzisAvgqpsjvHEPAGMwYw3hMrtrohnoi7nldKPa4zaAk8QrNLDQphnRgXArL6/m1Eiosl4pIzSRBUD8bIIMt1HRGRTcWr5fz61p2m9T0LIOfWX02LWdruNnMQpU4tRXBVlMFUNVHs52AZxKfIJME47exxVnUViVsPkQVFIcQSl0q1BqBsNVwhQIhJNUkeqwmuFT5apjiOjMZ9+KakPMYPD4SfT1o+XsHMeOguQOCyzLzpC1q41Bq41o9JgVtJKgeDzRstELqWtzwpmq5FNZMvYnm59FcWoJC6D+rorySWyzl0eYLKGITredLaHMp7NUmxDx/fgXNoY1r+TWItFrICZuUQ9iUiXpJMAFf9eYFp6QO4oaR7oOJwGqSQBS4GRinzrlIhEdk25W/2PYwulDkO9R1br2kEm/ESrzx/5T4v6pjhKqbsLh8EsseptexSS+cznISh3ciHKDdx38Ezz+9dCoLTolsYbisfununQSnT4PffvYPO7329+AancDwcHy/3/4s6VjkLPR88G2/fRD37D77Ypzn5TOdIKNNcVgWcsmDTo8S1Qf7Dqf7Xx/ll8nKY7x2N9RUeJIjLStT0LOQTZY4etblbOKBLuGTj+g4HISlR2wnoIijDthPQEFq6nlxJlwLoKfd1JWFvwGREWWk</source>
+  </file>
+  <file path="lib/class/UserGroup.php" generated-path="lib.class.UserGroup.html" hash="a7a656d14b173b2d9b3e15d89a11c193" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="15" package="Default">
+      <extends/>
+      <name>UserGroup</name>
+      <full_name>\UserGroup</full_name>
+      <docblock line="15">
+        <description>一個物件即代表這一個使用者群組</description>
+        <long-description></long-description>
+        <tag name="link" line="15" description="https://github.com/CHU-TDAP/" link="https://github.com/CHU-TDAP/"/>
+        <tag name="version" line="15" description="Version 1.0"/>
+      </docblock>
+      <property static="false" visibility="private" line="22" namespace="" package="Default">
+        <name>$thisGroup</name>
+        <default></default>
+        <docblock line="22">
+          <description>群組ID</description>
+          <long-description></long-description>
+          <tag name="access" line="22" description="private"/>
+          <tag name="var" line="22" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="34" package="Default">
+        <name>__construct</name>
+        <full_name>\UserGroup::__construct()</full_name>
+        <docblock line="34">
+          <description>建構子</description>
+          <long-description></long-description>
+          <tag name="access" line="34" description="public"/>
+          <tag name="param" line="34" description="&lt;p&gt;群組ID&lt;/p&gt;&#10;" type="string" variable="$inputGroupName">
+            <type>string</type>
+          </tag>
+          <tag name="author" line="34" description="元兒～" link="mailto:yuan817@moztw.org"/>
+          <tag name="version" line="34" description="Version 1"/>
+        </docblock>
+        <argument line="0">
+          <name>$inputGroupName</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="49" package="Default">
+        <name>getDiaplayName</name>
+        <full_name>\UserGroup::getDiaplayName()</full_name>
+        <docblock line="49">
+          <description>取得顯示名稱</description>
+          <long-description></long-description>
+          <tag name="access" line="49" description="public"/>
+          <tag name="return" line="49" description="群組顯示名稱" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="author" line="49" description="元兒～" link="mailto:yuan817@moztw.org"/>
+          <tag name="version" line="49" description="Version 1"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="84" package="Default">
+        <name>userGroup_remove</name>
+        <full_name>\UserGroup::userGroup_remove()</full_name>
+        <docblock line="84">
+          <description>刪除使用者群組</description>
+          <long-description></long-description>
+          <tag name="access" line="84" description="public"/>
+          <tag name="return" line="84" description="是否有成功刪除&#10;         &lt;ul&gt;&#10;           &lt;li&gt;&quot;Finish&quot;: 成功建立&lt;/li&gt;&#10;           &lt;li&gt;&quot;UserExist&quot;: 尚有存在的使用者&lt;/li&gt;&#10;           &lt;li&gt;&quot;NoFound&quot;: 找不到存在的群組&lt;/li&gt;&#10;           &lt;li&gt;&quot;DBErr&quot;: 資料庫錯誤&lt;/li&gt;&#10;         &lt;/ul&gt;" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="author" line="84" description="元兒～" link="mailto:yuan817@moztw.org"/>
+          <tag name="version" line="84" description="Version 2"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="127" package="Default">
+        <name>getPermissionList</name>
+        <full_name>\UserGroup::getPermissionList()</full_name>
+        <docblock line="127">
+          <description>取得此群組內有哪些權限</description>
+          <long-description></long-description>
+          <tag name="access" line="127" description="public"/>
+          <tag name="return" line="127" description="所有權限名稱" type="array">
+            <type>array</type>
+          </tag>
+          <tag name="author" line="127" description="元兒～" link="mailto:yuan817@moztw.org"/>
+          <tag name="version" line="127" description="Version 2"/>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJzVV2tP21YY/uz8ijMrUhMG8bovm7hkdEmASoWgkGwfpik44ZBYNXbqC5StSCklKuGyom5jpWV0tNBSWko31A3BYH8mdpJP/Qs7F9u5UqhopS2KEvn4vT7nfR4fd36RSWdcXEuLC7SAwtE/xZ+2Stlc8Xij+HoGLXEujgNGfrF49LJwtGpu7rgUeE0XFBiXpST0BMOBWH9oIBqPhMNRHysKCS4p8qrKBXmNT/Aq9KHorLfjVK9RXUpqgixxugqVXkXWM7anC9jF7WeN7Hwx/6xw+KexuFc4fFxa3ypnV+h6Y+nYp1sUpKsgrWkZtZ3jUoKW1hO+pDzGBfpibdHgpUGOWI1DRUXJwVfW/0XfJy7UOmkFxOyKwPcuBtfCIBea5XKQXJCfbj6ZhMg8owjjvAbp2jivAFVTBCmFrzkXY90Fbi0tqCRqh4tBYTnQ9Z4+JJxVpXF4YD6dN3aW8FVtlXpCFJJ0KcMr/JhVJnALUkbXSGUD/BisbbSb17W0rAAjd8vI3X1ztAY6J3Ve+vziZ91j8nfahE9WUn6r83pIXQzu395nEI8nZQnl1JOapy6nFwPNCKMeZxbigprmx2GDIbVkCJhtfgdS0FXfBgKZmXLhL0K67T19apC+s2wc/1Je3y1uHBhLi8Wt398KuQI1XZFszCnG9c7nRBvUwJ2CWlDgMyI/ieHwUOBSopzgReDuCUf647GhUCTeGwnHBjFY6Mtxpb3b5vKKcfC8nH1cfI2GiHGPJBC4EpwANsE93kZz8+Fm6dkjah6vbOI1HSqTeG9GEm3+jALR3EEPOxS6EgpEwXDv5eBwK/rD9Q2Dnki4H7A+YooSiWjv66r0+ljwdV8oEqKuKG57yt5ulhTVJHubPyFII4N44D1slX1r/QidHABeh0ldq+672d7j8QVukuCSovBW243RRqGWTKPtsCbZmosqx28uEEQufGuNMANFFdYYS7oofqD5dqZ7dru8slEvsY3Sd9KEkyXnY97bNZaemKt5c3bJmHtIg9eadOqiv3YFrYmCn+0RJKQFbDuwfA8Pis/nOzl0q6k51u7QdUHVkIfx6j7KaezcM1a3ivdnnG5O9h6Qe2RdGsHZ8seF/UVj9pXjTjE42Tf4ZUhRkGeFQwu7pe2NJg6dnN3sOQj/aT3hK5OmwDEZaae3KeNbm7L/nalPGW/ubFBYnB12QK5i0yk6EMNkfhv9z07883D+ZLqb249Qu5Uhtpu2SP9R41OrPg/wVvPXGTOb4Q0pHBTL0zN0ANGxB5+F7LxEE4ji1FXvyEtNwgorKinLt47MP+5igvx8p7y+YAUlbkjhCEWddGfS9SDaz2iI7uTwaUo+fMqOnl/LzyDmDG22NL/ZoE2WnjcLocgTAbR9WkXEHZwtserACD5YM6b3aNDS1px5cxdbYuirBN1xpOLRYZt8KGW3jy3OCBu5p3gCftwuHDwwX8yVVxDxiV29wlcEnidPNzOfxZgRF/sReGY9ay5n5LRM0oHqU8wgVMYEFRtdQQP8HzzItPwPzy5048wX6KG4+K5nl8FguL29JxQN9MUvDQ2FAw4N3LKuoTM48iYzUsWxUVmBfDINPNVJeBW4r0KUzA/c47yoQ5tN+AX0ybS5tor0kC3/ukaLZWm1b/5eMPK3S3/tlW/+QKxR7TRMF2ARtiy4cQNUFijAVmAGvYFogqSTtwOLjExdSjTUROJpUpxt7jcjt4leh839nLH80slJSsZJ0CuNUzoKZKPwsQ0DLoZCwTBkJZ7R1bTHsmutul0paKr6bEgNz3IcZLBuTLn+BXhKixg=</source>
+  </file>
+  <file path="lib/class/RecommandLearnNode.php" generated-path="lib.class.RecommandLearnNode.html" hash="57167ebbd9cd464f9c425a85290f3011" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <markers>
+      <todo line="200">判斷有沒有學習完，不然會陷入無限迴圈</todo>
+    </markers>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+    <source>eJzVWltTG0cWfoZf0TvFpiQQyMKVfbCDE4dLxVsGsUjUVq1LJQ9iQGOLkTIzsuNNeQvfAhgwrBNjE7PO1S4SX2NvbAUb+88wI+kpf2FPX6bnohmNxNpbtRQFUvfp06fP5Tt9uvuDD0v5Ume8u7sTdSPz2nZt457xsFJ9c73+8k79uzvG4l3oiHeiThSPG0ur1d1He7tb5t2HnQip0qdlWZWyRSUnRYS+vjj9LchTcVnJFcrTUh/wFqKHvbRDycHJ0eGxdHYimUz3CXhAriBqWnxI1MUpUePj4vGBd/sDq8Irb1w6bqPtD3+kajBvPTa//c388uva/Q1zY2GvcrX69WXjygPj1Zq5NG88vgd6MRZ29l5/Ae2W5hiTj8Syni+q6B+ni1PiOVHLyxGiFegpyMpplNf1knYoHp+V9Xx5qi9XnIsPfjLZmx46Oh6nZGckVZOLCurvO4Ab4p1EYWhCAto5UZk+LomqMlacljo/7+zowIvq6IBxtWcL5samsXN/fChZXfpp7+Vz0k47PxJzOQmYlFT5jKhLrPGMqCKgRsmpU1JOJ41x+MuIUFeuqAx9fBhaXPP8/Ma4vmKsXTJvVBwzgPLMB5f3dldBeUalAp3G/KuwyWWlcVaYVNNRl1go5UU0gA70vX8Y/NEzq1Mg8+Wb+ner5sqCub3pEMi48KtZeVC9/QhcuT6/acwvc4uD1fZ2doATlnX9nvHiaf3CV2Dl+ub6769WjCvPQfTqxR1dLUvxGbGgSWHr+LhYLEii0qjBmXKhMFMQZw8jHFP7ksi72oc/1O6tGSsbDRbwE88lzKwI/kMkaWSC6cpTBTmHZspKTsf+l80SU6jlnB6JQj/2to4uPS9rvUeIZ4B1FOkssiIZ+7lNYa0ciIgKnX1EEGxb3HjeuUAw29VvqSbwN9JSvfF8b/dN9avt2vwV0JO5tGz+9A3VpbH4ZGxkEKXFWXNxw7x2yVxbg6a/TIATTUsxZCwtUF6YaWWec2zUFLSVRFWcQ7BeWZlFXaUi+GZWKc9NSSpymqn6Yru2+Q0eEvfRmTg9PS4VSwUp4uLA1SfPRP7AlCBrg2VVlRR9HBOOgLo8Y/AgOqqj69OypJ4DjTnV33ukpEogNQDy5PjQ0fQwOin0uQnAMCCKoIvqrKQL0T7hJEoNp9HJ0VMngRn514MS6GxeUiV0Mn1sCDcfovML1Jxs7t4jU7IyPY51FBEsiphbYDe99JmUK+vYKxBux2bukMARID/oZVVBQu2np1yxzEwOtxd8fMOs3G7iG+bK0l5lWajf/r6+sSzAt/riDXPzosMN8Hg/NyBGdHpBS+b3DRqtPNW6A/xNUov/Y6OTv71g879+Mjwx/O5s7m9yamBza35v9xo1CeAt/bBXWTXWHtcu7QIC1p5+Cwj8+6sL8OvxA0TMRFVne8H3O7WfVymw4kzth6rAH/7Wbz9vBQXc9oePKMAJ0EdsaSwDoIidNKIcJBgAcyfxtTxHWFXSygU92O6p4ePDg2k0egqNTCRHUaj5manB0rah0dGxIcwBMJjZnE3bss05vdvmtKt4FotvUcxIei7P+sH/cfcJYfSUkEEDMH/U8g6sucNel+G5wwUFCLuAFz4dqZA6hCfHcifgYAM7h9A9UsuAgEKdAQV5Q0giaNczQj2ib/RULJxo/PgpoY+EN/sR9uVwZCnNnIwStOFjbfkX/YbXkomidweuIzSjjrCM6kFXpw58wTVYBwHY2uENmgaw9Y+cbgRykwoCtjmkiLDg0FjbMF7fdLo23RwSJF4xnizQz0bluXHlLi2GatuL1Uc3oRJiFdXiFxhrt+br92/h4Uure5UlY33VRly/YKKwHQSvbERZk1RwJ3sf2IjA4A6sQEKiqornUPXZy+qvv1DRnFkBBW3ePJpxR2GMyeDdCVt7We4mcyWw0lhRnRML8t9FzJga2RpPrAXFwOs7tGIzr34JqqdaqL14bLz+JwhLu9oJ+qFjqfSxseDol6ZnJRLWaTko9m2SQHjgJKPFM1JanpM4QjQHB2tcEF+sG+jnvGj8hC+FBxezkgDog1Nb82mEvkmKTdQkoeCUbSUPOkcxvjGXzZtlTAX8bYC4LWvVJD2rg36zBXlO1iN/OsD9piH+YNMLu1rIdLV7F7C3r6579kA8WDrO5mW8MwVIHPCipwscS6KeHyxq2Ot6EwyGZG1Y0WUdY6bVBAEzJn2m42AhK5d0iGfuqLgXepIzJKiSM5yEIXQaINmtoQ5qf4zhfqxPCCMU1BNR5BTxAB1M0I9++pw5UjAnQGZg9QGs5f0oI7YGuZbP1kJPI7qRK+i7URD3s5I8m9c1mCGOggQgWsmSGMqw5XvUbK2LYrsF782kjSR6nQJHscQhEnYHrSElZHqD+khyDVwaS7aQB6NAFAki4xCSAdL2tOTWC/0HoXEZCspbLCnd3cW7fys07MO+Dgu6j5IkMUCTRURIy8LAEeaYMjgmdk/egD1VsPSMm63PQDYGsuKmgAWQbhht2RWTWp9jAlkeWV0wB6cKYsKcWJqcOB5MPiqWspNqgZJCiywW8Ncm9JSIDmIqJjrJlspaPkKgKWZrzFHagcafLDSqGJ+Jbv5gLN40r103dtYw5UxRlcQcY4ZEDXWdls6BSGfEQllylrz6XOkE7svg0CO9J2y9Z+ypqYBzAGCyVlT1CB4YSyUn0tmh4dRgjArNv9tAS0Su/rpu3tmK0P0J26tYwkeNlSu1H/5lLq7/OZUcMy4+q89fqC08o4dOlANKJ4eSyFj80dx4YW4tmU+vw1/KwHi0ggvaymr18nNz61J98wVgdfXyd/XN9dqbfxtbiwTsZR7bFI9lDdCe6iaK3nsPOb6f6JJ7EhkAZ6ofht8steWl3OkRWZGxlSiMxqxBGeq0geyo/rQS7H8kZmLUJccgYi207+mh2uaqAyx1c+p1CAadqAWxYIglmCVDqVhiS7et6zPdgQw9GgHJlJliNmEHLu4G945AYo5atFbI8uC02614dEYz77VdzR2wnIA3Ztyx65nd7gK6UR6xvJ8FMel0xaiDwm7PRIOMkHBrpb+ZVhIBWkk01UoiTCuJ1rSSCNFKIlQrCX+teDTS79bIwWYa6Q/QSH9TjfSHaaS/NY30h2ikP1Qj/a34CQ0XJxBQV2loOWgpDrbMuqTotuZmZJWun/KKCRpUWso0b+mPCRD6qt1wMGqf47Qgyb7nbTZNi0z9VMbGnGC0Nso5SkzOL0fPbsb8UYjsJBSWdfGsjLf3gLQ9/q661MleKRcKDtYNlbHfQVpgxeo4GqN7qiZXT2FluuNwDLSDZ0LTRSi/Jd/7LL/iPLywbveY7P+jYm6nFG44y/WpNLXyXILvP/C3fs9uxL86dOzR3mbVxzfz1i4ivFyDnQMVu2cgtLhpsfyiex5ePrLSqmsCn4/vvwJi1QrVOAgbXiwGF5S4GAN5egDXcEn1liuq85YFzrPDCBKgA4iKHqf6PuxEFErif7rob/4m54zm0jzeQVvx7z4rxOiWbeE6zotBlIpeGRuVZw2nhbQSITWgR6K935a9EsXJVZ/34L6JqzdI3Xh8+NYO8yE2Yu6DeqvEDbsBaHMMeHX7g8hGqsVhU1KhqMySYSwo2p9vZD8y2jHR4uAGVG9/0tQ+jCaW9mVrtkcEDN3XfU7DjCHGa43ecSTcArX7gJiJ3zQ1es968T96NNyud7CLU29INzs2ngw+/XXdrzbwjDVCR2BOd5wd8/1itJ1Mjkf2DFgHYCAyP/DC6TZm6YmkM6uLpDa7a9TuGXV1pAQ0cITdvqWcHSP2iBE3Kyt7cYY8ndlEVrK0aHjytEl4MUeXwgo5u9uRADmR+4zNOkPjguC4c1Zhnl4eXhmfzTdWst++23HblNJFvazRZpqM+A6aZiWc6ZbnzSvL7e6593N7Ta5XWWaks5Opa88WattX6f7c7+VLw3rs0593cZvtDO+QWyWgGZNzpxWaiNpLBuF51A0ozTHVEiiUsYvjPmGuRVxLN78AaxHJ0oTsrVzhO9zQt161zxc7vS8+7Ldg1lsP8OD6hWtBV8H/TTg54ij8CUhBbPoExPfMlMzytsJF08vT57jZm/kop2R+Z12VytPEr1p91QH0rfiN6+HDPlxmfCh56NDIcHrwk+zRVCo5aL8CoUbiL0BIStvnWyPcmy5OSGKBPNEZI/7t8B38OGJ7k8NpbXfJXLttLq4bj+/Vv77tuo21XaWzzUdHzhncvkacsdlUvj7nu6iAl0dsIncv+iO+PMXXfFRn5zs/PPIfXLhHVQ==</source>
+  </file>
+  <file path="lib/create_txt/create_db_config.php" generated-path="lib.create_txt.create_db_config.html" hash="b50894324c098d2cb43c59c27098fef7" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="2" package="Default">
+      <name>create_dbconfig_txt_content</name>
+      <full_name>\create_dbconfig_txt_content()</full_name>
+      <docblock line="2">
+        <description></description>
+        <long-description></long-description>
+      </docblock>
+      <argument line="0">
+        <name>$inputSQLHost</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSQLUser</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSQLPass</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSQLDBName</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSQLDBFormPrefix</name>
+        <default></default>
+        <type/>
+      </argument>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSQLHost is missing from the Docblock of \create_dbconfig_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSQLUser is missing from the Docblock of \create_dbconfig_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSQLPass is missing from the Docblock of \create_dbconfig_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSQLDBName is missing from the Docblock of \create_dbconfig_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSQLDBFormPrefix is missing from the Docblock of \create_dbconfig_txt_content()</error>
+      <error line="2" code="PPC:ERR-50011">No summary for function \create_dbconfig_txt_content()</error>
+    </parse_markers>
+    <source>eJyzsS/IKOBKK81LLsnMz1NILkpNLEmNT0lKzs9Ly0yPL6koiQcyS1LzSjRUMvMKSkuCA3088otLdBTg3NDi1CIkbkBicTES18XJLzE3FUXALb8oN6AoNS2zQlOhmotTBWopkl0KtgpKNiCXxeQpWWNXoQdUEqPi4hQf7BoUBlSvjuI8deuYEn39F5vbn02b+XTX6id7dj2b0/t05oqnE3qfr9hIhKmhQGNRTAX5Et3UvfufT1nxoqGVaFMDHIODUUwFBRZOU9e3PV+0hwhT/Rx9XVFMhYQ5xNxnPe1P1816sawRYu7TyaueNnTDLSNkupt/kG98QJCrm2cEmg2ISER2/4uFK57Panna2ft825ana6c/bW0Gms/FWZRaUlqUp4DFHmuuWgA3vwO/</source>
+  </file>
+  <file path="lib/create_txt/create_config.php" generated-path="lib.create_txt.create_config.html" hash="d74bcd06abb04edaee1384f18296b1cf" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+    </docblock>
+    <function namespace="" line="2" package="Default">
+      <name>create_config_txt_content</name>
+      <full_name>\create_config_txt_content()</full_name>
+      <docblock line="2">
+        <description></description>
+        <long-description></long-description>
+      </docblock>
+      <argument line="0">
+        <name>$inputSiteName</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSiteSubName</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSiteReferred</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSiteIndexUrl</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputSiteRootUrl</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputEncryptMode</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputCookiesPrefix</name>
+        <default></default>
+        <type/>
+      </argument>
+      <argument line="0">
+        <name>$inputCookiesLoginTimeout</name>
+        <default></default>
+        <type/>
+      </argument>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSiteName is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSiteSubName is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSiteReferred is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSiteIndexUrl is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputSiteRootUrl is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputEncryptMode is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputCookiesPrefix is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50015">Argument $inputCookiesLoginTimeout is missing from the Docblock of \create_config_txt_content()</error>
+      <error line="2" code="PPC:ERR-50011">No summary for function \create_config_txt_content()</error>
+    </parse_markers>
+    <source>eJytlG1L21AUx1/bTxGKkFqKYS/2Rh3DtXELa5uSpmyDwKVrb7vL9KbEW3Abg7rZbWqlwp6IVlYHk7BhdQ+Isum+jDdpv8USjbW1jsbNNyE5N+ec/+/cc87Y9cKDgi9XxBmCVMxkNJgmEGRUnEN5QGaI80ogJoFBhAtFkkQExtNTMMScfieL98+aJJiDmgaznTYBZ+FMSpvs+k9VSYeJxxntUYHE1Gw7WlhVHyI4ndBgDs2cMUbVPMIymoJqkQwxT3wDg678Dt3MNcY/5jAqmAsGFcwEGWvnm/VFN+t71mqjVZlTcJBTsH/0fPdh218hWTs7hgE2IoZTMT4uA0kUZTaURRq2yQMATAhRHoChYZZjh0b7RHNO/37crbL5/WXTWPAikeNcLkNvrVe8AiUFmQfx8RjPhtjuG+7P0U5J57f+IWsydaMnsdtKF8h9nNjaXreMrxeGBhI/wUsSH+kScdK8/3uTpyLtJ10r9Ue6k9YwwvkR5tiBHlRaax/pok5/l+lC/XB3QfFziv9CmCkp2gV3MoUeSnw2jtv0bM/4XlbLNzdmrTcGff3ZMho2L916Yb7bo7+qR4fHQ7HaoPNLZnX58GC1NbvbqpdHmFjkaohJ3hq/EmLC0r2E7GVYlEE+fvQziIkR3t4RbM8CYi9pjEvV5sY+1Q13Z7ksXubZ9RAi1sqcTW3t/KCb72n5eX+4sCjeFvgkSNj9Ldw9xetapn0BbQlNY5M2Viz9Jy1/shZLZnnR1mLW5s23r8zah5a+7F1LVLwpxIEsxHgxJfdI6lzll1T5w/26U7jaNl0qedrxjtnu+XRxkgBiS3msYgimIQmw49MozclpVIDI6fV2YUz92VFwJ7BvQIOkqGHmnAyjvqd/AJigxWM=</source>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <namespace name="global" full_name="global"/>
+  <deprecated count="0"/>
+</project>

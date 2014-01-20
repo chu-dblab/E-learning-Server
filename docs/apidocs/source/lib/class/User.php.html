@@ -1,0 +1,538 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * 使用者帳號類別
+ */
+// 前置作業
+require_once(DOCUMENT_ROOT.&quot;lib/class/Database.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;lib/function/password.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;lib/class/UserGroup.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;lib/function/userGroup.php&quot;);
+
+/**
+ * 使用者處理專用類別
+ * 
+ * 一個物件即代表這一位使用者
+ * @author CHU-TDAP
+ * @link https://github.com/CHU-TDAP/
+ * @version  Version 2.0
+ */
+class User {
+	/**
+	 * 使用者ID
+	 * 
+	 * @access private
+	 * @var string
+	 */
+	private $thisUID;
+	/**
+	 * 此帳號的所有資訊
+	 * 
+	 * 由 $this-&gt;getQuery() 抓取資料表中所有資訊，並放在此陣列裡
+	 * @access private
+	 * @var array
+	 */
+	private $infoArray;
+	
+	/**
+	 * 取得此使用者的資料表欄位內容
+	 *
+	 * @access private
+	 * @param string $colName 資料表欄位名稱
+	 * @return int|bool|string 資料表欄位內容
+	 * 
+	 * @author	元兒～ &lt;yuan817@moztw.org&gt;
+	 * @version	Version 1
+	 */
+	private function getQueryInfo($colName){
+		
+		return $this-&gt;infoArray[0][$colName];
+	}
+	/**
+	 * 更新此使用者的資料表欄位內容
+	 *
+	 * @access private
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
+	 * @param string $colName 資料表欄位名稱
+	 * @param string $rowContent 資料表此欄位內容
+	 * @param int|bool|string 資料表欄位內容
+	 * @return int 更動到幾筆
+	 * 
+	 * @author	元兒～ &lt;yuan817@moztw.org&gt;
+	 * @version	Version 4
+	 */
+	private function setQueryInfo($colName, $rowContent){
+		global $FORM_USER;
+		$db = new Database();
+		
+		$queryResult = $db-&gt;prepare(&quot;UPDATE &quot;.$db-&gt;table($FORM_USER).&quot; SET $colName = :content WHERE `UID` = :toUID&quot;);
+		$queryResult-&gt;bindParam(':content',$rowContent);
+		$queryResult-&gt;bindParam(':toUID',$this-&gt;thisUID);
+		$queryResult-&gt;execute();
+		
+		return $queryResult-&gt;rowCount();
+	}
+	
+	// ========================================================================
+	
+	/**
+	 * 建構子
+	 *
+	 * @access public
+	 * @param string $inputUID 使用者ID
+	 */
+	public function __construct($inputUID){
+		$this-&gt;thisUID = $inputUID;
+		$this-&gt;getQuery();
+	}
+	
+	// ========================================================================
+	
+	/**
+	 * 取得登入碼
+	 *
+	 * @access public
+	 * @return string 登入碼
+	 */
+	public function getLoggedCode(){
+		return $this-&gt;getQueryInfo(&quot;ULogged_code&quot;);
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號名稱
+	 *
+	 * @access public
+	 * @return string 帳號名稱
+	 */
+	public function getUsername(){
+		return $this-&gt;thisUID;
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得登入時間
+	 *
+	 * @access public
+	 * @return string 登入時間
+	 */
+	public function getLoginTime(){
+		return $this-&gt;getQueryInfo(&quot;ULast_In_Time&quot;);
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號建立時間
+	 *
+	 * @access public
+	 * @return string 建立時間
+	 */
+	public function getCreateTime(){
+		return $this-&gt;getQueryInfo(&quot;UBuild_Time&quot;);
+	}
+	// ========================================================================
+	
+	/**
+	 * 取得所在群組
+	 *
+	 * @access public
+	 * @return string 群組名稱
+	 */
+	public function getGroup(){
+		return $this-&gt;getQueryInfo(&quot;GID&quot;);
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得所在群組顯式名稱
+	 *
+	 * @access public
+	 * @return string 群組顯示名稱
+	 */
+	public function getGroupName(){
+		$thisGroup = new UserGroup($this-&gt;getQueryInfo(&quot;GID&quot;));
+		return $thisGroup-&gt;getDiaplayName();
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 設定所在群組
+	 *
+	 * 傳回的字串如果是:
+	 * 
+	 * @access public
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
+	 * @param string $toGroup 群組
+	 * @return string
+	 *          是否更改成功
+	 *          &lt;ul&gt;
+	 *            &lt;li&gt;&quot;Finish&quot;: 密碼更改完成 &lt;/li&gt;
+	 *            &lt;li&gt;&quot;NoFoundUserGroup&quot;: 無此使用者群組&lt;/li&gt;
+	 *            &lt;li&gt;&quot;DBErr&quot;: 其他資料庫錯誤&lt;/li&gt;
+	 *          &lt;/ul&gt;
+	 * @todo 防呆: 判斷至少要有一個以上的帳號為啟用
+	 * 
+	 * @author 元兒～ &lt;yuan817@moztw.org&gt;
+	 * @version Version 1
+	 */
+	public function setGroup($toGroup){
+		global $FORM_USER;
+		
+		//連結資料庫
+		$db = new Database();
+		
+		$queryResult = $db-&gt;prepare(&quot;UPDATE &quot;.$db-&gt;table($FORM_USER).&quot; SET `GID` = :togroup WHERE `UID` = :username&quot;);
+		$queryResult-&gt;bindParam(&quot;:username&quot;,$this-&gt;thisUID);
+		$queryResult-&gt;bindParam(&quot;:togroup&quot;,$toGroup);
+		$queryResult-&gt;execute();
+		
+		
+		$errmsg = $queryResult-&gt;errorInfo();
+		if( $errmsg[1] == 0 ) {
+			return &quot;Finish&quot;;
+		}
+		else if ( $errmsg[1] == 1452) {
+			return &quot;NoFoundUserGroup&quot;;
+		}
+		else {
+			return &quot;DBErr&quot;;
+		}
+	
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號啟用狀態
+	 *
+	 * @access public
+	 * @return bool 是否已啟用
+	 */
+	public function isEnable(){
+		return $this-&gt;getQueryInfo(&quot;UEnabled&quot;);
+	}
+	
+	/**
+	 * 設定帳號啟用狀態
+	 *
+	 * @access public
+	 * @param bool $isActive 是否為啟用
+	 * @return bool 是否更改成功
+	 */
+	public function setEnable($isActive){
+		return $this-&gt;setQueryInfo(&quot;UEnabled&quot;, $isActive);
+	}
+	
+	// ========================================================================
+	
+	/**
+	 * 取得真實姓名
+	 *
+	 * @access public
+	 * @return string 真實姓名
+	 */
+	public function getRealName(){
+		return $this-&gt;getQueryInfo(&quot;UReal_Name&quot;);
+	}
+	
+	/**
+	 * 修改真實姓名
+	 *
+	 * @access public
+	 * @param string $input 新真實姓名
+	 * @return bool 是否更改成功
+	 */
+	public function setRealName($input){
+		return $this-&gt;setQueryInfo(&quot;UReal_Name&quot;, $input);
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得暱稱
+	 *
+	 * @access public
+	 * @return string 暱稱
+	 */
+	public function getNickName(){
+		return $this-&gt;getQueryInfo(&quot;UNickname&quot;);
+	}
+	
+	/**
+	 * 修改暱稱
+	 *
+	 * @access public
+	 * @param string $input 新暱稱
+	 * @return bool 是否更改成功
+	 */
+	public function setNickName($input){
+		return $this-&gt;setQueryInfo(&quot;UNickname&quot;, $input);
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得名稱
+	 *
+	 * @access public
+	 * @return string 依照有填入多少名字（優先順序: 暱稱&rarr;真實名字&rarr;帳號名稱）
+	 */
+	public function getName(){
+		if($this-&gt;getNickName() != &quot;&quot;) {
+			return $this-&gt;getNickName();
+		}
+		else if($this-&gt;getRealName() != &quot;&quot;) {
+			return $this-&gt;getRealName();
+		}
+		else {
+			return $this-&gt;getUsername();
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得帳號Email
+	 *
+	 * @access public
+	 * @return string 使用者資訊的Email
+	 */
+	public function getEmail(){
+		return $this-&gt;getQueryInfo(&quot;UEmail&quot;);
+	}
+	
+	/**
+	 * 修改帳號Email
+	 *
+	 * @access public
+	 * @param string $input 新Email
+	 * @return bool 是否更改成功
+	 */
+	public function setEmail($input){
+		return $this-&gt;setQueryInfo(&quot;UEmail&quot;, $input);
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得此帳號查詢
+	 *
+	 * @access public
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
+	 * @return object 此使用者的資料表內容(回傳NULL為找不到使用者)
+	 * @version Version 4
+	 */
+	public function getQuery(){
+		global $FORM_USER;
+		$db = new Database();
+		
+		$queryResult = $db-&gt;prepare(&quot;SELECT * FROM &quot;.$db-&gt;table($FORM_USER).&quot; WHERE `UID` = :toUID&quot;);
+		$queryResult-&gt;bindParam(':toUID',$this-&gt;thisUID);
+		$queryResult-&gt;execute();
+		
+		$result = $queryResult-&gt;fetchAll();
+		$this-&gt;infoArray = $result;
+		return $this-&gt;infoArray;
+	}
+	// ========================================================================
+	
+	/**
+	 * 驗證密碼是否錯誤
+	 *
+	 * @access public
+	 * @global string $ENCRYPT_MODE 放在/config.php的加密方式選項
+	 * @param string $inputPasswd 密碼
+	 * @param string $mode 加密方式(可省略)
+	 * @return bool true:密碼正確，false:密碼錯誤
+	 */
+	public function isPasswordCorrect(){
+		//若帶入兩個參數
+		if(func_num_args() == 2){
+			//對應變數
+			$args = func_get_args();
+			$inputPasswd = $args[0];
+			$mode = $args[1];
+			
+			//動作
+			if( $this-&gt;getQueryInfo(&quot;UPassword&quot;) == encryptText($inputPasswd, $mode) ){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else if(func_num_args() == 1){
+			global $ENCRYPT_MODE;
+			$args = func_get_args();
+			$inputPasswd = $args[0];
+			
+			return $this-&gt;isPasswordCorrect($inputPasswd, $ENCRYPT_MODE);
+		}
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 更改密碼
+	 * 
+	 * @access public
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
+	 * @global string $ENCRYPT_MODE 在/config.php的加密方式選項
+	 * @param string $newPasswd 新密碼
+	 * @param string $newPasswdMode 新密碼加密方式（可省略）
+	 * @return string 狀態回傳
+	 * @version Version 0
+	 */
+	public function changePassword(){
+		global $FORM_USER, $ENCRYPT_MODE;
+		//若帶入兩個參數
+		if(func_num_args() == 2){
+			//對應變數
+			$args = func_get_args();
+			$newPasswd = $args[0];
+			$newPasswdMode = $args[1];
+			
+			//將密碼加密
+			$passwd = encryptText($newPasswd, $newPasswdMode);
+			
+			//登記新的密碼進資料庫
+			$this-&gt;setQueryInfo(&quot;UPassword&quot;, $passwd);
+			
+			return &quot;Finish&quot;;
+		}
+		else if(func_num_args() == 1){
+			//對應變數
+			$args = func_get_args();
+			$newPasswd = $args[0];
+			
+			return $this-&gt;changePassword($newPasswd, $ENCRYPT_MODE);
+		}
+	}
+	// ========================================================================
+	/**
+	 * 是否還在登入狀態
+	 *
+	 * @access public
+	 * @return bool 是否仍在登入狀態
+	 */
+	public function isLogged() {
+		if($this-&gt;getQuery()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 取得權限清單
+	 *
+	 * @access public
+	 * @return array 權限清單
+	 */
+	 public function getPermissionList() {
+		$thisGroup = new UserGroup($this-&gt;getQueryInfo(&quot;GID&quot;));
+		return $thisGroup-&gt;getPermissionList();
+		
+	 }
+	 
+	/**
+	 * 是否擁有此權限
+	 *
+	 * @access public
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
+	 * @global string $FORM_USER_GROUP 在/config/db_table_config.php的使用者群組資料表名稱
+	 * @param string $permissionName 權限名稱
+	 * @return bool 是否擁有
+	 */
+	 public function havePermission($permissionName) {
+		global $FORM_USER,$FORM_USER_GROUP;
+		
+		//將使用者的選擇轉為資料表的欄位名稱
+		switch($permissionName){
+			case &quot;admin&quot;:
+				$db_auth = &quot;Gauth_admin&quot;;
+				break;
+			default:
+				$db_auth = $permissionName;
+				break;
+		}
+		
+		//對此使用者進行權限查詢
+		$db = new Database();
+		$queryResult = $db-&gt;prepare(&quot;SELECT `ugroup`.`$db_auth` 
+			FROM `&quot;.$db-&gt;table($FORM_USER).&quot;` AS `user` 
+			JOIN `&quot;.$db-&gt;table($FORM_USER_GROUP).&quot;` AS `ugroup` ON `user`.`GID` = `ugroup`.`GID` 
+			WHERE `UID` = :toUID&quot;
+		);
+		$queryResult-&gt;bindParam(':toUID',$this-&gt;thisUID);
+		$queryResult-&gt;execute();
+		
+		$result = $queryResult-&gt;fetch(PDO::FETCH_NUM);
+		if($result[0] == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	 }
+	 
+	// ------------------------------------------------------------------------
+	
+	/**
+	 * 登出
+	 *
+	 * @access public
+	 * @return bool 是否登出成功
+	 */
+	 public function logout(){
+		global $FORM_USER;
+		if($this-&gt;thisUID){
+			//清除登入碼進資料庫
+			$this-&gt;setQueryInfo(&quot;ULogged_code&quot;, NULL);
+			
+			$this-&gt;thisUID = NULL;
+			return true;
+		}
+		return false;
+	 }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>
