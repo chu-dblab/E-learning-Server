@@ -1,0 +1,28 @@
+<?php
+require_once("../lib/include.php");
+require_once(DOCUMENT_ROOT."lib/class/UserGroup.php");
+
+	//require_once(DOCUMENT_ROOT."lib/user.php");
+	//require_once(DOCUMENT_ROOT."lib/userGroup.php");
+	
+	//echo userGroup_getID("admin");
+	//echo userGroup_ishave("s");
+	
+	//echo userGroup_create("v","sss",true);
+	//echo userGroup_remove("v");
+	
+	//$userGroup = userGroup_getList();
+	/*for($i=1; $i<=count($userGroup); $i++){
+		echo $i.": ".$userGroup[$i]."<br>";
+	}*/
+	/*foreach($userGroup as $key=>$value){
+	    echo $key.".".$value."<br>";
+	}*/
+	
+	//echo "admin: ".$userGroup[1]."<br>";
+	$thisGroup = new UserGroup("admin");
+	echo $thisGroup->getDiaplayName();
+	
+	
+	
+	echo "<h1>Finish</h1>";
