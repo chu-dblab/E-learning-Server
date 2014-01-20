@@ -9,6 +9,9 @@ $referer_page = $_SERVER["HTTP_REFERER"];
 $next_page = $_REQUEST['next'];
 // ------------------------------------------------------------------------
 
+/**
+ * @ignore
+ */
 function successToPage() {
 	global $next_page;
 
@@ -20,6 +23,9 @@ function successToPage() {
 	}
 }
 
+/**
+ * @ignore
+ */
 function errorToPage() {
 	global $referer_page;
 	

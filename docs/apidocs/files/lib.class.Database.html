@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="../css/template.css" type="text/css"></link><script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="../js/jquery.tools.min.js"></script><script type="text/javascript" src="../js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="../js/template.js"></script></head><body><div id="content"><h1 class="file">lib/class/Database.php<a href="../source/lib/class/Database.php.html"><img src="../images/icons/view_source.png" alt="View Source" border="0"></img></a></h1><div id="file-nav-box"><div id="file-nav-options">
+              Show:
+              <img src="../images/icons/visibility_public.png" alt="Public" id="show-public"></img><img src="../images/icons/visibility_protected.png" alt="Protected" id="show-protected"></img><img src="../images/icons/visibility_private.png" alt="Private" id="show-private"></img><span class="attribute" id="show-inherited">inherited</span></div><div id="file-nav-container"><ul id="file-nav"><li><a href="#classes"><img src="../images/icons/class.png" alt="Class" height="14"></img>
+                          Classes
+                      </a><ul><li><a href="#\Database">\Database</a></li></ul></li></ul><div style="clear: left;"></div></div><div id="file-nav-tab">
+              Table of Contents
+          </div></div><a name="top" class="anchor"></a><div id="file-description"><div class="long-description"></div></div><a name="classes" class="anchor"></a><a id="\Database" class="anchor"></a><h2 class="class">\Database<div class="to-top"><a href="#top">jump to top</a></div></h2><div class="class"><small class="package"><b>Package: </b>Default</small><div class="short-description">資料庫連接專用類別</div><div class="long-description"></div><dl class="class-info"><dt>Parent(s)</dt><dd>\PDO</dd><dt>See</dt><dd><a href="../files/
+                         \https://github.com/shuliu/myPDO"></a>
+         
+    </dd><dt>Author</dt><dd>CHU-TDAP
+         
+    </dd><dt>Extends</dt><dd>PDO
+         
+    </dd><dt>Link</dt><dd><a href="https://github.com/CHU-TDAP/">https://github.com/CHU-TDAP/</a>
+         
+    </dd><dt>Version</dt><dd>Version 1.0
+         
+    </dd></dl><h3>Methods</h3><div><a id="\Database::ErrorMsg()" class="anchor"></a><div class="method public"><a href="#" class="gripper"><img src="../images/icons/arrow_right.png"></img><img src="../images/icons/arrow_down.png" style="display: none;"></img></a><code class="title"><img src="../images/icons/method.png" alt="method" title="method"></img><img src="../images/icons/visibility_public.png" style="margin-right: 5px" alt="public"></img><span class="highlight">ErrorMsg</span><span class="nb-faded-text">()</span> : array</code><div class="description"><p class="short_description">錯誤訊息的陣列</p></div><div class="code-tabs"><div class="long-description">改寫Adodb -> ErrorMsg</div><strong>Returns</strong><table class="argument-info"><thead><tr><th>Type</th><th>Description</th></tr></thead><tr><td>array</td><td>錯誤訊息</td></tr></table><strong>Details</strong><dl class="function-info"><dt>Access</dt><dd>public
+         
+    </dd><dt>Author</dt><dd>shuliu <https://github.com/shuliu>
+         
+    </dd><dt>See</dt><dd><a href="../files/
+                         \https://github.com/shuliu/myPDO/blob/master/PDO.class.php"></a>
+         
+    </dd><dt>Since</dt><dd>2013.8.6
+         
+    </dd></dl></div><div class="clear"></div></div><a id="\Database::__construct()" class="anchor"></a><div class="method public"><a href="#" class="gripper"><img src="../images/icons/arrow_right.png"></img><img src="../images/icons/arrow_down.png" style="display: none;"></img></a><code class="title"><img src="../images/icons/method.png" alt="method" title="method"></img><img src="../images/icons/visibility_public.png" style="margin-right: 5px" alt="public"></img><span class="highlight">__construct</span><span class="nb-faded-text">()</span> : void</code><div class="description"><p class="short_description">建構子</p></div><div class="code-tabs"><div class="long-description"></div><strong>Details</strong><dl class="function-info"><dt>Access</dt><dd>public
+         
+    </dd><dt>Global</dt><dd>string $DB_SERV 在/config/db_config.php的資料庫URL
+         
+    </dd><dt>Global</dt><dd>string $DB_NAME 在/config/db_config.php的資料庫名稱
+         
+    </dd><dt>Global</dt><dd>string $DB_USER 在/config/db_config.php的資料庫帳號
+         
+    </dd><dt>Global</dt><dd>string $DB_PASS 在/config/db_config.php的資料庫密碼
+         
+    </dd></dl></div><div class="clear"></div></div><a id="\Database::table()" class="anchor"></a><div class="method public"><a href="#" class="gripper"><img src="../images/icons/arrow_right.png"></img><img src="../images/icons/arrow_down.png" style="display: none;"></img></a><code class="title"><img src="../images/icons/method.png" alt="method" title="method"></img><img src="../images/icons/visibility_public.png" style="margin-right: 5px" alt="public"></img><span class="highlight">table</span><span class="nb-faded-text">(string $inputName)</span> : string</code><div class="description"><p class="short_description">取得帶有前綴字元的完整資料表名稱</p></div><div class="code-tabs"><div class="long-description"></div><strong>Parameters</strong><table class="argument-info"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tr><th>$inputName</th><td>string</td><td><em><p>資料表名稱</p>
+</em></td></tr></table><strong>Returns</strong><table class="argument-info"><thead><tr><th>Type</th><th>Description</th></tr></thead><tr><td>string</td><td>完整的資料表名稱</td></tr></table><strong>Details</strong><dl class="function-info"><dt>Access</dt><dd>public
+         
+    </dd><dt>Author</dt><dd><a href="mailto:yuan817@moztw.org">元兒～</a>
+         
+    </dd><dt>Version</dt><dd>Version 2
+         
+    </dd></dl></div><div class="clear"></div></div></div></div></div><small class="footer">
+            Documentation was generated by
+            <a href="http://phpdoc.org">phpDocumentor
+                2.1.0
+</a>.
+        </small></body></html>

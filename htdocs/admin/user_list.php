@@ -25,18 +25,27 @@ Copyright 2013 元兒～ <yuan@Yuan-NB>
 	// ------------------------------------------------------------------------
 	
 	//輸出通知資料
+	/**
+	 * @ignore
+	 */
 	function show_status_notify(){
 		global $theAlert;
 		$theAlert->show();
 	}
 	
 	//取得共有幾個使用者
+	/**
+	 * @ignore
+	 */
 	function usersTotal(){
 		global $user_DBTable;
 		return count($user_DBTable);
 	}
 	
 	//顯示使用者列表
+	/**
+	 * @ignore
+	 */
 	function showUsersTable(){
 		global $user_DBTable;
 		if( usersTotal() > 0 ){	//若已有1個以上的使用者

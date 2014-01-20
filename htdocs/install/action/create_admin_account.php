@@ -4,7 +4,7 @@
  *
  * 將文字加密（不帶第二個參數）
  * 不帶第二個參數，就自動從預設的帶起
- *
+ * @ignore
  * @param	string	原文內容
  * @return	string	加密後內容
  * 
@@ -58,6 +58,9 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);	
 
 echo "a";
+/**
+ * @ignore
+ */
 define('DOCUMENT_ROOT',dirname(__FILE__).'/../../');
 echo "b";
 echo "c";	

@@ -8,9 +8,7 @@
 -->
 
 <?php
-	/**
-	 * 前置設定
-	*/
+	// 前置設定
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	require_once(DOCUMENT_ROOT."lib/web/AlertClass.php");
@@ -20,7 +18,10 @@
 	$theAlert = new Alert();
 	$theAlert->getInSession("site_manager");
 	
-	//輸出通知資料
+	/**
+	 * 輸出通知資料
+	 * @ignore
+	 */
 	function show_status_notify(){
 		global $theAlert;
 		$theAlert->show();
