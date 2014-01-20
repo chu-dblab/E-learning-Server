@@ -4,7 +4,7 @@
  *
  * 將文字加密（不帶第二個參數）
  * 不帶第二個參數，就自動從預設的帶起
- *
+ * @ignore
  * @param	string	原文內容
  * @return	string	加密後內容
  * 

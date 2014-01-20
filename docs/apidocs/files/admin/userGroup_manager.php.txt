@@ -23,18 +23,27 @@
 	// ------------------------------------------------------------------------
 	
 	//取得上個頁面傳來的訊息
+	/**
+	 * @ignore
+	 */
 	function show_status_notify(){
 		global $theAlert;
 		$theAlert->show();
 	}
 	
 	//取得共有幾個使用者
+	/**
+	 * @ignore
+	 */
 	function userGroupsTotal(){
 		global $userGroup_DBTable;
 		return count($userGroup_DBTable);
 	}
 	
 	//顯示使用者列表
+	/**
+	 * @ignore
+	 */
 	function showuserGroupsTable(){
 		global $userGroup_DBTable;
 		if( userGroupsTotal() > 0 ){	//若已有1個以上的使用者

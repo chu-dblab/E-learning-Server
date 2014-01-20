@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @ignore
+ */
 function backPage($toPage, $Message){
 	//利用session傳回錯誤訊息
 	session_start();
@@ -9,6 +12,9 @@ function backPage($toPage, $Message){
 	header("Location: $toPage");
 }
 
+/**
+ * @ignore
+ */
 function input_site_config(){
 	/**
 	 * 帶入使用者輸入的資料
@@ -64,7 +70,9 @@ function input_site_config(){
 	echo $inputSiteIndexUrl."<br>";*/
 }
 
-
+/**
+ * @ignore
+ */
 function input_sql_config(){
 	/**
 	 * 帶入使用者輸入的資料
@@ -116,6 +124,9 @@ function input_sql_config(){
 	
 }
 
+/**
+ * @ignore
+ */
 function input_admin_account(){
 	/**
 	 * 帶入使用者輸入的資料

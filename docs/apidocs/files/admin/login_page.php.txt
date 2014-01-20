@@ -8,9 +8,7 @@
 -->
 
 <?php
-	/**
-	 * 前置設定
-	*/
+	//前置設定
 	require_once("../lib/include.php");
 	require_once(DOCUMENT_ROOT."admin/template/template.php");
 	
@@ -26,7 +24,10 @@
 	unset($_SESSION["user_create_status_message"]);*/
 	// ------------------------------------------------------------------------
 	
-	//取得上個頁面傳來的訊息
+	/**
+	 * 取得上個頁面傳來的訊息
+	 * @ignore
+	 */
 	function show_status_notify(){
 		global $status_create, $status_create_message;
 		
@@ -45,7 +46,6 @@
 			echo "</div>";
 		}
 	}
-	// ------------------------------------------------------------------------
 
 	
 ?>

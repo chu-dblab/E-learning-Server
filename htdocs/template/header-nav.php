@@ -1,4 +1,7 @@
 <?php
+/**
+ * @ignore
+ */
 function getCurrentActiveClass($link_file){
 	$current_file = basename(getenv('SCRIPT_NAME'));	//取得目前網頁
 	

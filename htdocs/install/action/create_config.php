@@ -1,7 +1,5 @@
 <?php
-/**
- * 取得使用者輸入過的資料
-*/
+// 取得使用者輸入過的資料
 $inputSiteName = $_SESSION["install_inputSiteName"];
 $inputSiteSubName = $_SESSION["install_inputSiteSubName"];
 $inputSiteReferred = $_SESSION["install_inputSiteReferred"];
@@ -9,9 +7,7 @@ $inputEncryptMode = $_SESSION["install_inputEncryptMode"];
 $inputSiteRootUrl = $_SESSION["install_inputSiteRootUrl"];
 $inputSiteIndexUrl = $_SESSION["install_inputSiteIndexUrl"];
 
-/**
- * 網站設定檔建立
-*/
+// 網站設定檔建立
 $create_txt_content = "<?php\n/**\n * 網站根目錄\n*/\n";
 $create_txt_content .= "\tdefine('DOCUMENT_ROOT',dirname(__FILE__).'/');\n";
 $create_txt_content .= "\n";

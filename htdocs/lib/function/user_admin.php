@@ -1,15 +1,6 @@
 <?php
 /**
- * E-learning
- *
- *
- * @package	CHU-E-learning
- * @author		CHU-TDAP
- * @copyright	
- * @license		
- * @link		https://github.com/CHU-TDAP/
- * @since		Version 2.0
- * @filesource
+ * 使用者帳號管理函式庫
 */
 
 require_once(DOCUMENT_ROOT."lib/function/password.php");
@@ -20,18 +11,13 @@ require_once(DOCUMENT_ROOT."config/db_table_config.php");
 // ========================================================================
 
 /**
- * user_getList
- *
  * 取得使用者名單
  *
- * @access	public
- * @param	string	以何種內容傳回
- * @param	string	以何種方式排序
- * @return	array	索引: 使用者ID; 值: 真實名字: 暱稱
+ * @return array 索引: 使用者ID; 值: 真實名字: 暱稱
  * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
-*/
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 1
+ */
 function user_getList(){
 	global $FORM_USER;
 	
@@ -52,15 +38,12 @@ function user_getList(){
 // ------------------------------------------------------------------------
 
 /**
- * user_queryAll
- *
  * 查詢使用者帳號
  *
- * @access	public
- * @return	array	mysql_query的查詢結果
+ * @return array mysql_query的查詢結果
  * 
- * @since	Version 3
-*/
+ * @version	Version 3
+ */
 function user_queryAll(){
 	global $FORM_USER;
 	

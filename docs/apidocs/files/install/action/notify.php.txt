@@ -5,7 +5,9 @@ session_start();
 $status_message =  $_SESSION["install_status_message"];
 unset($_SESSION["install_status_message"]);
 
-
+/**
+ * @ignore
+ */
 function show_status_notify(){
 	global $status_message;
 	

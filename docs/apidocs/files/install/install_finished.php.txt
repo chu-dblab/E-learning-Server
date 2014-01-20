@@ -14,6 +14,9 @@
 	require_once("config.php");
 	require_once("template/template.php");
 	
+	/**
+	 * @ignore
+	 */
 	function show_status_notify(){
 		global $status_message;
 		

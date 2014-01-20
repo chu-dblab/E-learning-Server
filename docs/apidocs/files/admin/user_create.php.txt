@@ -22,6 +22,9 @@
 	$theAlert->getInSession("user_process");
 	
 	//輸出通知資料
+	/**
+	 * @ignore
+	 */
 	function show_status_notify(){
 		global $theAlert;
 		$theAlert->show();

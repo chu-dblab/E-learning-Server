@@ -23,7 +23,9 @@
 		$sql_query_input = $_POST["sql-query-input"];
 	}
 	// ------------------------------------------------------------------------
-	
+	/**
+	 * @ignore
+	 */
 	function show_status_notify(){
 		global $sql_status, $sql_result_message;
 		
@@ -46,11 +48,17 @@
 		}
 	}
 	
+	/**
+	 * @ignore
+	 */
 	function sqlTotal(){
 		global $sql_Table;
 		return count($sql_Table);
 	}
 	
+	/**
+	 * @ignore
+	 */
 	function showSqlTable(){
 		global $sql_Table, $sql_result;
 		if( count($sql_Table) > 0 ){

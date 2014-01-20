@@ -1,17 +1,13 @@
 <?php
 echo "s";
-/**
- * 取得使用者輸入過的資料
-*/
+// 取得使用者輸入過的資料
 $inputSQLHost = $_SESSION["install_inputSQLHost"];
 $inputSQLUser = $_SESSION["install_inputSQLUser"];
 $inputSQLPass = $_SESSION["install_inputSQLPass"];
 $inputSQLDBName = $_SESSION["install_inputSQLDBName"];
 $inputSQLDBFormPrefix = $_SESSION["install_inputSQLDBFormPrefix"];
 
-/**
- * 資料庫設定檔建立
-*/
+// 資料庫設定檔建立
 $create_txt_content = "<?php\n";
 $create_txt_content .= "\$DB_SERV = '$inputSQLHost';\t//資料庫伺服器名稱\n";
 $create_txt_content .= "\$DB_USER = '$inputSQLUser';\t//資料庫使用者名稱\n";
@@ -30,9 +26,7 @@ fclose($fp);
 
 echo "db_config text created";
 
-/**
- * 資料庫連結
-*/
+// 資料庫連結
 //連結資料庫
 $db = mysql_connect($inputSQLHost,$inputSQLUser,$inputSQLPass) or die(mysql_error());
 //設定編碼成UTF-8
@@ -42,9 +36,7 @@ mysql_query("CREATE DATABASE IF NOT EXISTS `$inputSQLDBName` DEFAULT CHARACTER S
 //指定這個資料庫
 mysql_select_db($inputSQLDBName,$db);
 
-/**
- * 建立資料表
-*/
+// 建立資料表
 //mysql_query("") or die(mysql_error());
 //".$inputSQLDBFormPrefix."
 

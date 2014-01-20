@@ -1,7 +1,8 @@
 <?php
 /**
- * 前置設定
-*/
+ * 資料庫函式庫
+ */
+// 前置設定
 require_once(DOCUMENT_ROOT."lib/class/Database.php");
 require_once(DOCUMENT_ROOT."lib/function/write_txt.php");
 require_once(DOCUMENT_ROOT."config/db_config.php"); //取得連結資料庫連結變數
@@ -10,17 +11,17 @@ require_once(DOCUMENT_ROOT."config/db_table_config.php");
 // ========================================================================
 
 /**
- * db_rename_db_name
- *
  * 更改資料庫名稱
  *
- * @param	string	新名稱
- * @return	string	寫入結果
- * 		"Finish": 成功寫入
- * 		其他: 無法寫入，回傳內文
- * 
- * @since	Version 1
- * @author	元兒～ <yuan817@moztw.org>
+ * @param string $newName 新名稱
+ * @return string
+ *          寫入結果
+ *          <ul>
+ *            <li>"Finish": 成功寫入</li>
+ *            <li>其他: 無法寫入，回傳內文</li>
+ *          </ul>
+ * @version Version 1
+ * @author 元兒～ <yuan817@moztw.org>
 */
 function db_rename_db_name($newName) {
 	require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");
@@ -51,17 +52,18 @@ function db_rename_db_name($newName) {
 // ------------------------------------------------------------------------
 
 /**
- * db_rename_prefix
- *
  * 更改資料庫前綴字元
  *
- * @param	string	新名稱
- * @return	string	寫入結果
- * 		"Finish": 成功寫入
- * 		其他: 無法寫入，回傳內文
+ * @param string $newPrefix 新名稱
+ * @return string
+ *          寫入結果
+ *          <ul>
+ *            <li>"Finish": 成功寫入</li>
+ *            <li>其他: 無法寫入，回傳內文</li>
+ *          </ul>
  * 
- * @since	Version 1
- * @author	元兒～ <yuan817@moztw.org>
+ * @version Version 1
+ * @author 元兒～ <yuan817@moztw.org>
 */
 function db_rename_prefix($newPrefix) {
 	require_once(DOCUMENT_ROOT."lib/create_txt/create_db_config.php");

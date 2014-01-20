@@ -2,15 +2,10 @@
 /**
  * E-learning
  *
- *
- * @package	CHU-E-learning
- * @author		CHU-TDAP
- * @copyright	
- * @license		
- * @link		https://github.com/CHU-TDAP/
- * @since		Version 2.0
- * @filesource
-*/
+ * @author CHU-TDAP
+ * @link https://github.com/CHU-TDAP/
+ * @version Version 2.0
+ */
 
 require_once(DOCUMENT_ROOT."lib/function/password.php");
 require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
@@ -19,16 +14,13 @@ require_once(DOCUMENT_ROOT."config/db_table_config.php");
 // ========================================================================
 
 /**
- * user_ishave
- *
  * 是否已有這個使用者
  *
- * @access	public
- * @param	string	帳號
- * @return	bool	是否已有這個使用者
+ * @param string $username 帳號
+ * @return bool 是否已有這個使用者
  * 
- * @since	Version 3
-*/
+ * @version Version 3
+ */
 function user_ishave($username){
 	global $FORM_USER;
 	
@@ -55,29 +47,27 @@ function user_ishave($username){
 // ------------------------------------------------------------------------
 
 /**
- * user_create
- *
  * 建立使用者帳號
  *
- * @access	public
- * @param	string	帳號
- * @param	string	密碼
- * @param	string	確認密碼
- * @param	string	群組
- * @param	string	是否啟用
- * @param	string	姓名
- * @param	string	暱稱
- * @param	string	e-mail
- * @return	string	是否有成功建立
- *			"Finish": 成功建立
- *			"UsernameCreatedErr": 已有這個帳號
- *			"RepPasswdErr": 確認密碼錯誤
- *			"NoGroupErr": 沒有指定的群組
-			"DBErr": 資料庫錯誤
- * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 3
-*/
+ * @param string $username 帳號
+ * @param string $passwd 密碼
+ * @param string $group 群組
+ * @param string $isActive 是否啟用
+ * @param string $name 姓名
+ * @param string $nickname 暱稱
+ * @param string $email e-mail
+ * @return string 
+ *          是否有成功建立
+ *          <ul>
+ *            <li>"Finish": 成功建立</li>
+ *            <li>"UsernameCreatedErr": 已有這個帳號</li>
+ *            <li>"RepPasswdErr": 確認密碼錯誤</li>
+ *            <li>"NoGroupErr": 沒有指定的群組</li>
+ *            <li>"DBErr": 資料庫錯誤</li>
+ *          </ul>
+ * @author 元兒～ <yuan817@moztw.org>
+ * @version Version 3
+ */
 function user_create(){
 	global $FORM_USER;
 	
@@ -154,24 +144,21 @@ function user_create(){
 // ------------------------------------------------------------------------
 
 /**
- * user_login
- *
  * 登入使用者帳號
  *
- * @access	public
- * @param	string	帳號
- * @param	string	密碼
- * @return	string	使用者登入碼
-			"NoActiveErr": 帳號未啟用
-			"PasswdErr": 密碼錯誤
-			"NoFound": 找不到存在的使用者
-			"DBErr": 資料庫寫入錯誤
- * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 3
- *
-*/
-
+ * @param string $userid 帳號
+ * @param string $userpasswd 密碼
+ * @return string
+ *          使用者登入碼
+ *          <ul>
+ *            <li>"NoActiveErr": 帳號未啟用</li>
+ *            <li>"PasswdErr": 密碼錯誤</li>
+ *            <li>"NoFound": 找不到存在的使用者</li>
+ *            <li>"DBErr": 資料庫寫入錯誤</li>
+ *          </ul>
+ * @author 元兒～ <yuan817@moztw.org>
+ * @version Version 3
+ */
 function user_login($userid, $userpasswd){
 	global $FORM_USER;
 	
@@ -226,20 +213,19 @@ function user_login($userid, $userpasswd){
 // ------------------------------------------------------------------------
 
 /**
- * user_isLoginEnable
- *
  * 此帳號是否可登入
  *
- * @access	public
- * @param	string	帳號
- * @param	string	密碼
- * @return	string	"OK": 可登入
-			"NoActiveErr": 帳號未啟用
-			"PasswdErr": 密碼錯誤
-			"NoFound": 找不到存在的使用者
- * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
+ * @param string $userid 帳號
+ * @param string $userpasswd 密碼
+ * @return string 
+ *          <ul>
+ *            <li>"OK": 可登入</li>
+ *            <li>"NoActiveErr": 帳號未啟用</li>
+ *            <li>"PasswdErr": 密碼錯誤</li>
+ *            <li>"NoFound": 找不到存在的使用者</li>
+ *          </ul>
+ * @author 元兒～ <yuan817@moztw.org>
+ * @version Version 1
  *
 */
 

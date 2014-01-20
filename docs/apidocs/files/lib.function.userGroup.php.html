@@ -138,10 +138,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-900285685"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2005977812"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-900285685" class="accordion-body collapse in">
+            <div id="namespace-2005977812" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -153,7 +153,6 @@
                                                     <li class="class"><a href="../classes/Database.html">Database</a></li>
                                                     <li class="class"><a href="../classes/UpdateInfo.html">UpdateInfo</a></li>
                                                     <li class="class"><a href="../classes/RecommandLearnNode.html">RecommandLearnNode</a></li>
-                                                    <li class="class"><a href="../classes/APIStatus.html">APIStatus</a></li>
                                                     <li class="class"><a href="../classes/User.html">User</a></li>
                                             </ul>
                 </div>
@@ -172,7 +171,7 @@
 
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
                     <h1><small>lib/function</small>userGroup.php</h1>
-                    <p><em>E-learning</em></p>
+                    <p><em></em></p>
                     
 
 
@@ -183,59 +182,13 @@
                 <aside class="span4 detailsbar">
                     <dl>
                                                     <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">CHU-E-learning</div></dd>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
                         
-                                                                                    <dt>See also</dt>
-                                                                                        <dd><a href="https://github.com/CHU-TDAP/"><div class="namespace-wrapper">https://github.com/CHU-TDAP/</div></a></dd>
-                                                    
+                        
                     </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                                    <tr>
-                                <th>
-                                    author
-                                </th>
-                                <td>
-                                                                            <p>CHU-TDAP</p>
-
-                                                                    </td>
-                            </tr>
-                                                    <tr>
-                                <th>
-                                    copyright
-                                </th>
-                                <td>
-                                                                            
-
-                                                                    </td>
-                            </tr>
-                                                    <tr>
-                                <th>
-                                    license
-                                </th>
-                                <td>
-                                                                            
-
-                                                                    </td>
-                            </tr>
-                                                    <tr>
-                                <th>
-                                    since
-                                </th>
-                                <td>
-                                                                            <p>Version 2.0</p>
-
-                                                                    </td>
-                            </tr>
-                                                    <tr>
-                                <th>
-                                    filesource
-                                </th>
-                                <td>
-                                                                            
-
-                                                                    </td>
-                            </tr>
+                                                    <tr><td colspan="2"><em>None found</em></td></tr>
                                             </table>
 
                 </aside>
@@ -255,35 +208,35 @@
             <article class="method">
                 <h3 class=" ">userGroup_create()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userGroup_create( <span class="argument">$name</span>,  <span class="argument">$display_name</span>,  <span class="argument">$adminPermissions</span>,  <span class="argument">$clientAdminPermissions</span>) : string</pre>
-                <p><em>userGroup_create</em></p>
-                <p>建立使用者群組</p>
+                <pre class="signature" style="margin-right: 54px;">userGroup_create(string <span class="argument">$name</span>, string <span class="argument">$display_name</span>, string <span class="argument">$adminPermissions</span>, string <span class="argument">$clientAdminPermissions</span>) : string</pre>
+                <p><em>建立使用者群組</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$name</td>
-                                <td>
+                                <td><p>群組ID</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$display_name</td>
-                                <td>
+                                <td><p>顯示名稱</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$adminPermissions</td>
-                                <td>
+                                <td><p>管理員權限</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$clientAdminPermissions</td>
-                                <td>
+                                <td><p>客戶端管理權限</p>
 </td>
                             </tr>
                                             </table>
@@ -291,10 +244,13 @@
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>是否有成功建立
-        "Finish": 成功建立
-        "NameCreatedErr": 有重複名稱
-        "DBErr": 資料庫錯誤</p>
+                                            &mdash; <p>是否有成功建立</p>
+
+<ul>
+           <li>"Finish": 成功建立</li>
+           <li>"NameCreatedErr": 有重複名稱</li>
+           <li>"DBErr": 資料庫錯誤</li>
+         </ul>
 
                                                 </article>
         </div>
@@ -341,17 +297,17 @@
             <article class="method">
                 <h3 class=" ">userGroup_remove()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userGroup_remove( <span class="argument">$name</span>) : string</pre>
-                <p><em>userGroup_remove</em></p>
-                <p>刪除使用者群組</p>
+                <pre class="signature" style="margin-right: 54px;">userGroup_remove(string <span class="argument">$name</span>) : string</pre>
+                <p><em>刪除使用者群組</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$name</td>
-                                <td>
+                                <td><p>群組ID</p>
 </td>
                             </tr>
                                             </table>
@@ -359,11 +315,14 @@
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>是否有成功刪除
-        "Finish": 成功刪除
-        "UserExist": 尚有存在的使用者
-"NoFound": 找不到存在的群組
-"DBErr": 資料庫錯誤</p>
+                                            &mdash; <p>是否有成功刪除</p>
+
+<ul>
+           <li>"Finish": 成功刪除</li>
+           <li>"UserExist": 尚有存在的使用者</li>
+           <li>"NoFound": 找不到存在的群組</li>
+           <li>"DBErr": 資料庫錯誤</li>
+         </ul>
 
                                                 </article>
         </div>
@@ -386,7 +345,7 @@
                     </tr>
                                     <tr>
                         <th>
-                            since
+                            version
                         </th>
                         <td>
                                                             <p>Version 2</p>
@@ -411,8 +370,8 @@
                 <h3 class=" ">userGroup_getList()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">userGroup_getList() : array</pre>
-                <p><em>userGroup_getList</em></p>
-                <p>取得使用者群組清單</p>
+                <p><em>取得使用者群組清單</em></p>
+                
 
 
                 
@@ -466,17 +425,17 @@
             <article class="method">
                 <h3 class=" ">userGroup_ishave()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userGroup_ishave( <span class="argument">$name</span>) : bool</pre>
-                <p><em>userGroup_ishave</em></p>
-                <p>是否擁有此群組</p>
+                <pre class="signature" style="margin-right: 54px;">userGroup_ishave(string <span class="argument">$name</span>) : bool</pre>
+                <p><em>是否擁有此群組</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$name</td>
-                                <td>
+                                <td><p>群組ID</p>
 </td>
                             </tr>
                                             </table>
@@ -507,7 +466,7 @@
                     </tr>
                                     <tr>
                         <th>
-                            since
+                            version
                         </th>
                         <td>
                                                             <p>Version 2</p>
@@ -531,17 +490,17 @@
             <article class="method">
                 <h3 class=" ">userGroup_getDiaplayName()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userGroup_getDiaplayName( <span class="argument">$groupName</span>) : string</pre>
-                <p><em>userGroup_getName</em></p>
-                <p>取得此使用者群組的名稱</p>
+                <pre class="signature" style="margin-right: 54px;">userGroup_getDiaplayName(string <span class="argument">$groupName</span>) : string</pre>
+                <p><em>取得此使用者群組的名稱</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$groupName</td>
-                                <td>
+                                <td><p>群組ID</p>
 </td>
                             </tr>
                                             </table>
@@ -596,23 +555,23 @@
             <article class="method">
                 <h3 class=" ">userGroup_setDiaplayName()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userGroup_setDiaplayName( <span class="argument">$groupName</span>,  <span class="argument">$displayName</span>) : string</pre>
-                <p><em>userGroup_setDiaplayName</em></p>
-                <p>取得此使用者群組的名稱</p>
+                <pre class="signature" style="margin-right: 54px;">userGroup_setDiaplayName(string <span class="argument">$groupName</span>, string <span class="argument">$displayName</span>) : string</pre>
+                <p><em>取得此使用者群組的名稱</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$groupName</td>
-                                <td>
+                                <td><p>群組ID</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$displayName</td>
-                                <td>
+                                <td><p>要更改的顯示名稱</p>
 </td>
                             </tr>
                                             </table>
@@ -620,10 +579,13 @@
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>狀態回傳
-            "Finish": 成功更改
-            "NoFound": 無此使用者群組
-            "DBErr": 其他資料庫錯誤</p>
+                                            &mdash; <p>狀態回傳</p>
+
+<ul>
+           <li>"Finish": 成功更改</li>
+           <li>"NoFound": 無此使用者群組</li>
+           <li>"DBErr": 其他資料庫錯誤</li>
+         </ul>
 
                                                 </article>
         </div>
@@ -670,23 +632,23 @@
             <article class="method">
                 <h3 class=" ">userGroup_havePermission()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userGroup_havePermission( <span class="argument">$groupName</span>,  <span class="argument">$permissionName</span>) : bool</pre>
-                <p><em>userGroup_havePermission</em></p>
-                <p>取得此使用者群組的名稱</p>
+                <pre class="signature" style="margin-right: 54px;">userGroup_havePermission(string <span class="argument">$groupName</span>, string <span class="argument">$permissionName</span>) : bool</pre>
+                <p><em>取得此使用者群組的名稱</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$groupName</td>
-                                <td>
+                                <td><p>群組ID</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$permissionName</td>
-                                <td>
+                                <td><p>權限名稱</p>
 </td>
                             </tr>
                                             </table>
@@ -741,29 +703,29 @@
             <article class="method">
                 <h3 class=" ">userGroup_setPermission()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userGroup_setPermission( <span class="argument">$groupName</span>,  <span class="argument">$permissionName</span>,  <span class="argument">$permissionEnable</span>) : bool</pre>
-                <p><em>userGroup_setPermission</em></p>
-                <p>取得此使用者群組的名稱</p>
+                <pre class="signature" style="margin-right: 54px;">userGroup_setPermission(string <span class="argument">$groupName</span>, string <span class="argument">$permissionName</span>, bool <span class="argument">$permissionEnable</span>) : bool</pre>
+                <p><em>取得此使用者群組的名稱</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$groupName</td>
-                                <td>
+                                <td><p>群組ID</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$permissionName</td>
-                                <td>
+                                <td><p>權限名稱</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>bool</td>
                                 <td>$permissionEnable</td>
-                                <td>
+                                <td><p>是否擁有</p>
 </td>
                             </tr>
                                             </table>
@@ -794,7 +756,7 @@
                     </tr>
                                     <tr>
                         <th>
-                            since
+                            version
                         </th>
                         <td>
                                                             <p>Version 1</p>
@@ -819,8 +781,8 @@
                 <h3 class=" ">userGroup_queryAll()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">userGroup_queryAll() : array</pre>
-                <p><em>userGroup_queryAll</em></p>
-                <p>查詢所有使用者群組</p>
+                <p><em>查詢所有使用者群組</em></p>
+                
 
 
                 
@@ -850,7 +812,7 @@
                     </tr>
                                     <tr>
                         <th>
-                            since
+                            version
                         </th>
                         <td>
                                                             <p>Version 2</p>
@@ -918,7 +880,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 20th, 2014 at 16:07.
+                    on January 20th, 2014 at 17:37.
                 </section>
             </section>
         </section>
