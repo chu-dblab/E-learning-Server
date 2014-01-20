@@ -21,6 +21,7 @@ class User {
 	 * 使用者ID
 	 * 
 	 * @access private
+	 * @var string
 	 */
 	private $thisUID;
 	/**
@@ -28,6 +29,7 @@ class User {
 	 * 
 	 * 由 $this->getQuery() 抓取資料表中所有資訊，並放在此陣列裡
 	 * @access private
+	 * @var array
 	 */
 	private $infoArray;
 	
@@ -49,7 +51,7 @@ class User {
 	 * 更新此使用者的資料表欄位內容
 	 *
 	 * @access private
-	 * @global string $FORM_USER 在/config/db_config.php的使用者資料表名稱
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
 	 * @param string $colName 資料表欄位名稱
 	 * @param string $rowContent 資料表此欄位內容
 	 * @param int|bool|string 資料表欄位內容
@@ -156,16 +158,17 @@ class User {
 	 * 設定所在群組
 	 *
 	 * 傳回的字串如果是:
-	 * <ul>
-	 *   <li>"Finish": 密碼更改完成 </li>
-	 *   <li>"NoFoundUserGroup": 無此使用者群組</li>
-	 *   <li>"DBErr": 其他資料庫錯誤</li>
-	 * </ul>
 	 * 
 	 * @access public
-	 * @global string $FORM_USER 在/config/db_config.php的使用者資料表名稱
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
 	 * @param string $toGroup 群組
-	 * @return string 是否更改成功
+	 * @return string
+	 *          是否更改成功
+	 *          <ul>
+	 *            <li>"Finish": 密碼更改完成 </li>
+	 *            <li>"NoFoundUserGroup": 無此使用者群組</li>
+	 *            <li>"DBErr": 其他資料庫錯誤</li>
+	 *          </ul>
 	 * @todo 防呆: 判斷至少要有一個以上的帳號為啟用
 	 * 
 	 * @author 元兒～ <yuan817@moztw.org>
@@ -310,7 +313,7 @@ class User {
 	 * 取得此帳號查詢
 	 *
 	 * @access public
-	 * @global string $FORM_USER 在/config/db_config.php的使用者資料表名稱
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
 	 * @return object 此使用者的資料表內容(回傳NULL為找不到使用者)
 	 * @version Version 4
 	 */
@@ -366,13 +369,8 @@ class User {
 	/**
 	 * 更改密碼
 	 * 
-	 * 傳回的字串如果是:
-	 * <ul>
-	 *   <li>"Finish":密碼更改完成</li>
-	 * </ul>
-	 * 
 	 * @access public
-	 * @global string $FORM_USER 在/config/db_config.php的使用者資料表名稱
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
 	 * @global string $ENCRYPT_MODE 在/config.php的加密方式選項
 	 * @param string $newPasswd 新密碼
 	 * @param string $newPasswdMode 新密碼加密方式（可省略）
@@ -436,8 +434,8 @@ class User {
 	 * 是否擁有此權限
 	 *
 	 * @access public
-	 * @global string $FORM_USER 在/config/db_config.php的使用者資料表名稱
-	 * @global string $FORM_USER_GROUP 在/config/db_config.php的使用者群組資料表名稱
+	 * @global string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱
+	 * @global string $FORM_USER_GROUP 在/config/db_table_config.php的使用者群組資料表名稱
 	 * @param string $permissionName 權限名稱
 	 * @return bool 是否擁有
 	 */

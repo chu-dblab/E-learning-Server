@@ -271,7 +271,7 @@ class MyUser {
 	 * @access public
 	 * @return object 此使用者的資料表內容(回傳NULL為找不到使用者)
 	 * 
-	 * @since Version 0
+	 * @version Version 0
 	 */
 	function getQuery(){
 		if(isset($this->userObject)) {
@@ -291,7 +291,7 @@ class MyUser {
 	 * @param string 加密方式(可省略)
 	 * @return bool true:密碼正確 false:密碼錯誤
 	 * 
-	 * @since Version 0
+	 * @version Version 0
 	 */
 	function isPasswordCorrect(){
 		if(isset($this->userObject)) {
@@ -330,7 +330,7 @@ class MyUser {
 	 * @param string $newPasswd 新密碼
 	 * @param string $newPasswdMode 新密碼加密方式（可省略）
 	 * @return string 狀態回傳
-	 * @since Version 1
+	 * @version Version 1
 	 */
 	function changePassword(){
 		global $ENCRYPT_MODE;

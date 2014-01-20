@@ -138,10 +138,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-224290640"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-585547227"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-224290640" class="accordion-body collapse in">
+            <div id="namespace-585547227" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -307,12 +307,14 @@
             <a id="property_thisUID" name="property_thisUID" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$thisUID</h3>
-                <pre class="signature">$thisUID</pre>
+                <pre class="signature">$thisUID : string</pre>
                 <p><em>使用者ID</em></p>
                 
 
 
-                            </article>
+                                <h4>Type</h4>
+                string
+                                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -330,12 +332,14 @@
             <a id="property_infoArray" name="property_infoArray" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$infoArray</h3>
-                <pre class="signature">$infoArray</pre>
+                <pre class="signature">$infoArray : array</pre>
                 <p><em>此帳號的所有資訊</em></p>
                 <p>由 $this->getQuery() 抓取資料表中所有資訊，並放在此陣列裡</p>
 
 
-                            </article>
+                                <h4>Type</h4>
+                array
+                                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -580,12 +584,6 @@
                 <p><em>設定所在群組</em></p>
                 <p>傳回的字串如果是:</p>
 
-<ul>
-  <li>"Finish": 密碼更改完成 </li>
-  <li>"NoFoundUserGroup": 無此使用者群組</li>
-  <li>"DBErr": 其他資料庫錯誤</li>
-</ul>
-
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -602,6 +600,12 @@
                     string
                                             &mdash; <p>是否更改成功</p>
 
+<ul>
+           <li>"Finish": 密碼更改完成 </li>
+           <li>"NoFoundUserGroup": 無此使用者群組</li>
+           <li>"DBErr": 其他資料庫錯誤</li>
+         </ul>
+
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -615,7 +619,7 @@
                             global
                         </th>
                         <td>
-                                                            <p>string $FORM_USER 在/config/db_config.php的使用者資料表名稱</p>
+                                                            <p>string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱</p>
 
                                                     </td>
                     </tr>
@@ -986,7 +990,7 @@
                             global
                         </th>
                         <td>
-                                                            <p>string $FORM_USER 在/config/db_config.php的使用者資料表名稱</p>
+                                                            <p>string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱</p>
 
                                                     </td>
                     </tr>
@@ -1049,11 +1053,7 @@
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">changePassword() : string</pre>
                 <p><em>更改密碼</em></p>
-                <p>傳回的字串如果是:</p>
-
-<ul>
-  <li>"Finish":密碼更改完成</li>
-</ul>
+                
 
 
                 
@@ -1075,7 +1075,7 @@
                             global
                         </th>
                         <td>
-                                                            <p>string $FORM_USER 在/config/db_config.php的使用者資料表名稱</p>
+                                                            <p>string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱</p>
 
                                                             <p>string $ENCRYPT_MODE 在/config.php的加密方式選項</p>
 
@@ -1193,9 +1193,9 @@
                             global
                         </th>
                         <td>
-                                                            <p>string $FORM_USER 在/config/db_config.php的使用者資料表名稱</p>
+                                                            <p>string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱</p>
 
-                                                            <p>string $FORM_USER_GROUP 在/config/db_config.php的使用者群組資料表名稱</p>
+                                                            <p>string $FORM_USER_GROUP 在/config/db_table_config.php的使用者群組資料表名稱</p>
 
                                                     </td>
                     </tr>
@@ -1334,7 +1334,7 @@
                             global
                         </th>
                         <td>
-                                                            <p>string $FORM_USER 在/config/db_config.php的使用者資料表名稱</p>
+                                                            <p>string $FORM_USER 在/config/db_table_config.php的使用者資料表名稱</p>
 
                                                     </td>
                     </tr>
@@ -1409,7 +1409,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 20th, 2014 at 15:04.
+                    on January 20th, 2014 at 16:05.
                 </section>
             </section>
         </section>

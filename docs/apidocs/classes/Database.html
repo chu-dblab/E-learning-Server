@@ -138,10 +138,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-857246200"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-66416583"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-857246200" class="accordion-body collapse in">
+            <div id="namespace-66416583" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -173,7 +173,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>Database</h1>
-                    <p><em>Database</em></p>
+                    <p><em>資料庫連接專用類別</em></p>
                     
 
 
@@ -234,7 +234,7 @@
                         <dt>File</dt>
                             <dd><a href="../files/lib.class.Database.php.html"><div class="path-wrapper">lib/class/Database.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">\CHU-E-learning</div></dd>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                 
@@ -246,10 +246,20 @@
                         
                                                                             <dt>See also</dt>
                                                                                     <dd><a href="https://github.com/CHU-TDAP/"><div class="namespace-wrapper">https://github.com/CHU-TDAP/</div></a></dd>
+                                                                                                                                        <dd><a href=""><div class="namespace-wrapper"></div></a></dd>
                                                     
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                extends
+                            </th>
+                            <td>
+                                                                    <p>PDO</p>
+
+                                                            </td>
+                        </tr>
                                             <tr>
                             <th>
                                 author
@@ -261,37 +271,10 @@
                         </tr>
                                             <tr>
                             <th>
-                                copyright
-                            </th>
-                            <td>
-                                                                    
-
-                                                            </td>
-                        </tr>
-                                            <tr>
-                            <th>
-                                license
-                            </th>
-                            <td>
-                                                                    <p>type filter text</p>
-
-                                                            </td>
-                        </tr>
-                                            <tr>
-                            <th>
-                                since
+                                version
                             </th>
                             <td>
                                                                     <p>Version 1.0</p>
-
-                                                            </td>
-                        </tr>
-                                            <tr>
-                            <th>
-                                filesource
-                            </th>
-                            <td>
-                                                                    <p>部份來源    https://github.com/shuliu/myPDO</p>
 
                                                             </td>
                         </tr>
@@ -328,7 +311,21 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            global
+                        </th>
+                        <td>
+                                                            <p>string $DB_SERV 在/config/db_config.php的資料庫URL</p>
+
+                                                            <p>string $DB_NAME 在/config/db_config.php的資料庫名稱</p>
+
+                                                            <p>string $DB_USER 在/config/db_config.php的資料庫帳號</p>
+
+                                                            <p>string $DB_PASS 在/config/db_config.php的資料庫密碼</p>
+
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -339,17 +336,17 @@
             <article class="method">
                 <h3 class="public ">table()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">table( <span class="argument">$inputName</span>) : string</pre>
-                <p><em>form</em></p>
-                <p>取得完整資料表名稱</p>
+                <pre class="signature" style="margin-right: 54px;">table(string <span class="argument">$inputName</span>) : string</pre>
+                <p><em>取得帶有前綴字元的完整資料表名稱</em></p>
+                
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$inputName</td>
-                                <td>
+                                <td><p>資料表名稱</p>
 </td>
                             </tr>
                                             </table>
@@ -369,7 +366,7 @@
             <table class="table table-condensed">
                                     <tr>
                         <th>
-                            since
+                            version
                         </th>
                         <td>
                                                             <p>Version 2</p>
@@ -396,7 +393,7 @@
                 <h3 class="public ">ErrorMsg()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">ErrorMsg() : array</pre>
-                <p><em>ErrorMsg</em></p>
+                <p><em>錯誤訊息的陣列</em></p>
                 <p>改寫Adodb -> ErrorMsg</p>
 
 
@@ -411,7 +408,9 @@
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -429,15 +428,6 @@
                         </th>
                         <td>
                                                             <p>shuliu <a href="https://github.com/shuliu">https://github.com/shuliu</a></p>
-
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            source
-                        </th>
-                        <td>
-                                                            <p>https://github.com/shuliu/myPDO/blob/master/PDO.class.php</p>
 
                                                     </td>
                     </tr>
@@ -494,7 +484,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 20th, 2014 at 15:04.
+                    on January 20th, 2014 at 16:05.
                 </section>
             </section>
         </section>

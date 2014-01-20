@@ -1,22 +1,24 @@
 <?php
 /**
- * 前置作業
-*/
+ * 使用者群組
+ */
+// 前置作業
 require_once(DOCUMENT_ROOT."lib/class/Database.php");
 require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
 
  /**
- * UserGroup
- * 一個物件即代表這一位使用者
+ * 一個物件即代表這一個使用者群組
  *
- * @package	CHU-E-learning
- * @author	CHU-TDAP
- * @copyright	
- * @license	type filter text
- * @link	https://github.com/CHU-TDAP/
- * @since	Version 1.0
+ * @link https://github.com/CHU-TDAP/
+ * @version Version 1.0
 */
 class UserGroup {
+	/**
+	 * 群組ID
+	 * 
+	 * @access private
+	 * @var string
+	 */
 	private $thisGroup;
 	
 	// ========================================================================
@@ -24,11 +26,10 @@ class UserGroup {
 	/**
 	 * 建構子
 	 *
-	 * @access	public
-	 * @param	string	登入碼
-	 * 
-	 * @author	元兒～ <yuan817@moztw.org>
-	 * @since	Version 1
+	 * @access public
+	 * @param string $inputGroupName 群組ID
+	 * @author 元兒～ <yuan817@moztw.org>
+	 * @version Version 1
 	*/
 	function __construct($inputGroupName) {
 		if(userGroup_ishave($inputGroupName)) {
@@ -40,11 +41,10 @@ class UserGroup {
 	/**
 	 * 取得顯示名稱
 	 *
-	 * @access	public
-	 * @return	string	群組顯示名稱
-	 *
-	 * @author	元兒～ <yuan817@moztw.org>
-	 * @since	Version 1
+	 * @access public
+	 * @return string 群組顯示名稱
+	 * @author 元兒～ <yuan817@moztw.org>
+	 * @version Version 1
 	 */
 	function getDiaplayName() {
 		global $FORM_USER_GROUP;
@@ -67,19 +67,20 @@ class UserGroup {
 	}
 	// ------------------------------------------------------------------------
 	/**
-	* remove
-	*
-	* 刪除使用者群組
-	*
-	* @access	public
-	* @return	string	是否有成功刪除
-	*			"Finish": 成功建立
-	*			"UserExist": 尚有存在的使用者
-				"NoFound": 找不到存在的群組
-				"DBErr": 資料庫錯誤
-	* @author	元兒～ <yuan817@moztw.org>
-	* @since	Version 2
-	*/
+	 * 刪除使用者群組
+	 * 
+	 * @access public
+	 * @return string
+	 *          是否有成功刪除
+	 *          <ul>
+	 *            <li>"Finish": 成功建立</li>
+	 *            <li>"UserExist": 尚有存在的使用者</li>
+	 *            <li>"NoFound": 找不到存在的群組</li>
+	 *            <li>"DBErr": 資料庫錯誤</li>
+	 *          </ul>
+	 * @author 元兒～ <yuan817@moztw.org>
+	 * @version Version 2
+	 */
 	function userGroup_remove(){
 		global $FORM_USER, $FORM_USER_GROUP;
 		//資料庫連結
@@ -116,18 +117,12 @@ class UserGroup {
 	}
 	// ------------------------------------------------------------------------
 	/**
-	* remove
+	* 取得此群組內有哪些權限
 	*
-	* 刪除使用者群組
-	*
-	* @access	public
-	* @return	string	是否有成功刪除
-	*			"Finish": 成功建立
-	*			"UserExist": 尚有存在的使用者
-				"NoFound": 找不到存在的群組
-				"DBErr": 資料庫錯誤
-	* @author	元兒～ <yuan817@moztw.org>
-	* @since	Version 2
+	* @access public
+	* @return array 所有權限名稱
+	* @author 元兒～ <yuan817@moztw.org>
+	* @version Version 2
 	*/
 	public function getPermissionList() {
 		global $FORM_USER_GROUP;
