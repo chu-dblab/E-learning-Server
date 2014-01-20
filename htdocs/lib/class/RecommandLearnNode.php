@@ -1,7 +1,6 @@
 <?php
   require_once("../../../lib/include.php");
   require_once(DOCUMENT_ROOT."lib/class/Database.php");
-
  /**
   * @Class_Name：推薦學習點
   * @author	~kobayashi();
@@ -11,8 +10,9 @@
 class RecommandLearnNode
 {
 		private $conDB;
-		
+		private $alpha = 0.5; //調和參數
 		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
+		private $gamma;  //正規化參數
 		
 		public function __construct()
 		{
@@ -62,13 +62,13 @@ class RecommandLearnNode
 		*/
 		private function isZero($point_number)
 		{
-			$isZero = false;
 			$result = $this->conDB->prepare("SELECT Mj FROM ".$this->conDB->table("target")." WHERE TID = :number AND Mj = 0");
 			$result->bindParam(":number",$point_number);
 			$result->execute();
 			
 			$row = $result->fetch();
-			if($row["Mj"] == 0) $isZero = true;
+			if($row["Mj"] == 0) return true;
+			else return false;
 		}
 		
 		private function isCurrentPointFull($point_number)
@@ -80,7 +80,7 @@ class RecommandLearnNode
 			$row = $result->fetch();
 			if($row["Mj"] == $row["PLj"]) 
 			{
-				$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Fj` = `Fj` + 1 WHERE TID = :point");
+				$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Fj` = `Fj` + 1 WHERE `TID` = :point");
 				$query->bindParam(":point",$point_number);
 				$query->execute();
 				return true;
@@ -97,6 +97,7 @@ class RecommandLearnNode
 		*/
 		public function getLearningNode($point_number,$userID)
 		{
+			$this->gamma = $this->computeNormalizationParam($userID);
 			//從資料抓取目前路徑的資料
 			$result = $this->conDB->prepare("SELECT DISTINCT ".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj,".$this->conDB->table("edge").".MoveTime".
 						" FROM ".$this->conDB->table("edge").",".$this->conDB->table("user").
@@ -117,11 +118,15 @@ class RecommandLearnNode
 					if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
 					else
 					{
-						$pathCost = $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
 						if($getNextNodeParameter["TID"] <= 15)
 						{
-							$pathCost = $pathCost * 0.06;
+							$pathCost = $this->alpha * $this->gamma * ($getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"]);
 							$isEntity = 0;
+						}
+						else 
+						{
+							$pathCost = (1-$this->alpha) * $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+							
 						}
 					}
 				//儲存計算好的下一個學習點
@@ -148,14 +153,12 @@ class RecommandLearnNode
 			}
 			
 			if(isset($node[0]))
-				$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"isEntity"=>$node[0]["isEntity"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
+				$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"pathCost"=>$node[0]["pathCost"],"isEntity"=>$node[0]["isEntity"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
 			
 			if(isset($node[1]))
-				$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
+				$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"pathCost"=>$node[1]["pathCost"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
 			if(isset($node[2]))
-				$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
-			
-			$content = array();
+				$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"pathCost"=>$node[2]["pathCost"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
 			
 			if(isset($info_1) && isset($info_2) && isset($info_3))
 				$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
@@ -174,10 +177,37 @@ class RecommandLearnNode
 		}
 		
 		/**
+		* @param
+		* @return
+		*/
+		public function computeNormalizationParam($userID)
+		{
+			$result = $this->conDB->prepare("SELECT DISTINCT ".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj,".$this->conDB->table("edge").".MoveTime".
+						" FROM ".$this->conDB->table("edge")." WHERE ".$this->conDB->table("edge").".Ti = 0");
+			$result->execute();
+			
+			$sum1 = 0;
+			$sum2 = 0;
+			while($row=$result->fetch())
+			{
+				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);				
+				
+				if($getNextNodeParameter["TID"] <= 15 ) $sum2 += $getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"];
+				else
+				{
+					$Rj = $getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"];
+					$sum1 += ($getNextNodeParameter["weights"] * ($getNextNodeParameter["S"]-$Rj+1)) / ($getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+				}				
+			}
+			$normal = $sum1 / $sum2;
+			return $normal;
+		}
+		
+		/**
 		* @Method_Name		getNodeOfLearnOfParameter
 		* @description		取得學習點的所有參數
-		* @param			$next_point_number_學習點的編號
-		* @param			$userID_學習者的帳號
+		* @param			$next_point_number 學習點的編號
+		* @param			$userID 學習者的帳號
 		* @return			取得學習點之所有參數(2D array);
 		*/	
 		private function getNodeOfLearnOfParameter($next_point_number,$userID)
@@ -246,6 +276,11 @@ class RecommandLearnNode
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			if($point == $row["TID"]) return true;
 			else return false;
+		}
+		
+		private function turnToRealPointNumber($point_number)
+		{
+			return ($point_number % 15) + 1;
 		}
 }
 ?>
