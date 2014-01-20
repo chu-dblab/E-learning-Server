@@ -1,0 +1,3 @@
+<?php
+require_once("../lib/include.php");
+echo $_COOKIE[$COOKIES_PREFIX."userLoginCode"];

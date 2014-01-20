@@ -1,0 +1,3 @@
+[submodule "htdocs/Material"]
+	path = htdocs/Material
+	url = https://github.com/CHU-TDAP/E-learning-material.git 

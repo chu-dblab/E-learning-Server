@@ -1,0 +1,23 @@
+<?php
+session_destroy();
+session_start();
+	$_SESSION["install_inputSiteName"]  = "無所不在學習導引系統";
+	$_SESSION["install_inputSiteSubName"] = "";
+	$_SESSION["install_inputSiteReferred"] = "無所不在學習導引系統";
+	$_SESSION["install_inputEncryptMode"] = "MD5";
+	$_SESSION["install_inputSiteRootUrl"] = "http://chu-elearning/";
+	$_SESSION["install_inputSiteIndexUrl"] = "http://chu-elearning/";
+	
+	$_SESSION["install_inputSQLHost"]  = "localhost";
+	$_SESSION["install_inputSQLUser"]  = "yuan";
+	$_SESSION["install_inputSQLPass"]  = "yrNeh@897625";
+	$_SESSION["install_inputSQLDBName"]  = "yuan_chu-elearn";
+	$_SESSION["install_inputSQLDBFormPrefix"]  = "ce_";
+	
+	$_SESSION["install_inputSiteAdminUser"]  = "root";
+	$_SESSION["install_inputSiteAdminPass"]  = "123";
+	$_SESSION["install_inputSiteAdminUserRealName"]  = "";
+	$_SESSION["install_inputSiteAdminUserNickName"]  = "";
+	$_SESSION["install_inputSiteAdminUserEmail"]  = "";
+	
+header("Location: pre_install_detail.php");

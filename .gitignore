@@ -1,0 +1,16 @@
+# 設定檔
+htdocs/config.php
+htdocs/config/db_config.php
+
+# 建立測試用的檔案
+test.php
+
+# KDE Dolphin自己產生的垃圾
+*.directory
+.*.kate-swp
+
+# GitEye產生的
+.project
+
+# phpdoc產生的垃圾檔案
+docs/apidocs/phpdoc-cache-*

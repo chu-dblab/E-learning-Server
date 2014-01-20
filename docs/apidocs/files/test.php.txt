@@ -1,0 +1,207 @@
+<?php 
+	echo dirname(__FILE__)."/template/template.php";
+	/**
+	 * 前置設定
+	*/
+	//require_once("lib/include.php");
+	//require_once(DOCUMENT_ROOT."lib/function/user.php");
+	//require_once(DOCUMENT_ROOT."lib/function/user_admin.php");
+	//require_once(DOCUMENT_ROOT."lib/class/User.php");
+	//require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
+	//require_once(DOCUMENT_ROOT."lib/password.php");
+	
+	//建立帳號
+	//echo user_create("zyuan817", "123456", "123456", "admin", true, "Yuan Chiu", "元兒～", "yuan817@moztw.org");
+	//帳號登入
+	//echo user_login("yuan","yrNah@897625");
+	//取得ID
+	//echo user_getUserId("qYtPZ{3S[G}iiwMk3^Q4XAXDR!RMIzgH");
+	//登出
+	//echo user_logout("qYtPZ{3S[G}iiwMk3^Q4XAXDR!RMIzgH");
+	
+	/*$userGroup = user_getGroupList();
+	//echo count($userGroup);
+	for($i=1; $i<=count($userGroup); $i++){
+		echo $i.": ".$userGroup[$i]."<br>";
+	}
+	echo user_ishaveGroup(2);*/
+	//echo user_getGroupID("usesr");
+	
+	//加密
+	//echo encryptText("eric");
+	
+	
+	/*echo $_GET['token'];
+	echo $_GET['text1'];*/
+	//echo user_login("aaaa","aaaa")."<br>";
+	//echo user_login("yuan","yrNeh@897625")."<br>";
+	
+	
+	//$theUser = new User("yuan");
+	//$theUser = new MyUser("fkUm6i{LInvxQ}^^gA*8&vj6u7#eCTgI");
+	//echo $theUser->isLogged()."<br>";
+	//echo $theUser->havePermission("user");
+	//print_r($theUser->getPermissionList());
+	
+	//echo isset($theUser);
+	//echo user_getUserId("^4R-mzH7&ykSUY)yD}#}54z-SHmcnhs!");
+	/*echo $theUser->getUsername()."<br>";
+	//echo $theUser->isPasswordCorrect("eric")."<br>";
+	
+	echo $theUser->getLoginTime()."<br>";
+	echo $theUser->getCreateTime()."<br>";
+	
+	echo $theUser->getRealName()."<br>";
+	echo $theUser->setRealName("邱迺元")."<br>";
+	echo $theUser->getNickName()."<br>";
+	echo $theUser->setNickName("元兒～")."<br>";
+	echo $theUser->getEmail()."<br>";
+	//echo $theUser->setEmail("yuan817@msn.com")."<br>";
+	echo "G:".$theUser->getGroup()."<br>";*/
+	//echo "G:".$theUser->setGroup("user")."<br>";
+	
+	//echo $theUser->getEmail()."<br>";
+	//echo "passwd:".$theUser->isPasswordCorrect("yrNah@897625");
+	//echo $theUser->changePassword("yrNeh@897625","yrNah@897625")."<br>";
+	//echo $theUser->logout();
+	
+	//echo user_logout("yuan817");
+	
+	//echo $theUser->logout()."<br>";
+	/*if($theUser->getLoggedCode()){
+		echo "true";
+	}*/
+	
+	/*$array = array("a","b","c");
+	foreach($array as $key=>$value){
+	    echo $key.".".$value."<br>";
+	}*/
+	
+	// ===================================================================================
+	/*error_reporting(E_ALL);
+	ini_set("display_errors", 1);*/
+
+	/*require_once("lib/include.php");
+	require_once(DOCUMENT_ROOT."lib/DatabaseClass.php");
+
+	$db_connect = new Database();
+	//$db_connect = new PDO("mysql:dbname=yuan_chu_elearn;host:localhost;charset=utf8;", "yuan", "yrNeh@897625");
+	//$db_connect = new PDO("mysql:host:localhost;dbname=yuan_chu_elearn;charset=utf8;", "yuan", "123456");
+
+	$result = $db_connect->query("SELECT * FROM chu_users"); 
+
+	if ($result === false){
+	print_r($db_connect->errorInfo());
+	//log the error or take some other smart action
+	}*/
+
+
+	//while($row=$result->fetch(/*PDO::FETCH_OBJ*/)){   
+		//PDO::FETCH_OBJ 指定取出資料的型態
+		//echo $row->username."\n"; 
+		//echo $row->ID."\n";  
+		
+		//echo '<pre>', print_r($row, true), '</pre>';
+		
+		//if($row){
+		//	echo "y";
+		//}
+		//else{
+		//	echo "x";
+		//}
+	//}
+
+	//$userArray = $db_connect->getTheUserArray("=rfg*]R]ta@3[D9B6eec6z-DR=VC]R5j");
+	//echo '<pre>', print_r($userArray, true), '</pre>';
+
+	// ===================================================================================
+	
+	//require_once(DOCUMENT_ROOT."lib/function/user_admin.php");
+	
+	//echo user_changeGroup("yuan","admin");
+	
+	//echo user_login("yuan817","yrNeh@897625")."<br>";
+	//echo user_ishave("yuan817");
+	
+	//echo user_logout("yuan817");
+	
+	//echo '<pre>', print_r(user_queryAll(), true), '</pre>';
+	
+	//echo user_setEnable("yuan", true);
+	
+	/*$db = new Database();
+	
+	echo "users";
+	echo "<br>";
+	echo $db->table("users");
+	
+	//echo user_create("qqq", "123456", "123456", "admin", true, "Yuan Chiu", "元兒～", "yuan817@moztw.org");*/
+	// ===================================================================================
+	//require_once(DOCUMENT_ROOT."lib/function/userGroup.php");
+	//echo userGroup_ishave("admin");
+	//echo userGroup_getDiaplayName("admin");
+	//echo userGroup_setDiaplayName("aas","XX");
+	//echo userGroup_havePermission("admin","admin");
+	//echo userGroup_setPermission("user","admin",false);
+	//$group = userGroup_getList();
+	//print_r($group);
+	//print_r(userGroup_queryAll());
+	//echo '<pre>', print_r(userGroup_queryAll(), true), '</pre>';
+	
+	//echo userGroup_create("student","學生",false);
+	//echo userGroup_remove("admin");
+	
+	// ===================================================================================
+	/*require_once(DOCUMENT_ROOT."lib/class/UserGroup.php");
+	$userGroup = new UserGroup("admin");
+	echo '<pre>', print_r($userGroup->getPermissionList(), true), '</pre>';*/
+	
+	// ===================================================================================
+	/*$db = new Database();
+	$user_DBTable = user_queryAll();	//查詢所有使用者*/
+	
+	//echo '<pre>', print_r($user_DBTable, true), '</pre>';
+	
+	// ===================================================================================
+	
+	/*require_once(DOCUMENT_ROOT."lib/web/web_user_login.php");
+	echo web_userLogin("yuan","yrNah@897625");
+	
+	$theUser = web_getLoggedUser();
+	echo $theUser->getLoginTime()."<br>";
+	echo $theUser->getCreateTime()."<br>";*/
+	//echo web_userLogout();
+	// ===================================================================================
+	/*require_once(DOCUMENT_ROOT."lib/function/database.php");
+	echo "<pre>".db_rename_prefix("chu_")."</pre>";*/
+	
+	// ===================================================================================
+	//echo $_COOKIE[$COOKIES_PREFIX."userLoginCode"];
+	
+	
+	// ===================================================================================
+	//echo "<h1>finish!!</h1>";
+	
+	// ===================================================================================
+	
+	/*$action = $_GET['a'];
+	
+	switch($action) {
+	case "a":
+		echo "hahaha";
+		break;
+	case "b":
+		echo "aaaaaaaaa.............";
+		break;
+	case "test":
+		$output = array(
+			"msg"=>"hello",
+			"hello"=>true
+		);
+		
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode($output);
+		break;
+	}*/
+	
+	//echo "test";
