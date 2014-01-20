@@ -19,6 +19,7 @@
 		 * 資料庫PDO連接物件
 		 *
 		 * @access private
+		 * @var PDO Object
 		 */
 		private $connection;
 		
