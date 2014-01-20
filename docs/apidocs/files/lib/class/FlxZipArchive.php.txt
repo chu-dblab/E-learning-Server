@@ -2,7 +2,7 @@
 /**
 * FlxZipArchive, Extends ZipArchiv.
 * Add Dirs with Files and Subdirs.
-* @link	 http://ninad.pundaliks.in/blog/2011/05/recursively-zip-a-directory-with-php/
+* @see	 http://ninad.pundaliks.in/blog/2011/05/recursively-zip-a-directory-with-php/
 * <code>
 * $archive = new FlxZipArchive;
 * // .....

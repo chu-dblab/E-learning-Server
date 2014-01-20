@@ -138,10 +138,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-754319944"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-579430820"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-754319944" class="accordion-body collapse in">
+            <div id="namespace-579430820" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -173,8 +173,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>Alert</h1>
-                    <p><em>Alert
-顯示通知訊息</em></p>
+                    <p><em>顯示通知訊息</em></p>
                     <p>需搭配Bootstrap 2.x 使用</p>
 
 
@@ -239,7 +238,7 @@
                         <dt>File</dt>
                             <dd><a href="../files/lib.web.AlertClass.php.html"><div class="path-wrapper">lib/web/AlertClass.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">\CHU-E-learning</div></dd>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                     <div class="namespace-wrapper">\Alert</div>
@@ -264,25 +263,7 @@
                         </tr>
                                             <tr>
                             <th>
-                                copyright
-                            </th>
-                            <td>
-                                                                    
-
-                                                            </td>
-                        </tr>
-                                            <tr>
-                            <th>
-                                license
-                            </th>
-                            <td>
-                                                                    <p>type filter text</p>
-
-                                                            </td>
-                        </tr>
-                                            <tr>
-                            <th>
-                                since
+                                version
                             </th>
                             <td>
                                                                     <p>Version 1.0</p>
@@ -307,12 +288,14 @@
             <a id="property_message_type" name="property_message_type" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$message_type</h3>
-                <pre class="signature">$message_type</pre>
-                <p><em></em></p>
+                <pre class="signature">$message_type : string</pre>
+                <p><em>通知型態</em></p>
                 
 
 
-                            </article>
+                                <h4>Type</h4>
+                string
+                                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -330,12 +313,14 @@
             <a id="property_message_isBlock" name="property_message_isBlock" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$message_isBlock</h3>
-                <pre class="signature">$message_isBlock</pre>
-                <p><em></em></p>
+                <pre class="signature">$message_isBlock : bool</pre>
+                <p><em>是否要顯示成一塊</em></p>
                 
 
 
-                            </article>
+                                <h4>Type</h4>
+                bool
+                                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -353,12 +338,14 @@
             <a id="property_message_content" name="property_message_content" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$message_content</h3>
-                <pre class="signature">$message_content</pre>
-                <p><em></em></p>
+                <pre class="signature">$message_content : string</pre>
+                <p><em>通知內容</em></p>
                 
 
 
-                            </article>
+                                <h4>Type</h4>
+                string
+                                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -410,7 +397,7 @@
             <article class="method">
                 <h3 class="public ">getInSession()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getInSession( <span class="argument">$message_category</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">getInSession(string <span class="argument">$message_category</span>)</pre>
                 <p><em>從Session取得通知訊息</em></p>
                 
 
@@ -418,9 +405,9 @@
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$message_category</td>
-                                <td>
+                                <td><p>通知session內的分類</p>
 </td>
                             </tr>
                                             </table>
@@ -445,7 +432,7 @@
             <article class="method">
                 <h3 class="public ">setInSession()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setInSession( <span class="argument">$message_category</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">setInSession(string <span class="argument">$message_category</span>)</pre>
                 <p><em>通知訊息紀錄到Session</em></p>
                 
 
@@ -453,9 +440,9 @@
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$message_category</td>
-                                <td>
+                                <td><p>通知session內的分類</p>
 </td>
                             </tr>
                                             </table>
@@ -596,7 +583,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 20th, 2014 at 15:04.
+                    on January 20th, 2014 at 16:07.
                 </section>
             </section>
         </section>

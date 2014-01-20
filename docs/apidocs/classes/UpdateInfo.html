@@ -138,10 +138,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1325993378"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-197571620"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1325993378" class="accordion-body collapse in">
+            <div id="namespace-197571620" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -173,7 +173,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>UpdateInfo</h1>
-                    <p><em></em></p>
+                    <p><em>更新所有使用者資訊類別</em></p>
                     
 
 
@@ -251,15 +251,6 @@
                     <table class="table table-condensed">
                                             <tr>
                             <th>
-                                Class_Name
-                            </th>
-                            <td>
-                                                                    <p>：更新所有使用者資訊類別</p>
-
-                                                            </td>
-                        </tr>
-                                            <tr>
-                            <th>
                                 author
                             </th>
                             <td>
@@ -269,7 +260,7 @@
                         </tr>
                                             <tr>
                             <th>
-                                since
+                                version
                             </th>
                             <td>
                                                                     <p>Version 1.0</p>
@@ -351,23 +342,23 @@
             <article class="method">
                 <h3 class="public ">receiveQuestionData()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">receiveQuestionData( <span class="argument">$num_of_question</span>,  <span class="argument">$point_number</span>)</pre>
-                <p><em>接收Client端傳送過來的資料</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">receiveQuestionData(mixed <span class="argument">$num_of_question</span>, mixed <span class="argument">$point_number</span>)</pre>
+                <p><em>receiveQuestionData</em></p>
+                <p>接收Client端傳送過來的資料</p>
 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>mixed</td>
                                 <td>$num_of_question</td>
-                                <td>
+                                <td><p>問題編號</p>
 </td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>mixed</td>
                                 <td>$point_number</td>
-                                <td>
+                                <td><p>標的編號</p>
 </td>
                             </tr>
                                             </table>
@@ -393,8 +384,8 @@
                 <h3 class="public ">updateQestionStatus()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">updateQestionStatus(mixed <span class="argument">$questionNumber</span>, mixed <span class="argument">$receiveData</span>)</pre>
-                <p><em>更新答題狀態</em></p>
-                
+                <p><em>updateQestionStatus</em></p>
+                <p>更新答題狀態</p>
 
 
                                     <h4>Parameters</h4>
@@ -433,9 +424,9 @@
             <article class="method">
                 <h3 class="public ">updateUserLearnData()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">updateUserLearnData( <span class="argument">$userID</span>,  <span class="argument">$point_number</span>, mixed <span class="argument">$InTime</span>, mixed <span class="argument">$OutTime</span>) : \NONE</pre>
-                <p><em></em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">updateUserLearnData( <span class="argument">$userID</span>,  <span class="argument">$point_number</span>, mixed <span class="argument">$InTime</span>, mixed <span class="argument">$OutTime</span>)</pre>
+                <p><em>updateUserLearnData</em></p>
+                <p>更新使用者的學習狀態</p>
 
 
                                     <h4>Parameters</h4>
@@ -455,21 +446,19 @@
                                                     <tr>
                                 <td>mixed</td>
                                 <td>$InTime</td>
-                                <td>
+                                <td><p>進入系統推薦的標的的時間</p>
 </td>
                             </tr>
                                                     <tr>
                                 <td>mixed</td>
                                 <td>$OutTime</td>
-                                <td>
+                                <td><p>離開系統推薦得標的的時間</p>
 </td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    \NONE
-                                                </article>
+                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -477,24 +466,7 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            Method_Name
-                        </th>
-                        <td>
-                                                            <p>updateUserLearnData</p>
-
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            description
-                        </th>
-                        <td>
-                                                            <p>更新使用者的學習狀態</p>
-
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
@@ -548,7 +520,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 20th, 2014 at 15:04.
+                    on January 20th, 2014 at 16:07.
                 </section>
             </section>
         </section>

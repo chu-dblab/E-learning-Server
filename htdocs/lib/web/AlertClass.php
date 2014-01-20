@@ -1,32 +1,40 @@
 <?php
- /**
- * Alert
+/**
  * 顯示通知訊息
  *
  * 需搭配Bootstrap 2.x 使用
- *
- * @package	CHU-E-learning
- * @author	CHU-TDAP
- * @copyright	
- * @license	type filter text
- * @link	https://github.com/CHU-TDAP/
- * @since	Version 1.0
-*/
+ * @author CHU-TDAP
+ * @link https://github.com/CHU-TDAP/
+ * @version Version 1.0
+ */
 class Alert {
 
+/**
+ * 通知型態
+ * @access private
+ * @var string
+ */
 private $message_type;
+/**
+ * 是否要顯示成一塊
+ * @access private
+ * @var bool
+ */
 private $message_isBlock;
+/**
+ * 通知內容
+ * @access private
+ * @var string
+ */
 private $message_content;
 
 /**
  * 建構子
  *
- * @access	public
- * @param	string	通知型態（warning, error, success, info）
- * @param	bool	是否要顯示成一塊
- * @param	string	通知內容
- *
- * 可不帶參數
+ * @access public
+ * @param string 通知型態（warning, error, success, info）(選填)
+ * @param bool 是否要顯示成一塊(選填)
+ * @param string 通知內容(選填)
 */
 function __construct(){
 	//若帶入3個參數
@@ -50,8 +58,8 @@ function __construct(){
 /**
 * 從Session取得通知訊息
 *
-* @access      public
-* @param	string	通知session內的分類
+* @access public
+* @param string $message_category 通知session內的分類
 */
 function getInSession($message_category){
 	//啟動session
@@ -79,8 +87,8 @@ function getInSession($message_category){
 /**
 * 通知訊息紀錄到Session
 *
-* @access      public
-* @param	string	通知session內的分類
+* @access public
+* @param string $message_category 通知session內的分類
 */
 function setInSession($message_category){
 	//啟動session
@@ -98,10 +106,10 @@ function setInSession($message_category){
 /**
 * 設定通知訊息
 *
-* @access      public
-* @param	string	通知型態（warning, error, success, info）
-* @param	bool	是否要顯示成一塊
-* @param	string	通知內容
+* @access public
+* @param string 通知型態（warning, error, success, info）
+* @param bool 是否要顯示成一塊
+* @param string 通知內容
 */
 function set($input_type, $input_isBlock, $input_content){
 	$this->message_type = $input_type;
@@ -113,7 +121,7 @@ function set($input_type, $input_isBlock, $input_content){
 /**
 * 輸出通知訊息
 *
-* @access      public
+* @access public
 */
 function show(){
 	if($this->message_type){
