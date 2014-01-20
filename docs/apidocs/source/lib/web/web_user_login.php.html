@@ -1,0 +1,165 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+// 前置作業
+require_once(DOCUMENT_ROOT.&quot;lib/function/user.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;lib/class/MyUser.php&quot;);
+
+/**
+ * 登入使用者帳號
+ *
+ * @access public
+ * @param string $userid 帳號
+ * @param string $userpasswd 密碼
+ * @return string 
+ *          使用者登入碼
+ *          &lt;ul&gt;
+ *            &lt;li&gt;&quot;NoActiveErr&quot;: 帳號未啟用&lt;/li&gt;
+ *            &lt;li&gt;&quot;PasswdErr&quot;: 密碼錯誤&lt;/li&gt;
+ *            &lt;li&gt;&quot;NoFound&quot;: 找不到存在的使用者&lt;/li&gt;
+ *            &lt;li&gt;&quot;DBErr&quot;: 資料庫寫入錯誤&lt;/li&gt;
+ *          &lt;/ul&gt;
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+ * @since Version 1
+ *
+*/
+function web_userLogin($userid, $userpasswd) {
+	global $COOKIES_PREFIX, $COOKIES_LOGIN_TIMEOUT;
+	$loginCode = user_login($userid, $userpasswd);
+	
+	//當使用者登入成功的話
+	if( $loginCode!=&quot;NoActiveErr&quot; &amp;&amp; $loginCode!=&quot;PasswdErr&quot; &amp;&amp; $loginCode!=&quot;DBErr&quot; &amp;&amp; $loginCode!=&quot;NoFound&quot;){
+		//設定cookies到使用者瀏覽器
+		setcookie($COOKIES_PREFIX.&quot;userLoginCode&quot;, $loginCode, time() + $COOKIES_LOGIN_TIMEOUT, &quot;/&quot;);
+	}
+	return $loginCode;
+}
+// ------------------------------------------------------------------------
+
+/**
+ * 登出使用者帳號
+ * 
+ * @access public
+ * @return bool 是否成功登出
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+ * @since Version 1
+*/
+function web_userLogout() {
+	global $COOKIES_PREFIX;
+	
+	if( isset($_COOKIE[$COOKIES_PREFIX.&quot;userLoginCode&quot;]) ) {
+		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX.&quot;userLoginCode&quot;];
+		
+		$theUser = new MyUser($theUserLoginCode);
+	
+		if( $result = $theUser-&gt;logout() ) {
+			setcookie($COOKIES_PREFIX.&quot;userLoginCode&quot;, &quot;&quot;, time()-3600, &quot;/&quot;);
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
+
+// ========================================================================
+
+/**
+ * 取得目前登入的使用者物件
+ * 
+ * @access public
+ * @return object 使用者物件
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+ * @since Version 1
+*/
+function web_isLogged() {
+	global $COOKIES_PREFIX;
+	
+	if( isset($_COOKIE[$COOKIES_PREFIX.&quot;userLoginCode&quot;]) ) {
+		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX.&quot;userLoginCode&quot;];
+		
+		$theUser = new MyUser($theUserLoginCode);
+		
+		if( $theUser-&gt;isLogged() ) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	} else {
+		return false;
+	}
+}
+// ------------------------------------------------------------------------
+
+/**
+ * 取得目前登入的使用者物件
+ * 
+ * @access public
+ * @return object 使用者物件
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+ * @since Version 1
+*/
+function web_getLoggedUser() {
+	global $COOKIES_PREFIX;
+	if( isset($_COOKIE[$COOKIES_PREFIX.&quot;userLoginCode&quot;]) ) {
+		$theUserLoginCode = $_COOKIE[$COOKIES_PREFIX.&quot;userLoginCode&quot;];
+		
+		$theUser = new MyUser($theUserLoginCode);
+		
+		if( $theUser-&gt;isLogged() ) {
+			return $theUser;
+		} else {
+			return null;
+		}
+		
+	} else {
+		return null;
+	}
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

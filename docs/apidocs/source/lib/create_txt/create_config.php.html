@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+function create_config_txt_content($inputSiteName, $inputSiteSubName, $inputSiteReferred, $inputSiteIndexUrl, $inputSiteRootUrl, $inputEncryptMode, $inputCookiesPrefix, $inputCookiesLoginTimeout) {
+	$create_txt_content = &quot;&lt;?php\n/**\n * 網站根目錄\n*/\n&quot;;
+	$create_txt_content .= &quot;\tdefine('DOCUMENT_ROOT',dirname(__FILE__).'/');\n&quot;;
+	$create_txt_content .= &quot;\n&quot;;
+
+	$create_txt_content .= &quot;/**\n * 網站資訊\n*/\n&quot;;
+	$create_txt_content .= &quot;\t//網站標題\n&quot;;
+	$create_txt_content .= &quot;\tdefine('SITE_NAME','$inputSiteName');\n&quot;;
+	$create_txt_content .= &quot;\t//網站副標題\n&quot;;
+	$create_txt_content .= &quot;\tdefine('SITE_SUBNAME','$inputSiteSubName');\n&quot;;
+	$create_txt_content .= &quot;\t//網站標題簡稱\n&quot;;
+	$create_txt_content .= &quot;\tdefine('SITE_NAME_REFERRED','$inputSiteReferred');\n&quot;;
+	$create_txt_content .= &quot;\n&quot;;
+
+	$create_txt_content .= &quot;\t//網站網址\n&quot;;
+	$create_txt_content .= &quot;\t//Warning: 網址後面務必加上\&quot;/\&quot;\n&quot;;
+	$create_txt_content .= &quot;\tdefine('SITE_URL','$inputSiteIndexUrl');\n&quot;;
+	$create_txt_content .= &quot;\tdefine('SITE_URL_ROOT','$inputSiteRootUrl');\n&quot;;
+	$create_txt_content .= &quot;\n&quot;;
+
+	$create_txt_content .= &quot;/**\n * 要用哪種加密方式\n * \n * 目前提供選項: MD5, SHA1, CRYPT\n*/\n&quot;;
+	$create_txt_content .= &quot;\t\$ENCRYPT_MODE = '$inputEncryptMode';\n&quot;;
+	$create_txt_content .= &quot;\n&quot;;
+
+	$create_txt_content .= &quot;/**\n * 瀏覽器Cookies\n * \n*/\n&quot;;
+	$create_txt_content .= &quot;\t//CookiesID的前綴字元\n&quot;;
+	$create_txt_content .= &quot;\t\$COOKIES_PREFIX = '$inputCookiesPrefix';\n&quot;;
+	$create_txt_content .= &quot;\t//設定登入狀態的有效期限\n&quot;;
+	$create_txt_content .= &quot;\t\$COOKIES_LOGIN_TIMEOUT = '$inputCookiesLoginTimeout';\n&quot;;
+	$create_txt_content .= &quot;\n&quot;;
+
+	$create_txt_content .= &quot;/**\n * 你的地區\n*/\n&quot;;
+	$create_txt_content .= &quot;\tdate_default_timezone_set('Asia/Taipei');\t//設定時區\n&quot;;
+	
+	return $create_txt_content;
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

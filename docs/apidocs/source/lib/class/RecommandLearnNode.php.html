@@ -1,0 +1,411 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * 推薦學習點類別
+ */
+ 
+ //前置作業
+  require_once(&quot;../../../lib/include.php&quot;);
+  require_once(DOCUMENT_ROOT.&quot;lib/class/Database.php&quot;);
+//===============================================================================================
+ /**
+  * 推薦學習點
+  *
+  * 此類別是根據論文上的公式所實作出來的類別
+  *
+  * @author ~kobayashi();
+  * @link https://github.com/CHU-TDAP/
+  * @version 2.0
+  */
+class RecommandLearnNode
+{
+		/**
+		 * 資料庫PDO物件
+		 *
+		 * @access private
+		 * @var PDO Object
+		 */
+		private $conDB;
+		
+		/**
+		 * 調和參數
+		 *
+		 * 此欄位是常數值
+		 * @access private
+		 * @var int
+		 */
+		private const $alpha = 0.5; //調和參數
+		
+		/**
+		 * 滿額指標
+		 *
+		 * 偵測目前這個學習點的人數是否已達上限，其值為true/false
+		 * @access private
+		 * @var Boolean
+		 */
+		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
+		
+		/**
+		 * 正規化參數
+		 *
+		 * @access private
+		 */
+		private $gamma;  //正規化參數
+		
+		public function __construct()
+		{
+			$this-&gt;conDB = new Database();
+			$this-&gt;fullflag = false;
+			$this-&gt;gamma = 0;
+		}
+		
+		/**
+		* 加人數
+		*
+		* 當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
+		*
+		* @access private
+		* @param string $point_number 學習點的編號
+		*/
+		public function addPeople($point_number)
+		{
+			if(!$this-&gt;isCurrentPointFull($point_number))
+			{
+				$query = $this-&gt;conDB-&gt;prepare(&quot;UPDATE `&quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;` SET `Mj` = `Mj` + 1 where `TID` = :number&quot;);
+				$query-&gt;bindParam(&quot;:number&quot;,$point_number);
+				$query-&gt;execute(); 
+			}
+			else return &quot;該學習點人數已達上限&quot;;
+		}
+		
+		/**
+		* 減人數
+		*
+		* 當使用者按下&quot;離開&quot;按鈕時, 則人數減一
+		*
+		* @access public
+		* @param $point_number 學習點的編號
+		*/		
+		public function subPeople($point_number)
+		{
+			if(!$this-&gt;isZero($point_number))
+			{
+				$query = $this-&gt;conDB-&gt;prepare(&quot;UPDATE `&quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;` SET `Mj` =`Mj` - 1 WHERE `TID` = :number&quot;);
+				$query-&gt;bindParam(&quot;:number&quot;,$point_number);
+				$query-&gt;execute();
+			}
+			else return &quot;已達最低人數，人數不可能是負值！！&quot;;
+		}
+		
+		/** 
+		* isZero
+		*
+		* 確認目前的學習點的人數是不是零
+		*
+		* @access private
+		* @param $point_number int  學習點的編號
+		* @return Boolean (true/false)
+		*/
+		private function isZero($point_number)
+		{
+			$result = $this-&gt;conDB-&gt;prepare(&quot;SELECT Mj FROM &quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot; WHERE TID = :number AND Mj = 0&quot;);
+			$result-&gt;bindParam(&quot;:number&quot;,$point_number);
+			$result-&gt;execute();
+			
+			$row = $result-&gt;fetch();
+			if($row[&quot;Mj&quot;] == 0) return true;
+			else return false;
+		}
+		
+		/**
+		 * isCurrentPointFull
+		 *
+		 * 確認這個學習點是不是人數已滿
+		 *
+		 * @access private
+		 * @param $point_number 學習點的編號
+		 * @return Boolean (true/false)
+		 */
+		private function isCurrentPointFull($point_number)
+		{
+			$result = $this-&gt;conDB-&gt;prepare(&quot;SELECT &quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.Mj,&quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.PLj&quot;.
+											&quot; FROM &quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot; WHERE TID = :point&quot;);
+			$result-&gt;bindParam(&quot;:point&quot;,$point_number);
+			$result-&gt;execute();
+			$row = $result-&gt;fetch();
+			if($row[&quot;Mj&quot;] == $row[&quot;PLj&quot;]) 
+			{
+				$query = $this-&gt;conDB-&gt;prepare(&quot;UPDATE `&quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;` SET `Fj` = `Fj` + 1 WHERE `TID` = :point&quot;);
+				$query-&gt;bindParam(&quot;:point&quot;,$point_number);
+				$query-&gt;execute();
+				return true;
+			}
+			else return false;
+		}
+		
+		/**
+		* getLearningNode
+		*
+		* 取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
+		*
+		* @param $point_number 目前學習點的編號
+		* @param $userID 使用者編號
+		* @return $recommand array 系統推薦的學習點 
+		*/
+		public function getLearningNode($point_number,$userID)
+		{
+			$this-&gt;gamma = $this-&gt;computeNormalizationParam($userID);
+			//從資料抓取目前路徑的資料
+			$result = $this-&gt;conDB-&gt;prepare(&quot;SELECT DISTINCT &quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.Ti,&quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.Tj,&quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.MoveTime&quot;.
+						&quot; FROM &quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;,&quot;.$this-&gt;conDB-&gt;table(&quot;user&quot;).
+						&quot; WHERE &quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.Ti = :point_number&quot;.&quot; AND &quot;.$this-&gt;conDB-&gt;table(&quot;user&quot;).&quot;.UID = :userID&quot;);
+			$result-&gt;bindParam(&quot;:point_number&quot;,$point_number);
+			$result-&gt;bindParam(&quot;:userID&quot;,$userID);
+			$result-&gt;execute();
+			
+			$node=array();
+			set_time_limit(60);
+			//帶入公式計算下一個要推荐的學習點的編號
+			while($row=$result-&gt;fetch()) 
+			{
+				$pathCost = -1;
+				$isEntity = 1;
+				$getNextNodeParameter = $this-&gt;getNodeOfLearnOfParameter($row[&quot;Tj&quot;],$userID);
+				
+					if($getNextNodeParameter[&quot;Fj&quot;] ==1) $pathCost = 0;
+					else
+					{
+						if($getNextNodeParameter[&quot;TID&quot;] &lt;= 15)
+						{
+							$pathCost = $this-&gt;alpha * $this-&gt;gamma * ($getNextNodeParameter[&quot;weights&quot;] / $getNextNodeParameter[&quot;TLearn_Time&quot;]);
+							$isEntity = 0;
+						}
+						else 
+						{
+							$pathCost = (1-$this-&gt;alpha) * $getNextNodeParameter[&quot;weights&quot;]*($getNextNodeParameter[&quot;S&quot;]-($getNextNodeParameter[&quot;Mj&quot;] / $getNextNodeParameter[&quot;PLj&quot;]) + 1) / ( $getNextNodeParameter[&quot;MoveTime&quot;] + $getNextNodeParameter[&quot;TLearn_Time&quot;]);
+							
+						}
+					}
+				//儲存計算好的下一個學習點
+				$thisArray = array(&quot;Ti&quot;=&gt;$row[&quot;Ti&quot;],&quot;Tj&quot;=&gt;$row[&quot;Tj&quot;],&quot;pathCost&quot;=&gt;$pathCost,&quot;TName&quot;=&gt;$getNextNodeParameter[&quot;TName&quot;],&quot;isEntity&quot;=&gt;$isEntity,&quot;LearnTime&quot;=&gt;$getNextNodeParameter[&quot;TLearn_Time&quot;],&quot;mapURL&quot;=&gt;$getNextNodeParameter[&quot;Map_Url&quot;],&quot;materialUrl&quot;=&gt;$getNextNodeParameter[&quot;Material_Url&quot;]);
+				array_push($node,$thisArray);
+			}
+			//將下一個學習點的陣列排序
+			foreach($node as $key=&gt;$value)
+			{
+				$tmp[$key] = $value[&quot;pathCost&quot;];
+			}
+			array_multisort($tmp,SORT_DESC,$node,SORT_DESC);
+			
+			//將結果(前三高的學習點)包裝成JSON傳送至手機
+			// TODO 判斷有沒有學習完，不然會陷入無限迴圈
+			$i = 0;
+			while(isset($node) &amp;&amp; isset($node[$i+1])) {
+				while($this-&gt;checkFinish($userID,$node[$i][&quot;Tj&quot;]) &amp;&amp; isset($node[$i+1])) array_splice($node, $i, 1);
+				$i++;
+			};
+			
+			if(isset($node[$i-1])) {
+				if( $this-&gt;checkFinish($userID,$node[$i-1][&quot;Tj&quot;]) ) array_pop($node);
+			}
+			
+			if(isset($node[0]))
+				$info_1 = array(&quot;node&quot;=&gt;(int)$node[0][&quot;Tj&quot;],&quot;TName&quot;=&gt;$node[0][&quot;TName&quot;],&quot;pathCost&quot;=&gt;$node[0][&quot;pathCost&quot;],&quot;isEntity&quot;=&gt;$node[0][&quot;isEntity&quot;],&quot;LearnTime&quot;=&gt;(int)$node[0][&quot;LearnTime&quot;],&quot;MapURL&quot;=&gt;$node[0][&quot;mapURL&quot;],&quot;MaterialUrl&quot;=&gt;$node[0][&quot;materialUrl&quot;]);
+			
+			if(isset($node[1]))
+				$info_2 = array(&quot;node&quot;=&gt;(int)$node[1][&quot;Tj&quot;],&quot;TName&quot;=&gt;$node[1][&quot;TName&quot;],&quot;pathCost&quot;=&gt;$node[1][&quot;pathCost&quot;],&quot;isEntity&quot;=&gt;$node[1][&quot;isEntity&quot;],&quot;LearnTime&quot;=&gt;(int)$node[1][&quot;LearnTime&quot;],&quot;MapURL&quot;=&gt;$node[1][&quot;mapURL&quot;],&quot;MaterialUrl&quot;=&gt;$node[1][&quot;materialUrl&quot;]);
+			if(isset($node[2]))
+				$info_3 = array(&quot;node&quot;=&gt;(int)$node[2][&quot;Tj&quot;],&quot;TName&quot;=&gt;$node[2][&quot;TName&quot;],&quot;pathCost&quot;=&gt;$node[2][&quot;pathCost&quot;],&quot;isEntity&quot;=&gt;$node[2][&quot;isEntity&quot;],&quot;LearnTime&quot;=&gt;(int)$node[2][&quot;LearnTime&quot;],&quot;MapURL&quot;=&gt;$node[2][&quot;mapURL&quot;],&quot;MaterialUrl&quot;=&gt;$node[2][&quot;materialUrl&quot;]);
+			
+			if(isset($info_1) &amp;&amp; isset($info_2) &amp;&amp; isset($info_3))
+				$content = array(&quot;first&quot;=&gt;$info_1,&quot;second&quot;=&gt;$info_2,&quot;third&quot;=&gt;$info_3);
+			else if(isset($info_1) &amp;&amp; isset($info_2))
+				$content = array(&quot;first&quot;=&gt;$info_1,&quot;second&quot;=&gt;$info_2);
+			else if(isset($info_1))
+				$content = array(&quot;first&quot;=&gt;$info_1);
+			
+			if(isset($content[&quot;first&quot;])) {
+				$recommand = array(&quot;currentNode&quot;=&gt;(int)$node[0][&quot;Ti&quot;],&quot;nextNode&quot;=&gt;$content);
+			}
+			else {
+				$recommand = array(&quot;currentNode&quot;=&gt;(int)$point_number,&quot;nextNode&quot;=&gt;null);
+			}
+			return $recommand;
+		}
+		
+		/**
+		 * computeNormalizationParam
+		 *
+		 * 計算正規化參數
+		 *
+		 * @param $userID 使用者編號
+		 * @return $normal double 正規化參數
+		 */
+		public function computeNormalizationParam($userID)
+		{
+			$result = $this-&gt;conDB-&gt;prepare(&quot;SELECT DISTINCT &quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.Ti,&quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.Tj,&quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.MoveTime&quot;.
+						&quot; FROM &quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot; WHERE &quot;.$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.Ti = 0&quot;);
+			$result-&gt;execute();
+			
+			$sum1 = 0;
+			$sum2 = 0;
+			while($row=$result-&gt;fetch())
+			{
+				$getNextNodeParameter = $this-&gt;getNodeOfLearnOfParameter($row[&quot;Tj&quot;],$userID);				
+				
+				if($getNextNodeParameter[&quot;TID&quot;] &lt;= 15 ) $sum2 += $getNextNodeParameter[&quot;weights&quot;] / $getNextNodeParameter[&quot;TLearn_Time&quot;];
+				else
+				{
+					$Rj = $getNextNodeParameter[&quot;Mj&quot;] / $getNextNodeParameter[&quot;PLj&quot;];
+					$sum1 += ($getNextNodeParameter[&quot;weights&quot;] * ($getNextNodeParameter[&quot;S&quot;]-$Rj+1)) / ($getNextNodeParameter[&quot;MoveTime&quot;] + $getNextNodeParameter[&quot;TLearn_Time&quot;]);
+				}				
+			}
+			$normal = $sum1 / $sum2;
+			return $normal;
+		}
+		
+		/**
+		* getNodeOfLearnOfParameter
+		*
+		* 取得學習點的所有參數
+		*
+		* @param $next_point_number 學習點的編號
+		* @param $userID 學習者的帳號
+		* @return $node array 取得學習點之所有參數
+		*/	
+		private function getNodeOfLearnOfParameter($next_point_number,$userID)
+		{
+			$result = $this-&gt;conDB-&gt;prepare(&quot;SELECT &quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.TID,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.Mj,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.PLj,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.TName,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;belong&quot;).&quot;.weights,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.Fj,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.TLearn_Time,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;.MoveTime,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.S,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.MapID,&quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.MaterialID&quot;.
+											&quot; FROM &quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;,&quot;.
+													$this-&gt;conDB-&gt;table(&quot;belong&quot;).&quot;,&quot;.
+													$this-&gt;conDB-&gt;table(&quot;edge&quot;).&quot;,&quot;.
+													$this-&gt;conDB-&gt;table(&quot;user&quot;).
+											&quot; WHERE &quot;.$this-&gt;conDB-&gt;table(&quot;user&quot;).&quot;.UID = :UID AND &quot;.
+														$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.TID = :next_point_number&quot;);
+			$result-&gt;bindParam(&quot;:UID&quot;,$userID);
+			$result-&gt;bindParam(&quot;:next_point_number&quot;,$next_point_number);
+			$result-&gt;execute();		
+			$node = array();
+			while($row=$result-&gt;fetch())
+			{
+				$node+=array(&quot;TID&quot;=&gt;$row[&quot;TID&quot;],
+							&quot;PLj&quot;=&gt;$row[&quot;PLj&quot;],
+							&quot;Mj&quot;=&gt;$row[&quot;Mj&quot;],
+							&quot;S&quot; =&gt; $row[&quot;S&quot;],
+							&quot;Fj&quot;=&gt;$row[&quot;Fj&quot;],
+							&quot;MoveTime&quot;=&gt;$row[&quot;MoveTime&quot;],
+							&quot;weights&quot;=&gt;$row[&quot;weights&quot;],
+							&quot;TName&quot;=&gt;$row[&quot;TName&quot;],
+							&quot;TLearn_Time&quot;=&gt;$row[&quot;TLearn_Time&quot;],&quot;Map_Url&quot;=&gt;$row[&quot;MapID&quot;],&quot;Material_Url&quot;=&gt;$row[&quot;MaterialID&quot;]);
+			}
+			return $node;
+		}
+		
+		/**
+		 * getLearningStatus
+		 * 取得使用者學習的狀態
+		 *
+		 * @param $userID 使用者編號
+		 * @param $point_number 學習點的編號
+		 * @return $row array 學習狀態資訊
+		 */	
+		public function getLearningStatus($userID,$point_number)
+		{
+			$result = $this-&gt;conDB-&gt;prepare(&quot;SELECT &quot;.$this-&gt;conDB-&gt;table(&quot;user&quot;).&quot;.UID,&quot;.$this-&gt;conDB-&gt;table(&quot;user&quot;).&quot;.UNickname,&quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.TLearn_Time,&quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.Mj &quot;.
+										&quot; FROM &quot;.$this-&gt;conDB-&gt;table(&quot;user&quot;).&quot;,&quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).
+										&quot; WHERE &quot;.$this-&gt;conDB-&gt;table(&quot;user&quot;).&quot;.UID = :UID AND &quot;.$this-&gt;conDB-&gt;table(&quot;target&quot;).&quot;.TID = :TID&quot;);
+			$result-&gt;bindParam(&quot;:UID&quot;,$userID);
+			$result-&gt;bindParam(&quot;:TID&quot;,$point_number);
+			$result-&gt;execute();
+			$row = $result-&gt;fetch();
+			return $row;
+		}
+		
+		/**
+		 * checkFinish
+		 *
+		 * 確認使用者是不是學過系統推薦的學習點
+		 *
+		 * @param $userID 使用者編號
+		 * @param $point 學習點編號
+		 * @return Boolean (true/flase)
+		 */
+		private function checkFinish($userID,$point)
+		{
+			$result = $this-&gt;conDB-&gt;prepare(&quot;SELECT &quot;.$this-&gt;conDB-&gt;table(&quot;study&quot;).&quot;.TID FROM &quot;.$this-&gt;conDB-&gt;table(&quot;study&quot;).&quot; WHERE UID = :uid AND TID = :point&quot;);
+			$result-&gt;bindParam(&quot;:uid&quot;,$userID);
+			$result-&gt;bindParam(&quot;:point&quot;,$point);
+			$result-&gt;execute();
+			$row = $result-&gt;fetch(PDO::FETCH_ASSOC);
+			if($point == $row[&quot;TID&quot;]) return true;
+			else return false;
+		}
+		
+		/**
+		 * turnToRealPointNumber
+		 *
+		 * 將標的編號轉換成實際的學習點編號
+		 *
+		 * @access private
+		 * @param $point_number 標的編號
+		 * @return int 實際的學習點編號
+		 */
+		private function turnToRealPointNumber($point_number)
+		{
+			return ($point_number % 15) + 1;
+		}
+}
+?&gt;</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

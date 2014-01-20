@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * 更新所有使用者資訊類別
+ */
+	require_once(&quot;../../../lib/include.php&quot;);
+	require_once(DOCUMENT_ROOT.&quot;lib/class/Database.php&quot;);
+//==========================================================================================================
+	/**
+	 * 更新所有使用者資訊類別
+	 *
+	 * @author ~kobayashi();
+	 * @link https://github.com/CHU-TDAP/
+	 * @version Version 1.0
+	 */
+	class UpdateInfo
+	{
+		/**
+		 * 連接資料庫的PDO物件
+		 * @access private
+		 * @var PDO Object
+		 */
+		private $conDB;
+		
+		public function __construct()
+		{
+			$this-&gt;conDB = new Database();
+		}
+		
+		/**
+		 * receiveQuestionData
+		 *
+		 * 接收Client端傳送過來的資料
+		 * @param $num_of_question 問題編號
+		 * @param $point_number 標的編號
+		 */
+		public function receiveQuestionData($num_of_question,$point_number)
+		{
+			$result = $this-&gt;conDB-&gt;prepare(&quot;INSERT INTO &quot;.$this-&gt;conDB-&gt;table(&quot;question&quot;).&quot; VALUES(:qid,:tid,0,0)&quot;);
+			$result-&gt;bindParam(&quot;:qid&quot;,$num_of_question);
+			$result-&gt;bindParam(&quot;:tid&quot;,$point_number);
+			$result-&gt;execute();
+			
+			$test = $result-&gt;errorInfo();
+			echo print_r($test);
+		}
+		
+		/**
+		 * updateQestionStatus
+		 *
+		 * 更新答題狀態
+		 *
+		 * @param $questionNumber
+		 * @param $receiveData
+		 */
+		public function updateQestionStatus($questionNumber,$receiveData)
+		{
+				if($receiveData[&quot;correct&quot;] == 1)
+				{
+					$result = $this-&gt;conDB-&gt;prepare(&quot;UPDATE `&quot;.$this-&gt;conDB-&gt;table(&quot;question&quot;).&quot;` SET `Cnumber` = `Cnumber` + 1 WHERE `QID` = :qid&quot;);
+					$result-&gt;bindParam(&quot;:qid&quot;,$receiveData[&quot;QID&quot;]);
+					$result-&gt;execute();
+					$result-&gt;errorInfo();
+					$info = $result-&gt;errorInfo();
+					return print_r($info);
+				}
+				else if($receiveData[&quot;wrong&quot;] == 1)
+				{
+					$result = $this-&gt;conDB-&gt;prepare(&quot;UPDATE `&quot;.$this-&gt;conDB-&gt;table(&quot;question&quot;).&quot;` SET `Wnumber` = `Wnumber` + 1 WHERE `QID` = :qid&quot;);
+					$result-&gt;bindParam(&quot;:qid&quot;,$receiveData[&quot;QID&quot;]);
+					$result-&gt;execute();
+					$info = $result-&gt;errorInfo();
+					return print_r($info);
+				}
+				else return false;
+		}
+		
+		/**
+		 * updateUserLearnData
+		 *
+		 * 更新使用者的學習狀態
+		 *
+		 * @param $InTime 進入系統推薦的標的的時間
+		 * @param $OutTime 離開系統推薦得標的的時間
+		 */
+		public function updateUserLearnData($userID,$point_number,$InTime,$OutTime)
+		{
+			
+			$result = $this-&gt;conDB-&gt;prepare(&quot;INSERT INTO `&quot;.$this-&gt;conDB-&gt;table(&quot;study&quot;).&quot;` VALUES (:point,:ID,:in,:out)&quot;);
+			$result-&gt;bindParam(&quot;:point&quot;,$point_number);
+			$result-&gt;bindParam(&quot;:ID&quot;,$userID);
+			$result-&gt;bindParam(&quot;:in&quot;,$InTime);
+			$result-&gt;bindParam(&quot;:out&quot;,$OutTime);
+			$result-&gt;execute();
+		}
+	}
+?&gt;</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

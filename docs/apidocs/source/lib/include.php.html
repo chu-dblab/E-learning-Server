@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php 
+/**
+ * 
+*/
+$INCLUDE_ROOT_FILE = dirname(__FILE__).&quot;/../&quot;;	//根目錄的位置
+require_once($INCLUDE_ROOT_FILE.&quot;config.php&quot;); //取得網站根目錄位置
+
+require_once(DOCUMENT_ROOT.&quot;config/dev_config.php&quot;); //取得除錯參數
+require_once(DOCUMENT_ROOT.&quot;config/db_config.php&quot;); //取得連結資料庫連結變數
+require_once(DOCUMENT_ROOT.&quot;config/db_table_config.php&quot;); //取得資料表對應</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

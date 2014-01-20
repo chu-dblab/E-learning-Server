@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * 使用者帳號管理函式庫
+*/
+
+require_once(DOCUMENT_ROOT.&quot;lib/function/password.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;lib/function/user.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;lib/function/userGroup.php&quot;);
+require_once(DOCUMENT_ROOT.&quot;config/db_table_config.php&quot;);
+
+// ========================================================================
+
+/**
+ * 取得使用者名單
+ *
+ * @return array 索引: 使用者ID; 值: 真實名字: 暱稱
+ * 
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+ * @since Version 1
+ */
+function user_getList(){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = new Database();
+	
+	//取得所有使用者
+	$result_sql = $db-&gt;query( &quot;SELECT `UID`, `UReal_Name`, `UNickname` FROM &quot;.$db-&gt;table($FORM_USER) );
+		
+	//$result[內部群組名稱] = 使用者看得到的群組名稱
+	while( $db_thisArray = $result_sql-&gt;fetch() ) {
+		$output_realName = $db_thisArray['UReal_Name'];
+		$output_nickName = $db_thisArray['UNickname'];
+		$result[ $db_thisArray['UID'] ] = $output_realName.&quot;- &quot;.$output_nickName;
+	}
+	return $result;
+}
+// ------------------------------------------------------------------------
+
+/**
+ * 查詢使用者帳號
+ *
+ * @return array mysql_query的查詢結果
+ * 
+ * @version	Version 3
+ */
+function user_queryAll(){
+	global $FORM_USER;
+	
+	//連結資料庫
+	$db = new Database();
+	
+	//取得所有使用者
+	$result_sql = $db-&gt;query( &quot;SELECT `UID`, `GID`, `ULogged_code`, `ULast_In_Time`, `UBuild_Time`, `UEnabled`, `In_Learn_Time`, `UReal_Name`, `UNickname`, `UEmail` 
+		FROM &quot;.$db-&gt;table($FORM_USER) );
+	
+	return $result_sql-&gt;fetchAll();
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

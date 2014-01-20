@@ -1,0 +1,251 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php 
+	echo dirname(__FILE__).&quot;/template/template.php&quot;;
+	/**
+	 * 前置設定
+	*/
+	//require_once(&quot;lib/include.php&quot;);
+	//require_once(DOCUMENT_ROOT.&quot;lib/function/user.php&quot;);
+	//require_once(DOCUMENT_ROOT.&quot;lib/function/user_admin.php&quot;);
+	//require_once(DOCUMENT_ROOT.&quot;lib/class/User.php&quot;);
+	//require_once(DOCUMENT_ROOT.&quot;lib/class/MyUser.php&quot;);
+	//require_once(DOCUMENT_ROOT.&quot;lib/password.php&quot;);
+	
+	//建立帳號
+	//echo user_create(&quot;zyuan817&quot;, &quot;123456&quot;, &quot;123456&quot;, &quot;admin&quot;, true, &quot;Yuan Chiu&quot;, &quot;元兒～&quot;, &quot;yuan817@moztw.org&quot;);
+	//帳號登入
+	//echo user_login(&quot;yuan&quot;,&quot;yrNah@897625&quot;);
+	//取得ID
+	//echo user_getUserId(&quot;qYtPZ{3S[G}iiwMk3^Q4XAXDR!RMIzgH&quot;);
+	//登出
+	//echo user_logout(&quot;qYtPZ{3S[G}iiwMk3^Q4XAXDR!RMIzgH&quot;);
+	
+	/*$userGroup = user_getGroupList();
+	//echo count($userGroup);
+	for($i=1; $i&lt;=count($userGroup); $i++){
+		echo $i.&quot;: &quot;.$userGroup[$i].&quot;&lt;br&gt;&quot;;
+	}
+	echo user_ishaveGroup(2);*/
+	//echo user_getGroupID(&quot;usesr&quot;);
+	
+	//加密
+	//echo encryptText(&quot;eric&quot;);
+	
+	
+	/*echo $_GET['token'];
+	echo $_GET['text1'];*/
+	//echo user_login(&quot;aaaa&quot;,&quot;aaaa&quot;).&quot;&lt;br&gt;&quot;;
+	//echo user_login(&quot;yuan&quot;,&quot;yrNeh@897625&quot;).&quot;&lt;br&gt;&quot;;
+	
+	
+	//$theUser = new User(&quot;yuan&quot;);
+	//$theUser = new MyUser(&quot;fkUm6i{LInvxQ}^^gA*8&amp;vj6u7#eCTgI&quot;);
+	//echo $theUser-&gt;isLogged().&quot;&lt;br&gt;&quot;;
+	//echo $theUser-&gt;havePermission(&quot;user&quot;);
+	//print_r($theUser-&gt;getPermissionList());
+	
+	//echo isset($theUser);
+	//echo user_getUserId(&quot;^4R-mzH7&amp;ykSUY)yD}#}54z-SHmcnhs!&quot;);
+	/*echo $theUser-&gt;getUsername().&quot;&lt;br&gt;&quot;;
+	//echo $theUser-&gt;isPasswordCorrect(&quot;eric&quot;).&quot;&lt;br&gt;&quot;;
+	
+	echo $theUser-&gt;getLoginTime().&quot;&lt;br&gt;&quot;;
+	echo $theUser-&gt;getCreateTime().&quot;&lt;br&gt;&quot;;
+	
+	echo $theUser-&gt;getRealName().&quot;&lt;br&gt;&quot;;
+	echo $theUser-&gt;setRealName(&quot;邱迺元&quot;).&quot;&lt;br&gt;&quot;;
+	echo $theUser-&gt;getNickName().&quot;&lt;br&gt;&quot;;
+	echo $theUser-&gt;setNickName(&quot;元兒～&quot;).&quot;&lt;br&gt;&quot;;
+	echo $theUser-&gt;getEmail().&quot;&lt;br&gt;&quot;;
+	//echo $theUser-&gt;setEmail(&quot;yuan817@msn.com&quot;).&quot;&lt;br&gt;&quot;;
+	echo &quot;G:&quot;.$theUser-&gt;getGroup().&quot;&lt;br&gt;&quot;;*/
+	//echo &quot;G:&quot;.$theUser-&gt;setGroup(&quot;user&quot;).&quot;&lt;br&gt;&quot;;
+	
+	//echo $theUser-&gt;getEmail().&quot;&lt;br&gt;&quot;;
+	//echo &quot;passwd:&quot;.$theUser-&gt;isPasswordCorrect(&quot;yrNah@897625&quot;);
+	//echo $theUser-&gt;changePassword(&quot;yrNeh@897625&quot;,&quot;yrNah@897625&quot;).&quot;&lt;br&gt;&quot;;
+	//echo $theUser-&gt;logout();
+	
+	//echo user_logout(&quot;yuan817&quot;);
+	
+	//echo $theUser-&gt;logout().&quot;&lt;br&gt;&quot;;
+	/*if($theUser-&gt;getLoggedCode()){
+		echo &quot;true&quot;;
+	}*/
+	
+	/*$array = array(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);
+	foreach($array as $key=&gt;$value){
+	    echo $key.&quot;.&quot;.$value.&quot;&lt;br&gt;&quot;;
+	}*/
+	
+	// ===================================================================================
+	/*error_reporting(E_ALL);
+	ini_set(&quot;display_errors&quot;, 1);*/
+
+	/*require_once(&quot;lib/include.php&quot;);
+	require_once(DOCUMENT_ROOT.&quot;lib/DatabaseClass.php&quot;);
+
+	$db_connect = new Database();
+	//$db_connect = new PDO(&quot;mysql:dbname=yuan_chu_elearn;host:localhost;charset=utf8;&quot;, &quot;yuan&quot;, &quot;yrNeh@897625&quot;);
+	//$db_connect = new PDO(&quot;mysql:host:localhost;dbname=yuan_chu_elearn;charset=utf8;&quot;, &quot;yuan&quot;, &quot;123456&quot;);
+
+	$result = $db_connect-&gt;query(&quot;SELECT * FROM chu_users&quot;); 
+
+	if ($result === false){
+	print_r($db_connect-&gt;errorInfo());
+	//log the error or take some other smart action
+	}*/
+
+
+	//while($row=$result-&gt;fetch(/*PDO::FETCH_OBJ*/)){   
+		//PDO::FETCH_OBJ 指定取出資料的型態
+		//echo $row-&gt;username.&quot;\n&quot;; 
+		//echo $row-&gt;ID.&quot;\n&quot;;  
+		
+		//echo '&lt;pre&gt;', print_r($row, true), '&lt;/pre&gt;';
+		
+		//if($row){
+		//	echo &quot;y&quot;;
+		//}
+		//else{
+		//	echo &quot;x&quot;;
+		//}
+	//}
+
+	//$userArray = $db_connect-&gt;getTheUserArray(&quot;=rfg*]R]ta@3[D9B6eec6z-DR=VC]R5j&quot;);
+	//echo '&lt;pre&gt;', print_r($userArray, true), '&lt;/pre&gt;';
+
+	// ===================================================================================
+	
+	//require_once(DOCUMENT_ROOT.&quot;lib/function/user_admin.php&quot;);
+	
+	//echo user_changeGroup(&quot;yuan&quot;,&quot;admin&quot;);
+	
+	//echo user_login(&quot;yuan817&quot;,&quot;yrNeh@897625&quot;).&quot;&lt;br&gt;&quot;;
+	//echo user_ishave(&quot;yuan817&quot;);
+	
+	//echo user_logout(&quot;yuan817&quot;);
+	
+	//echo '&lt;pre&gt;', print_r(user_queryAll(), true), '&lt;/pre&gt;';
+	
+	//echo user_setEnable(&quot;yuan&quot;, true);
+	
+	/*$db = new Database();
+	
+	echo &quot;users&quot;;
+	echo &quot;&lt;br&gt;&quot;;
+	echo $db-&gt;table(&quot;users&quot;);
+	
+	//echo user_create(&quot;qqq&quot;, &quot;123456&quot;, &quot;123456&quot;, &quot;admin&quot;, true, &quot;Yuan Chiu&quot;, &quot;元兒～&quot;, &quot;yuan817@moztw.org&quot;);*/
+	// ===================================================================================
+	//require_once(DOCUMENT_ROOT.&quot;lib/function/userGroup.php&quot;);
+	//echo userGroup_ishave(&quot;admin&quot;);
+	//echo userGroup_getDiaplayName(&quot;admin&quot;);
+	//echo userGroup_setDiaplayName(&quot;aas&quot;,&quot;XX&quot;);
+	//echo userGroup_havePermission(&quot;admin&quot;,&quot;admin&quot;);
+	//echo userGroup_setPermission(&quot;user&quot;,&quot;admin&quot;,false);
+	//$group = userGroup_getList();
+	//print_r($group);
+	//print_r(userGroup_queryAll());
+	//echo '&lt;pre&gt;', print_r(userGroup_queryAll(), true), '&lt;/pre&gt;';
+	
+	//echo userGroup_create(&quot;student&quot;,&quot;學生&quot;,false);
+	//echo userGroup_remove(&quot;admin&quot;);
+	
+	// ===================================================================================
+	/*require_once(DOCUMENT_ROOT.&quot;lib/class/UserGroup.php&quot;);
+	$userGroup = new UserGroup(&quot;admin&quot;);
+	echo '&lt;pre&gt;', print_r($userGroup-&gt;getPermissionList(), true), '&lt;/pre&gt;';*/
+	
+	// ===================================================================================
+	/*$db = new Database();
+	$user_DBTable = user_queryAll();	//查詢所有使用者*/
+	
+	//echo '&lt;pre&gt;', print_r($user_DBTable, true), '&lt;/pre&gt;';
+	
+	// ===================================================================================
+	
+	/*require_once(DOCUMENT_ROOT.&quot;lib/web/web_user_login.php&quot;);
+	echo web_userLogin(&quot;yuan&quot;,&quot;yrNah@897625&quot;);
+	
+	$theUser = web_getLoggedUser();
+	echo $theUser-&gt;getLoginTime().&quot;&lt;br&gt;&quot;;
+	echo $theUser-&gt;getCreateTime().&quot;&lt;br&gt;&quot;;*/
+	//echo web_userLogout();
+	// ===================================================================================
+	/*require_once(DOCUMENT_ROOT.&quot;lib/function/database.php&quot;);
+	echo &quot;&lt;pre&gt;&quot;.db_rename_prefix(&quot;chu_&quot;).&quot;&lt;/pre&gt;&quot;;*/
+	
+	// ===================================================================================
+	//echo $_COOKIE[$COOKIES_PREFIX.&quot;userLoginCode&quot;];
+	
+	
+	// ===================================================================================
+	//echo &quot;&lt;h1&gt;finish!!&lt;/h1&gt;&quot;;
+	
+	// ===================================================================================
+	
+	/*$action = $_GET['a'];
+	
+	switch($action) {
+	case &quot;a&quot;:
+		echo &quot;hahaha&quot;;
+		break;
+	case &quot;b&quot;:
+		echo &quot;aaaaaaaaa.............&quot;;
+		break;
+	case &quot;test&quot;:
+		$output = array(
+			&quot;msg&quot;=&gt;&quot;hello&quot;,
+			&quot;hello&quot;=&gt;true
+		);
+		
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode($output);
+		break;
+	}*/
+	
+	//echo &quot;test&quot;;</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>
