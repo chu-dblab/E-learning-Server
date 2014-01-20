@@ -58,6 +58,9 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);	
 
 echo "a";
+/**
+ * @ignore
+ */
 define('DOCUMENT_ROOT',dirname(__FILE__).'/../../');
 echo "b";
 echo "c";	

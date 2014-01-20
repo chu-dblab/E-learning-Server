@@ -14,6 +14,11 @@
 	 */
 	class UpdateInfo
 	{
+		/**
+		 * 連接資料庫的PDO物件
+		 * @access private
+		 * @var PDO Object
+		 */
 		private $conDB;
 		
 		public function __construct()

@@ -1,25 +1,21 @@
 <?php
 	/**
 	 * 網站根目錄
-	 * @ignore
 	 */
 	define('DOCUMENT_ROOT',dirname(__FILE__).'/');
 
 	/**
 	 *網站標題
-	 * @ignore
 	 */
 	define('SITE_NAME','無所不在學習導引系統');
 	
 	/** 
 	 * 網站副標題
-	 * @ignore
 	 */
 	define('SITE_SUBNAME','');
 	
 	/**
 	 * 網站標題簡稱
-	 * @ignore
 	 */
 	define('SITE_NAME_REFERRED','E-learning');
 
@@ -27,7 +23,6 @@
 	 * 網站首頁網址
 	 * 
 	 * Warning: 網址後面務必加上"/"
-	 * @ignore
 	 */ 
 	define('SITE_URL','http://localhost/');
 	
@@ -36,7 +31,6 @@
 	 * 
 	 * 給絕對路徑用的。
 	 * Warning: 網址後面務必加上"/"
-	 * @ignore
 	 */
 	define('SITE_URL_ROOT','http://localhost/');
 
@@ -49,13 +43,11 @@
 	 *   <li>SHA1</li>
 	 *   <li>CRYPT</li>
 	 * </ul>
-	 * @ignore
 	 */
 	$ENCRYPT_MODE = 'SHA1';
 
 	/**
 	 * 你的地區
-	 * @ignore
 	 */
 	date_default_timezone_set('Asia/Taipei');	//設定時區
 	
