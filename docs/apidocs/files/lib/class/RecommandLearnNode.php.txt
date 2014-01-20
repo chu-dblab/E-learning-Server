@@ -1,30 +1,67 @@
 <?php
+/**
+ * 推薦學習點類別
+ */
+ 
+ //前置作業
   require_once("../../../lib/include.php");
   require_once(DOCUMENT_ROOT."lib/class/Database.php");
+//===============================================================================================
  /**
-  * @Class_Name：推薦學習點
-  * @author	~kobayashi();
-  * @link	https://github.com/CHU-TDAP/
-  * @since	Version 1.0
+  * 推薦學習點
+  *
+  * 此類別是根據論文上的公式所實作出來的類別
+  *
+  * @author ~kobayashi();
+  * @link https://github.com/CHU-TDAP/
+  * @version 2.0
   */
 class RecommandLearnNode
 {
+		/**
+		 * 資料庫PDO物件
+		 *
+		 * @access private
+		 */
 		private $conDB;
+		
+		/**
+		 * 調和參數
+		 *
+		 * 此欄位是常數值
+		 * @access private
+		 */
 		private $alpha = 0.5; //調和參數
+		
+		/**
+		 * 滿額指標
+		 *
+		 * 偵測目前這個學習點的人數是否已達上限，其值為true/false
+		 * @access private
+		 */
 		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
+		
+		/**
+		 * 正規化參數
+		 *
+		 * @access private
+		 */
 		private $gamma;  //正規化參數
 		
 		public function __construct()
 		{
 			$this->conDB = new Database();
 			$this->fullflag = false;
+			$this->gamma = 0;
 		}
 		
 		/**
-		* @Method_Name	加人數
-		* @description	當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
-		* @param	   string  $point_number, 學習點的編號
-		* @return   NONE
+		* 加人數
+		*
+		* 當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
+		*
+		* @access private
+		* @param string $point_number 學習點的編號
 		*/
 		public function addPeople($point_number)
 		{
@@ -38,10 +75,12 @@ class RecommandLearnNode
 		}
 		
 		/**
-		*  @Method_Name		減人數
-		*  @description		當使用者按下"離開"按鈕時, 則人數減一
-		*  @param		$point_number, 學習點的編號
-		*  @return		NONE
+		* 減人數
+		*
+		* 當使用者按下"離開"按鈕時, 則人數減一
+		*
+		* @access public
+		* @param $point_number 學習點的編號
 		*/		
 		public function subPeople($point_number)
 		{
@@ -55,10 +94,13 @@ class RecommandLearnNode
 		}
 		
 		/** 
-		* @Method_Name	isZero
-		* @description	確認目前的學習點的人數是不是零
-		* @param		$point_number (data type is an Integer)  學習點的編號
-		* @return	Boolean (true/false)
+		* isZero
+		*
+		* 確認目前的學習點的人數是不是零
+		*
+		* @access private
+		* @param $point_number int  學習點的編號
+		* @return Boolean (true/false)
 		*/
 		private function isZero($point_number)
 		{
@@ -71,6 +113,15 @@ class RecommandLearnNode
 			else return false;
 		}
 		
+		/**
+		 * isCurrentPointFull
+		 *
+		 * 確認這個學習點是不是人數已滿
+		 *
+		 * @access private
+		 * @param $point_number 學習點的編號
+		 * @return Boolean (true/false)
+		 */
 		private function isCurrentPointFull($point_number)
 		{
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("target").".Mj,".$this->conDB->table("target").".PLj".
@@ -89,11 +140,13 @@ class RecommandLearnNode
 		}
 		
 		/**
-		* @Method_Name	getLearningNode
-		* @description	取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
-		* @param		$point_number 目前學習點的編號
-		* @param		$userID 使用者編號
-		* @return		推薦學習之標的編號
+		* getLearningNode
+		*
+		* 取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
+		*
+		* @param $point_number 目前學習點的編號
+		* @param $userID 使用者編號
+		* @return $recommand array 系統推薦的學習點 
 		*/
 		public function getLearningNode($point_number,$userID)
 		{
@@ -177,9 +230,13 @@ class RecommandLearnNode
 		}
 		
 		/**
-		* @param
-		* @return
-		*/
+		 * computeNormalizationParam
+		 *
+		 * 計算正規化參數
+		 *
+		 * @param $userID 使用者編號
+		 * @return $normal double 正規化參數
+		 */
 		public function computeNormalizationParam($userID)
 		{
 			$result = $this->conDB->prepare("SELECT DISTINCT ".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj,".$this->conDB->table("edge").".MoveTime".
@@ -204,11 +261,13 @@ class RecommandLearnNode
 		}
 		
 		/**
-		* @Method_Name		getNodeOfLearnOfParameter
-		* @description		取得學習點的所有參數
-		* @param			$next_point_number 學習點的編號
-		* @param			$userID 學習者的帳號
-		* @return			取得學習點之所有參數(2D array);
+		* getNodeOfLearnOfParameter
+		*
+		* 取得學習點的所有參數
+		*
+		* @param $next_point_number 學習點的編號
+		* @param $userID 學習者的帳號
+		* @return $node array 取得學習點之所有參數
 		*/	
 		private function getNodeOfLearnOfParameter($next_point_number,$userID)
 		{
@@ -249,12 +308,13 @@ class RecommandLearnNode
 		}
 		
 		/**
-		* @Method_Name		getLearningStatus
-		* @description		取得使用者學習的狀態
-		* @param			$userID_使用者編號
-		* @param			$point_number_學習點的編號
-		* @return			學習狀態資訊
-		*/	
+		 * getLearningStatus
+		 * 取得使用者學習的狀態
+		 *
+		 * @param $userID 使用者編號
+		 * @param $point_number 學習點的編號
+		 * @return $row array 學習狀態資訊
+		 */	
 		public function getLearningStatus($userID,$point_number)
 		{
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("user").".UID,".$this->conDB->table("user").".UNickname,".$this->conDB->table("target").".TLearn_Time,".$this->conDB->table("target").".Mj ".
@@ -267,6 +327,15 @@ class RecommandLearnNode
 			return $row;
 		}
 		
+		/**
+		 * checkFinish
+		 *
+		 * 確認使用者是不是學過系統推薦的學習點
+		 *
+		 * @param $userID 使用者編號
+		 * @param $point 學習點編號
+		 * @return Boolean (true/flase)
+		 */
 		private function checkFinish($userID,$point)
 		{
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("study").".TID FROM ".$this->conDB->table("study")." WHERE UID = :uid AND TID = :point");
@@ -278,6 +347,15 @@ class RecommandLearnNode
 			else return false;
 		}
 		
+		/**
+		 * turnToRealPointNumber
+		 *
+		 * 將標的編號轉換成實際的學習點編號
+		 *
+		 * @access private
+		 * @param $point_number 標的編號
+		 * @return int 實際的學習點編號
+		 */
 		private function turnToRealPointNumber($point_number)
 		{
 			return ($point_number % 15) + 1;
