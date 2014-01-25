@@ -60,9 +60,11 @@ case "login":
 		}
 		//已登入成功
 		else {
+			$totalOfLearnTime = $timer->getLearnTotalTime(); 
 			$output += array(
 				"uid"=>$id,
 				"ucode"=>$login_code,
+				"LearningTime"=>$totalOfLearnTime,
 				"status_ok"=>true,
 				"status"=>"OK"
 			);
