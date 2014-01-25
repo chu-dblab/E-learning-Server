@@ -6,11 +6,15 @@
 -->
 
 <?php
-	/**
-	 * 前置設定
-	*/
-	// 因為後端網頁界面尚未實作完成，故先轉到管理界面
-	header("Location: admin/index.php");
+	// 前置設定
+	// 如果沒有找到設定檔的話
+	if( !file_exists("config.php") || !file_exists("config/db_config.php")) {
+		header("Location: no_init-msg.php");
+	}
+	else {
+		// 因為後端網頁界面尚未實作完成，故先轉到管理界面
+		header("Location: admin/index.php");
+	}
 	
 	require_once("lib/include.php");
 	require_once(DOCUMENT_ROOT."template/template.php");
