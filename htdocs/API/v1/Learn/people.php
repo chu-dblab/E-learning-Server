@@ -8,6 +8,7 @@
      $Data = ( isset($_POST["data"]) ) ? $_POST["data"] : null;
      $point = ( isset($_POST["point"]) ) ? $_POST["point"] : null;
      $ID = ( isset($_POST["uid"]) ) ? $_POST["uid"] : null;
+     $time = ( isset($_POST["remainedTime"]) ) ? $_POST["remainedTime"] : null;
 //======================================================================================================//
      $learn = new RecommandLearnNode();
      
@@ -32,9 +33,9 @@
 			}
 			break;
 		case "recommand" :
-			if(isset($point) && isset($ID))
+			if(isset($point) && isset($ID) && isset($time))
 			{
-				$data = $learn->getLearningNode($point,$ID);
+				$data = $learn->getLearningNode($point,$ID,$time);
 				$message += array("status_ok"=>True);
 				$message += $data;
 			}
