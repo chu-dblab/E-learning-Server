@@ -1,16 +1,24 @@
 <?php
-
+/**
+ * 更新所有使用者資訊類別
+ */
 	require_once("../../../lib/include.php");
 	require_once(DOCUMENT_ROOT."lib/class/Database.php");
-	
+//==========================================================================================================
 	/**
-	* @Class_Name：更新所有使用者資訊類別
-	* @author	~kobayashi();
-	* @link	https://github.com/CHU-TDAP/
-	* @since	Version 1.0
-	*/
+	 * 更新所有使用者資訊類別
+	 *
+	 * @author ~kobayashi();
+	 * @link https://github.com/CHU-TDAP/
+	 * @version Version 1.0
+	 */
 	class UpdateInfo
 	{
+		/**
+		 * 連接資料庫的PDO物件
+		 * @access private
+		 * @var PDO Object
+		 */
 		private $conDB;
 		
 		public function __construct()
@@ -19,7 +27,11 @@
 		}
 		
 		/**
-		 *	接收Client端傳送過來的資料
+		 * receiveQuestionData
+		 *
+		 * 接收Client端傳送過來的資料
+		 * @param $num_of_question 問題編號
+		 * @param $point_number 標的編號
 		 */
 		public function receiveQuestionData($num_of_question,$point_number)
 		{
@@ -31,10 +43,14 @@
 			$test = $result->errorInfo();
 			echo print_r($test);
 		}
+		
 		/**
-		 *	更新答題狀態
-		 *	@param $questionNumber
-		 *	@param $receiveData
+		 * updateQestionStatus
+		 *
+		 * 更新答題狀態
+		 *
+		 * @param $questionNumber
+		 * @param $receiveData
 		 */
 		public function updateQestionStatus($questionNumber,$receiveData)
 		{
@@ -59,12 +75,13 @@
 		}
 		
 		/**
-		* @Method_Name		updateUserLearnData
-		* @description		更新使用者的學習狀態
-		* @param			$InTime
-		* @param			$OutTime
-		* @return			NONE
-		*/
+		 * updateUserLearnData
+		 *
+		 * 更新使用者的學習狀態
+		 *
+		 * @param $InTime 進入系統推薦的標的的時間
+		 * @param $OutTime 離開系統推薦得標的的時間
+		 */
 		public function updateUserLearnData($userID,$point_number,$InTime,$OutTime)
 		{
 			
@@ -75,7 +92,5 @@
 			$result->bindParam(":out",$OutTime);
 			$result->execute();
 		}
-		
-		
 	}
 ?>

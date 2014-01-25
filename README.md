@@ -11,6 +11,14 @@
     * zip
 * MariaDB 5.5.31 (可用MySQL)
 
+## 開發文件
+已將整份專案使用[PHPDocumentor](http://www.phpdoc.org/)產生出[開發文件網站](docs/apidocs/index.html)
+
+產生指令:
+
+    phpdoc -d htdocs/ -t docs/apidocs --ignore htdocs/admin/,htdocs/API/,htdocs/assets/,htdocs/install/,htdocs/template/ --parseprivate --template="zend"
+
+    
 ## 拷貝專案
 1. `$ git clone git@github.com:CHU-TDAP/E-learning-Server.git`
 

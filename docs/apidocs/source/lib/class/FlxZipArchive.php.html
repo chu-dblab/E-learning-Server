@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php 
+/**
+* FlxZipArchive, Extends ZipArchiv.
+* Add Dirs with Files and Subdirs.
+* @see	 http://ninad.pundaliks.in/blog/2011/05/recursively-zip-a-directory-with-php/
+* &lt;code&gt;
+* $archive = new FlxZipArchive;
+* // .....
+* $archive-&gt;addDir( 'test/blub', 'blub' );
+* &lt;/code&gt;
+*/
+class FlxZipArchive extends ZipArchive {
+	/**
+	* Add a Dir with Files and Subdirs to the archive
+	*
+	* @param string $location Real Location
+	* @param string $name Name in Archive
+	* @author Nicolas Heimann
+	* @access private
+	**/
+	
+	public function addDir($location, $name) {
+		$this-&gt;addEmptyDir($name);
+		
+		$this-&gt;addDirDo($location, $name);
+	} // EO addDir;
+	
+	/**
+	* Add Files &amp; Dirs to archive.
+	*
+	* @param string $location Real Location
+	* @param string $name Name in Archive
+	* @author Nicolas Heimann
+	* @access private
+	**/
+	
+	private function addDirDo($location, $name) {
+		$name .= '/';
+		$location .= '/';
+		
+		// Read all Files in Dir
+		$dir = opendir ($location);
+		while ($file = readdir($dir))
+		{
+			if ($file == '.' || $file == '..') continue;
+			// Rekursiv, If dir: FlxZipArchive::addDir(), else ::File();
+			$do = (filetype( $location . $file) == 'dir') ? 'addDir' : 'addFile';
+			$this-&gt;$do($location . $file, $name . $file);
+		}
+	} // EO addDirDo();
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

@@ -51,9 +51,9 @@
 			break;
 		//方法獨立測試用
 		case "test":
-			if(isset($ID)&&isset($point))
+			if(isset($ID))
 			{
-				$data=$learn->checkFinish($ID,$point);
+				$data=$learn->computeNormalizationParam($ID);
 				$message += array("status_ok"=>true,"data"=>$data);
 			}
 			else $message += array("status_ok"=>false,"status"=>"CommandError");

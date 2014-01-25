@@ -11,3 +11,6 @@ test.php
 
 # GitEye產生的
 .project
+
+# phpdoc產生的垃圾檔案
+docs/apidocs/phpdoc-cache-*

@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * 寫入檔案函式庫
+*/
+
+// ========================================================================
+/**
+ * 寫入txt檔案
+ *
+ * @param string $create_txt_content 檔案內文
+ * @param string $writeURL 路徑
+ * @return string
+ *          寫入結果
+ *          &lt;ul&gt;
+ *            &lt;li&gt;&quot;Finish&quot;: 成功寫入&lt;/li&gt;
+ *            &lt;li&gt;其他: 無法寫入，回傳內文&lt;/li&gt;
+ *          &lt;/ul&gt;
+ * @since Version 1
+ * @author 元兒～ &lt;yuan817@moztw.org&gt;
+*/
+function write_txt($create_txt_content, $writeURL) {
+	if($fp=fopen($writeURL,&quot;w+&quot;)){
+		fputs($fp,$create_txt_content);
+		return &quot;Finish&quot;;
+	}
+	else{
+		return $create_txt_content;
+	}
+	fclose($fp);
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

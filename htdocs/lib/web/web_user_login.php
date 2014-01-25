@@ -1,26 +1,24 @@
 <?php
-/**
- * 前置作業
-*/
+// 前置作業
 require_once(DOCUMENT_ROOT."lib/function/user.php");
 require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
 
 /**
- * web_userLogin
- *
  * 登入使用者帳號
  *
- * @access	public
- * @param	string	帳號
- * @param	string	密碼
- * @return	string	使用者登入碼
-			"NoActiveErr": 帳號未啟用
-			"PasswdErr": 密碼錯誤
-			"NoFound": 找不到存在的使用者
-			"DBErr": 資料庫寫入錯誤
- * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
+ * @access public
+ * @param string $userid 帳號
+ * @param string $userpasswd 密碼
+ * @return string 
+ *          使用者登入碼
+ *          <ul>
+ *            <li>"NoActiveErr": 帳號未啟用</li>
+ *            <li>"PasswdErr": 密碼錯誤</li>
+ *            <li>"NoFound": 找不到存在的使用者</li>
+ *            <li>"DBErr": 資料庫寫入錯誤</li>
+ *          </ul>
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 1
  *
 */
 function web_userLogin($userid, $userpasswd) {
@@ -37,14 +35,12 @@ function web_userLogin($userid, $userpasswd) {
 // ------------------------------------------------------------------------
 
 /**
- * web_userLogout
- * 
  * 登出使用者帳號
  * 
- * @access	public
- * @return	bool	是否成功登出
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
+ * @access public
+ * @return bool 是否成功登出
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 1
 */
 function web_userLogout() {
 	global $COOKIES_PREFIX;
@@ -71,14 +67,12 @@ function web_userLogout() {
 // ========================================================================
 
 /**
- * web_isLogged
- * 
  * 取得目前登入的使用者物件
  * 
- * @access	public
- * @return	object	使用者物件
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
+ * @access public
+ * @return object 使用者物件
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 1
 */
 function web_isLogged() {
 	global $COOKIES_PREFIX;
@@ -101,14 +95,12 @@ function web_isLogged() {
 // ------------------------------------------------------------------------
 
 /**
- * web_getLoggedUser
- * 
  * 取得目前登入的使用者物件
  * 
- * @access	public
- * @return	object	使用者物件
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
+ * @access public
+ * @return object 使用者物件
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 1
 */
 function web_getLoggedUser() {
 	global $COOKIES_PREFIX;

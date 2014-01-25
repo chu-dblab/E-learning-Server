@@ -3,6 +3,7 @@ require_once("../../../lib/include.php");
 require_once(DOCUMENT_ROOT."lib/api/v1/apiTemplate.php");
 require_once(DOCUMENT_ROOT."lib/function/user.php");
 require_once(DOCUMENT_ROOT."lib/class/MyUser.php");
+require_once(DOCUMENT_ROOT."lib/class/TimeControl.php");
 
 //-------------------設定區-----------------------//
 $action = ( isset($_REQUEST['op']) )?$_REQUEST['op']:null;
@@ -14,6 +15,7 @@ $logCode = ( isset($_REQUEST['ucode']) )?$_REQUEST['ucode']:null;
 
 //宣告輸出的陣列內容
 $output = array();
+$timer = new TimeControl();
 
 switch($action){
 //登入此使用者
@@ -58,9 +60,11 @@ case "login":
 		}
 		//已登入成功
 		else {
+			$totalOfLearnTime = $timer->getLearnTotalTime(); 
 			$output += array(
 				"uid"=>$id,
 				"ucode"=>$login_code,
+				"LearningTime"=>$totalOfLearnTime,
 				"status_ok"=>true,
 				"status"=>"OK"
 			);
@@ -166,7 +170,7 @@ case "logout":
 	}
 	break;
 
-//這個帳號使否可登入
+//這個帳號是否可登入
 case "is_login_enable":
 	$output += array("action"=>"is_login_enable");
 	//有填入登入資料
@@ -216,6 +220,10 @@ case "is_login_enable":
 	}
 	break;
 	
+case "getTotalTime":
+	$totalOfLearnTime = $timer->getLearnTotalTime(); 
+	$output += array("status_ok"=>true,"status"=>"OK","LearningTime"=>$totalOfLearnTime);
+	break;
 default:
 	$output += array(
 		"status_ok"=>false,

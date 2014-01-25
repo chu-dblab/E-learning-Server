@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;!--
+  index.php
+   
+   Copyright 2013 元兒～ &lt;yuan@Yuan-NB&gt;
+   
+--&gt;
+
+&lt;?php
+	/**
+	 * 前置設定
+	*/
+	// 因為後端網頁界面尚未實作完成，故先轉到管理界面
+	header(&quot;Location: admin/index.php&quot;);
+	
+	require_once(&quot;lib/include.php&quot;);
+	require_once(DOCUMENT_ROOT.&quot;template/template.php&quot;);
+	require_once(DOCUMENT_ROOT.&quot;lib/web/AlertClass.php&quot;);
+	
+	//取得通知資料
+	$loginAlert = new Alert();
+	$loginAlert-&gt;getInSession(&quot;user_login&quot;);
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-tw&quot;&gt;
+	&lt;head&gt;
+		&lt;meta charset=&quot;utf-8&quot; /&gt;
+		&lt;title&gt;&lt;?php echo SITE_NAME ?&gt;&lt;/title&gt;
+		&lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;
+		&lt;meta name=&quot;author&quot; content=&quot;&quot;&gt;
+		&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+		&lt;!-- Bootstrap --&gt;
+		&lt;link href=&quot;&lt;?php echo SITE_URL_ROOT ?&gt;assets/bootstrap/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot;&gt;
+		&lt;link href=&quot;&lt;?php echo SITE_URL_ROOT ?&gt;assets/css/bootstrap-Justified_nav.css&quot; rel=&quot;stylesheet&quot;&gt;
+		&lt;link href=&quot;&lt;?php echo SITE_URL_ROOT ?&gt;assets/bootstrap/css/bootstrap-responsive.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+		&lt;link href=&quot;&lt;?php echo SITE_URL_ROOT ?&gt;assets/font-awesome/css/font-awesome.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+		&lt;style&gt;
+		/* Main marketing message and sign up button */
+		/* http://getbootstrap.com/2.3.2/examples/justified-nav.html */
+		.jumbotron {
+			margin: 80px 0;
+			text-align: center;
+		}
+		.jumbotron h1 {
+			font-size: 40px;
+			line-height: 1;
+		}
+		.jumbotron .lead {
+			font-size: 24px;
+			line-height: 1.25;
+		}
+		.jumbotron .btn {
+			font-size: 21px;
+			padding: 14px 24px;
+		}
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+	&lt;div class=&quot;container&quot;&gt;
+	
+		&lt;?php template_header() ?&gt;
+		
+		&lt;!-- 通知區域 --&gt;
+		&lt;?php $loginAlert-&gt;show(); ?&gt;
+		
+		&lt;!-- Jumbotron --&gt;
+		&lt;div class=&quot;jumbotron&quot;&gt;
+			&lt;h1&gt;混合式情境感知無所不在學習導引機制&lt;/h1&gt;
+			&lt;p class=&quot;lead&quot;&gt;這套導引機制讓學習標的同時具有實體學習教材與虛擬學習教材，並在這個混合的架構上，提出了一套適合的導引方法，讓學習者可以進行實體學習標的之觀察或是直接檢視虛擬教材進行學習。&lt;/p&gt;
+			&lt;a class=&quot;btn btn-large btn-success&quot; href=&quot;#&quot;&gt;咱們開始吧～&lt;/a&gt;
+		&lt;/div&gt;
+		&lt;!-- End Jumbotron --&gt;
+		
+		&lt;hr /&gt;
+		
+		&lt;!-- Example row of columns --&gt;
+		&lt;div class=&quot;row-fluid&quot;&gt;
+			&lt;div class=&quot;span4&quot;&gt;
+				&lt;h2&gt;規劃學習路徑&lt;/h2&gt;
+				&lt;p&gt;此系統會依學生狀況、現場人數分配而規劃最佳的學習路徑給學生，並紀錄學生學習時的狀況。&lt;/p&gt;
+				&lt;p&gt;&lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;了解更多 &raquo;&lt;/a&gt;&lt;/p&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;span4&quot;&gt;
+				&lt;h2&gt;學習測驗&lt;/h2&gt;
+				&lt;p&gt;學生在學習當中，除了提供教材外，會在此學習點學習後，提供測驗給學生評量。&lt;/p&gt;
+				&lt;p&gt;&lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;了解更多 &raquo;&lt;/a&gt;&lt;/p&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;span4&quot;&gt;
+				&lt;h2&gt;管理界面&lt;/h2&gt;
+				&lt;p&gt;提供界面給老師 or 管理員，進行人員控管、本站設定。&lt;/p&gt;
+				&lt;p&gt;&lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;了解更多 &raquo;&lt;/a&gt;&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		
+		&lt;hr /&gt;
+		&lt;?php template_footer() ?&gt;
+		
+	&lt;/div&gt;
+	&lt;script src=&quot;&lt;?php echo SITE_URL_ROOT ?&gt;assets/js/jquery.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;&lt;?php echo SITE_URL_ROOT ?&gt;assets/bootstrap/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		
+	&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

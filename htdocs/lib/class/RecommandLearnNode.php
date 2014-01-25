@@ -1,30 +1,70 @@
 <?php
+/**
+ * 推薦學習點類別
+ */
+ 
+ //前置作業
   require_once("../../../lib/include.php");
   require_once(DOCUMENT_ROOT."lib/class/Database.php");
-
+//===============================================================================================
  /**
-  * @Class_Name：推薦學習點
-  * @author	~kobayashi();
-  * @link	https://github.com/CHU-TDAP/
-  * @since	Version 1.0
+  * 推薦學習點
+  *
+  * 此類別是根據論文上的公式所實作出來的類別
+  *
+  * @author ~kobayashi();
+  * @link https://github.com/CHU-TDAP/
+  * @version 2.0
   */
 class RecommandLearnNode
 {
+		/**
+		 * 資料庫PDO物件
+		 *
+		 * @access private
+		 * @var PDO Object
+		 */
 		private $conDB;
 		
+		/**
+		 * 調和參數
+		 *
+		 * 此欄位是常數值
+		 * @access private
+		 * @var int
+		 */
+		const ALPHA = 0.5; //調和參數
+		
+		/**
+		 * 滿額指標
+		 *
+		 * 偵測目前這個學習點的人數是否已達上限，其值為true/false
+		 * @access private
+		 * @var Boolean
+		 */
 		private $fullflag;  //偵測目前這個學習點的人數是否已達上限
+		
+		/**
+		 * 正規化參數
+		 *
+		 * @access private
+		 */
+		private $gamma;  //正規化參數
 		
 		public function __construct()
 		{
 			$this->conDB = new Database();
 			$this->fullflag = false;
+			$this->gamma = 0;
 		}
 		
 		/**
-		* @Method_Name	加人數
-		* @description	當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
-		* @param	   string  $point_number, 學習點的編號
-		* @return   NONE
+		* 加人數
+		*
+		* 當使用者的手機偵測到NFC Tag或掃描到QR code, 則人數加一
+		*
+		* @access private
+		* @param string $point_number 學習點的編號
 		*/
 		public function addPeople($point_number)
 		{
@@ -38,10 +78,12 @@ class RecommandLearnNode
 		}
 		
 		/**
-		*  @Method_Name		減人數
-		*  @description		當使用者按下"離開"按鈕時, 則人數減一
-		*  @param		$point_number, 學習點的編號
-		*  @return		NONE
+		* 減人數
+		*
+		* 當使用者按下"離開"按鈕時, 則人數減一
+		*
+		* @access public
+		* @param $point_number 學習點的編號
 		*/		
 		public function subPeople($point_number)
 		{
@@ -55,22 +97,34 @@ class RecommandLearnNode
 		}
 		
 		/** 
-		* @Method_Name	isZero
-		* @description	確認目前的學習點的人數是不是零
-		* @param		$point_number (data type is an Integer)  學習點的編號
-		* @return	Boolean (true/false)
+		* isZero
+		*
+		* 確認目前的學習點的人數是不是零
+		*
+		* @access private
+		* @param $point_number int  學習點的編號
+		* @return Boolean (true/false)
 		*/
 		private function isZero($point_number)
 		{
-			$isZero = false;
 			$result = $this->conDB->prepare("SELECT Mj FROM ".$this->conDB->table("target")." WHERE TID = :number AND Mj = 0");
 			$result->bindParam(":number",$point_number);
 			$result->execute();
 			
 			$row = $result->fetch();
-			if($row["Mj"] == 0) $isZero = true;
+			if($row["Mj"] == 0) return true;
+			else return false;
 		}
 		
+		/**
+		 * isCurrentPointFull
+		 *
+		 * 確認這個學習點是不是人數已滿
+		 *
+		 * @access private
+		 * @param $point_number 學習點的編號
+		 * @return Boolean (true/false)
+		 */
 		private function isCurrentPointFull($point_number)
 		{
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("target").".Mj,".$this->conDB->table("target").".PLj".
@@ -80,7 +134,7 @@ class RecommandLearnNode
 			$row = $result->fetch();
 			if($row["Mj"] == $row["PLj"]) 
 			{
-				$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Fj` = `Fj` + 1 WHERE TID = :point");
+				$query = $this->conDB->prepare("UPDATE `".$this->conDB->table("target")."` SET `Fj` = `Fj` + 1 WHERE `TID` = :point");
 				$query->bindParam(":point",$point_number);
 				$query->execute();
 				return true;
@@ -89,14 +143,17 @@ class RecommandLearnNode
 		}
 		
 		/**
-		* @Method_Name	getLearningNode
-		* @description	取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
-		* @param		$point_number_學習點的編號
-		* @param		$userID_使用者編號
-		* @return		推薦學習之標的編號
+		* getLearningNode
+		*
+		* 取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
+		*
+		* @param $point_number 目前學習點的編號
+		* @param $userID 使用者編號
+		* @return $recommand array 系統推薦的學習點 
 		*/
 		public function getLearningNode($point_number,$userID)
 		{
+			$this->gamma = $this->computeNormalizationParam($userID);
 			//從資料抓取目前路徑的資料
 			$result = $this->conDB->prepare("SELECT DISTINCT ".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj,".$this->conDB->table("edge").".MoveTime".
 						" FROM ".$this->conDB->table("edge").",".$this->conDB->table("user").
@@ -106,27 +163,30 @@ class RecommandLearnNode
 			$result->execute();
 			
 			$node=array();
+			set_time_limit(60);
 			//帶入公式計算下一個要推荐的學習點的編號
 			while($row=$result->fetch()) 
 			{
 				$pathCost = -1;
+				$isEntity = 1;
 				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);
 				
 					if($getNextNodeParameter["Fj"] ==1) $pathCost = 0;
 					else
 					{
-						$pathCost = $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $row["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
-						if($getNextNodeParameter["TID"] > 15)
+						if($getNextNodeParameter["TID"] <= 15)
 						{
-							//實體學習點
+							$pathCost = RecommandLearnNode::ALPHA * $this->gamma * ($getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"]);
+							$isEntity = 0;
 						}
 						else 
 						{
-							$pathCost = $pathCost * 0.06;
+							$pathCost = (1-RecommandLearnNode::ALPHA) * $getNextNodeParameter["weights"]*($getNextNodeParameter["S"]-($getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"]) + 1) / ( $getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+							
 						}
 					}
 				//儲存計算好的下一個學習點
-				$thisArray = array("Ti"=>$row["Ti"],"Tj"=>$row["Tj"],"pathCost"=>$pathCost,"TName"=>$getNextNodeParameter["TName"],"LearnTime"=>$getNextNodeParameter["TLearn_Time"],"mapURL"=>$getNextNodeParameter["Map_Url"],"materialUrl"=>$getNextNodeParameter["Material_Url"]);
+				$thisArray = array("Ti"=>$row["Ti"],"Tj"=>$row["Tj"],"pathCost"=>$pathCost,"TName"=>$getNextNodeParameter["TName"],"isEntity"=>$isEntity,"LearnTime"=>$getNextNodeParameter["TLearn_Time"],"mapURL"=>$getNextNodeParameter["Map_Url"],"materialUrl"=>$getNextNodeParameter["Material_Url"]);
 				array_push($node,$thisArray);
 			}
 			//將下一個學習點的陣列排序
@@ -138,21 +198,79 @@ class RecommandLearnNode
 			
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
 			// TODO 判斷有沒有學習完，不然會陷入無限迴圈
-			while($this->checkFinish($userID,$node[0]["Tj"])) array_shift($node);
-			$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
-			$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
-			$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
-			$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
-			$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
+			$i = 0;
+			while(isset($node) && isset($node[$i+1])) {
+				while($this->checkFinish($userID,$node[$i]["Tj"]) && isset($node[$i+1])) array_splice($node, $i, 1);
+				$i++;
+			};
+			
+			if(isset($node[$i-1])) {
+				if( $this->checkFinish($userID,$node[$i-1]["Tj"]) ) array_pop($node);
+			}
+			
+			if(isset($node[0]))
+				$info_1 = array("node"=>(int)$node[0]["Tj"],"TName"=>$node[0]["TName"],"pathCost"=>$node[0]["pathCost"],"isEntity"=>$node[0]["isEntity"],"LearnTime"=>(int)$node[0]["LearnTime"],"MapURL"=>$node[0]["mapURL"],"MaterialUrl"=>$node[0]["materialUrl"]);
+			
+			if(isset($node[1]))
+				$info_2 = array("node"=>(int)$node[1]["Tj"],"TName"=>$node[1]["TName"],"pathCost"=>$node[1]["pathCost"],"isEntity"=>$node[1]["isEntity"],"LearnTime"=>(int)$node[1]["LearnTime"],"MapURL"=>$node[1]["mapURL"],"MaterialUrl"=>$node[1]["materialUrl"]);
+			if(isset($node[2]))
+				$info_3 = array("node"=>(int)$node[2]["Tj"],"TName"=>$node[2]["TName"],"pathCost"=>$node[2]["pathCost"],"isEntity"=>$node[2]["isEntity"],"LearnTime"=>(int)$node[2]["LearnTime"],"MapURL"=>$node[2]["mapURL"],"MaterialUrl"=>$node[2]["materialUrl"]);
+			
+			if(isset($info_1) && isset($info_2) && isset($info_3))
+				$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
+			else if(isset($info_1) && isset($info_2))
+				$content = array("first"=>$info_1,"second"=>$info_2);
+			else if(isset($info_1))
+				$content = array("first"=>$info_1);
+			
+			if(isset($content["first"])) {
+				$recommand = array("currentNode"=>(int)$node[0]["Ti"],"nextNode"=>$content);
+			}
+			else {
+				$recommand = array("currentNode"=>(int)$point_number,"nextNode"=>null);
+			}
 			return $recommand;
 		}
 		
 		/**
-		* @Method_Name		getNodeOfLearnOfParameter
-		* @description		取得學習點的所有參數
-		* @param			$next_point_number_學習點的編號
-		* @param			$userID_學習者的帳號
-		* @return			取得學習點之所有參數(2D array);
+		 * computeNormalizationParam
+		 *
+		 * 計算正規化參數
+		 *
+		 * @param $userID 使用者編號
+		 * @return $normal double 正規化參數
+		 */
+		public function computeNormalizationParam($userID)
+		{
+			$result = $this->conDB->prepare("SELECT DISTINCT ".$this->conDB->table("edge").".Ti,".$this->conDB->table("edge").".Tj,".$this->conDB->table("edge").".MoveTime".
+						" FROM ".$this->conDB->table("edge")." WHERE ".$this->conDB->table("edge").".Ti = 0");
+			$result->execute();
+			
+			$sum1 = 0;
+			$sum2 = 0;
+			while($row=$result->fetch())
+			{
+				$getNextNodeParameter = $this->getNodeOfLearnOfParameter($row["Tj"],$userID);				
+				
+				if($getNextNodeParameter["TID"] <= 15 ) $sum2 += $getNextNodeParameter["weights"] / $getNextNodeParameter["TLearn_Time"];
+				else
+				{
+					$Rj = $getNextNodeParameter["Mj"] / $getNextNodeParameter["PLj"];
+					$sum1 += ($getNextNodeParameter["weights"] * ($getNextNodeParameter["S"]-$Rj+1)) / ($getNextNodeParameter["MoveTime"] + $getNextNodeParameter["TLearn_Time"]);
+				}				
+			}
+			$normal = $sum1 / $sum2;
+			return $normal;
+		}
+		
+		/**
+		* getNodeOfLearnOfParameter
+		*
+		* 取得學習點的所有參數
+		*
+		* @param $next_point_number 學習點的編號
+		* @param $userID 學習者的帳號
+		* @return $node array 取得學習點之所有參數
 		*/	
 		private function getNodeOfLearnOfParameter($next_point_number,$userID)
 		{
@@ -193,12 +311,13 @@ class RecommandLearnNode
 		}
 		
 		/**
-		* @Method_Name		getLearningStatus
-		* @description		取得使用者學習的狀態
-		* @param			$userID_使用者編號
-		* @param			$point_number_學習點的編號
-		* @return			學習狀態資訊
-		*/	
+		 * getLearningStatus
+		 * 取得使用者學習的狀態
+		 *
+		 * @param $userID 使用者編號
+		 * @param $point_number 學習點的編號
+		 * @return $row array 學習狀態資訊
+		 */	
 		public function getLearningStatus($userID,$point_number)
 		{
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("user").".UID,".$this->conDB->table("user").".UNickname,".$this->conDB->table("target").".TLearn_Time,".$this->conDB->table("target").".Mj ".
@@ -211,6 +330,15 @@ class RecommandLearnNode
 			return $row;
 		}
 		
+		/**
+		 * checkFinish
+		 *
+		 * 確認使用者是不是學過系統推薦的學習點
+		 *
+		 * @param $userID 使用者編號
+		 * @param $point 學習點編號
+		 * @return Boolean (true/flase)
+		 */
 		private function checkFinish($userID,$point)
 		{
 			$result = $this->conDB->prepare("SELECT ".$this->conDB->table("study").".TID FROM ".$this->conDB->table("study")." WHERE UID = :uid AND TID = :point");
@@ -220,6 +348,20 @@ class RecommandLearnNode
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			if($point == $row["TID"]) return true;
 			else return false;
+		}
+		
+		/**
+		 * turnToRealPointNumber
+		 *
+		 * 將標的編號轉換成實際的學習點編號
+		 *
+		 * @access private
+		 * @param $point_number 標的編號
+		 * @return int 實際的學習點編號
+		 */
+		private function turnToRealPointNumber($point_number)
+		{
+			return ($point_number % 15) + 1;
 		}
 }
 ?>

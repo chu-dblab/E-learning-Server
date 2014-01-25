@@ -1,16 +1,7 @@
 <?php
 /**
- * E-learning
- *
- *
- * @package	CHU-E-learning
- * @author		CHU-TDAP
- * @copyright	
- * @license		
- * @link		https://github.com/CHU-TDAP/
- * @since		Version 2.0
- * @filesource
-*/
+ * 使用者群組函式庫
+ */
 
 require_once(DOCUMENT_ROOT."lib/function/user.php");
 require_once(DOCUMENT_ROOT."config/db_table_config.php");
@@ -19,21 +10,22 @@ require_once(DOCUMENT_ROOT."lib/class/Database.php");
 // ========================================================================
 
 /**
- * userGroup_create
- *
  * 建立使用者群組
  *
- * @access	public
- * @param	string	名稱
- * @param	string	管理員權限
- * @return	string	是否有成功建立
- *			"Finish": 成功建立
- *			"NameCreatedErr": 有重複名稱
- *			"DBErr": 資料庫錯誤
- * 
-* @author	元兒～ <yuan817@moztw.org>
- * @since	Version 2
-*/
+ * @param string $name 群組ID
+ * @param string $display_name 顯示名稱
+ * @param string $adminPermissions 管理員權限
+ * @param string $clientAdminPermissions 客戶端管理權限
+ * @return string 
+ *          是否有成功建立
+ *          <ul>
+ *            <li>"Finish": 成功建立</li>
+ *            <li>"NameCreatedErr": 有重複名稱</li>
+ *            <li>"DBErr": 資料庫錯誤</li>
+ *          </ul>
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 2
+ */
 function userGroup_create($name, $display_name, $adminPermissions, $clientAdminPermissions){
 	global $FORM_USER_GROUP;
 	//檢查有無重複的名稱
@@ -66,20 +58,20 @@ function userGroup_create($name, $display_name, $adminPermissions, $clientAdminP
 // ------------------------------------------------------------------------
 
 /**
- * userGroup_remove
- *
  * 刪除使用者群組
  *
- * @access	public
- * @param	string	名稱
- * @return	string	是否有成功刪除
- *			"Finish": 成功刪除
- *			"UserExist": 尚有存在的使用者
-			"NoFound": 找不到存在的群組
-			"DBErr": 資料庫錯誤
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 2
-*/
+ * @param string $name 群組ID
+ * @return string 
+ *          是否有成功刪除
+ *          <ul>
+ *            <li>"Finish": 成功刪除</li>
+ *            <li>"UserExist": 尚有存在的使用者</li>
+ *            <li>"NoFound": 找不到存在的群組</li>
+ *            <li>"DBErr": 資料庫錯誤</li>
+ *          </ul>
+ * @author 元兒～ <yuan817@moztw.org>
+ * @version Version 2
+ */
 function userGroup_remove($name){
 	global $FORM_USER, $FORM_USER_GROUP;
 	//資料庫連結
@@ -117,16 +109,13 @@ function userGroup_remove($name){
 // ========================================================================
 
 /**
- * userGroup_getList
- *
  * 取得使用者群組清單
  *
- * @access	public
- * @return	array	陣列索引為name，值為群組顯示名稱
+ * @return array 陣列索引為name，值為群組顯示名稱
  * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 2
-*/
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 2
+ */
 function userGroup_getList(){
 	global $FORM_USER_GROUP;
 	
@@ -146,17 +135,14 @@ function userGroup_getList(){
 // ------------------------------------------------------------------------
 
 /**
- * userGroup_ishave
- *
  * 是否擁有此群組
  *
- * @access	public
- * @param	string	群組名稱
- * @return	bool	是否已有
+ * @param string $name 群組ID
+ * @return bool 是否已有
  * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 2
-*/
+ * @author 元兒～ <yuan817@moztw.org>
+ * @version Version 2
+ */
 function userGroup_ishave($name){
 	global $FORM_USER_GROUP;
 	
@@ -180,17 +166,14 @@ function userGroup_ishave($name){
 // ========================================================================
 
 /**
- * userGroup_getName
- *
  * 取得此使用者群組的名稱
  *
- * @access	public
- * @param	string	groupName
- * @return	string	群組名稱
+ * @param string $groupName 群組ID
+ * @return string 群組名稱
  * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 2
-*/
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 2
+ */
 function userGroup_getDiaplayName($groupName){
 	global $FORM_USER_GROUP;
 	
@@ -213,21 +196,20 @@ function userGroup_getDiaplayName($groupName){
 // ------------------------------------------------------------------------ 
 
 /**
- * userGroup_setDiaplayName
- *
  * 取得此使用者群組的名稱
  *
- * @access	public
- * @param	string	groupName
- * @param	string	要更改的顯示名稱
- * @return	string	狀態回傳
- * 			"Finish": 成功更改
- * 			"NoFound": 無此使用者群組
- * 			"DBErr": 其他資料庫錯誤
- * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
-*/
+ * @param string $groupName 群組ID
+ * @param string $displayName 要更改的顯示名稱
+ * @return string
+ *          狀態回傳
+ *          <ul>
+ *            <li>"Finish": 成功更改</li>
+ *            <li>"NoFound": 無此使用者群組</li>
+ *            <li>"DBErr": 其他資料庫錯誤</li>
+ *          </ul>
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 1
+ */
 function userGroup_setDiaplayName($groupName, $displayName){
 	global $FORM_USER_GROUP;
 	
@@ -258,18 +240,15 @@ function userGroup_setDiaplayName($groupName, $displayName){
 // ========================================================================
 
 /**
- * userGroup_havePermission
- *
  * 取得此使用者群組的名稱
  *
- * @access	public
- * @param	string	groupName
- * @param	string	權限名稱
- * @return	bool	是否擁有
+ * @param string $groupName 群組ID
+ * @param string $permissionName 權限名稱
+ * @return bool 是否擁有
  * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
-*/
+ * @author 元兒～ <yuan817@moztw.org>
+ * @since Version 1
+ */
 function userGroup_havePermission($groupName, $permissionName){
 	global $FORM_USER_GROUP;
 	
@@ -302,18 +281,15 @@ function userGroup_havePermission($groupName, $permissionName){
 // ------------------------------------------------------------------------ 
 
 /**
- * userGroup_setPermission
- *
  * 取得此使用者群組的名稱
  *
- * @access	public
- * @param	string	groupName
- * @param	string	權限名稱
- * @param	bool	是否擁有
- * @return	bool	是否設定成功
+ * @param string $groupName 群組ID
+ * @param string $permissionName 權限名稱
+ * @param bool $permissionEnable 是否擁有
+ * @return bool 是否設定成功
  * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 1
+ * @author 元兒～ <yuan817@moztw.org>
+ * @version Version 1
 */
 function userGroup_setPermission($groupName, $permissionName, $permissionEnable){
 	global $FORM_USER_GROUP;
@@ -357,15 +333,12 @@ function userGroup_setPermission($groupName, $permissionName, $permissionEnable)
 // ========================================================================
 
 /**
- * userGroup_queryAll
- *
  * 查詢所有使用者群組
  *
- * @access	public
- * @return	array	mysql_query的查詢結果
+ * @return array mysql_query的查詢結果
  * 
- * @author	元兒～ <yuan817@moztw.org>
- * @since	Version 2
+ * @author 元兒～ <yuan817@moztw.org>
+ * @version Version 2
 */
 function userGroup_queryAll(){
 	global $FORM_USER, $FORM_USER_GROUP;
