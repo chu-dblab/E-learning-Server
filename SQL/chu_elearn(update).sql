@@ -91,10 +91,7 @@ INSERT INTO `chu_belong` VALUES (15, 'T10', 6);
 INSERT INTO `chu_belong` VALUES (15, 'T4', 6);
 INSERT INTO `chu_belong` VALUES (15, 'T7', 6);
 INSERT INTO `chu_belong` VALUES (15, 'T9', 6);
-INSERT INTO `chu_belong` VALUES (15, 'T1', 10);
-INSERT INTO `chu_belong` VALUES (15, 'T2', 10);
-INSERT INTO `chu_belong` VALUES (15, 'T3', 10);
-INSERT INTO `chu_belong` VALUES (15, 'T4', 10);
+
 INSERT INTO `chu_belong` VALUES (16, 'T1', 10);
 INSERT INTO `chu_belong` VALUES (16, 'T2', 10);
 INSERT INTO `chu_belong` VALUES (16, 'T3', 10);
