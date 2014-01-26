@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jan 25, 2014, 03:32 PM
+-- 建立日期: Jan 26, 2014, 12:03 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -32,127 +32,155 @@ CREATE TABLE `chu_belong` (
 -- 
 
 INSERT INTO `chu_belong` VALUES (1, 'T1', 10);
+INSERT INTO `chu_belong` VALUES (1, 'T11', 10);
 INSERT INTO `chu_belong` VALUES (1, 'T2', 10);
 INSERT INTO `chu_belong` VALUES (1, 'T3', 10);
 INSERT INTO `chu_belong` VALUES (1, 'T4', 10);
 INSERT INTO `chu_belong` VALUES (2, 'T1', 10);
+INSERT INTO `chu_belong` VALUES (2, 'T11', 10);
 INSERT INTO `chu_belong` VALUES (2, 'T2', 10);
 INSERT INTO `chu_belong` VALUES (2, 'T3', 10);
 INSERT INTO `chu_belong` VALUES (2, 'T4', 10);
 INSERT INTO `chu_belong` VALUES (3, 'T1', 2);
+INSERT INTO `chu_belong` VALUES (3, 'T11', 2);
 INSERT INTO `chu_belong` VALUES (3, 'T2', 2);
 INSERT INTO `chu_belong` VALUES (3, 'T3', 2);
 INSERT INTO `chu_belong` VALUES (3, 'T4', 2);
 INSERT INTO `chu_belong` VALUES (4, 'T1', 4);
+INSERT INTO `chu_belong` VALUES (4, 'T11', 4);
 INSERT INTO `chu_belong` VALUES (4, 'T5', 4);
 INSERT INTO `chu_belong` VALUES (4, 'T6', 4);
 INSERT INTO `chu_belong` VALUES (4, 'T7', 4);
 INSERT INTO `chu_belong` VALUES (5, 'T1', 4);
+INSERT INTO `chu_belong` VALUES (5, 'T11', 4);
 INSERT INTO `chu_belong` VALUES (5, 'T5', 4);
 INSERT INTO `chu_belong` VALUES (5, 'T6', 4);
 INSERT INTO `chu_belong` VALUES (5, 'T7', 4);
+INSERT INTO `chu_belong` VALUES (6, 'T11', 7);
 INSERT INTO `chu_belong` VALUES (6, 'T2', 7);
 INSERT INTO `chu_belong` VALUES (6, 'T5', 7);
 INSERT INTO `chu_belong` VALUES (6, 'T8', 7);
 INSERT INTO `chu_belong` VALUES (6, 'T9', 7);
+INSERT INTO `chu_belong` VALUES (7, 'T11', 5);
 INSERT INTO `chu_belong` VALUES (7, 'T2', 5);
 INSERT INTO `chu_belong` VALUES (7, 'T5', 5);
 INSERT INTO `chu_belong` VALUES (7, 'T8', 5);
 INSERT INTO `chu_belong` VALUES (7, 'T9', 5);
+INSERT INTO `chu_belong` VALUES (8, 'T11', 4);
 INSERT INTO `chu_belong` VALUES (8, 'T2', 4);
 INSERT INTO `chu_belong` VALUES (8, 'T5', 4);
 INSERT INTO `chu_belong` VALUES (8, 'T8', 4);
 INSERT INTO `chu_belong` VALUES (8, 'T9', 4);
+INSERT INTO `chu_belong` VALUES (9, 'T11', 6);
 INSERT INTO `chu_belong` VALUES (9, 'T2', 6);
 INSERT INTO `chu_belong` VALUES (9, 'T5', 6);
 INSERT INTO `chu_belong` VALUES (9, 'T8', 6);
 INSERT INTO `chu_belong` VALUES (9, 'T9', 6);
+INSERT INTO `chu_belong` VALUES (10, 'T11', 8);
 INSERT INTO `chu_belong` VALUES (10, 'T2', 8);
 INSERT INTO `chu_belong` VALUES (10, 'T5', 8);
 INSERT INTO `chu_belong` VALUES (10, 'T8', 8);
 INSERT INTO `chu_belong` VALUES (10, 'T9', 8);
 INSERT INTO `chu_belong` VALUES (11, 'T10', 10);
+INSERT INTO `chu_belong` VALUES (11, 'T11', 10);
 INSERT INTO `chu_belong` VALUES (11, 'T3', 10);
 INSERT INTO `chu_belong` VALUES (11, 'T6', 10);
 INSERT INTO `chu_belong` VALUES (11, 'T8', 10);
 INSERT INTO `chu_belong` VALUES (12, 'T10', 5);
+INSERT INTO `chu_belong` VALUES (12, 'T11', 5);
 INSERT INTO `chu_belong` VALUES (12, 'T4', 5);
 INSERT INTO `chu_belong` VALUES (12, 'T7', 5);
 INSERT INTO `chu_belong` VALUES (12, 'T9', 5);
 INSERT INTO `chu_belong` VALUES (13, 'T10', 5);
+INSERT INTO `chu_belong` VALUES (13, 'T11', 5);
 INSERT INTO `chu_belong` VALUES (13, 'T4', 5);
 INSERT INTO `chu_belong` VALUES (13, 'T7', 5);
 INSERT INTO `chu_belong` VALUES (13, 'T9', 5);
 INSERT INTO `chu_belong` VALUES (14, 'T10', 2);
+INSERT INTO `chu_belong` VALUES (14, 'T11', 2);
 INSERT INTO `chu_belong` VALUES (14, 'T4', 2);
 INSERT INTO `chu_belong` VALUES (14, 'T7', 2);
 INSERT INTO `chu_belong` VALUES (14, 'T9', 2);
 INSERT INTO `chu_belong` VALUES (15, 'T10', 6);
+INSERT INTO `chu_belong` VALUES (15, 'T11', 6);
 INSERT INTO `chu_belong` VALUES (15, 'T4', 6);
 INSERT INTO `chu_belong` VALUES (15, 'T7', 6);
 INSERT INTO `chu_belong` VALUES (15, 'T9', 6);
-
 INSERT INTO `chu_belong` VALUES (16, 'T1', 10);
+INSERT INTO `chu_belong` VALUES (16, 'T11', 10);
 INSERT INTO `chu_belong` VALUES (16, 'T2', 10);
 INSERT INTO `chu_belong` VALUES (16, 'T3', 10);
 INSERT INTO `chu_belong` VALUES (16, 'T4', 10);
 INSERT INTO `chu_belong` VALUES (17, 'T1', 10);
+INSERT INTO `chu_belong` VALUES (17, 'T11', 10);
 INSERT INTO `chu_belong` VALUES (17, 'T2', 10);
 INSERT INTO `chu_belong` VALUES (17, 'T3', 10);
 INSERT INTO `chu_belong` VALUES (17, 'T4', 10);
 INSERT INTO `chu_belong` VALUES (18, 'T1', 2);
+INSERT INTO `chu_belong` VALUES (18, 'T11', 2);
 INSERT INTO `chu_belong` VALUES (18, 'T2', 2);
 INSERT INTO `chu_belong` VALUES (18, 'T3', 2);
 INSERT INTO `chu_belong` VALUES (18, 'T4', 2);
 INSERT INTO `chu_belong` VALUES (19, 'T1', 4);
+INSERT INTO `chu_belong` VALUES (19, 'T11', 4);
 INSERT INTO `chu_belong` VALUES (19, 'T5', 4);
 INSERT INTO `chu_belong` VALUES (19, 'T6', 4);
 INSERT INTO `chu_belong` VALUES (19, 'T7', 4);
 INSERT INTO `chu_belong` VALUES (20, 'T1', 4);
+INSERT INTO `chu_belong` VALUES (20, 'T11', 4);
 INSERT INTO `chu_belong` VALUES (20, 'T5', 4);
 INSERT INTO `chu_belong` VALUES (20, 'T6', 4);
 INSERT INTO `chu_belong` VALUES (20, 'T7', 4);
+INSERT INTO `chu_belong` VALUES (21, 'T11', 7);
 INSERT INTO `chu_belong` VALUES (21, 'T2', 7);
 INSERT INTO `chu_belong` VALUES (21, 'T5', 7);
 INSERT INTO `chu_belong` VALUES (21, 'T8', 7);
 INSERT INTO `chu_belong` VALUES (21, 'T9', 7);
+INSERT INTO `chu_belong` VALUES (22, 'T11', 5);
 INSERT INTO `chu_belong` VALUES (22, 'T2', 5);
 INSERT INTO `chu_belong` VALUES (22, 'T5', 5);
 INSERT INTO `chu_belong` VALUES (22, 'T8', 5);
 INSERT INTO `chu_belong` VALUES (22, 'T9', 5);
+INSERT INTO `chu_belong` VALUES (23, 'T11', 4);
 INSERT INTO `chu_belong` VALUES (23, 'T2', 4);
 INSERT INTO `chu_belong` VALUES (23, 'T5', 4);
 INSERT INTO `chu_belong` VALUES (23, 'T8', 4);
 INSERT INTO `chu_belong` VALUES (23, 'T9', 4);
+INSERT INTO `chu_belong` VALUES (24, 'T11', 6);
 INSERT INTO `chu_belong` VALUES (24, 'T2', 6);
 INSERT INTO `chu_belong` VALUES (24, 'T5', 6);
 INSERT INTO `chu_belong` VALUES (24, 'T8', 6);
 INSERT INTO `chu_belong` VALUES (24, 'T9', 6);
+INSERT INTO `chu_belong` VALUES (25, 'T11', 8);
 INSERT INTO `chu_belong` VALUES (25, 'T2', 8);
 INSERT INTO `chu_belong` VALUES (25, 'T5', 8);
 INSERT INTO `chu_belong` VALUES (25, 'T8', 8);
 INSERT INTO `chu_belong` VALUES (25, 'T9', 8);
 INSERT INTO `chu_belong` VALUES (26, 'T10', 10);
+INSERT INTO `chu_belong` VALUES (26, 'T11', 10);
 INSERT INTO `chu_belong` VALUES (26, 'T3', 10);
 INSERT INTO `chu_belong` VALUES (26, 'T6', 10);
 INSERT INTO `chu_belong` VALUES (26, 'T8', 10);
 INSERT INTO `chu_belong` VALUES (27, 'T10', 5);
+INSERT INTO `chu_belong` VALUES (27, 'T11', 5);
 INSERT INTO `chu_belong` VALUES (27, 'T4', 5);
 INSERT INTO `chu_belong` VALUES (27, 'T7', 5);
 INSERT INTO `chu_belong` VALUES (27, 'T9', 5);
 INSERT INTO `chu_belong` VALUES (28, 'T10', 5);
+INSERT INTO `chu_belong` VALUES (28, 'T11', 5);
 INSERT INTO `chu_belong` VALUES (28, 'T4', 5);
 INSERT INTO `chu_belong` VALUES (28, 'T7', 5);
 INSERT INTO `chu_belong` VALUES (28, 'T9', 5);
 INSERT INTO `chu_belong` VALUES (29, 'T10', 2);
+INSERT INTO `chu_belong` VALUES (29, 'T11', 2);
 INSERT INTO `chu_belong` VALUES (29, 'T4', 2);
 INSERT INTO `chu_belong` VALUES (29, 'T7', 2);
 INSERT INTO `chu_belong` VALUES (29, 'T9', 2);
 INSERT INTO `chu_belong` VALUES (30, 'T10', 6);
+INSERT INTO `chu_belong` VALUES (30, 'T11', 6);
 INSERT INTO `chu_belong` VALUES (30, 'T4', 6);
 INSERT INTO `chu_belong` VALUES (30, 'T7', 6);
 INSERT INTO `chu_belong` VALUES (30, 'T9', 6);
-
 
 -- --------------------------------------------------------
 
@@ -330,6 +358,7 @@ CREATE TABLE `chu_theme` (
 
 INSERT INTO `chu_theme` VALUES ('T1', '生命的起源+生命登上陸地', '2014-01-31 23:01:21', 40, '生命的起源+生命登上陸地');
 INSERT INTO `chu_theme` VALUES ('T10', '生命征服天空+人類的過去', '2014-01-15 23:11:46', 40, '生命征服天空+人類的過去');
+INSERT INTO `chu_theme` VALUES ('T11', '全部標的', '2014-01-02 20:03:05', 90, '全部標的都學習');
 INSERT INTO `chu_theme` VALUES ('T2', '生命的起源+恐龍時代', '2014-01-25 23:00:44', 40, '生命的起源+恐龍時代');
 INSERT INTO `chu_theme` VALUES ('T3', '生命的起源+生命征服天空', '2014-01-23 23:08:33', 40, '生命的起源+生命征服天空');
 INSERT INTO `chu_theme` VALUES ('T4', '生命的起源+人類的過去', '2014-01-07 23:08:59', 40, '生命的起源+人類的過去');
