@@ -61,10 +61,16 @@ case "login":
 		//已登入成功
 		else {
 			$totalOfLearnTime = $timer->getLearnTotalTime(); 
+			//建立此使用者物件
+			$theUser = new MyUser($login_code);
+			
 			$output += array(
 				"uid"=>$id,
 				"ucode"=>$login_code,
-				"LearningTime"=>$totalOfLearnTime,
+				"ulogin_time" => $theUser->getLoginTime(),
+				"learning_time"=>$totalOfLearnTime,
+				"urealname" => $theUser->getRealName(),
+				"unickname" => $theUser->getNickName(),
 				"status_ok"=>true,
 				"status"=>"OK"
 			);
