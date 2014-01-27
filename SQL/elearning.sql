@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- 資料庫: `elearning`
 --
-CREATE DATABASE IF NOT EXISTS `elearning` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `elearning`;
 
 -- --------------------------------------------------------
 
