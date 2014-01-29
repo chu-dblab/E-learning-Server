@@ -79,13 +79,13 @@ mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."user(
 
 mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."target(
   TID int(10) unsigned NOT NULL,
-  MapID int(10) unsigned NOT NULL COMMENT '地圖編號',
-  MaterialID int(10) unsigned NOT NULL COMMENT '教材編號',
+  MapID varchar(30) NOT NULL COMMENT '地圖編號',
+  MaterialID varchar(30) NOT NULL COMMENT '教材編號',
   TName varchar(15) NOT NULL COMMENT '標的名稱',
   TLearn_Time int(10) unsigned NOT NULL COMMENT '預估此標的應該學習的時間',
   PLj int(200) unsigned NOT NULL COMMENT '學習標的的人數限制',
   Mj int(200) unsigned default NULL COMMENT '目前人數',
-  S float unsigned default NULL COMMENT '學習標的飽和率上限',
+  S float unsigned default NULL COMMENT '學習標的飽和率上限,資料庫中沒有任何資料表',
   Fj tinyint(1) default NULL COMMENT '學習標的滿額指標',
   PRIMARY KEY (TID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='標的'") or die(mysql_error());
@@ -94,7 +94,7 @@ mysql_query("CREATE TABLE ".$inputSQLDBFormPrefix."theme(
   ThemeID int(10) unsigned NOT NULL,
   ThemeName varchar(15) NOT NULL,
   theme_Learn_DateTime datetime NOT NULL COMMENT '本次學習此主題發生的日期時間',
-  Theme_LearnTotal int(10) unsigned NOT NULL COMMENT '學習此主題要花的總時間(hr)',
+  Theme_LearnTotal int(10) unsigned NOT NULL COMMENT '學習此主題要花的總時間(min)',
   Theme_Introduction varchar(70) NOT NULL,
   PRIMARY KEY (ThemeID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='主題'") or die(mysql_error());

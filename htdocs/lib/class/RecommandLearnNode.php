@@ -194,20 +194,51 @@ class RecommandLearnNode
 			return $recommand;
 		}
 		
+		/**
+		 * 所有學習點是否已學完
+		 *
+		 * 確認學習點是否已經學完了
+		 * @param array $matrix 下一個學習點(含虛擬點)
+		 * @param string $userID 使用者帳號
+		 * @param int $point_number 標的編號
+		 * @param int $remainingTime 剩餘時間
+		 * @return 系統推薦的學習點(已過濾)
+		 */
 		private function checkIsAllPointAreLearned($matrix,$userID,$point_number,$remainingTime)
 		{			
 			//將結果(前三高的學習點)包裝成JSON傳送至手機
 			// TODO 判斷有沒有學習完，不然會陷入無限迴圈(流程待修)
 			$i = 0;
+			// 檢查系統推薦的學習點在study中是否存在
 			while(isset($matrix) && isset($matrix[$i+1])) {
-				while($this->checkFinish($userID,$matrix[$i]["Tj"]) && isset($matrix[$i+1]) && $matrix[$i]["TLearn_Time"] < $remainingTime){
-					array_splice($matrix, $i, 1);
+				while( ($this->checkFinish($userID,$matrix[$i]["Tj"]) || $matrix[$i]["LearnTime"]<=$remainingTime) && isset($matrix[$i+1]))
+				{
+					if($matrix[$i]["Tj"] > 15)
+					{
+						array_splice($matrix, $i, 1);
+					}
+					else
+					{
+						$numID = $matrix[$i]["Tj"] + 15;
+						if($this->checkFinish($userID,$numID)) array_splice($matrix, $i, 1);
+					}					
 				}
 				$i++;
 			};
 			
 			if(isset($matrix[$i-1])) {
-				if( $this->checkFinish($userID,$matrix[$i-1]["Tj"]) ) array_pop($matrix);
+				if($matrix[$i-1]["Tj"] > 15)
+				{
+					if($this->checkFinish($userID,$matrix[$i-1]["Tj"])) 
+						array_pop($matrix);
+				}
+				else
+				{
+					$numID = $matrix[$i-1]["Tj"] + 15;
+					if($this->checkFinish($userID,$matrix[$i-1]["Tj"])) array_pop($matrix);
+				}
+				
+				if($matrix[$i-2]["LearnTime"] <= $remainingTime) array_pop($matrix);
 			}
 			
 			//將下一個學習點的陣列排序
@@ -217,14 +248,26 @@ class RecommandLearnNode
 			}
 			array_multisort($tmp,SORT_DESC,$matrix,SORT_DESC);
 			
+// 			echo "<pre>All Node:<br>".print_r($matrix,true)."</pre>";
+			
 			//塞資料
 			if(isset($matrix[0]))
+			{
 				$info_1 = array("node"=>(int)$matrix[0]["Tj"],"TName"=>$matrix[0]["TName"],"pathCost"=>$matrix[0]["pathCost"],"isEntity"=>$matrix[0]["isEntity"],"LearnTime"=>(int)$matrix[0]["LearnTime"],"MapURL"=>$matrix[0]["mapURL"],"MaterialUrl"=>$matrix[0]["materialUrl"]);
+// 				echo "<pre>info_1:<br>".print_r($info_1,true)."</pre>";
+			}
 			
-			if(isset($node[1]))
+			if(isset($matrix[1]))
+			{
 				$info_2 = array("node"=>(int)$matrix[1]["Tj"],"TName"=>$matrix[1]["TName"],"pathCost"=>$matrix[1]["pathCost"],"isEntity"=>$matrix[1]["isEntity"],"LearnTime"=>(int)$matrix[1]["LearnTime"],"MapURL"=>$matrix[1]["mapURL"],"MaterialUrl"=>$matrix[1]["materialUrl"]);
+				//echo "<pre>info_2:<br>".print_r($info_2,true)."</pre>";
+			}
 			if(isset($matrix[2]))
+			{
 				$info_3 = array("node"=>(int)$matrix[2]["Tj"],"TName"=>$matrix[2]["TName"],"pathCost"=>$matrix[2]["pathCost"],"isEntity"=>$matrix[2]["isEntity"],"LearnTime"=>(int)$matrix[2]["LearnTime"],"MapURL"=>$matrix[2]["mapURL"],"MaterialUrl"=>$matrix[2]["materialUrl"]);
+				//echo "<pre>info_3:<br>".print_r($info_3,true)."</pre>";
+			}
+			
 			
 			if(isset($info_1) && isset($info_2) && isset($info_3))
 				$content = array("first"=>$info_1,"second"=>$info_2,"third"=>$info_3);
@@ -249,7 +292,7 @@ class RecommandLearnNode
 		 * 計算正規化參數
 		 *
 		 * @param string $userID 使用者編號
-		 * @return $normal double 正規化參數
+		 * @return 正規化參數
 		 */
 		public function computeNormalizationParam($userID)
 		{
@@ -281,7 +324,7 @@ class RecommandLearnNode
 		*
 		* @param int $next_point_number 學習點的編號
 		* @param string $userID 學習者的帳號
-		* @return $node array 取得學習點之所有參數
+		* @return 學習點之所有參數(array)
 		*/	
 		private function getNodeOfLearnOfParameter($next_point_number,$userID)
 		{
@@ -327,7 +370,7 @@ class RecommandLearnNode
 		 *
 		 * @param string $userID 使用者編號
 		 * @param int $point_number 學習點的編號
-		 * @return $row array 學習狀態資訊
+		 * @return 學習狀態資訊(array)
 		 */	
 		public function getLearningStatus($userID,$point_number)
 		{
@@ -348,7 +391,7 @@ class RecommandLearnNode
 		 *
 		 * @param string $userID 使用者編號
 		 * @param int $point 學習點編號
-		 * @return Boolean (true/flase)
+		 * @return true->已經學過系統推薦的學習點,false->還沒學過系統推薦的學習點
 		 */
 		private function checkFinish($userID,$point)
 		{
@@ -359,20 +402,6 @@ class RecommandLearnNode
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			if($point == $row["TID"]) return true;
 			else return false;
-		}
-		
-		/**
-		 * 標的編號轉換
-		 *
-		 * 將標的編號轉成實際的學習點編號
-		 *
-		 * @access private
-		 * @param int $point_number 標的編號
-		 * @return 實際的學習點編號
-		 */
-		private function changeNumber($point_number)
-		{
-			return ( $point_number % 15 ) + 1;
 		}
 }
 ?>
