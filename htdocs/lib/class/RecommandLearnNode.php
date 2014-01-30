@@ -211,7 +211,7 @@ class RecommandLearnNode
 			$i = 0;
 			// 檢查系統推薦的學習點在study中是否存在
 			while(isset($matrix) && isset($matrix[$i+1])) {
-				while( ($this->checkFinish($userID,$matrix[$i]["Tj"]) || $matrix[$i]["LearnTime"]<=$remainingTime) && isset($matrix[$i+1]))
+				while($this->checkFinish($userID,$matrix[$i]["Tj"]) && isset($matrix[$i+1]))
 				{
 					if($matrix[$i]["Tj"] > 15)
 					{
@@ -224,7 +224,7 @@ class RecommandLearnNode
 					}					
 				}
 				$i++;
-			};
+			}
 			
 			if(isset($matrix[$i-1])) {
 				if($matrix[$i-1]["Tj"] > 15)
@@ -237,9 +237,26 @@ class RecommandLearnNode
 					$numID = $matrix[$i-1]["Tj"] + 15;
 					if($this->checkFinish($userID,$matrix[$i-1]["Tj"])) array_pop($matrix);
 				}
-				
-				if($matrix[$i-2]["LearnTime"] <= $remainingTime) array_pop($matrix);
+ 				if($matrix[$i-2]["LearnTime"] <= $remainingTime) array_pop($matrix);
 			}
+			
+			//TODO 有問題待修
+			$length = count($matrix);
+			for($j=0;$j<$length;$j++)
+			{
+				
+				if($matrix[$j]["LearnTime"] <= $remainingTime) array_splice($matrix, $j, 1);
+				if(!isset($matrix[$j+1])) break;
+			}
+			
+			/*
+			$j=0;
+			while($remainingTime > $matrix[$j]["LearnTime"])
+			{
+				array_splice($matrix, $j, 1);
+// 				echo "<pre>All Node:<br>".print_r($matrix,true)."</pre>";
+				$j++;
+			}*/
 			
 			//將下一個學習點的陣列排序
 			foreach($matrix as $key=>$value)
@@ -399,7 +416,8 @@ class RecommandLearnNode
 			$result->bindParam(":uid",$userID);
 			$result->bindParam(":point",$point);
 			$result->execute();
-			$row = $result->fetch(PDO::FETCH_ASSOC);
+			$row = $result->fetch();
+// 			echo "<pre>Row: <br>".print_r($row)."</pre>";
 			if($point == $row["TID"]) return true;
 			else return false;
 		}
