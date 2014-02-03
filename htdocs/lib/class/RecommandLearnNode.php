@@ -213,6 +213,7 @@ class RecommandLearnNode
 			while(isset($matrix) && isset($matrix[$i+1])) {
 				while($this->checkFinish($userID,$matrix[$i]["Tj"]) && isset($matrix[$i+1]))
 				{
+// 					echo "<br><pre>matrix: ".print_r($matrix[$i])."\n";
 					if($matrix[$i]["Tj"] > 15)
 					{
 						array_splice($matrix, $i, 1);
@@ -237,7 +238,7 @@ class RecommandLearnNode
 					$numID = $matrix[$i-1]["Tj"] + 15;
 					if($this->checkFinish($userID,$matrix[$i-1]["Tj"])) array_pop($matrix);
 				}
- 				if($matrix[$i-2]["LearnTime"] <= $remainingTime) array_pop($matrix);
+//  				if($matrix[$i-2]["LearnTime"] <= $remainingTime) array_pop($matrix);
 			}
 			
 			//TODO 有問題待修
