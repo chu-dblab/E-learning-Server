@@ -221,7 +221,7 @@ class RecommandLearnNode
 					else
 					{
 						$numID = $matrix[$i]["Tj"] + 15;
-						if($this->checkFinish($userID,$numID)) array_splice($matrix, $i, 1);
+						if($this->checkFinish($userID,$numID) || $this->checkFinish($userID,$matrix[$i]["Tj"])) array_splice($matrix, $i, 1);
 					}					
 				}
 				$i++;
