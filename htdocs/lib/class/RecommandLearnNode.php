@@ -242,31 +242,23 @@ class RecommandLearnNode
 			}
 			
 			//TODO 有問題待修
-			$length = count($matrix);
-			for($j=0;$j<$length;$j++)
+			//$length = count($matrix);
+			for($j=0;isset($matrix)&&isset($matrix[$j+1]);$j++)
 			{
-				
-				if($matrix[$j]["LearnTime"] <= $remainingTime) array_splice($matrix, $j, 1);
-				if(!isset($matrix[$j+1])) break;
+				while($matrix[$j]["LearnTime"] > $remainingTime && isset($matrix[$j+1])) array_splice($matrix,$j,1);
 			}
 			
-			/*
-			$j=0;
-			while($remainingTime > $matrix[$j]["LearnTime"])
-			{
-				array_splice($matrix, $j, 1);
-// 				echo "<pre>All Node:<br>".print_r($matrix,true)."</pre>";
-				$j++;
-			}*/
+			if(isset($matrix[$j-1]) && $matrix[$j-1]["LearnTime"] > $remainingTime) array_pop($matrix);
 			
 			//將下一個學習點的陣列排序
-			foreach($matrix as $key=>$value)
+			if(isset($matrix))
 			{
-				$tmp[$key] = $value["pathCost"];
+				foreach($matrix as $key=>$value)
+				{
+					$tmp[$key] = $value["pathCost"];
+				}
+				array_multisort($tmp,SORT_DESC,$matrix,SORT_DESC);
 			}
-			array_multisort($tmp,SORT_DESC,$matrix,SORT_DESC);
-			
-// 			echo "<pre>All Node:<br>".print_r($matrix,true)."</pre>";
 			
 			//塞資料
 			if(isset($matrix[0]))
