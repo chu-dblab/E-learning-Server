@@ -7,11 +7,12 @@
   require_once("../../../lib/include.php");
   require_once(DOCUMENT_ROOT."lib/class/Database.php");
 
-  // ===============================================================
+// =======================================================================
 /**
- * 推薦學習點類別
+ * 規劃學習路徑類別
+ *
+ * 為這一位使用者規劃出最佳的學習路徑
  * 
- * 這個物件代表一個學習點
  * TODO 準備取代RecommandLearnNode類別用
  *  
  */
@@ -44,16 +45,17 @@ class LearnRecommand {
 	 */
 	private $gamma;  //正規化參數
 
-	// -------------------------------------------------------------
+	// ---------------------------------------------------------------------
 
 	/**
 	* getLearningNode
 	*
-	* 取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
+  * 取得學習點的參數值，將數值帶入公式計算出推薦分數最高的前三名
+  *
 	* TODO 我沒看懂，待修
 	*
-	* @param int 目前剩餘學習時間
-	* @return $recommand array 系統推薦的學習點 
+	* @param int $remainingTime 目前剩餘學習時間
+	* @return array 系統推薦的學習點 
 	*/
 	public function getLearningNode($remainingTime) {
 
@@ -62,15 +64,16 @@ class LearnRecommand {
 	/**
 	 * 所有學習點是否已學完
 	 *
-	 * 確認學習點是否已經學完了
+   * 確認學習點是否已經學完了
+   *
 	 * TODO 為什麼要帶那麼多參數？
+   *
 	 * @param array $matrix 下一個學習點(含虛擬點)
 	 * @param int $point_number 標的編號
 	 * @param int $remainingTime 目前剩餘學習時間
 	 * @return 系統推薦的學習點(已過濾)
 	 */
-	private function checkIsAllPointAreLearned($matrix
-	                                           ,$point_number
+	private function checkIsAllPointAreLearned($matrix ,$point_number
 	                                           ,$remainingTime) {
 
 	}
@@ -89,7 +92,8 @@ class LearnRecommand {
 	/**
 	* getNodeOfLearnOfParameter
 	*
-	* 取得學習點的所有參數
+  * 取得學習點的所有參數
+  *
 	* TODO 這是什麼？
 	*
 	* @param int $next_point_number 學習點的編號
@@ -99,13 +103,13 @@ class LearnRecommand {
 
 	}
 
-	// -------------------------------------------------------------
+	// ---------------------------------------------------------------------
 	/**
 	 * getLearningStatus
 	 * 
 	 * 取得使用者學習的狀態
 	 *
-	 * @param int 學習點的編號
+	 * @param int $point_number 學習點的編號
 	 * @return 學習狀態資訊(array)
 	 */	
 	public function getLearningStatus($point_number) {
@@ -117,7 +121,7 @@ class LearnRecommand {
 	 *
 	 * 確認使用者是不是學過系統推薦的學習點
 	 *
-	 * @param int 學習點編號
+	 * @param int $point 學習點編號
 	 * @return boolean true->已經學過系統推薦的學習點
 	 *                 ,false->還沒學過系統推薦的學習點
 	 */
